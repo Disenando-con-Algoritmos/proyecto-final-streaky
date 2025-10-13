@@ -5,7 +5,7 @@ export default function LikeButton() {
   const [liked, setLiked] = useState(false);
 
   return (
-    <div className="flex items-center"
+    <div className="flex items-center pr-3"
       onClick={() => setLiked(!liked)}
     >
       {liked ? (
@@ -13,6 +13,8 @@ export default function LikeButton() {
       ) : (
         <AiFillHeart color="#d1d1d1ff" size={30} />
       )}
+
+      <p>150</p>
       
     </div>
 );

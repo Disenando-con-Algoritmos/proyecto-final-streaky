@@ -1,5 +1,6 @@
 import CategoryTag from "../create-post/CategoryTag";
 import LikeButton from "../create-post/LikeButton";
+import CommentFeed from "./Comments";
 
 export default function Post() {
   return (
@@ -21,6 +22,7 @@ export default function Post() {
           alt="Shoes" />
         <div id="btn-container" className="flex justify-end">
           <LikeButton />
+          <CommentFeed />
           <CategoryTag />
         </div>
       </div>
