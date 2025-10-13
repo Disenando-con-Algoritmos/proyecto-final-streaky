@@ -1,5 +1,4 @@
 export default function Post() {
-
     return (
         <div className="min-h-screen flex flex-col justify-center items-center">
             <div className="bg-[#1D1D1D] text-[#F9FAFB] p-5 rounded-xl w-full max-w-md shadow-md">
@@ -13,7 +12,13 @@ export default function Post() {
                         <p className="text-[#5A5A5A] text-sm">30 minutes ago</p>
                     </div>
                 </div>
-            </div>  
+                
+                <img className="rounded-[19px] h-[304.12px]"
+                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                    alt="Shoes" />
+            </div>
+
+
         </div>
     );
 };
