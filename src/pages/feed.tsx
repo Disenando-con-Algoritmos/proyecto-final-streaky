@@ -1,7 +1,7 @@
-function Feed (){
+function Feed (){;
     return(<>
     
-    </>)
+    </>);
 }
 
-export default Feed
+export default Feed;
