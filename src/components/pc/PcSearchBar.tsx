@@ -4,8 +4,8 @@ import { FiPlus } from "react-icons/fi";
 import { HiOutlineLogout } from "react-icons/hi";
 import { useState } from "react";
 import { CgClose } from "react-icons/cg";
-import logo1 from "../../assets/logo1.png"
-import logo2 from "../../assets/logo2.png"
+import logo1 from "../../assets/logo1.png";
+import logo2 from "../../assets/logo2.png";
 
 function PcSearchBar() {
   const [ClickSearch, setClickSearch] = useState(true);
@@ -24,10 +24,13 @@ function PcSearchBar() {
         >
           <h1 className="text-white text-2xl ml-6 mt-23 mb-3">Search</h1>
           <div className="relative w-[80%] ml-6">
-            <FaMagnifyingGlass className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
-            <CgClose className="absolute left-63 top-1/2 transform -translate-y-1/2 text-gray-400 text-2xl font-black" />
+            <FaMagnifyingGlass className="absolute left-3 top-1/2 transform 
+            -translate-y-1/2 text-gray-400 text-lg" />
+            <CgClose className="absolute left-63 top-1/2 transform 
+            -translate-y-1/2 text-gray-400 text-2xl font-black" />
             <input
-              className="bg-[#2A2A2A] text-gray-200 p-2 pl-10 rounded-full w-full focus:outline-none 
+              className="bg-[#2A2A2A] text-gray-200 p-2 pl-10 rounded-full 
+              w-full focus:outline-none 
               focus:ring-2 focus:ring-gray-500"
               placeholder="Search..."
             />
