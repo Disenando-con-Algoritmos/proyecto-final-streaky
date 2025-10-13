@@ -1,4 +1,5 @@
 import CategoryTag from "../create-post/CategoryTag";
+import LikeButton from "../create-post/LikeButton";
 
 export default function Post() {
     return (
@@ -19,6 +20,7 @@ export default function Post() {
                     src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
                     alt="Shoes" />
                 <div id="btn-container" className="flex justify-end">
+                    <LikeButton/>
                     <CategoryTag />
                 </div>
             </div>
