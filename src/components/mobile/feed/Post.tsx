@@ -1,3 +1,5 @@
+import CategoryTag from "../create-post/CategoryTag";
+
 export default function Post() {
     return (
         <div className="min-h-screen flex flex-col justify-center items-center">
@@ -16,6 +18,9 @@ export default function Post() {
                 <img className="rounded-[19px] h-[304.12px]"
                     src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
                     alt="Shoes" />
+                <div id="btn-container" className="flex justify-end">
+                    <CategoryTag />
+                </div>
             </div>
 
 
