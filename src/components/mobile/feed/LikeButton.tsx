@@ -15,7 +15,9 @@ export default function LikeButton() {
   };
 
   return (
-    <div className="flex items-center pr-3" onClick={handleLike}
+
+    <div  className="flex items-center pr-3">
+    <div onClick={handleLike}
     >
       {liked ? (
         <AiFillHeart color="#703EDD" size={30} />
@@ -23,8 +25,10 @@ export default function LikeButton() {
         <AiFillHeart color="#d1d1d1ff" size={30} />
       )}
 
-      <p className="ml-2 text-[20px]">{likes}</p>
+      
 
+    </div>
+    <p className="ml-2 text-[20px]">{likes}</p>
     </div>
   );
 }
