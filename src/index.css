@@ -1,8 +1,8 @@
 @import "tailwindcss";
-@plugin "daisyui" {
-    themes: dark #171717
-};
+@plugin "daisyui";
 
-#root {
-    font-family: 'Satoshi', sans-serif;
+body, html {
+  background-color: #171717;
+  color: #F9FAFB;
+  font-family: 'Satoshi', sans-serif;
 }

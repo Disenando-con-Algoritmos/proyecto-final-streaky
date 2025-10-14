@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { MdOutlineModeComment } from "react-icons/md";
+import type { CommentsPost } from "../../../types/Comments";
 
-export default function CommentFeed() {
+export default function LikeButton({ cardIndividuals }: { cardIndividuals: CommentsPost }) {
     const [SComments, setShowCommenst] = useState(false);
 
     function ShowComments() {
@@ -26,26 +27,21 @@ export default function CommentFeed() {
                 <div className="flex items-center bg-[#2A2A2A] p-3 rounded-xl mb-3">
                     <img
                         className="w-10 h-10 rounded-full"
-                        src="https://picsum.photos/100"
+                        src={cardIndividuals.userImage}
                         alt="User"
                     />
                     <div id="Comment" className="ml-3">
-                        <p className="text-[12px] font-semibold">Nattpro_</p>
-                        <p>Amazing kevin, what a hacker</p>
+                        <p className="text-[12px] font-semibold">
+                            {cardIndividuals.username}
+                        </p>
+                        <p>{cardIndividuals.content}</p>
                     </div>
                 </div>
 
-                <div className="flex items-center bg-[#2A2A2A] p-3 rounded-xl mb-3">
-                    <img
-                        className="w-10 h-10 rounded-full"
-                        src="https://picsum.photos/150"
-                        alt="User"
-                    />
-                    <div id="Comment" className="ml-3">
-                        <p className="text-[12px] font-semibold">Jura</p>
-                        <p>Teach me kevin</p>
-                    </div>
-                </div>
+            </div>
+
+            <div>
+                    
             </div>
 
         </div>
