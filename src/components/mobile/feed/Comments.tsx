@@ -2,7 +2,11 @@ import { useState } from "react";
 import { MdOutlineModeComment } from "react-icons/md";
 import type { CommentsPost } from "../../../types/Comments";
 
-export default function CommentFeed({cardIndividuals,}: {cardIndividuals: CommentsPost;}) {
+export default function CommentFeed({
+  cardIndividuals,
+}: {
+  cardIndividuals: CommentsPost;
+}) {
   const [showComments, setShowComments] = useState(false);
 
   function toggleComments() {
@@ -12,12 +16,22 @@ export default function CommentFeed({cardIndividuals,}: {cardIndividuals: Commen
   return (
     <div className="w-full relative right-70 bottom-10 z-0">
       <div id="btn-container" className="flex items-center justify-end">
-        <div id="comments-post" className="flex items-center 
-        cursor-pointer" onClick={toggleComments}>
-          <MdOutlineModeComment className="text-[#F9FAFB] 
-          text-3xl hover:text-[#CCCCCC] transition" />
+        <div
+          id="comments-post"
+          className="flex items-center 
+        cursor-pointer"
+          onClick={toggleComments}
+        >
+          <MdOutlineModeComment
+            className="text-[#F9FAFB] 
+          text-3xl hover:text-[#CCCCCC] transition"
+          />
           <p className="ml-2 text-[20px]">3</p>
         </div>
+      </div>
+      <div className="flex relative left-70 mt-1">
+        <h1 className="pr-2 font-medium">{cardIndividuals.username}:</h1>
+        <p className="font-normal">{cardIndividuals.content}</p>
       </div>
       <div
         id="ShowComments"
@@ -33,8 +47,12 @@ export default function CommentFeed({cardIndividuals,}: {cardIndividuals: Commen
               alt="User"
             />
             <div className="ml-3">
-              <p className="text-[13px] font-semibold">{cardIndividuals.username}</p>
-              <p className="text-sm text-[#E5E5E5]">{cardIndividuals.content}</p>
+              <p className="text-[13px] font-semibold">
+                {cardIndividuals.username}
+              </p>
+              <p className="text-sm text-[#E5E5E5]">
+                {cardIndividuals.content}
+              </p>
             </div>
           </div>
         </div>
