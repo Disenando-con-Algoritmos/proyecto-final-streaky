@@ -1,210 +1,210 @@
 [
   {
     "id": 1,
-    "datePublished": "2025-09-26 07:52:00",
+    "datePublished": "30min",
     "postImage": "https://i.pinimg.com/736x/75/4c/7b/754c7b4129faa5bd5d8e6b0ba629f459.jpg",
     "content": "coding",
     "username": "kelocoes",
     "userImage": "https://i.pinimg.com/736x/e0/fa/41/e0fa41ca8278c8b0e892fa5e489ade71.jpg",
     "likeCount": 80,
-    "tag": "study",
+    "tag": "📚 study",
     "coments": [
       {
         "id": 1,
         "userImage": "https://i.pinimg.com/736x/e0/fa/41/e0fa41ca8278c8b0e892fa5e489ade71.jpg",
         "username": "kelocoes",
-        "datePublished": "2025-09-26 07:52:00",
+        "datePublished": "25min",
         "content": "Have you realized that React is the best yet? :)"
       },
       {
         "id": 2,
         "userImage": "https://i.pinimg.com/736x/f3/4a/6b/f34a6b66cc525993665237d4348aba2b.jpg",
         "username": "S_florez_",
-        "datePublished": "2025-09-26 07:32:00",
+        "datePublished": "20min",
         "content": "Explain it again please"
       },
       {
         "id": 3,
         "userImage": "https://i.pinimg.com/1200x/84/22/aa/8422aa5f01ae49cc133c68c7fd3dd667.jpg",
         "username": "nattpro_",
-        "datePublished": "2025-09-26 07:52:00",
+        "datePublished": "15min",
         "content": "You're on a winning streak!"
       },
       {
         "id": 4,
         "userImage": "https://i.pinimg.com/736x/50/59/75/505975a0281b2d860947663d7371cbf8.jpg",
         "username": "lausrnb",
-        "datePublished": "2025-09-26 07:32:00",
+        "datePublished": "10min",
         "content": "Let's do monitoring at I2T"
       },
       {
         "id": 5,
         "userImage": "https://i.pinimg.com/736x/1f/be/04/1fbe040a53949ab9fee8c44ccdd0d6a4.jpg",
         "username": "valxci17",
-        "datePublished": "2025-09-26 07:32:00",
+        "datePublished": "5min",
         "content": "Let’s play Order Overload Café!!"
       }
     ]
   },
   {
     "id": 2,
-    "datePublished": "2025-09-26 07:00:00",
+    "datePublished": "1h",
     "postImage": "https://i.pinimg.com/736x/6a/33/10/6a331025e1456a98fc6990dd8a4280f3.jpg",
     "content": "yummy :3",
     "username": "nattpro_",
     "userImage": "https://i.pinimg.com/1200x/84/22/aa/8422aa5f01ae49cc133c68c7fd3dd667.jpg",
     "likeCount": 20,
-    "tag": "food",
+    "tag": "🥗 food",
     "coments": [
       {
         "id": 1,
         "userImage": "https://i.pinimg.com/736x/7c/51/bf/7c51bf3d94c837de5de32961506a6ee6.jpg",
         "username": "jura",
-        "datePublished": "2025-09-26 06:50:00",
+        "datePublished": "50min",
         "content": "That looks delicious!"
       },
       {
         "id": 2,
         "userImage": "https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg",
         "username": "Jenny",
-        "datePublished": "2025-09-26 06:51:00",
+        "datePublished": "48min",
         "content": "Share with me next time 🌸"
       },
       {
         "id": 3,
         "userImage": "https://i.pinimg.com/736x/e0/fa/41/e0fa41ca8278c8b0e892fa5e489ade71.jpg",
         "username": "kelocoes",
-        "datePublished": "2025-09-26 06:55:00",
+        "datePublished": "45min",
         "content": "Now I’m hungry 😅"
       }
     ]
   },
   {
     "id": 3,
-    "datePublished": "2025-09-26 07:00:00",
+    "datePublished": "1h",
     "postImage": "https://i.pinimg.com/736x/af/8b/2f/af8b2f006566feda43e206180aea5d81.jpg",
     "content": "love this",
     "username": "jura",
     "userImage": "https://i.pinimg.com/736x/7c/51/bf/7c51bf3d94c837de5de32961506a6ee6.jpg",
     "likeCount": 40,
-    "tag": "sport",
+    "tag": "🏃🏻‍♂️ sport",
     "coments": [
       {
         "id": 1,
         "userImage": "https://i.pinimg.com/736x/50/59/75/505975a0281b2d860947663d7371cbf8.jpg",
         "username": "lausrnb",
-        "datePublished": "2025-09-26 06:40:00",
+        "datePublished": "50min",
         "content": "You crushed it!"
       },
       {
         "id": 2,
         "userImage": "https://i.pinimg.com/736x/1f/be/04/1fbe040a53949ab9fee8c44ccdd0d6a4.jpg",
         "username": "valxci17",
-        "datePublished": "2025-09-26 06:41:00",
+        "datePublished": "48min",
         "content": "Sporty vibes 🏀"
       }
     ]
   },
   {
     "id": 4,
-    "datePublished": "2025-09-26 05:00:00",
+    "datePublished": "2h",
     "postImage": "https://i.pinimg.com/1200x/02/95/c7/0295c790f50a374a319f7f91c0b522ea.jpg",
     "content": "feeling great",
     "username": "lausrnb",
     "userImage": "https://i.pinimg.com/736x/50/59/75/505975a0281b2d860947663d7371cbf8.jpg",
     "likeCount": 27,
-    "tag": "health",
+    "tag": "❤️‍🩹 health",
     "coments": [
       {
         "id": 1,
         "userImage": "https://i.pinimg.com/1200x/84/22/aa/8422aa5f01ae49cc133c68c7fd3dd667.jpg",
         "username": "nattpro_",
-        "datePublished": "2025-09-26 04:50:00",
+        "datePublished": "1h 45min",
         "content": "Keep it up! 🌿"
       },
       {
         "id": 2,
         "userImage": "https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg",
         "username": "Jenny",
-        "datePublished": "2025-09-26 04:52:00",
+        "datePublished": "1h 40min",
         "content": "So inspiring 💖"
       }
     ]
   },
   {
     "id": 5,
-    "datePublished": "2025-09-26 04:00:00",
+    "datePublished": "3h",
     "postImage": "https://i.pinimg.com/736x/b3/fd/8a/b3fd8a6de6cf467e8b30bf3ca1ce0482.jpg",
     "content": "Learning",
     "username": "Jenny",
     "userImage": "https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg",
     "likeCount": 3,
-    "tag": "study",
+    "tag": "📚 study",
     "coments": [
       {
         "id": 1,
         "userImage": "https://i.pinimg.com/736x/f3/4a/6b/f34a6b66cc525993665237d4348aba2b.jpg",
         "username": "S_florez_",
-        "datePublished": "2025-09-26 03:50:00",
+        "datePublished": "2h 45min",
         "content": "Proud of you 👏"
       },
       {
         "id": 2,
         "userImage": "https://i.pinimg.com/736x/7c/51/bf/7c51bf3d94c837de5de32961506a6ee6.jpg",
         "username": "jura",
-        "datePublished": "2025-09-26 03:55:00",
+        "datePublished": "2h 40min",
         "content": "Keep going, Jenny!"
       }
     ]
   },
   {
     "id": 6,
-    "datePublished": "2025-09-26 04:00:00",
+    "datePublished": "3h",
     "postImage": "https://i.pinimg.com/736x/a2/6a/27/a26a27a5ff6a2cb80d5b872a73d1413b.jpg",
     "content": "a little bit of peace",
     "username": "S_florez_",
     "userImage": "https://i.pinimg.com/736x/f3/4a/6b/f34a6b66cc525993665237d4348aba2b.jpg",
     "likeCount": 30,
-    "tag": "hobbits",
+    "tag": "🕹️ hobbies",
     "coments": [
       {
         "id": 1,
         "userImage": "https://i.pinimg.com/736x/1f/be/04/1fbe040a53949ab9fee8c44ccdd0d6a4.jpg",
         "username": "valxci17",
-        "datePublished": "2025-09-26 03:45:00",
+        "datePublished": "2h 45min",
         "content": "Such a vibe ✨"
       },
       {
         "id": 2,
         "userImage": "https://i.pinimg.com/736x/50/59/75/505975a0281b2d860947663d7371cbf8.jpg",
         "username": "lausrnb",
-        "datePublished": "2025-09-26 03:46:00",
+        "datePublished": "2h 40min",
         "content": "I feel the same!"
       }
     ]
   },
   {
     "id": 7,
-    "datePublished": "2025-09-26 00:00:00",
+    "datePublished": "7h",
     "postImage": "https://i.pinimg.com/736x/14/20/fd/1420fdb2c1b84a55bc9a61e3050b0fa5.jpg",
     "content": "A cute place to program <3",
     "username": "valxci17",
     "userImage": "https://i.pinimg.com/736x/1f/be/04/1fbe040a53949ab9fee8c44ccdd0d6a4.jpg",
     "likeCount": 20,
-    "tag": "study",
+    "tag": "📚 study",
     "coments": [
       {
         "id": 1,
         "userImage": "https://i.pinimg.com/1200x/84/22/aa/8422aa5f01ae49cc133c68c7fd3dd667.jpg",
         "username": "nattpro_",
-        "datePublished": "2025-09-25 23:50:00",
+        "datePublished": "6h 50min",
         "content": "Such an aesthetic spot 💻"
       },
       {
         "id": 2,
         "userImage": "https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg",
         "username": "Jenny",
-        "datePublished": "2025-09-25 23:55:00",
+        "datePublished": "6h 45min",
         "content": "Take me there 🌸"
       }
     ]
