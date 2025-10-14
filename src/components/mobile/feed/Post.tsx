@@ -21,12 +21,15 @@ export default function Post() {
           src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
           alt="Shoes" />
         <div id="btn-container" className="flex justify-end">
-          <LikeButton />
-          <CommentFeed />
+          <div className="flex">
+            <LikeButton />
+            <CommentFeed />
+          </div>
+
           <CategoryTag />
         </div>
       </div>
-      
+
       <div className="flex flex-col justify-center items-center mt-10">
         <div className="bg-[#1D1D1D] text-[#F9FAFB] p-5 rounded-xl w-full max-w-md shadow-md">
           <div className="flex items-center gap-3 mb-3">
