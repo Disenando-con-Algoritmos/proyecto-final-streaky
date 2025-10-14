@@ -17,7 +17,7 @@ export default function LikeButton({ cardIndividuals }: { cardIndividuals: PostT
   };
 
   return (
-    <div className="flex items-center pr-3">
+    <div className="flex items-center z-1">
       <div onClick={handleLike} className="cursor-pointer">
         {liked ? (
           <AiFillHeart color="#703EDD" size={30} />
