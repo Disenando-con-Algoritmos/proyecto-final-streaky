@@ -19,8 +19,9 @@ export default function CardPost({ cardIndividuals }: { cardIndividuals: PostTyp
                 </div>
 
                 <img className="rounded-[19px] h-100 w-100"
-                    src= {cardIndividuals.postImage}
+                    src={cardIndividuals.postImage}
                     alt="Shoes" />
+
                 <div id="btn-container" className="flex justify-end">
                     <div className="flex">
                         <LikeButton cardIndividuals={cardIndividuals} />
@@ -28,6 +29,11 @@ export default function CardPost({ cardIndividuals }: { cardIndividuals: PostTyp
                     </div>
 
                     <CategoryTag cardIndividuals={cardIndividuals} />
+                </div>
+
+                <div className="flex">
+                    <h1 className="pr-2 font-medium">{cardIndividuals.username}:</h1>
+                    <p className="font-normal">{cardIndividuals.content}</p>
                 </div>
             </div>
         </div>
