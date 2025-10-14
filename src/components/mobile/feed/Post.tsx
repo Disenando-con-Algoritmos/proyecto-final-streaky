@@ -1,5 +1,5 @@
 import CategoryTag from "../create-post/CategoryTag";
-import LikeButton from "../create-post/LikeButton";
+import LikeButton from "./LikeButton";
 import CommentFeed from "./Comments";
 
 export default function Post() {
