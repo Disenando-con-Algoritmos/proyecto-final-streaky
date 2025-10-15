@@ -4,18 +4,19 @@ function Feed() {
     ;
     return (
         <>
-            <div className="flex justify-center items-center ">
-                <div className="flex">
+            <div className="pt-[80px]  px-[535px]">
+                <div className="flex justify-between items-center pb-[40px]">
+
                     <img
-                        src=
-                        "https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
+                        src="
+                        https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
                         className="w-12 h-12 rounded-full"
                     />
 
                     <img
-                        src=
-                        "https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
-                        className="w-12 h-12 rounded-full"
+                        src="
+                        https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
+                        className="w-16 h-16 rounded-full"
                     />
                 </div>
             </div>
@@ -31,7 +32,7 @@ function Feed() {
                     <div id="streak-container" className="bg-[#956EFF] mt-10 mb-12 p-3 
                     rounded-[17px]">
                         <div id="text-container" className="flex justify-center items-center">
-                            <p className="text-[35px] mr-2">🔥</p> 
+                            <p className="text-[35px] mr-2">🔥</p>
                             <p className="text-[16px]" >
                                 Amazing! You’ve kept your streak for <strong>10 days</strong>
                             </p>
