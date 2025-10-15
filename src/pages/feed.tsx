@@ -4,24 +4,52 @@ function Feed() {
     return (
         <>
             {/* header de logo mas profile */}
-            <div className="flex justify-center items-center mt-10 md:mt-10">
+            <div className="flex justify-center items-center mt-10 md:mt-10 relative md:mb-10">
                 <div className="flex justify-between items-center px-5
-                w-full max-w-md mx-auto">
+                w-full max-w-md ">
                     <img
-                    src="https://i.imgur.com/7IzEEQ5.png"
-                    alt="Streaky logo"
-                        className="w-24 md:w-28"
+                        src="https://i.imgur.com/7IzEEQ5.png"
+                        alt="Streaky logo"
+                        className="w-24 md:w-28 md:hidden"
                     />
+
+                    {/* este es el perfil de solo desktop*/}
+                    {/* esta imagen no se puede poner en un espacio abajo pq se deja de ver en 
+                    el navegador */}
+                    <div className="hidden md:flex items-center gap-3 absolute right-40 top-10">
+                        <img
+                    src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
+                    alt="Profile"
+                            className="w-17 h-17 rounded-full "
+                        />
+                        <div className="flex flex-col">
+                            <p className="font-semibold text-[#F9FAFB] text-[19px]">Jenny Torres</p>
+                            <p className="text-[#A1A1AA] text-sm text-[14px]">Your Profile</p>
+                        </div>
+                    </div>
+
+                    {/* perfil pequeña de mobileeee */}
+                    {/* esta imagen no se puede poner en un espacio abajo pq se deja de ver en 
+                    el navegador */}
                     <img
                     src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
                     alt="Profile"
-                        className="w-12 h-12  rounded-full "
+                        className="w-12 h-12 rounded-full md:hidden"
                     />
                 </div>
+
+                {/* miffyyy desktop */}
+                <img
+                    src="https://i.imgur.com/O90kfzg.png" // reemplázalo con tu imagen real
+                    alt="miffyy"
+                    className="hidden md:block absolute 
+                    bottom-[-800px] right-[2px] w-[400px]"
+                />
             </div>
 
-            {/* hello jenny dd*/}
-            <div className="max-w-md w-full mx-auto mt-15 md:mt-15 px-4 md:px-0">
+            {/* hello jenny dd */}
+            <div className="max-w-md w-full mx-auto md:mr-17
+            mt-15 md:mt-0 px-4 md:px-0 md:max-w-[920px]">
                 <div className="text-center md:text-left">
                     <h1 className="font-black text-[33px] md:text-[42px] 
                     leading-tight md:mr-10 mr-30">
@@ -32,11 +60,11 @@ function Feed() {
                         What’s your habit today?
                     </p>
 
-                    {/*streak */}
+                    {/* streak */}
                     <div
-                        id="streak-container"
                         className="bg-[#956EFF] mt-10 mb-11 p-3 md:p-4  rounded-[17px] 
-            flex justify-center md:justify-start items-center text-white shadow-md"
+                        flex justify-center md:justify-start 
+                        items-center text-white shadow-md w-full md:w-[50%]"
                     >
                         <p className="text-[35px] md:text-[40px] mr-2">🔥</p>
                         <p className="text-[16px] md:text-[18px] text-center md:text-left">
