@@ -1,5 +1,6 @@
 import type { PostTypes } from "../../../types/PostTypes";
-import { AiFillHeart } from "react-icons/ai";
+import { FaHeart } from "react-icons/fa6";
+import { FaRegHeart } from "react-icons/fa6";;
 import { useState } from "react";
 
 export default function LikeButton({ cardIndividuals }: { cardIndividuals: PostTypes }) {
@@ -20,9 +21,9 @@ export default function LikeButton({ cardIndividuals }: { cardIndividuals: PostT
     <div className="flex items-center z-1">
       <div onClick={handleLike} className="cursor-pointer">
         {liked ? (
-          <AiFillHeart color="#703EDD" size={30} />
+          <FaHeart   color="#703EDD" size={30} />
         ) : (
-          <AiFillHeart color="#d1d1d1ff" size={30} />
+          <FaRegHeart   color="#d1d1d1ff" size={30} />
         )}
       </div>
 
