@@ -17,7 +17,7 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
                 className="flex items-center cursor-pointer text-[#F9FAFB]"
             >
                 <MdOutlineModeComment className="text-3xl" />
-                <p className="ml-2 text-[18px]">{comments.length}</p>
+                <p className="ml-2 text-[20px]">{comments.length}</p>
             </div>
 
             {/* visible en mobile */}

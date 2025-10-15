@@ -27,11 +27,9 @@ export default function CardPost({ cardIndividuals }: { cardIndividuals: PostTyp
                 {/* Contenedor de botones */}
                 <div id="btn-container" className="flex justify-between items-center mt-2">
 
-                    <div className="flex items-center">
+                    <div className="flex items-center gap-4">
                         <LikeButton cardIndividuals={cardIndividuals} />
-                        <div className="block md:hidden">
-                            <CommentPopup cardIndividuals={cardIndividuals} />
-                        </div>
+                        <CommentPopup cardIndividuals={cardIndividuals} />
                     </div>
 
                     <CategoryTag cardIndividuals={cardIndividuals} />
