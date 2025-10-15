@@ -9,5 +9,5 @@ export type PostTypes = {
     userImage: string
     likeCount: number
     tag: string
-    coments: CommentsPost
+    coments: CommentsPost[]
 }
