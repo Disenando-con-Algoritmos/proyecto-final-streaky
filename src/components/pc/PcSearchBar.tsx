@@ -6,8 +6,10 @@ import { useState } from "react";
 import { CgClose } from "react-icons/cg";
 import logo1 from "../../assets/logo1.png";
 import logo2 from "../../assets/logo2.png";
+import type { PostTypes } from "../../types/PostTypes";
 
-function PcSearchBar() {
+function PcSearchBar({cardIndividuals,}: {cardIndividuals: PostTypes;}) {
+  // const [UsersRegistered, setUsersUsersRegistered] = useState([]);
   const [ClickSearch, setClickSearch] = useState(true);
 
   function PcSearchBarOpen() {
@@ -20,7 +22,8 @@ function PcSearchBar() {
         <div></div>
       ) : (
         <div
-          className="hidden lg:block bg-[#1E1E1E] h-screen rounded-r-[2rem] absolute w-90 ml-23 z-1"
+          className="hidden lg:block bg-[#1E1E1E] h-screen rounded-r-[2rem] absolute w-90 ml-23 z-1
+          transition-all"
         >
           <h1 className="text-white text-2xl ml-6 mt-23 mb-3">Search</h1>
           <div className="relative w-[80%] ml-6">
@@ -34,6 +37,9 @@ function PcSearchBar() {
               focus:ring-2 focus:ring-gray-500"
               placeholder="Search..."
             />
+            <div id="Users">
+              <img src={cardIndividuals.userImage}></img>
+            </div>
           </div>
         </div>
       )}

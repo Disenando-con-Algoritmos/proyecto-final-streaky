@@ -1,11 +1,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import "./App.css";
+import "./index.css";
 import PcSearchBar from "./components/pc/PcSearchBar";
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
-        <PcSearchBar/>
+        <PcSearchBar cardIndividuals={cardIndividual}/>
     </StrictMode>
 );
