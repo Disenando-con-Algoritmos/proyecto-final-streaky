@@ -8,6 +8,7 @@
     "userImage": "https://i.pinimg.com/736x/e0/fa/41/e0fa41ca8278c8b0e892fa5e489ade71.jpg",
     "likeCount": 80,
     "tag": "📚 study",
+    "userDescription": "Coffee and code",
     "coments": [
       {
         "id": 1,
@@ -55,6 +56,7 @@
     "userImage": "https://i.pinimg.com/1200x/84/22/aa/8422aa5f01ae49cc133c68c7fd3dd667.jpg",
     "likeCount": 20,
     "tag": "🥗 food",
+    "userDescription": "Sweet and calm",
     "coments": [
       {
         "id": 1,
@@ -88,6 +90,7 @@
     "userImage": "https://i.pinimg.com/736x/7c/51/bf/7c51bf3d94c837de5de32961506a6ee6.jpg",
     "likeCount": 40,
     "tag": "🏃🏻‍♂️ sport",
+    "userDescription": "Run. Eat. Repeat.",
     "coments": [
       {
         "id": 1,
@@ -114,6 +117,7 @@
     "userImage": "https://i.pinimg.com/736x/50/59/75/505975a0281b2d860947663d7371cbf8.jpg",
     "likeCount": 27,
     "tag": "❤️‍🩹 health",
+    "userDescription": "Positive energy only",
     "coments": [
       {
         "id": 1,
@@ -140,6 +144,7 @@
     "userImage": "https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg",
     "likeCount": 3,
     "tag": "📚 study",
+    "userDescription": "Always curious ✨",
     "coments": [
       {
         "id": 1,
@@ -166,6 +171,7 @@
     "userImage": "https://i.pinimg.com/736x/f3/4a/6b/f34a6b66cc525993665237d4348aba2b.jpg",
     "likeCount": 30,
     "tag": "🕹️ hobbies",
+    "userDescription": "Chill gamer",
     "coments": [
       {
         "id": 1,
@@ -192,6 +198,7 @@
     "userImage": "https://i.pinimg.com/736x/1f/be/04/1fbe040a53949ab9fee8c44ccdd0d6a4.jpg",
     "likeCount": 20,
     "tag": "📚 study",
+    "userDescription": "Café lover ☕",
     "coments": [
       {
         "id": 1,

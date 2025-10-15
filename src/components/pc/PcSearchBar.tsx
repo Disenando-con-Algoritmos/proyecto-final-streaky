@@ -32,11 +32,11 @@ function PcSearchBar() {
         <div></div>
       ) : (
         <div
-          className="hidden lg:block bg-[#1E1E1E] h-screen rounded-r-[2rem] absolute w-90 ml-23 z-1
-          transition-all"
+          className="hidden lg:block bg-[#1E1E1E] h-screen rounded-r-[2rem] w-90 ml-23 z-1
+          transition-all fixed top-0 left-0 z-50`"
         >
-          <h1 className="text-white text-2xl ml-6 mt-23 mb-3">Search</h1>
-          <div className="relative w-[80%] ml-6">
+          <h1 className="text-white text-2xl ml-7 mt-23 mb-3">Search</h1>
+          <div className="relative w-[80%] ml-7">
             <FaMagnifyingGlass
               className="absolute left-3 top-5 transform 
             -translate-y-1/2 text-gray-400 text-lg"
@@ -59,12 +59,14 @@ function PcSearchBar() {
             {Search !== "" && (
             Users.filter(user => 
             user.username.toLocaleLowerCase().includes(Search)).map((UserIndividual) => (
-                <div className="flex mb-3 mt-3 bg-[#2A2A2A] p-2 rounded-4xl cursor-pointer" 
+                <div className="flex items-center mb-3 mt-3 bg-[#2A2A2A] p-2 
+                rounded-4xl cursor-pointer" 
                 key={UserIndividual.id}>
                     <img className="w-13 h-13 rounded-4xl" src={UserIndividual.userImage}></img>
                     <div>
                       <p className="text-white ml-2">{UserIndividual.username}</p>
-                      <p className="text-white ml-2 text-[15px]">{UserIndividual.content}</p>
+                      <p className="text-[#B3B3B3] ml-2 text-[12px]">
+                        {UserIndividual.userDescription}</p>
                     </div>
                 </div>
             )))}
@@ -74,7 +76,8 @@ function PcSearchBar() {
       )}
 
       <div
-        className={`hidden lg:block bg-[#212121] h-screen rounded-r-[2rem] absolute w-65`}
+        className={`hidden lg:block bg-[#212121] h-screen rounded-r-[2rem] w-65
+          fixed top-0 left-0 z-0`}
       >
         <div id="generalPcBar" className="ml-10">
           <div className="flex flex-row mt-15 ml-1">

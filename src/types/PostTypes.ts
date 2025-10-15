@@ -9,5 +9,6 @@ export type PostTypes = {
     userImage: string
     likeCount: number
     tag: string
+    userDescription: string
     coments: CommentsPost
 }
