@@ -11,7 +11,7 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
 
     return (
         <>
-            {/* Botón de comentario: */}
+            {/* boton de comentario */}
             <div
                 onClick={() => setShowComments(true)}
                 className="flex items-center cursor-pointer text-[#F9FAFB]"
@@ -27,7 +27,7 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
             {showComments && (
                 <div className="fixed inset-0 flex 
                 justify-center items-end bg-black/60 z-50 md:hidden">
-                    {/* Caja de comentarios */}
+                    {/* caja de comentarios */}
                     <div className="bg-[#303030] w-full max-w-md h-[80vh] 
                     rounded-t-3xl flex flex-col justify-between shadow-lg">
                         {/* Header */}
@@ -42,7 +42,7 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
                             />
                         </div>
 
-                        {/* Lista de comentarios */}
+                        {/* lista de comentarios */}
                         <div className="flex-1 px-10 pt-2 space-y-7">
                             {comments.map((comment, index) => (
                                 <div key={index} className="flex items-start gap-3">
@@ -64,7 +64,7 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
                             ))}
                         </div>
 
-                        {/* Input inferior */}
+                        {/* input inferior */}
                         <div className="px-5 py-4 border-t border-[#808080] 
                         flex items-center bg-[#303030] rounded-b-3xl">
                             <img
