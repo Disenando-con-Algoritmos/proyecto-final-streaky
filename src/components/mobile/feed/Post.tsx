@@ -14,16 +14,17 @@ export default function Post() {
   }, []);
 
   return (
-    
 
-      <div>
-        {
-          multiplePost.map ((cardIndividual: PostTypes) => {
-            return <CardPost key={cardIndividual.id} cardIndividuals={cardIndividual}/>; 
-            //cardIndividuals es el mism nombre que se le pone en CardPost
-          })
-        }
-      </div>
+
+
+    <div>
+      {
+        multiplePost.map((cardIndividual: PostTypes) => {
+          return <CardPost key={cardIndividual.id} cardIndividuals={cardIndividual} />;
+          //cardIndividuals es el mism nombre que se le pone en CardPost
+        })
+      }
+    </div>
 
 
   );
