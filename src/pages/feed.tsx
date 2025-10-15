@@ -3,7 +3,7 @@ import Post from "../components/mobile/feed/Post";
 function Feed() {
     return (
         <>
-            {/*  */}
+            {/* header de logo mas profile */}
             <div className="flex justify-center items-center mt-10 md:mt-10">
                 <div className="flex justify-between items-center px-5
                 w-full max-w-md mx-auto">
