@@ -28,6 +28,15 @@ function Feed() {
                     <p className="text-[#F9FAFB] mt-3 text-[15px]">
                         What’s your habit today?
                     </p>
+                    <div id="streak-container" className="bg-[#956EFF] mt-10 mb-12 p-3 
+                    rounded-[17px]">
+                        <div id="text-container" className="flex justify-center items-center">
+                            <p className="text-[35px] mr-2">🔥</p> 
+                            <p className="text-[16px]" >
+                                Amazing! You’ve kept your streak for <strong>10 days</strong>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
