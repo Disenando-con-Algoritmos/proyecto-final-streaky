@@ -6,6 +6,6 @@ import PcSearchBar from "./components/pc/PcSearchBar";
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
-        <PcSearchBar cardIndividuals={cardIndividual}/>
+        <PcSearchBar/>
     </StrictMode>
 );
