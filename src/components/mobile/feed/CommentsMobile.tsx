@@ -15,9 +15,12 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
             <div
                 onClick={() => setShowComments(true)}
                 className="flex items-center cursor-pointer text-[#F9FAFB]"
-            >
+            >   
+            <div className="relative flex right-16 top-0,5">
                 <MdOutlineModeComment className="text-3xl" />
                 <p className="ml-2 text-[20px]">{comments.length}</p>
+            </div>
+            
             </div>
 
             {/* visible en mobile */}
