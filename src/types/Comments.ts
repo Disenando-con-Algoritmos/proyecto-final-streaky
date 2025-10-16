@@ -4,5 +4,4 @@ export type CommentsPost = {
     username: string
     datePublished: string
     content: string
-
 }

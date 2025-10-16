@@ -1,11 +1,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-
 import "./index.css";
-import PcSearchBar from "./components/pc/PcSearchBar";
+import Feed from "./pages/feed";
+
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
-        <PcSearchBar/>
+        <Feed/>
     </StrictMode>
 );
