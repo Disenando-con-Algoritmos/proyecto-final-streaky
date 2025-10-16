@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaRegComment } from "react-icons/fa";
-import type { PostTypes } from "../../../types/PostTypes";
+import type { PostTypes } from "../../types/PostTypes";
 import { FaPaperPlane } from "react-icons/fa6";
 
 export default function CommentFeed({
