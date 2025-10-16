@@ -10,5 +10,5 @@ export type PostTypes = {
     likeCount: number
     tag: string
     userDescription: string
-    coments: CommentsPost
+    coments: CommentsPost[]
 }

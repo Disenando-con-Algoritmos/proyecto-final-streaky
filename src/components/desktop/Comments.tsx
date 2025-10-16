@@ -43,21 +43,21 @@ export default function CommentFeed({
         {/* Caja con comentarios */}
         <div className="bg-[#2A2A2A] p-4 rounded-xl space-y-5 mt-2">
           {comments.length > 0 ? (
-            comments.map((comment, index) => (
+            comments.map((Comment, index) => (
               <div key={index} className="flex items-start gap-3">
                 <img
                   className="w-10 h-10 rounded-full"
-                  src={comment.userImage}
+                  src={Comment.userImage}
                   alt="User"
                 />
                 <div>
                   <p className="text-[#F9FAFB] font-semibold text-sm">
-                    {comment.username}{" "}
+                    {Comment.username}{" "}
                     <span className="text-[#8C8C8C] text-xs ml-1">
-                      {comment.datePublished}
+                      {Comment.datePublished}
                     </span>
                   </p>
-                  <p className="text-[#F9FAFB] text-sm">{comment.content}</p>
+                  <p className="text-[#F9FAFB] text-sm">{Comment.content}</p>
                 </div>
               </div>
             ))
