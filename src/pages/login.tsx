@@ -2,79 +2,89 @@ import Inputs from "../components/mobile/signup-login/Inputs";
 import { MdOutlineEmail } from "react-icons/md";
 import { MdLockOutline } from "react-icons/md";
 import catLogin from "../assets/catLogin.png";
-import shapeDownLogin from "../assets/shapeDownLogin.png";
 import shapeUpLogin from "../assets/shapeUpLogin.png";
+import GrayShape from "../assets/GrayShape.png";
+import Logo3 from "../assets/Logo3.png";
 
-export default function LoginPage() {
+export default function SignUp() {
   return (
-    <div className="h-screen overflow-hidden">
+    <div
+      id="signup-container"
+      className="relative min-h-screen flex flex-col items-center 
+        justify-between overflow-hidden"
+    >
       <div
-        id="signup-container"
-        className="flex flex-col items-center justify-center h-screen overflow-hidden"
+        id="elements-container"
+        className="p-4 sm:p-6 rounded-lg mt-22 sm:mt-12"
       >
-        <div
-          id="elements-container"
-          className="w-full max-w-sm p-6 rounded-lg flex flex-col mt-10 z-2"
-        >
-          <h1 className="font-bold text-[40px]">Login</h1>
-          <p className="text-[18px] mt-2">
-            Welcome back! you´ve been missed ✨
-          </p>
+        <h1 className="font-bold text-[26px] sm:text-[40px] leading-tight">
+          Log In
+        </h1>
+        <p className="text-[14px] sm:text-[18px] mt-2 text-gray-200">
+          Welcome back! you’ve been missed ✨
+        </p>
 
-          <form className="flex flex-col gap-5 mt-8 w-full">
-            <Inputs label="Email" type="email" placeholder="Enter email">
-              <MdOutlineEmail />
-            </Inputs>
+        <form className="flex flex-col gap-3 sm:gap-4 mt-6 sm:mt-8">
+          <Inputs label="Email" type="email" placeholder="Enter email">
+            <MdOutlineEmail />
+          </Inputs>
 
-            <Inputs
-              label="Password"
-              type="password"
-              placeholder="Enter password"
-            >
-              <MdLockOutline />
-            </Inputs>
+          <Inputs label="Password" type="password" placeholder="Enter password">
+            <MdLockOutline />
+          </Inputs>
 
-            <button
-              className="bg-[#B2F042] w-27 h-10 self-center rounded-4xl 
-            text-black mt-7 font-medium cursor-pointer"
-              type="submit"
-            >
-              Login
-            </button>
-          </form>
+          <button
+            className="bg-[#B2F042] w-25 sm:w-27 h-9 sm:h-10 self-center 
+      rounded-4xl text-black mt-6 sm:mt-7 font-medium cursor-pointer"
+            type="submit"
+          >
+            Login
+          </button>
+        </form>
 
-          <div className="flex flex-col items-center mt-6">
-            <div className="flex mt-3">
-              <p className="font-light flex">Not a member?</p>
-              <p className="ml-2 font-bold cursor-pointer hover:border-b-1">
-                Sign Up
-              </p>
-            </div>
-
-            {/* 🐱 Imagen del gato centrada y responsive */}
-            <img
-              src={catLogin}
-              className="w-56 sm:w-64 md:w-72 lg:w-80 object-contain relative z-1"
-              alt="cat login"
-            />
-          </div>
-        </div>
+        <p className="text-center mt-4 text-[13px] sm:text-base text-gray-300">
+          Not a Member?
+          <span className="font-semibold cursor-pointer hover:underline ml-1 text-white">
+            Sign Up
+          </span>
+        </p>
       </div>
-      <img
-  src={shapeDownLogin}
-  alt="shape background bottom left"
-  className="absolute bottom-0 left-0 
-  w-[180px] sm:w-[220px] md:w-[280px] lg:w-[350px] 
-  z-0 object-contain"
-/>
+      
+      <div
+        className="bg-[#222222] 
+        absolute left-0 top-6 
+        w-25 lg:w-[200px] 
+        h-10 md:h-[65px] 
+        rounded-r-4xl flex items-center justify-end pr-3"
+      >
+        <img
+          className="w-7 sm:w-8 mr-3 lg:w-10"
+          src={Logo3}
+          alt="Streaky Logo"
+        />
+      </div>
 
-<img
-  src={shapeUpLogin}
-  alt="shape background top right"
-  className="absolute top-0 right-0 
-  w-[140px] sm:w-[180px] md:w-[240px] lg:w-[300px] 
-  z-0 object-contain"
-/>
+      <img
+        className="absolute bottom-0 left-[-40px] sm:left-[-55px] md:left-[-70px] 
+            w-[180px] sm:w-[220px] md:w-[260px] lg:w-[300px] lg:mb-0 mb-20"
+        src={GrayShape}
+        alt="Gray Shape"
+      />
+
+      <img
+        className="absolute top-[-10px] right-[-50px] sm:right-[-95px] md:right-[-120px] 
+            w-[140px] sm:w-[200px] md:w-[260px] lg:w-[300px]"
+        src={shapeUpLogin}
+        alt="Green Shape"
+      />
+
+      <img
+        className="absolute bottom-0 mx-auto left-0 right-0 
+            h-[220px] sm:h-[260px] md:h-[300px] lg:h-[340px] 
+            object-contain"
+        src={catLogin}
+        alt="Miffy"
+      />
     </div>
   );
 }
