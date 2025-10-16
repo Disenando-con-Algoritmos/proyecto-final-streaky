@@ -39,7 +39,7 @@ function PcSearchBar() {
           <div className="relative w-[80%] ml-7">
             <FaMagnifyingGlass
               className="absolute left-3 top-5 transform 
-            -translate-y-1/2 text-gray-400 text-lg"
+            -translate-y-1/2 text-[#E7E7E7] text-lg"
             />
             <CgClose
             onClick={() => setSearch("")}

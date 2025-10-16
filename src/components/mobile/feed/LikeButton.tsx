@@ -21,9 +21,13 @@ export default function LikeButton({ cardIndividuals }: { cardIndividuals: PostT
     <div className="flex items-center z-1">
       <div onClick={handleLike} className="cursor-pointer">
         {liked ? (
-          <FaHeart   color="#703EDD" size={30} />
+          <FaHeart
+            size={30}
+            className="text-[#703EDD] hover:text-[#703EDD]" />
         ) : (
-          <FaRegHeart   color="#d1d1d1ff" size={30} />
+          <FaRegHeart
+            size={30}
+            className="text-[#d1d1d1ff] hover:text-[#703EDD]" />
         )}
       </div>
 

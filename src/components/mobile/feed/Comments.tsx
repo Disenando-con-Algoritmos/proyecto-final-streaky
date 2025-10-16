@@ -24,8 +24,8 @@ export default function CommentFeed({
       >
         <div className="relative flex right-70 bottom-17">
           <FaRegComment 
-            className="text-[#F9FAFB] 
-          text-3xl hover:text-[#CCCCCC] transition"
+            className="text-[#E7E7E7] 
+          text-3xl hover:text-[#703EDD] transition"
           />
           <p className="ml-2 text-[20px]">{comments.length}</p>
         </div>
