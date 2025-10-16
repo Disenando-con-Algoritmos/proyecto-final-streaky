@@ -66,7 +66,7 @@ function PcSearchBar() {
             {Search !== "" && (
             Users.filter(user => 
             user.username.toLocaleLowerCase().includes(Search)).map((UserIndividual) => (
-                <div className="flex items-center mb-3 mt-3 bg-[#2A2A2A] p-2 
+                <div className="flex items-center mb-3 mt-3 p-2 
                 rounded-4xl cursor-pointer" 
                 key={UserIndividual.id}>
                     <img className="w-13 h-13 rounded-4xl" src={UserIndividual.userImage}></img>
