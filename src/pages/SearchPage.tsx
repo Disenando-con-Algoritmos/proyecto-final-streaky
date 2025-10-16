@@ -4,6 +4,7 @@ import type { PostTypes } from "../types/PostTypes";
 import catSearch from "../assets/cat-search.png";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { getAccount } from "../services/PostService";
+import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 
 export default function SearchPage() {
   const [postsData, setPostsData] = useState<PostTypes[]>([]);
@@ -45,6 +46,8 @@ export default function SearchPage() {
   }, [inputText, uniqueUsers]);
 
   return (
+    <>
+    <MobileNavbar />
     <div
       id="search-container"
       className="bg-[#171717] min-h-screen pb-24 text-white flex 
@@ -100,5 +103,6 @@ export default function SearchPage() {
         )}
       </div>
     </div>
+    </>
   );
 }
