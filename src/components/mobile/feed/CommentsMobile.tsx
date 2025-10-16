@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MdOutlineModeComment } from "react-icons/md";
+import { FaRegComment } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { FaPaperPlane } from "react-icons/fa6";
 import type { PostTypes } from "../../../types/PostTypes";
@@ -17,7 +17,7 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
                 className="flex items-center cursor-pointer text-[#F9FAFB]"
             >   
             <div className="relative flex right-16 top-0,5">
-                <MdOutlineModeComment className="text-3xl" />
+                <FaRegComment className="text-3xl" />
                 <p className="ml-2 text-[20px]">{comments.length}</p>
             </div>
             
