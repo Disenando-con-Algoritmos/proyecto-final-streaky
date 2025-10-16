@@ -1,4 +1,4 @@
-import PcSearchBar from "../components/pc/PcSearchBar";
+import PcSearchBar from "../components/desktop/PcSearchBar";
 
 function CreatePost (){
 
