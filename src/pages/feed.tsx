@@ -57,24 +57,26 @@ function Feed() {
             ">
                 <div className="text-center md:text-left">
                     <h1 className="font-black text-[33px] md:text-[42px] 
-                    leading-tight md:mr-10 mr-30">
+                    leading-tight md:mr-10 mr-38">
                         Hello, Jenny! 👋🏻
                     </h1>
 
-                    <p className="text-[#F9FAFB] mt-3 text-[15px] md:text-[17px] md:mr-10 mr-55">
+                    <p className="text-[#F9FAFB] mt-3 text-[15px] md:text-[17px] md:mr-10 mr-62">
                         What’s your habit today?
                     </p>
 
                     {/* streak */}
+                    <div className="m-5">
                     <div
-                        className="bg-[#956EFF] mt-10 mb-11 p-3 md:p-4  rounded-[17px] 
+                        className="bg-[#956EFF] mt-10 mb-11 p-3 rounded-[17px] 
                         flex justify-center md:justify-start 
-                        items-center text-white shadow-md w-full md:w-[100%]"
+                        items-center text-white shadow-md w-full"
                     >
                         <p className="text-[35px] md:text-[40px] mr-2">🔥</p>
                         <p className="text-[16px] md:text-[18px] text-center md:text-left">
                             Amazing! You’ve kept your streak for <strong>10 days</strong>
                         </p>
+                    </div>
                     </div>
                 </div>
             </div>
