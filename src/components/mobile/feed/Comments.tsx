@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MdOutlineModeComment } from "react-icons/md";
+import { FaRegComment } from "react-icons/fa";
 import type { PostTypes } from "../../../types/PostTypes";
 import { FaPaperPlane } from "react-icons/fa6";
 
@@ -23,7 +23,7 @@ export default function CommentFeed({
         onClick={toggleComments}
       >
         <div className="relative flex right-70 bottom-17">
-          <MdOutlineModeComment
+          <FaRegComment 
             className="text-[#F9FAFB] 
           text-3xl hover:text-[#CCCCCC] transition"
           />
