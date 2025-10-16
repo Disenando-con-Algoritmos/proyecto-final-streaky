@@ -52,8 +52,9 @@ function Feed() {
             </div>
 
             {/* hello jenny dd */}
-            <div className="max-w-md w-full mx-auto md:mr-17
-            mt-15 md:mt-0 px-4 md:px-0 md:max-w-[920px]">
+            <div className="flex flex-col justify-center">
+            <div className="max-w-md w-full mx-auto 
+            ">
                 <div className="text-center md:text-left">
                     <h1 className="font-black text-[33px] md:text-[42px] 
                     leading-tight md:mr-10 mr-30">
@@ -68,7 +69,7 @@ function Feed() {
                     <div
                         className="bg-[#956EFF] mt-10 mb-11 p-3 md:p-4  rounded-[17px] 
                         flex justify-center md:justify-start 
-                        items-center text-white shadow-md w-full md:w-[50%]"
+                        items-center text-white shadow-md w-full md:w-[100%]"
                     >
                         <p className="text-[35px] md:text-[40px] mr-2">🔥</p>
                         <p className="text-[16px] md:text-[18px] text-center md:text-left">
@@ -80,6 +81,7 @@ function Feed() {
 
             {/* post de users */}
             <Post />
+            </div>
         </>
     );
 }
