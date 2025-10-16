@@ -1,3 +1,3 @@
-export type CategoryType {
+export type CategoryType = {
     tag: string;
 }
