@@ -8,11 +8,13 @@ import logo1 from "../../assets/logo1.png";
 import logo2 from "../../assets/logo2.png";
 import type { PostTypes } from "../../types/PostTypes";
 import { getAccount } from "../../services/PostService";
+import { useNavigate } from "react-router";
 
 function PcSearchBar() {
   const [ClickSearch, setClickSearch] = useState(true);
   const [Users, setUsers] = useState<PostTypes[]>([]);
   const [Search, setSearch] = useState("");
+  const nav = useNavigate();
 
   function PcSearchBarOpen() {
     setClickSearch(!ClickSearch);
@@ -25,6 +27,11 @@ function PcSearchBar() {
     }
     fetchUsers();
   }, []);
+
+  const NavigateNavBarPccreatepost = () => {nav("/createPost");};
+  const NavigateNavBarPcFeed = () => {nav("/");};
+  const NavigateNavBarPcLogin = () => {nav("/login");};
+  const NavigateNavBarPcLanding = () => {nav("/landing");};
 
   return (
     <>
@@ -80,7 +87,9 @@ function PcSearchBar() {
           fixed top-0 left-0 z-0`}
       >
         <div id="generalPcBar" className="ml-10">
-          <div className="flex flex-row mt-15 ml-1">
+          <div
+          onClick={NavigateNavBarPcLanding} 
+          className="flex flex-row mt-15 ml-1">
             <img className="w-6 h-9" src={logo1}></img>
             <img
               className={`w-35 ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
@@ -88,7 +97,9 @@ function PcSearchBar() {
             ></img>
           </div>
 
-          <div className="flex mt-10 mb-6">
+          <div
+          onClick={NavigateNavBarPcFeed}   
+          className="flex mt-10 mb-6">
             <TiHome className="text-white text-4xl cursor-pointer" />
               <h2
               className={`text-[20px] ml-3 mb-7 font-medium text-white 
@@ -112,8 +123,11 @@ function PcSearchBar() {
             </h2>
           </div>
 
-          <div className="flex items-center mt-3 ml-[-10px]">
-            <FiPlus className="text-white text-5xl cursor-pointer" />
+          <div
+          onClick={NavigateNavBarPccreatepost}  
+          className="flex items-center mt-3 ml-[-10px]">
+            <FiPlus
+            className="text-white text-5xl cursor-pointer" />
             <h2
               className={`text-[20px] text-gray-50 ml-2 font-medium 
               cursor-pointer ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
@@ -122,7 +136,9 @@ function PcSearchBar() {
             </h2>
           </div>
 
-          <div className="flex mt-60">
+          <div
+          onClick={NavigateNavBarPcLogin} 
+          className="flex mt-60">
             <HiOutlineLogout className="text-red-700 text-4xl cursor-pointer" />
             <h2
               className={`text-[20px] text-red-700 ml-2 font-bold 
