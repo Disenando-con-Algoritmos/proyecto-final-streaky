@@ -90,7 +90,7 @@ function PcSearchBar() {
 
           <div className="flex mt-10 mb-6">
             <TiHome className="text-white text-4xl cursor-pointer" />
-            <h2
+              <h2
               className={`text-[20px] ml-3 mb-7 font-medium text-white 
               cursor-pointer ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
             >
