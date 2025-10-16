@@ -18,7 +18,7 @@ function Feed() {
                     {/* este es el perfil de solo desktop*/}
                     {/* esta imagen no se puede poner en un espacio abajo pq se deja de ver en 
                     el navegador */}
-                    <div className="hidden md:flex items-center gap-3 absolute right-40 top-10">
+                    <div className="hidden md:flex items-center gap-3 fixed right-40 mt-20">
                         <img
                     src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
                     alt="Profile"
@@ -44,8 +44,8 @@ function Feed() {
                 <img
                     src="https://i.imgur.com/O90kfzg.png" // reemplázalo con tu imagen real
                     alt="miffyy"
-                    className="hidden md:block absolute 
-                    bottom-[-800px] right-[2px] w-[400px]"
+                    className="hidden md:block fixed  
+                    -bottom-8 right-[2px] w-[400px]"
                 />
             </div>
 
