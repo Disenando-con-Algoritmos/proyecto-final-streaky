@@ -4,7 +4,7 @@ export default function BuildGoodHabits() {
 
     return (
         <section className="flex flex-col md:flex-row items-center 
-    justify-between py-25 md:py-0  text-white">
+    justify-between md:py-0  text-white">
             <div className="md:text-left md:w-1/2 md:px-30">
                 <h2 className="text-[30px] md:text-5xl font-bold mb-4 ml-[40px]">
                     Build good habits!

@@ -29,8 +29,8 @@ export default function MakeEveryDay() {
             </div>
 
             <div className="flex justify-center  ">
-                <img src={mockup1}  className="w-full max-w-none 
-                scale-[1.5] ml-30 md:scale-100 md:w-[700px] " />
+                <img src={mockup1}  className="max-w-none 
+                w-[700px] ml-50 md:scale-100 md:w-[700px] " />
             </div>
         </section>
     );
