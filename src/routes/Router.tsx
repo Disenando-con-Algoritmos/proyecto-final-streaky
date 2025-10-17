@@ -1,17 +1,34 @@
 import { createBrowserRouter } from "react-router";
 import Feed from "../pages/feed";
 import CreatePost from "../pages/createpost";
-import LoginPage from "../pages/login";
+import LogIn from "../pages/login";
 import Landing from "../pages/landing";
 import SearchPage from "../pages/SearchPage";
 import SignUp from "../pages/signup";
 import ProfilePage from "../pages/myprofile";
+import Welcome from "../pages/welcome";
 
 const router = createBrowserRouter(
     [
         {
             path: "/",
             Component: Landing,
+        },
+        {
+            path: "/signUp",
+            Component: SignUp,
+        },
+        {
+            path: "/welcome",
+            Component: Welcome,
+        },
+        {
+            path: "/login",
+            Component: LogIn,
+        },
+        {
+            path: "/feed",
+            Component: Feed,
         },
         {
             path: "/createPost",
@@ -22,25 +39,9 @@ const router = createBrowserRouter(
             Component: SearchPage,
         },
         {
-            path: "/login",
-            element: <LoginPage/>
-        },
-        {
-            path: "/signUp",
-            Component: SignUp,
-        },
-        {
             path: "/profile",
-            Component: ProfilePage,
+            element: <ProfilePage />
         },
-        {
-            path: "/landing",
-            element: <Landing/>
-        },
-        {
-            path: "/feed",
-            element: <Feed/>
-        }
     ],
 );
 

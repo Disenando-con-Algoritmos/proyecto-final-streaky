@@ -58,7 +58,7 @@ function PcSearchBar() {
               onChange={e => setSearch(e.target.value)}
               className="bg-[#2A2A2A] text-gray-200 p-2 pl-10 rounded-full 
               w-full focus:outline-none 
-              focus:ring-2 focus:ring-gray-500"
+              focus:ring-2 focus:ring-[#B1F042]"
               placeholder="Search..."
             />
             <div className="mt-4 max-h-130 overflow-y-auto pr-2 scrollbar-thin 
