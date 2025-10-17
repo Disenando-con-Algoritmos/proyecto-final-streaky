@@ -7,7 +7,6 @@ import logoResponsive from "../assets/logo-responsive.png";
 import grayShape from "../assets/grayShape.png";
 import greenShape from "../assets/greenShape.png";
 
-
 export default function SignUp() {
     return(
         <div id="signup-container" className="relative min-h-screen flex flex-col items-center 
