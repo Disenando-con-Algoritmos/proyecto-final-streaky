@@ -14,7 +14,7 @@ export default function GlobalBtn({
       onClick={onClick}
       type={type}
       className="bg-[#B1F042] hover:bg-[#96cf33]  duration-300 
-                 p-3 rounded-[50px] w-[130px] text-[#171717] font-medium text-lg
+                 p-3 rounded-[50px] w-[130px] text-[#171717] font-[600] text-lg
                  shadow-md hover:shadow-lg hover:scale-105 transition"
     >
       {text}
