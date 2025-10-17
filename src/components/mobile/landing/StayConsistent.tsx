@@ -5,8 +5,7 @@ import beginjourney from "../../../assets/beginjourney.png";
 export default function StayConsistent() {
     return (
         <section
-            className="flex flex-col md:flex-row items-center justify-center 
-        gap-2  py-10 md:py-24"
+            className="flex flex-col md:flex-row items-center justify-center py-20 md:py-24"
         >   
             <img
                 src={stayconsistent}

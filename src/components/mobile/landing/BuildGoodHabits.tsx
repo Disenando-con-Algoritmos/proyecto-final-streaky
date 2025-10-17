@@ -16,7 +16,7 @@ export default function BuildGoodHabits() {
             </div>
 
             <div className="flex justify-center md:w-1/2">
-                <img src={bars} alt="Stats bars" className="w-[350px] md:w-[550px]" />
+                <img src={bars} alt="Stats bars" className="w-[330px] md:w-[500px]" />
             </div>
         </section>
     );

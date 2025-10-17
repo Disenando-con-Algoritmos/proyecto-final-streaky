@@ -6,7 +6,7 @@ export default function Adaptabilities() {
 
     return (
         <section className="flex flex-col md:flex-row items-center 
-        justify-between py-20 md:py-0 md:px-40 text-white">
+        justify-between py-20 pt-8 md:pt-0 md:py-0 md:px-40 text-white">
             <div className="md:text-left  md:w-100px px-15 md:px-0">
                 <h2 className="text-[30px] md:text-[46px] font-bold mb-4 ">
                     Adaptability just in a few clicks!
