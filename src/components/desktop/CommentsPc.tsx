@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { FaRegComment } from "react-icons/fa";
-import type { PostTypes } from "../../../types/PostTypes";
+import type { PostTypes } from "../../types/PostTypes";
 import { FaPaperPlane } from "react-icons/fa6";
 
-export default function CommentFeed({
+export default function CommentsPc({
   cardIndividuals,
 }: {
   cardIndividuals: PostTypes;
 }) {
   const [showComments, setShowComments] = useState(false);
-  const comments = cardIndividuals.coments || [];
+  const comments = cardIndividuals.comments || [];
 
   function toggleComments() {
     setShowComments(!showComments);
@@ -23,7 +23,7 @@ export default function CommentFeed({
         onClick={toggleComments}
       >
         <div className="relative flex right-70 bottom-17">
-          <FaRegComment 
+          <FaRegComment
             className="text-[#E7E7E7] 
           text-3xl hover:text-[#703EDD] transition"
           />
@@ -34,30 +34,29 @@ export default function CommentFeed({
       {/* Contenedor de comentarios */}
       <div
         id="ShowComments"
-        className={`transition-all duration-300 ease-in-out overflow-hidden relative ${
-          showComments
+        className={`transition-all duration-300 ease-in-out overflow-hidden relative ${showComments
             ? "max-h-[400px] opacity-100 mt-[-25px]"
             : "max-h-0 opacity-0 "
-        }`}
+          }`}
       >
         {/* Caja con comentarios */}
         <div className="bg-[#2A2A2A] p-4 rounded-xl space-y-5 mt-2">
           {comments.length > 0 ? (
-            comments.map((comment, index) => (
+            comments.map((Comment, index) => (
               <div key={index} className="flex items-start gap-3">
                 <img
                   className="w-10 h-10 rounded-full"
-                  src={comment.userImage}
+                  src={Comment.userImage}
                   alt="User"
                 />
                 <div>
                   <p className="text-[#F9FAFB] font-semibold text-sm">
-                    {comment.username}{" "}
+                    {Comment.username}{" "}
                     <span className="text-[#8C8C8C] text-xs ml-1">
-                      {comment.datePublished}
+                      {Comment.datePublished}
                     </span>
                   </p>
-                  <p className="text-[#F9FAFB] text-sm">{comment.content}</p>
+                  <p className="text-[#F9FAFB] text-sm">{Comment.content}</p>
                 </div>
               </div>
             ))
@@ -81,7 +80,7 @@ export default function CommentFeed({
             hover:bg-[#8B5CF6] transition">
             <FaPaperPlane className="text-white text-[14px]" />
           </button>
-          
+
         </div>
       </div>
     </div>
