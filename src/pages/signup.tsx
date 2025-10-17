@@ -49,7 +49,7 @@ export default function SignUp() {
                     <GlobalBtn text="Sign Up" type="button" onClick={() => navigate("/feed")}/>
                 </div>
 
-                    <p className="text-center mt-4 text-sm sm:text-base ">
+                    <p className="text-center mt-4 text-[15px] sm:text-base ">
                         Already have an account?
                         <span className="font-semibold cursor-pointer hover:underline p-2" onClick={
                             () => navigate("/login")

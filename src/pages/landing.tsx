@@ -2,7 +2,7 @@ import MakeEveryDay from "../components/mobile/landing/MakeEveryDay";
 import BuildGoodHabits from "../components/mobile/landing/BuildGoodHabits";
 import StayConsistent from "../components/mobile/landing/StayConsistent";
 import Adaptabilities from "../components/mobile/landing/Adaptabilities";
-import Footer from "../components/mobile/landing/footer";
+import Footer from "../components/mobile/landing/Footer";
 import logo from  "../assets/logo.png";
 
 export default function Landing() {

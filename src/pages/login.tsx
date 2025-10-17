@@ -21,10 +21,10 @@ export default function LogIn() {
                 id="elements-container"
                 className="p-4 sm:p-6 rounded-lg mt-22 sm:mt-12"
             >
-                <h1 className="font-bold text-[26px] sm:text-[40px] leading-tight">
+                <h1 className="font-bold text-[30px] md:text-[40px] leading-tight">
                     Log In
                 </h1>
-                <p className="text-[14px] sm:text-[18px] mt-2 text-gray-200">
+                <p className="text-[18px] md:text-[18px] mt-2 text-gray-200">
                     Welcome back! you’ve been missed ✨
                 </p>
 
@@ -49,7 +49,7 @@ export default function LogIn() {
                     </button>
                 </form>
 
-                <p className="text-center mt-4 text-[13px] sm:text-base text-gray-300">
+                <p className="text-center mt-4 text-[15px] md:text-base text-gray-300">
                     Not a Member?
                     <span className="font-semibold cursor-pointer hover:underline p-2" onClick={
                             () => navigate("/signup")
@@ -91,7 +91,7 @@ export default function LogIn() {
 
             <img
                 className="absolute bottom-0 mx-auto left-0 right-0 
-            h-[220px] lg:h-[290px] 
+            h-[350px] md:lg:h-[320px] 
             object-contain"
                 src={catLogin}
                 alt="Miffy"
