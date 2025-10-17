@@ -74,7 +74,7 @@ export default function SignUp() {
             src={greenShape} alt="Green Shape" />
 
             <img className="bottom-0 z-0 lg:mt-10 object-contain 
-            h-[220px] sm:h-[260px] md:h-[300px] lg:h-[140px]"
+            h-[220px] sm:h-[260px] md:h-[300px] lg:h-[180px]"
             src={miffySignUp} alt="Miffy" />
 
         </div>

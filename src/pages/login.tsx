@@ -85,7 +85,7 @@ export default function LogIn() {
 
             <img
                 className="absolute bottom-0 mx-auto left-0 right-0 
-            h-[350px] md:lg:h-[320px] 
+            h-[220px] md:lg:h-[250px] 
             object-contain"
                 src={catLogin}
                 alt="Miffy"
