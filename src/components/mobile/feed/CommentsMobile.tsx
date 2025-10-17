@@ -28,8 +28,8 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
                 <div className="fixed inset-0 flex 
                 justify-center items-end bg-black/60 z-50 md:hidden">
                     {/* caja de comentarios */}
-                    <div className="bg-[#303030] w-full max-w-md h-[80vh] 
-                    rounded-t-3xl flex flex-col justify-between shadow-lg">
+                    <div className="bg-[#303030] w-full max-w-md h-[750px] 
+                    rounded-t-3xl flex flex-col justify-between">
                         {/* Header */}
                         <div className="relative flex items-center justify-center px-5 pt-6 pb-3">
                             <h2 className="text-[#F9FAFB] text-2xl font-semibold 
@@ -37,13 +37,13 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
                                 Comments
                             </h2>
                             <IoClose
-                                className="absolute right-5 text-[#F9FAFB] text-2xl cursor-pointer"
+                                className="absolute right-5 text-[#F9FAFB] text-2xl"
                                 onClick={() => setShowComments(false)}
                             />
                         </div>
 
                         {/* lista de comentarios */}
-                        <div className="flex-1 px-10 pt-2 space-y-7">
+                        <div className="flex-1 px-10 pt-2 space-y-8">
                             {comments.map((comment, index) => (
                                 <div key={index} className="flex items-start gap-3">
                                     <img
