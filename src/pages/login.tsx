@@ -54,11 +54,11 @@ export default function SignUp() {
         className="bg-[#222222] 
         absolute left-0 top-6 
         w-25 lg:w-[200px] 
-        h-10 md:h-[65px] 
+        h-10 md:h-15 
         rounded-r-4xl flex items-center justify-end pr-3"
       >
         <img
-          className="w-7 sm:w-8 mr-3 lg:w-10"
+          className="w-6 mr-3 lg:w-8"
           src={Logo3}
           alt="Streaky Logo"
         />
@@ -66,21 +66,21 @@ export default function SignUp() {
 
       <img
         className="absolute bottom-0 left-[-40px] sm:left-[-55px] md:left-[-70px] 
-            w-[180px] sm:w-[220px] md:w-[260px] lg:w-[300px] lg:mb-0 mb-20"
+            w-[180px] sm:w-[220px] lg:w-[270px] lg:mb-0 mb-20"
         src={GrayShape}
         alt="Gray Shape"
       />
 
       <img
-        className="absolute top-[-10px] right-[-50px] sm:right-[-95px] md:right-[-120px] 
-            w-[140px] sm:w-[200px] md:w-[260px] lg:w-[300px]"
+        className="absolute top-[-10px] right-[-50px] md:right-[-100px] 
+            w-[140px] sm:w-[200px] md:w-[260px] lg:w-[270px]"
         src={shapeUpLogin}
         alt="Green Shape"
       />
 
       <img
         className="absolute bottom-0 mx-auto left-0 right-0 
-            h-[220px] sm:h-[260px] md:h-[300px] lg:h-[340px] 
+            h-[220px] lg:h-[290px] 
             object-contain"
         src={catLogin}
         alt="Miffy"
