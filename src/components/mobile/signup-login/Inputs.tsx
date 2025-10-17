@@ -25,7 +25,7 @@ export default function Inputs({
                     {children}
                 </span>
                 <input
-                className="w-[90%] sm:w-full bg-transparent border border-[#E1E1E1] rounded-full 
+                className="w-[90%] bg-transparent border border-[#E1E1E1] rounded-full 
                 py-2 pl-12 pr-4 text-gray-200 placeholder-[#5D5D5D] focus:outline-none 
                 focus:border-[#B1F042] transition mx-auto"
                 type={type} placeholder={placeholder} required={required} />
