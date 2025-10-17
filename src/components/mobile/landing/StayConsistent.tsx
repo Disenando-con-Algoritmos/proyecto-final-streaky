@@ -7,7 +7,7 @@ export default function StayConsistent() {
         <section
             className="flex flex-col md:flex-row items-center justify-center 
         gap-2  py-10 md:py-24"
-        >
+        >   
             <img
                 src={stayconsistent}
                 className="ml-26 w-[450px] md:w-[500px] md:mr-20"
