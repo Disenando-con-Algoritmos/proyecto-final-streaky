@@ -1,6 +1,7 @@
 import bars from "../../../assets/bars.png";
 
 export default function BuildGoodHabits() {
+
     return (
         <section className="flex flex-col md:flex-row items-center 
     justify-between py-25 md:py-0  text-white">

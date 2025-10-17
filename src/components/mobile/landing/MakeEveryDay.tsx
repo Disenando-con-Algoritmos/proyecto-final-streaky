@@ -1,7 +1,10 @@
 import words from "../../../assets/words.png";
 import mockup1 from "../../../assets/mockup1.png";
+import { useNavigate } from "react-router";
 
 export default function MakeEveryDay() {
+    const navigate = useNavigate();
+
     return (
         <section className="flex flex-col md:flex-row items-center 
         justify-between text-white">
@@ -17,8 +20,10 @@ export default function MakeEveryDay() {
                 </p>
 
 
-                <button className="bg-[#A0FF6F] text-black font-semibold 
-                px-8 py-3 rounded-full hover:scale-105 transition md:w-40 w-40 ml-10">
+                <button className="bg-[#B2F042] text-black font-medium
+                px-8 py-3 rounded-full hover:scale-105 transition md:w-40 w-40 ml-10 cursor-pointer"
+                onClick={ 
+                    ()=> navigate("/signUp")} > 
                     Start Now
                 </button>
             </div>

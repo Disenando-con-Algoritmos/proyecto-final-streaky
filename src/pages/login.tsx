@@ -39,7 +39,7 @@ export default function SignUp() {
 
                     <button
                         className="bg-[#B2F042] w-25 sm:w-27 h-9 sm:h-10 self-center 
-      rounded-4xl text-black mt-6 sm:mt-7 font-medium cursor-pointer"
+      rounded-4xl text-black mt-6 sm:mt-7 font-medium cursor-pointer hover:scale-105 transition"
                         type="submit"
                     >
                         Login

@@ -44,11 +44,12 @@ export default function SignUp() {
                     </Inputs>
                 </form>
 
-                <div id="btn-container" className="flex justify-center mt-6">
+                <div id="btn-container" className="flex justify-center mt-6 
+                hover:scale-105 transition">
                     <GlobalBtn text="Sign Up" type="button" onClick={() => navigate("/")}/>
                 </div>
 
-                    <p className="text-center mt-4 text-sm sm:text-base">
+                    <p className="text-center mt-4 text-sm sm:text-base ">
                         Already have an account?
                         <span className="font-semibold cursor-pointer hover:underline p-2" onClick={
                             () => navigate("/login")

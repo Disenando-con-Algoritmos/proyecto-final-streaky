@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router";
 import mockup2 from "../../../assets/mockup2.png";
 
 export default function Adaptabilities() {
+    const navigate = useNavigate();
+
     return (
         <section className="flex flex-col md:flex-row items-center 
         justify-between py-20 md:py-0 md:px-40 text-white">
@@ -12,8 +15,10 @@ export default function Adaptabilities() {
                     Track habits anytime on mobile or desktop. 
                     Streaky 🔥 keeps your progress with you.
                 </p>
-                <button className="bg-[#A0FF6F] text-black font-semibold px-10 
-                py-3 rounded-full hover:scale-105 transition">
+                <button className="bg-[#B2F042] text-black font-medium px-10 
+                py-3 rounded-full hover:scale-105 transition cursor-pointer"
+                onClick={ 
+                    ()=> navigate("/signUp")}>
                     Join Now
                 </button>
             </div>
