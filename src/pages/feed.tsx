@@ -1,8 +1,11 @@
 import Post from "../components/mobile/feed/Post";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 import PcSearchBar from "../components/desktop/PcSearchBar";
+import { useNavigate } from "react-router";
 
 function Feed() {
+  const nav = useNavigate();
+  const NavigateProfile = () => nav("/profile");
   return (
     <>
       <PcSearchBar></PcSearchBar>
@@ -22,7 +25,9 @@ function Feed() {
           {/* este es el perfil de solo desktop*/}
           {/* esta imagen no se puede poner en un espacio abajo pq se deja de ver en 
                     el navegador */}
-          <div className="hidden md:flex items-center gap-3 fixed right-40 mt-20">
+          <div 
+          onClick={NavigateProfile}
+          className="hidden md:flex items-center gap-3 fixed right-40 mt-20 cursor-pointer">
             <img
               src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
               alt="Profile"
