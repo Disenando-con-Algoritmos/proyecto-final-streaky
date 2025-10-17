@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAccount } from "../../../services/PostService";
+import { getPost } from "../../../services/PostService";
 import type { PostTypes } from "../../../types/PostTypes";
 import CardPost from "./CardPost";
 
@@ -7,7 +7,7 @@ export default function Post() {
     const [multiplePost, sedMultiplePost] = useState<PostTypes[]>([]); // la tag va el tipado
     useEffect(() => {
         const fecthData = async () => {
-            const data = await getAccount(); // aqui va la funcion de services 
+            const data = await getPost(); // aqui va la funcion de services 
             sedMultiplePost(data);
         };
         fecthData();
