@@ -23,7 +23,6 @@ export default function MakeEveryDay() {
                     <span className="block md:inline">share your journey!</span>
                 </p>
 
-
                 <div id="btn-container" className="flex m-7 mt-6 
                                 hover:scale-105 transition">
                     <GlobalBtn text="Start Now" 

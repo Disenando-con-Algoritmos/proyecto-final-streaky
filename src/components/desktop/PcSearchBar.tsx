@@ -32,7 +32,6 @@ function PcSearchBar() {
   const NavigateNavBarPcFeed = () => {nav("/feed");};
   const NavigateNavBarPcLogin = () => {nav("/login");};
 
-
   return (
     <>
       {ClickSearch ? (

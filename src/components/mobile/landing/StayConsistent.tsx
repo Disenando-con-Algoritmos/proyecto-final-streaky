@@ -1,7 +1,6 @@
 import stayconsistent from "../../../assets/stayconsistent.png";
 import beginjourney from "../../../assets/beginjourney.png";
 
-
 export default function StayConsistent() {
     return (
         <section

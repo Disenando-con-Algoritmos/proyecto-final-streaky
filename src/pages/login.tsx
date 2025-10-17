@@ -8,7 +8,6 @@ import Logo3 from "../assets/Logo3.png";
 import { useNavigate } from "react-router";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 
-
 export default function LogIn() {
     const navigate = useNavigate();
 
