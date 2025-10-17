@@ -6,8 +6,12 @@ import  miffySignUp from "../assets/miffy-signup.png";
 import logoResponsive from "../assets/logo-responsive.png";
 import grayShape from "../assets/grayShape.png";
 import greenShape from "../assets/greenShape.png";
+import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
+import { useNavigate } from "react-router";
 
 export default function SignUp() {
+    const navigate = useNavigate();
+
     return(
         <div id="signup-container" className="relative min-h-screen flex flex-col items-center 
         justify-between overflow-x-hidden">
@@ -40,9 +44,15 @@ export default function SignUp() {
                     </Inputs>
                 </form>
 
+                <div id="btn-container" className="flex justify-center mt-6">
+                    <GlobalBtn text="Sign Up" type="button" onClick={() => navigate("/")}/>
+                </div>
+
                     <p className="text-center mt-4 text-sm sm:text-base">
                         Already have an account?
-                        <span className="font-semibold cursor-pointer hover:underline p-2">
+                        <span className="font-semibold cursor-pointer hover:underline p-2" onClick={
+                            () => navigate("/login")
+                            }>
                             Log In
                         </span>
                     </p> 
