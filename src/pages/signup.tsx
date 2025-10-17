@@ -13,10 +13,11 @@ export default function SignUp() {
         <div id="signup-container" className="relative min-h-screen flex flex-col items-center 
         justify-between overflow-hidden">
         
-            <div id="elements-container" className="w-full max-w-sm p-6 rounded-lg mt-6">
+            <div id="elements-container" 
+            className="w-full max-w-sm flex flex-col mt-[140px] sm:mt-[40px] lg:mt-[50px]">
 
-                <h1 className="font-bold text-[34px] sm:text-[40px]">Sign Up</h1>
-                <p className="text-[16px] sm:text-[18px] mt-2">
+                <h1 className="font-bold text-[30px] sm:text-[35px]">Sign Up</h1>
+                <p className="text-[16px] sm:text-[17px] mt-2">
                     Hello! please create your account 💪🏻
                 </p>
             
