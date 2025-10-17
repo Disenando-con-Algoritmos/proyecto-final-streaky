@@ -8,7 +8,7 @@ import Logo3 from "../assets/Logo3.png";
 import { useNavigate } from "react-router";
 
 
-export default function SignUp() {
+export default function LogIn() {
     const navigate = useNavigate();
 
     return (

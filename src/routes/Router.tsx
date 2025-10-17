@@ -4,7 +4,8 @@ import CreatePost from "../pages/createpost";
 import LoginPage from "../pages/login";
 import Landing from "../pages/landing";
 import SearchPage from "../pages/SearchPage";
-import SignUp from "../pages/signup";
+import SignUp from "../pages/SignUp";
+
 
 const router = createBrowserRouter(
     [
