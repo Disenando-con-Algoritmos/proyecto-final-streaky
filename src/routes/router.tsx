@@ -4,6 +4,7 @@ import CreatePost from "../pages/createpost";
 import LoginPage from "../pages/login";
 import Landing from "../pages/landing";
 import SearchPage from "../pages/SearchPage";
+import SignUp from "../pages/signup";
 
 const router = createBrowserRouter(
     [
@@ -24,7 +25,11 @@ const router = createBrowserRouter(
             element: <LoginPage/>
         },
         {
-            path: "/landing",
+            path: "/signUp",
+            Component: SignUp,
+        },
+        {
+            path: "landing",
             element: <Landing/>
         }
     ],
