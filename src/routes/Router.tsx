@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router";
 import Feed from "../pages/feed";
 import CreatePost from "../pages/createpost";
-import LoginPage from "../pages/login";
+import LogIn from "../pages/login";
 import Landing from "../pages/landing";
 import SearchPage from "../pages/SearchPage";
 import SignUp from "../pages/SignUp";
+import Welcome from "../pages/welcome";
 
 
 const router = createBrowserRouter(
@@ -14,6 +15,22 @@ const router = createBrowserRouter(
             Component: Landing,
         },
         {
+            path: "/signUp",
+            Component: SignUp,
+        },
+        {
+            path: "/welcome",
+            Component: Welcome,
+        },
+        {
+            path: "/login",
+            Component: LogIn,
+        },
+        {
+            path: "/feed",
+            Component: Feed,
+        },
+        {
             path: "/createPost",
             element: <CreatePost/>
         },
@@ -21,22 +38,6 @@ const router = createBrowserRouter(
             path: "/userSearch",
             Component: SearchPage,
         },
-        {
-            path: "/login",
-            element: <LoginPage/>
-        },
-        {
-            path: "/signUp",
-            Component: SignUp,
-        },
-        {
-            path: "/landing",
-            element: <Landing/>
-        },
-        {
-            path: "/feed",
-            element: <Feed/>
-        }
     ],
 );
 

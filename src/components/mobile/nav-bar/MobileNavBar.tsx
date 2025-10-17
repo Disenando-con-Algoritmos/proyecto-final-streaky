@@ -24,12 +24,12 @@ export default function MobileNavbar() {
     >
 
       <button
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/feed")}
         className="flex items-center justify-center w-14 h-14"
       >
         <GoHome
           className={`text-3xl transition-all duration-300 ${
-            isActive("/") ? "text-[#833AFF]" : "text-[#8F8F8F]"
+            isActive("/feed") ? "text-[#833AFF]" : "text-[#8F8F8F]"
           }`}
         />
       </button>

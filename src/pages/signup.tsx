@@ -46,7 +46,7 @@ export default function SignUp() {
 
                 <div id="btn-container" className="flex justify-center mt-6 
                 hover:scale-105 transition">
-                    <GlobalBtn text="Sign Up" type="button" onClick={() => navigate("/feed")}/>
+                    <GlobalBtn text="Sign Up" type="submit" onClick={() => navigate("/welcome")}/>
                 </div>
 
                     <p className="text-center mt-4 text-sm sm:text-base ">
@@ -62,7 +62,7 @@ export default function SignUp() {
             
             <img className="absolute mt-5 top-5 left-0 w-[100px] sm:w-[150px] cursor-pointer" 
             onClick={
-                ()=> navigate("/landing")
+                ()=> navigate("/")
             }
             src={logoResponsive} 
             alt="Streaky Logo" />

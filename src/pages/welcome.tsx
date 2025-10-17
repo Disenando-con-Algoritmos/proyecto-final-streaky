@@ -3,8 +3,11 @@ import miffyCompleto from "../assets/miffy-completo.png";
 import AsteriscoGris from "../assets/asterisco-gris.png";
 import VectorVioleta from "../assets/Vector-violeta.png";
 import AsteriscoOuline from "../assets/asterisco-ounline.png";
+import { useNavigate } from "react-router";
 
 export default function Welcome() {
+    const navigate = useNavigate();
+
     return (
         <div
             className="relative flex flex-col justify-center items-center 
@@ -38,7 +41,7 @@ export default function Welcome() {
 
             {/* Botón */}
             <div className="lg:mb-[200px] sm:mt-[50px] mt-[30px]">
-                <GlobalBtn text="Start" type="button"  />
+                <GlobalBtn text="Start" type="button" onClick={() => navigate("/feed")} />
             </div>
 
             {/* Imagen del Miffy */}

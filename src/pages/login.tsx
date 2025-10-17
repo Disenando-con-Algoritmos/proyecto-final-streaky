@@ -1,11 +1,12 @@
 import Inputs from "../components/mobile/signup-login/Inputs";
 import { MdOutlineEmail } from "react-icons/md";
 import { MdLockOutline } from "react-icons/md";
-import catLogin from "../assets/catLogin.png";
+import catLogin from "../assets/miffy-signup.png";
 import shapeUpLogin from "../assets/shapeUpLogin.png";
 import GrayShape from "../assets/GrayShape.png";
 import Logo3 from "../assets/Logo3.png";
 import { useNavigate } from "react-router";
+import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 
 
 export default function LogIn() {
@@ -13,7 +14,7 @@ export default function LogIn() {
 
     return (
         <div
-            id="signup-container"
+            id="login-container"
             className="relative min-h-screen flex flex-col items-center 
         justify-between overflow-hidden"
         >
@@ -36,27 +37,21 @@ export default function LogIn() {
                     <Inputs label="Password" type="password" placeholder="Enter password">
                         <MdLockOutline />
                     </Inputs>
-
-                    <button
-                        className="bg-[#B2F042] w-25 sm:w-27 h-9 sm:h-10 self-center 
-      rounded-4xl text-black mt-6 sm:mt-7 font-medium cursor-pointer hover:scale-105 transition"
-                        type="submit"
-                    onClick={
-                        () => navigate("/feed")
-                    }
-                    >
-                        Login
-                    </button>
                 </form>
 
-                <p className="text-center mt-4 text-[13px] sm:text-base text-gray-300">
-                    Not a Member?
-                    <span className="font-semibold cursor-pointer hover:underline p-2" onClick={
+                <div id="btn-container" className="flex justify-center mt-6 
+                hover:scale-105 transition">
+                    <GlobalBtn text="Log In" type="submit" onClick={() => navigate("/feed")}/>
+                </div>
+
+                    <p className="text-center mt-4 text-sm sm:text-base ">
+                        Not a member?
+                        <span className="font-semibold cursor-pointer hover:underline p-2" onClick={
                             () => navigate("/signup")
-                            }>
+                        }>
                             Sign Up
                         </span>
-                </p>
+                    </p> 
             </div>
 
             <div
@@ -67,9 +62,8 @@ export default function LogIn() {
         rounded-r-4xl flex items-center justify-end pr-3"
             >
                 <img
-                    className="w-6 mr-3 lg:w-8 cursor-pointer"  onClick={
-                        ()=> navigate("/landing")
-                    }
+                    className="w-6 mr-3 lg:w-8 cursor-pointer"  
+                    onClick={()=> navigate("/")}
                     src={Logo3} 
                     alt="Streaky Logo"
                 />
@@ -91,7 +85,7 @@ export default function LogIn() {
 
             <img
                 className="absolute bottom-0 mx-auto left-0 right-0 
-            h-[220px] lg:h-[290px] 
+            h-[220px] lg:h-[220px] 
             object-contain"
                 src={catLogin}
                 alt="Miffy"
