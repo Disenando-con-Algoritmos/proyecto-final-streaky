@@ -1,4 +1,4 @@
-import BtnStart from "../components/mobile/welcome/BtnStart";
+import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 import miffyCompleto from "../assets/miffy-completo.png";
 import AsteriscoGris from "../assets/asterisco-gris.png";
 import VectorVioleta from "../assets/Vector-violeta.png";
@@ -38,7 +38,7 @@ export default function Welcome() {
 
             {/* Botón */}
             <div className="lg:mb-[200px] sm:mt-[50px] mt-[30px]">
-                <BtnStart />
+                <GlobalBtn text="Start" type="button"  />
             </div>
 
             {/* Imagen del Miffy */}
@@ -46,7 +46,7 @@ export default function Welcome() {
                 src={miffyCompleto}
                 alt="Miffy completo"
                 className="w-[300px] sm:w-[200px] lg:w-[300px] absolute
-                 bottom-0 left-1/2 transform -translate-x-1/2 z-10"
+                bottom-0 left-1/2 transform -translate-x-1/2 z-10"
             />
 
             {/* Asterisco gris (esquina inferior derecha) */}
