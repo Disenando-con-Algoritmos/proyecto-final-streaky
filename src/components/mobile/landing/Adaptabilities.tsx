@@ -8,7 +8,7 @@ export default function Adaptabilities() {
         <section className="flex flex-col md:flex-row items-center 
         justify-between py-20 md:py-0 md:px-40 text-white">
             <div className="md:text-left  md:w-100px px-15 md:px-0">
-                <h2 className="text-[30px] md:text-[46px] font-bold mb-4">
+                <h2 className="text-[30px] md:text-[46px] font-bold mb-4 ">
                     Adaptability just in a few clicks!
                 </h2>
                 <p className="text-[#D1D5DB] text-[20px] md:text-[23px] mb-6">
