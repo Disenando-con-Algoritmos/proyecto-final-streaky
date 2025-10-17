@@ -46,7 +46,7 @@ export default function SignUp() {
 
                 <div id="btn-container" className="flex justify-center mt-6 
                 hover:scale-105 transition">
-                    <GlobalBtn text="Sign Up" type="button" onClick={() => navigate("/")}/>
+                    <GlobalBtn text="Sign Up" type="button" onClick={() => navigate("/feed")}/>
                 </div>
 
                     <p className="text-center mt-4 text-sm sm:text-base ">

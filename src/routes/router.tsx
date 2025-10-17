@@ -10,7 +10,7 @@ const router = createBrowserRouter(
     [
         {
             path: "/",
-            Component: Feed,
+            Component: Landing,
         },
         {
             path: "/createPost",
@@ -29,8 +29,12 @@ const router = createBrowserRouter(
             Component: SignUp,
         },
         {
-            path: "landing",
+            path: "/landing",
             element: <Landing/>
+        },
+        {
+            path: "/feed",
+            element: <Feed/>
         }
     ],
 );

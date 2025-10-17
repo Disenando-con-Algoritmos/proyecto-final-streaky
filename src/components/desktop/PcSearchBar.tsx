@@ -29,9 +29,9 @@ function PcSearchBar() {
   }, []);
 
   const NavigateNavBarPccreatepost = () => {nav("/createPost");};
-  const NavigateNavBarPcFeed = () => {nav("/");};
+  const NavigateNavBarPcFeed = () => {nav("/feed");};
   const NavigateNavBarPcLogin = () => {nav("/login");};
-  const NavigateNavBarPcLanding = () => {nav("/landing");};
+
 
   return (
     <>
@@ -88,7 +88,6 @@ function PcSearchBar() {
       >
         <div id="generalPcBar" className="ml-10">
           <div
-          onClick={NavigateNavBarPcLanding} 
           className="flex flex-row mt-15 ml-1">
             <img className="w-6 h-9" src={logo1}></img>
             <img
