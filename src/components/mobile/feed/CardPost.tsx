@@ -1,6 +1,6 @@
 import type { PostTypes } from "../../../types/PostTypes";
 import CategoryTag from "../create-post/CategoryTag";
-import CommentFeed from "../../desktop/Comments";
+import CommentFeed from "../../desktop/CommentsPc";
 import CommentPopup from "./CommentsMobile";
 import LikeButton from "./LikeButton";
 

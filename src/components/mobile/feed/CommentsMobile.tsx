@@ -7,7 +7,7 @@ import type { PostTypes } from "../../../types/PostTypes";
 export default function CommentPopup({ cardIndividuals }: { cardIndividuals: PostTypes }) {
     const [showComments, setShowComments] = useState(false);
 
-    const comments = cardIndividuals.coments || [];
+    const comments = cardIndividuals.comments || [];
 
     return (
         <>
