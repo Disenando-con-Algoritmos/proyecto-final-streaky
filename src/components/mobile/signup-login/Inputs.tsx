@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 4b51d78e91fa69bfb95eded9e9ff77b2c8649ba8
 type InputProps = {
     label: string
     type: string
@@ -28,15 +24,9 @@ export default function Inputs({
                     {children}
                 </span>
                 <input
-<<<<<<< HEAD
-                className="w-[90%] bg-transparent border border-[#E1E1E1] rounded-full 
-                py-2 pl-12 pr-4 text-gray-200 placeholder-[#5D5D5D] focus:outline-none 
-                focus:border-[#B1F042] transition mx-auto"
-=======
                 className="w-full bg-transparent border border-[#E1E1E1] rounded-full 
                 py-2 pl-12 pr-4 text-gray-200 placeholder-[#5D5D5D] focus:outline-none 
                 focus:border-[#B1F042] transition"
->>>>>>> 4b51d78e91fa69bfb95eded9e9ff77b2c8649ba8
                 type={type} placeholder={placeholder} required={required} />
             </label>
         </div>

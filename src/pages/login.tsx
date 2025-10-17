@@ -5,8 +5,12 @@ import catLogin from "../assets/catLogin.png";
 import shapeUpLogin from "../assets/shapeUpLogin.png";
 import GrayShape from "../assets/GrayShape.png";
 import Logo3 from "../assets/Logo3.png";
+import { useNavigate } from "react-router";
+
 
 export default function SignUp() {
+    const navigate = useNavigate();
+
     return (
         <div
             id="signup-container"
@@ -44,9 +48,11 @@ export default function SignUp() {
 
                 <p className="text-center mt-4 text-[13px] sm:text-base text-gray-300">
                     Not a Member?
-                    <span className="font-semibold cursor-pointer hover:underline ml-1 text-white">
-                        Sign Up
-                    </span>
+                    <span className="font-semibold cursor-pointer hover:underline p-2" onClick={
+                            () => navigate("/signup")
+                            }>
+                            Sign Up
+                        </span>
                 </p>
             </div>
 
@@ -58,8 +64,10 @@ export default function SignUp() {
         rounded-r-4xl flex items-center justify-end pr-3"
             >
                 <img
-                    className="w-6 mr-3 lg:w-8"
-                    src={Logo3}
+                    className="w-6 mr-3 lg:w-8 cursor-pointer"  onClick={
+                        ()=> navigate("/landing")
+                    }
+                    src={Logo3} 
                     alt="Streaky Logo"
                 />
             </div>

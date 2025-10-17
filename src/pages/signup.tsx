@@ -59,8 +59,12 @@ export default function SignUp() {
                     
             </div>
             
-            <img className="absolute mt-5 top-5 left-0 w-[100px] sm:w-[150px]"
-            src={logoResponsive} alt="Streaky Logo" />
+            <img className="absolute mt-5 top-5 left-0 w-[100px] sm:w-[150px] cursor-pointer" 
+            onClick={
+                ()=> navigate("/landing")
+            }
+            src={logoResponsive} 
+            alt="Streaky Logo" />
 
             <img className="absolute bottom-[0] left-[-5px] w-[250px] opacity-25" 
             src={grayShape} alt="Gray Shape" />
