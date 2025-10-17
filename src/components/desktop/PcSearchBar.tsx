@@ -7,7 +7,7 @@ import { CgClose } from "react-icons/cg";
 import logo1 from "../../assets/logo1.png";
 import logo2 from "../../assets/logo2.png";
 import type { PostTypes } from "../../types/PostTypes";
-import { getAccount } from "../../services/PostService";
+import { getPost } from "../../services/PostService";
 import { useNavigate } from "react-router";
 
 function PcSearchBar() {
@@ -22,7 +22,7 @@ function PcSearchBar() {
 
   useEffect(() => {
     async function fetchUsers() {
-      const data = await getAccount();
+      const data = await getPost();
       setUsers(data);
     }
     fetchUsers();

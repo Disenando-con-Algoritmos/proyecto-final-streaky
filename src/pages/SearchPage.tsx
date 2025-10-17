@@ -3,7 +3,7 @@ import type { UserProfile } from "../types/UserProfileType";
 import type { PostTypes } from "../types/PostTypes";
 import catSearch from "../assets/cat-search.png";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { getAccount } from "../services/PostService";
+import { getPost } from "../services/PostService";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 
 export default function SearchPage() {
@@ -14,7 +14,7 @@ export default function SearchPage() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const data = await getAccount();
+      const data = await getPost();
       setPostsData(data);
     };
     fetchPosts();
