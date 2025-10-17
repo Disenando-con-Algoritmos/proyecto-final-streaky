@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import mockup2 from "../../../assets/mockup2.png";
+import GlobalBtn from "../welcome/GlobalBtn";
 
 export default function Adaptabilities() {
     const navigate = useNavigate();
@@ -12,15 +13,14 @@ export default function Adaptabilities() {
                     Adaptability just in a few clicks!
                 </h2>
                 <p className="text-[#D1D5DB] text-[20px] md:text-[23px] mb-6">
-                    Track habits anytime on mobile or desktop. 
+                    Track habits anytime on mobile or desktop.
                     Streaky 🔥 keeps your progress with you.
                 </p>
-                <button className="bg-[#B2F042] text-black font-medium px-10 
-                py-3 rounded-full hover:scale-105 transition cursor-pointer"
-                onClick={ 
-                    ()=> navigate("/signUp")}>
-                    Join Now
-                </button>
+                <div id="btn-container" className="flex m-0.5 mt-6 
+                    hover:scale-105 transition">
+                    <GlobalBtn text="Join Us"
+                        type="submit" onClick={() => navigate("/signup")} />
+                </div>
             </div>
 
             <div className="flex justify-center">

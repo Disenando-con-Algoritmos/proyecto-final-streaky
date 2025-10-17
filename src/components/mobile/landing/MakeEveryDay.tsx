@@ -1,6 +1,7 @@
 import words from "../../../assets/words.png";
 import mockup1 from "../../../assets/mockup1.png";
 import { useNavigate } from "react-router";
+import GlobalBtn from "../welcome/GlobalBtn";
 
 export default function MakeEveryDay() {
     const navigate = useNavigate();
@@ -23,16 +24,15 @@ export default function MakeEveryDay() {
                 </p>
 
 
-                <button className="bg-[#B2F042] text-black font-medium
-                px-8 py-3 rounded-full hover:scale-105 transition md:w-40 w-40 ml-10 cursor-pointer"
-                onClick={ 
-                    ()=> navigate("/signUp")} > 
-                    Start Now
-                </button>
+                <div id="btn-container" className="flex m-7 mt-6 
+                                hover:scale-105 transition">
+                    <GlobalBtn text="Start Now" 
+                    type="submit" onClick={() => navigate("/signup")} />
+                </div>
             </div>
 
             <div className="flex justify-center  ">
-                <img src={mockup1}  className="max-w-none 
+                <img src={mockup1} className="max-w-none 
                 w-[700px] ml-50 md:scale-100 md:w-[700px] " />
             </div>
         </section>
