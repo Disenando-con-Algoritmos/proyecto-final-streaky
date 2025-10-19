@@ -100,7 +100,7 @@ function PcSearchBar() {
           <div
             onClick={NavigateNavBarPcFeed}
             className="flex items-center mt-10 mb-12
-  cursor-pointer group"
+  cursor-pointer group w-30"
           >
             <TiHome
               className="text-white text-4xl transition-colors
@@ -118,7 +118,7 @@ ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
 
           <div
             id="searchIcon"
-            className="flex mt-3 cursor-pointer group"
+            className="flex mt-3 cursor-pointer group w-30 mb-10"
             onClick={PcSearchBarOpen}
           >
             <FaMagnifyingGlass
@@ -126,7 +126,7 @@ ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
               duration-300 group-hover:text-[#703EDD]"
             />
             <h2
-              className={`text-[20px] text-gray-50 ml-4 mb-7 font-medium
+              className={`text-[20px] text-gray-50 ml-4 mb-0 font-medium
                  transition-colors duration-300 group-hover:text-[#703EDD] 
     ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
             >
@@ -137,7 +137,8 @@ ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
 
           <div
             onClick={NavigateNavBarPccreatepost}
-            className="flex items-center mt-3 ml-[-10px] cursor-pointer group"
+            className="flex items-center mt-3 ml-[-10px] cursor-pointer group
+            w-30"
           >
             <FiPlus
               className="text-white text-5xl 
@@ -155,7 +156,7 @@ ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
 
           <div
             onClick={NavigateNavBarPcLogin}
-            className="flex items-center mt-60 cursor-pointer group"
+            className="flex items-center mt-60 cursor-pointer group w-35"
           >
             <HiOutlineLogout
               className="text-red-700 text-4xl
