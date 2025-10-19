@@ -25,7 +25,7 @@ export default function CommentsPc({
         <div className="relative flex right-70 bottom-17">
           <FaRegComment
             className="text-[#E7E7E7] 
-          text-3xl hover:text-[#703EDD] transition"
+          text-3xl hover:text-[#703EDD] transition-colors duration-300"
           />
           <p className="ml-2 text-[20px]">{comments.length}</p>
         </div>
@@ -35,8 +35,8 @@ export default function CommentsPc({
       <div
         id="ShowComments"
         className={`transition-all duration-300 ease-in-out overflow-hidden relative ${showComments
-            ? "max-h-[400px] opacity-100 mt-[-25px]"
-            : "max-h-0 opacity-0 "
+          ? "max-h-[400px] opacity-100 mt-[-25px]"
+          : "max-h-0 opacity-0 "
           }`}
       >
         {/* Caja con comentarios */}
