@@ -28,9 +28,9 @@ function PcSearchBar() {
     fetchUsers();
   }, []);
 
-  const NavigateNavBarPccreatepost = () => {nav("/createPost");};
-  const NavigateNavBarPcFeed = () => {nav("/feed");};
-  const NavigateNavBarPcLogin = () => {nav("/login");};
+  const NavigateNavBarPccreatepost = () => { nav("/createPost"); };
+  const NavigateNavBarPcFeed = () => { nav("/feed"); };
+  const NavigateNavBarPcLogin = () => { nav("/login"); };
 
   return (
     <>
@@ -41,15 +41,16 @@ function PcSearchBar() {
           className="hidden lg:block bg-[#1E1E1E] h-screen rounded-r-[2rem] w-90 ml-23 z-1
           transition-all fixed top-0 left-0 z-50`"
         >
-          <h1 className="text-white text-2xl ml-7 mt-23 mb-3">Search</h1>
-          <div className="relative w-[80%] ml-7">
+          <h1 className="text-white text-2xl ml-7 mt-23 mb-3 cursor-pointer">Search</h1>
+          <div className="relative w-[80%] ml-7" id="search-deploy">
+            <div className="flex justify-center">
             <FaMagnifyingGlass
               className="absolute left-3 top-5 transform 
             -translate-y-1/2 text-[#E7E7E7] text-lg"
             />
             <CgClose
-            onClick={() => setSearch("")}
-            className="absolute left-63 top-5 transform 
+              onClick={() => setSearch("")}
+              className="absolute left-63 top-5 transform 
             -translate-y-1/2 text-gray-400 text-2xl font-black"
             />
             <input
@@ -60,22 +61,23 @@ function PcSearchBar() {
               focus:ring-2 focus:ring-[#B1F042]"
               placeholder="Search..."
             />
+            </div>
             <div className="mt-4 max-h-130 overflow-y-auto pr-2 scrollbar-thin 
             scrollbar-thumb-gray-600">
-            {Search !== "" && (
-            Users.filter(user => 
-            user.username.toLocaleLowerCase().includes(Search)).map((UserIndividual) => (
-                <div className="flex items-center mb-3 mt-3 p-2 
-                rounded-4xl cursor-pointer" 
-                key={UserIndividual.id}>
-                    <img className="w-13 h-13 rounded-4xl" src={UserIndividual.userImage}></img>
-                    <div>
-                      <p className="text-white ml-2">{UserIndividual.username}</p>
-                      <p className="text-[#B3B3B3] ml-2 text-[12px]">
-                        {UserIndividual.userDescription}</p>
+              {Search !== "" && (
+                Users.filter(user =>
+                  user.username.toLocaleLowerCase().includes(Search)).map((UserIndividual) => (
+                    <div className="flex items-center mb-3 mt-3 p-2 
+                rounded-4xl cursor-pointer"
+                      key={UserIndividual.id}>
+                      <img className="w-13 h-13 rounded-4xl" src={UserIndividual.userImage}></img>
+                      <div>
+                        <p className="text-white ml-2">{UserIndividual.username}</p>
+                        <p className="text-[#B3B3B3] ml-2 text-[12px]">
+                          {UserIndividual.userDescription}</p>
+                      </div>
                     </div>
-                </div>
-            )))}
+                  )))}
             </div>
           </div>
         </div>
@@ -87,7 +89,7 @@ function PcSearchBar() {
       >
         <div id="generalPcBar" className="ml-10">
           <div
-          className="flex flex-row mt-15 ml-1">
+            className="flex flex-row mt-15 ml-1">
             <img className="w-6 h-9" src={logo1}></img>
             <img
               className={`w-35 ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
@@ -96,55 +98,78 @@ function PcSearchBar() {
           </div>
 
           <div
-          onClick={NavigateNavBarPcFeed}   
-          className="flex mt-10 mb-6">
-            <TiHome className="text-white text-4xl cursor-pointer" />
-              <h2
-              className={`text-[20px] ml-3 mb-7 font-medium text-white 
-              cursor-pointer ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
+            onClick={NavigateNavBarPcFeed}
+            className="flex items-center mt-10 mb-12
+  cursor-pointer group"
+          >
+            <TiHome
+              className="text-white text-4xl transition-colors
+     duration-300 group-hover:text-[#703EDD]"
+            />
+            <h2
+              className={`text-[20px] ml-3 font-medium text-white transition-colors
+       duration-300 group-hover:text-[#703EDD] 
+${!ClickSearch ? "opacity-0" : "opacity-100"}`}
             >
               Home
             </h2>
           </div>
 
-          <div id="searchIcon" className="flex mt-3">
+
+          <div
+            id="searchIcon"
+            className="flex mt-3 cursor-pointer group"
+            onClick={PcSearchBarOpen}
+          >
             <FaMagnifyingGlass
-              className="text-white text-3xl hover:text-gray-500 cursor-pointer"
-              onClick={PcSearchBarOpen}
+              className="text-white text-3xl transition-colors 
+              duration-300 group-hover:text-[#703EDD]"
             />
             <h2
-              onClick={PcSearchBarOpen}
-              className={`text-[20px] text-gray-50 ml-4 mb-7 font-medium 
-            cursor-pointer ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
+              className={`text-[20px] text-gray-50 ml-4 mb-7 font-medium
+                 transition-colors duration-300 group-hover:text-[#703EDD] 
+    ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
             >
               Search
             </h2>
           </div>
 
+
           <div
-          onClick={NavigateNavBarPccreatepost}  
-          className="flex items-center mt-3 ml-[-10px]">
+            onClick={NavigateNavBarPccreatepost}
+            className="flex items-center mt-3 ml-[-10px] cursor-pointer group"
+          >
             <FiPlus
-            className="text-white text-5xl cursor-pointer" />
+              className="text-white text-5xl 
+              transition-colors duration-300 group-hover:text-[#703EDD]"
+            />
             <h2
               className={`text-[20px] text-gray-50 ml-2 font-medium 
-              cursor-pointer ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
+                transition-colors duration-300 group-hover:text-[#703EDD] 
+    ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
             >
               Create
             </h2>
           </div>
 
+
           <div
-          onClick={NavigateNavBarPcLogin} 
-          className="flex mt-60">
-            <HiOutlineLogout className="text-red-700 text-4xl cursor-pointer" />
+            onClick={NavigateNavBarPcLogin}
+            className="flex items-center mt-60 cursor-pointer group"
+          >
+            <HiOutlineLogout
+              className="text-red-700 text-4xl
+               transition-colors duration-300 group-hover:text-[#831313]"
+            />
             <h2
               className={`text-[20px] text-red-700 ml-2 font-bold 
-            cursor-pointer ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
+                transition-colors duration-300 group-hover:text-[#831313] 
+${!ClickSearch ? "opacity-0" : "opacity-100"}`}
             >
               Log Out
             </h2>
           </div>
+
         </div>
       </div>
     </>
