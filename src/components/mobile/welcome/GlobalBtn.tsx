@@ -15,7 +15,7 @@ export default function GlobalBtn({
       type={type}
       className="bg-[#B1F042] hover:bg-[#96cf33]  duration-300 
                  p-3 rounded-[50px] w-[130px] text-[#171717] font-[600] text-lg
-                 shadow-md hover:shadow-lg hover:scale-105 transition"
+                 shadow-md hover:shadow-lg hover:scale-105 transition cursor-pointer"
     >
       {text}
     </button>
