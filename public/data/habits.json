@@ -1,0 +1,282 @@
+[
+  {
+    "id": 1,
+    "username": "kelocoes",
+    "userImage": "https://i.pinimg.com/736x/e0/fa/41/e0fa41ca8278c8b0e892fa5e489ade71.jpg",
+    "userDescription": "Coffee and code",
+    "habits": [
+      {
+        "id": 1,
+        "title": "Early morning run",
+        "category": "🏃‍♀️ Sport",
+        "color": "#F87171",
+        "icon": "💪",
+        "progress": {
+          "monday": [1, 0, 1, 1],
+          "tuesday": [0, 1, 1, 0],
+          "wednesday": [1, 1, 0, 0],
+          "thursday": [1, 0, 1, 1],
+          "friday": [0, 1, 0, 1],
+          "saturday": [1, 1, 1, 0],
+          "sunday": [0, 0, 1, 1]
+        }
+      },
+      {
+        "id": 2,
+        "title": "Coding challenges",
+        "category": "📚 Study",
+        "color": "#60A5FA",
+        "icon": "👾",
+        "progress": {
+          "monday": [1, 1, 0, 0],
+          "tuesday": [1, 0, 1, 1],
+          "wednesday": [0, 1, 1, 1],
+          "thursday": [1, 1, 0, 1],
+          "friday": [0, 0, 1, 1],
+          "saturday": [1, 0, 1, 0],
+          "sunday": [0, 1, 0, 1]
+        }
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "username": "nattpro_",
+    "userImage": "https://i.pinimg.com/1200x/84/22/aa/8422aa5f01ae49cc133c68c7fd3dd667.jpg",
+    "userDescription": "Sweet and calm",
+    "habits": [
+      {
+        "id": 1,
+        "title": "Meal prep Sundays",
+        "category": "🥗 Food",
+        "color": "#34D399",
+        "icon": "🥗",
+        "progress": {
+          "monday": [0, 1, 0, 1],
+          "tuesday": [1, 1, 1, 0],
+          "wednesday": [0, 1, 0, 1],
+          "thursday": [1, 0, 1, 1],
+          "friday": [0, 0, 1, 0],
+          "saturday": [1, 1, 1, 0],
+          "sunday": [0, 1, 1, 1]
+        }
+      },
+      {
+        "id": 2,
+        "title": "Evening meditation",
+        "category": "❤️ Health",
+        "color": "#FB7185",
+        "icon": "🧘‍♀️",
+        "progress": {
+          "monday": [1, 0, 0, 1],
+          "tuesday": [1, 1, 1, 0],
+          "wednesday": [0, 1, 1, 0],
+          "thursday": [1, 1, 0, 1],
+          "friday": [0, 1, 1, 0],
+          "saturday": [1, 0, 1, 1],
+          "sunday": [0, 1, 0, 1]
+        }
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "username": "jura",
+    "userImage": "https://i.pinimg.com/736x/7c/51/bf/7c51bf3d94c837de5de32961506a6ee6.jpg",
+    "userDescription": "Run. Eat. Repeat.",
+    "habits": [
+      {
+        "id": 1,
+        "title": "Stretch before runs",
+        "category": "🏃‍♀️ Sport",
+        "color": "#F87171",
+        "icon": "🤸‍♂️",
+        "progress": {
+          "monday": [1, 0, 1, 0],
+          "tuesday": [1, 1, 0, 1],
+          "wednesday": [1, 1, 1, 0],
+          "thursday": [0, 1, 1, 1],
+          "friday": [0, 1, 0, 1],
+          "saturday": [1, 0, 1, 0],
+          "sunday": [1, 1, 0, 1]
+        }
+      },
+      {
+        "id": 2,
+        "title": "Weekly meal plan",
+        "category": "🥗 Food",
+        "color": "#34D399",
+        "icon": "🍱",
+        "progress": {
+          "monday": [1, 1, 1, 0],
+          "tuesday": [0, 0, 1, 1],
+          "wednesday": [1, 1, 0, 1],
+          "thursday": [1, 1, 1, 0],
+          "friday": [0, 1, 1, 1],
+          "saturday": [0, 1, 0, 1],
+          "sunday": [1, 1, 1, 0]
+        }
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "username": "lausrnb",
+    "userImage": "https://i.pinimg.com/736x/50/59/75/505975a0281b2d860947663d7371cbf8.jpg",
+    "userDescription": "Positive energy only",
+    "habits": [
+      {
+        "id": 1,
+        "title": "Yoga mornings",
+        "category": "❤️ Health",
+        "color": "#FB7185",
+        "icon": "🧘‍♀️",
+        "progress": {
+          "monday": [1, 0, 1, 0],
+          "tuesday": [0, 1, 0, 1],
+          "wednesday": [1, 1, 1, 0],
+          "thursday": [1, 0, 1, 1],
+          "friday": [0, 1, 0, 1],
+          "saturday": [1, 1, 1, 0],
+          "sunday": [0, 1, 1, 1]
+        }
+      },
+      {
+        "id": 2,
+        "title": "Social brunch",
+        "category": "🤝 Social",
+        "color": "#FBBF24",
+        "icon": "🍳",
+        "progress": {
+          "monday": [1, 1, 1, 0],
+          "tuesday": [0, 1, 0, 1],
+          "wednesday": [1, 1, 0, 0],
+          "thursday": [1, 0, 1, 1],
+          "friday": [0, 1, 0, 1],
+          "saturday": [1, 1, 1, 0],
+          "sunday": [0, 0, 1, 1]
+        }
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "username": "Jenny",
+    "userImage": "https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg",
+    "userDescription": "Always curious ✨",
+    "habits": [
+      {
+        "id": 1,
+        "title": "Daily reading",
+        "category": "📚 Study",
+        "color": "#60A5FA",
+        "icon": "📖",
+        "progress": {
+          "monday": [1, 0, 1, 0],
+          "tuesday": [1, 1, 0, 1],
+          "wednesday": [1, 0, 1, 1],
+          "thursday": [0, 1, 0, 1],
+          "friday": [1, 1, 1, 0],
+          "saturday": [1, 0, 0, 1],
+          "sunday": [0, 1, 1, 0]
+        }
+      },
+      {
+        "id": 2,
+        "title": "Saving tracker",
+        "category": "💵 Money",
+        "color": "#FACC15",
+        "icon": "💰",
+        "progress": {
+          "monday": [1, 1, 1, 0],
+          "tuesday": [0, 1, 0, 1],
+          "wednesday": [1, 1, 0, 0],
+          "thursday": [1, 0, 1, 1],
+          "friday": [0, 1, 1, 1],
+          "saturday": [1, 0, 0, 1],
+          "sunday": [1, 1, 1, 0]
+        }
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "username": "S_florez_",
+    "userImage": "https://i.pinimg.com/736x/f3/4a/6b/f34a6b66cc525993665237d4348aba2b.jpg",
+    "userDescription": "Chill gamer",
+    "habits": [
+      {
+        "id": 1,
+        "title": "Evening gaming",
+        "category": "🕹️ Hobbies",
+        "color": "#38BDF8",
+        "icon": "🎮",
+        "progress": {
+          "monday": [1, 1, 0, 1],
+          "tuesday": [0, 1, 1, 0],
+          "wednesday": [1, 1, 0, 0],
+          "thursday": [1, 1, 1, 0],
+          "friday": [0, 0, 1, 1],
+          "saturday": [1, 1, 0, 1],
+          "sunday": [1, 0, 1, 0]
+        }
+      },
+      {
+        "id": 2,
+        "title": "Weekly reports",
+        "category": "💼 Work",
+        "color": "#A78BFA",
+        "icon": "🗂️",
+        "progress": {
+          "monday": [1, 0, 1, 1],
+          "tuesday": [0, 1, 0, 1],
+          "wednesday": [1, 1, 1, 0],
+          "thursday": [1, 0, 0, 1],
+          "friday": [0, 1, 1, 1],
+          "saturday": [1, 0, 1, 0],
+          "sunday": [1, 1, 0, 1]
+        }
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "username": "valxci17",
+    "userImage": "https://i.pinimg.com/736x/1f/be/04/1fbe040a53949ab9fee8c44ccdd0d6a4.jpg",
+    "userDescription": "Café lover ☕",
+    "habits": [
+      {
+        "id": 1,
+        "title": "Café study session",
+        "category": "📚 Study",
+        "color": "#60A5FA",
+        "icon": "☕",
+        "progress": {
+          "monday": [1, 0, 1, 1],
+          "tuesday": [1, 1, 0, 0],
+          "wednesday": [0, 1, 1, 0],
+          "thursday": [1, 0, 1, 1],
+          "friday": [1, 1, 0, 0],
+          "saturday": [0, 1, 1, 0],
+          "sunday": [1, 0, 0, 1]
+        }
+      },
+      {
+        "id": 2,
+        "title": "Home cleaning routine",
+        "category": "🏡 Home",
+        "color": "#4ADE80",
+        "icon": "🧹",
+        "progress": {
+          "monday": [1, 1, 1, 0],
+          "tuesday": [0, 1, 1, 1],
+          "wednesday": [1, 0, 1, 0],
+          "thursday": [1, 1, 0, 1],
+          "friday": [0, 1, 1, 1],
+          "saturday": [1, 1, 0, 0],
+          "sunday": [0, 1, 0, 1]
+        }
+      }
+    ]
+  }
+]
