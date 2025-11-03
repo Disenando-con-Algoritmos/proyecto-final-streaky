@@ -63,20 +63,20 @@ function PcSearchBar() {
       ) : (
         <div
           ref={sidebarRef}
-          className="hidden lg:block bg-[#1E1E1E] h-screen rounded-r-[2rem] w-90 ml-23 z-50
+          className="hidden lg:block bg-[#1E1E1E] h-screen rounded-r-[2rem] w-90 ml-27 z-50
           transition-all fixed top-0 left-0"
         >
           <h1 className="text-white text-2xl ml-7 mt-23 mb-3 cursor-pointer">
             Search
           </h1>
-          <div className="relative w-[80%] ml-7" id="search-deploy">
+          <div className="relative w-[85%] ml-7" id="search-deploy">
             <div className="flex justify-center">
               <FaMagnifyingGlass
                 className="absolute left-3 top-5 transform -translate-y-1/2 text-[#E7E7E7] text-lg"
               />
               <CgClose
                 onClick={() => setSearch("")}
-                className="absolute left-63 top-5 transform -translate-y-1/2
+                className="absolute left-67 top-5 transform -translate-y-1/2
                  text-gray-400 text-2xl font-black cursor-pointer"
               />
               <input
@@ -133,15 +133,15 @@ function PcSearchBar() {
           >
             <TiHome className={`${isFeed ? 
             `text-[#703EDD] text-4xl transition-colors 
-            duration-300 group-hover:text-[#703EDD]` :
+            duration-300 group-hover:text-[#703EDD] absolute left-[35px]` :
 
              `text-white text-4xl transition-colors 
-            duration-300 group-hover:text-[#703EDD]`}`} />
+            duration-300 group-hover:text-[#703EDD] absolute left-[35px]`}`} />
             <h2
-            className={`${isFeed ? `text-[20px] ml-3 font-medium text-[#703EDD] 
+            className={`${isFeed ? `text-[20px] ml-11 font-medium text-[#703EDD] 
                  transition-colors duration-300 group-hover:text-[#703EDD] 
                  ${!ClickSearch ? "opacity-0" : "opacity-100"}` 
-              : `text-[20px] ml-3 font-medium text-white 
+              : `text-[20px] ml-11 font-medium text-white 
                  transition-colors duration-300 group-hover:text-[#703EDD] 
                  ${!ClickSearch ? "opacity-0" : "opacity-100"}`}`}
             >
