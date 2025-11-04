@@ -4,6 +4,7 @@
     "username": "kelocoes",
     "userImage": "https://i.pinimg.com/736x/e0/fa/41/e0fa41ca8278c8b0e892fa5e489ade71.jpg",
     "userDescription": "Coffee and code",
+    "streak": 12,
     "habits": [
       {
         "id": 1,
@@ -44,6 +45,7 @@
     "username": "nattpro_",
     "userImage": "https://i.pinimg.com/1200x/84/22/aa/8422aa5f01ae49cc133c68c7fd3dd667.jpg",
     "userDescription": "Sweet and calm",
+    "streak": 25,
     "habits": [
       {
         "id": 1,
@@ -84,6 +86,7 @@
     "username": "jura",
     "userImage": "https://i.pinimg.com/736x/7c/51/bf/7c51bf3d94c837de5de32961506a6ee6.jpg",
     "userDescription": "Run. Eat. Repeat.",
+    "streak": 8,
     "habits": [
       {
         "id": 1,
@@ -124,6 +127,7 @@
     "username": "lausrnb",
     "userImage": "https://i.pinimg.com/736x/50/59/75/505975a0281b2d860947663d7371cbf8.jpg",
     "userDescription": "Positive energy only",
+    "streak": 19,
     "habits": [
       {
         "id": 1,
@@ -164,6 +168,7 @@
     "username": "Jenny",
     "userImage": "https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg",
     "userDescription": "Always curious ✨",
+    "streak": 34,
     "habits": [
       {
         "id": 1,
@@ -204,6 +209,7 @@
     "username": "S_florez_",
     "userImage": "https://i.pinimg.com/736x/f3/4a/6b/f34a6b66cc525993665237d4348aba2b.jpg",
     "userDescription": "Chill gamer",
+    "streak": 15,
     "habits": [
       {
         "id": 1,
@@ -244,6 +250,7 @@
     "username": "valxci17",
     "userImage": "https://i.pinimg.com/736x/1f/be/04/1fbe040a53949ab9fee8c44ccdd0d6a4.jpg",
     "userDescription": "Café lover ☕",
+    "streak": 27,
     "habits": [
       {
         "id": 1,
