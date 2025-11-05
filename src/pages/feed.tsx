@@ -70,7 +70,7 @@ function Feed() {
           <div className="text-center md:text-left">
             <h1
               className="font-black text-[33px] md:text-[42px] 
-                    leading-tight md:mr-10 mr-30 mt-12"
+                    leading-tight md:mr-10 mr-33 mt-12"
             >
               Hello, Jenny! 👋🏻
             </h1>

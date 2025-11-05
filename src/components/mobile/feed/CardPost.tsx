@@ -11,7 +11,7 @@ export default function CardPost({
 }) {
     return (
         <div className="m-5 flex flex-col justify-center items-center">
-            <div className="bg-[#242424] text-[#F9FAFB] p-5 rounded-xl max-w-md w-full shadow-md  ">
+            <div className="bg-[#242424] text-[#F9FAFB] p-5 rounded-xl max-w-md w-full">
                 <div className="flex items-center gap-3 mb-3">
                     <img
                         src={cardIndividuals.userImage}
