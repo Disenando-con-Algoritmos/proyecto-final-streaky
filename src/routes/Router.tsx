@@ -7,6 +7,7 @@ import SearchPage from "../pages/SearchPage";
 import SignUp from "../pages/SignUp";
 import ProfilePage from "../pages/myprofile";
 import Welcome from "../pages/welcome";
+import SelectCategory from "../components/mobile/create-post/SelectCategory";
 
 const router = createBrowserRouter(
     [
@@ -34,6 +35,12 @@ const router = createBrowserRouter(
             path: "/createPost",
             element: <CreatePost/>
         },
+
+                {
+            path: "/select",
+            Component: SelectCategory,
+        },
+        
         {
             path: "/userSearch",
             Component: SearchPage,
