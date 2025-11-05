@@ -86,20 +86,27 @@ export default function ProfileSearch() {
             <HabFoweFowi user={user} />
 
             {/* streak */}
-            <div className="mt-8 px-6 py-4 
-            rounded-2xl flex flex-col items-center text-center 
-            w-11/12 max-w-sm border border-[#2A2A2A]">
-                <p className="text-5xl mb-2">🔥</p>
-                <p className="text-white font-medium text-lg">
-                    {user.streak} days of streak
-                </p>
-                <p className="text-sm text-gray-400 mt-1">Keep the fire alive 💪</p>
+            <div className="mt-5 px-6 py-4 mb-5
+rounded-2xl flex items-center gap-4 
+w-11/12 max-w-sm border border-[#2A2A2A]">
+                {/* streak */}
+                <span className="text-[60px]">🔥</span>
+                <div className="flex flex-col items-start">
+                    <p className="text-[#F9FAFB] font-semibold text-[20px]">
+                        {user.streak} days of streak
+                    </p>
+                    <p className="text-[16px] text-[#F9FAFB]">Keep the fire alive 💪</p>
+                </div>
             </div>
 
             {/* habits */}
             <h3 className="text-[25px] font-semibold mt-10 mb-4 w-11/12 max-w-sm">
                 Habits
             </h3>
+
+            {/* 🔹 línea divisora */}
+            <div className="w-11/12 max-w-sm border-b border-[#2A2A2A] mb-6"></div>
+
             <div className="w-11/12 max-w-sm flex flex-col gap-5 mb-6">
                 {user.habits.map((habit: HabitType) => (
                     <Habit key={habit.id} habit={habit} />

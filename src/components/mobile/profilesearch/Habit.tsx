@@ -11,7 +11,7 @@ export default function ViewHabit({ habit }: { habit: Habit }) {
                     <div className="absolute w-15 h-15 bg-[#4E4E4E] rounded-full"></div>
                     <span className="text-[35px] relative z-10">{habit.icon}</span>
                 </div>
-                <p className="text-[#F9FAFB] text-[18px] font-medium ml-4">{habit.title}</p>
+                <p className="text-[#F9FAFB] text-[18px] font-medium ml-2">{habit.title}</p>
             </div>
             <div
                 className="border border-[#B1F042] px-5 py-2 rounded-full text-sm font-normal
