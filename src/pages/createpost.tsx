@@ -50,18 +50,28 @@ export default function CreatePost() {
               id="button-violette"
               className="flex justify-center mt-[30px] flex-wrap gap-4"
             >
-              <button
-                className="bg-[#703EDD] hover:bg-[#5c32b6]
-                duration-300 p-3 rounded-[50px] w-[130px] text-[#ffffff]
-                font-medium text-lg shadow-md hover:shadow-lg hover:scale-105 transition"
-              >
-                Image
-              </button>
-              <button
+              <div className="relative">
+                <input
+                  type="file"
+                  id="file-upload"
+                  className="hidden" // lo ocultas
+                />
+                <label
+                  htmlFor="file-upload"
+                  className="bg-[#703EDD] hover:bg-[#5c32b6]
+    duration-300 p-3 rounded-[50px] w-[130px] text-[#ffffff]
+    font-medium text-lg shadow-md hover:shadow-lg hover:scale-105 transition
+    text-center cursor-pointer inline-block"
+                >
+                  Image
+                </label>
+              </div>
+              <button onClick={() => navigate("/select")}
                 className="bg-[#703EDD] hover:bg-[#5c32b6]
                 duration-300 p-3 rounded-[50px] w-[200px]
                 text-[#ffffff] font-medium text-lg shadow-md
                 hover:shadow-lg hover:scale-105 transition"
+
               >
                 Choose Category
               </button>
@@ -117,13 +127,22 @@ export default function CreatePost() {
             id="button-violette"
             className="flex items-center mt-[30px] gap-4 w-full"
           >
-            <button
-              className="bg-[#703EDD] hover:bg-[#5c32b6]
-              duration-300 p-3 rounded-[50px] w-[70%] text-[#ffffff]
-              font-medium text-lg shadow-md hover:shadow-lg hover:scale-105 transition"
-            >
-              Image
-            </button>
+            <div className="relative">
+              <input
+                type="file"
+                id="file-upload"
+                className="hidden" // lo ocultas
+              />
+              <label
+                htmlFor="file-upload"
+                className="bg-[#703EDD] hover:bg-[#5c32b6]
+    duration-300 p-3 rounded-[50px] w-[130px] text-[#ffffff]
+    font-medium text-lg shadow-md hover:shadow-lg hover:scale-105 transition
+    text-center cursor-pointer inline-block"
+              >
+                Image
+              </label>
+            </div>
             <button
               className="bg-[#703EDD] hover:bg-[#5c32b6]
               duration-300 p-3 rounded-[50px] w-[70%]
