@@ -4,13 +4,12 @@ import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 import type { User } from "../types/HabitsTypes";
 import { useEffect, useState } from "react";
 import { getHabits } from "../services/HabitsServices";
-import { IoIosArrowDown } from "react-icons/io";
-import { IoIosArrowUp } from "react-icons/io";
+import InfoColor from "../components/mobile/my-habits/AboutStats";
+import CreateNewHabit from "../components/mobile/my-habits/CreateNewHabit";
 
 function Habits() {
   const nav = useNavigate();
   const [personalCategories, setpersonalCategories] = useState<User[]>([]);
-  const [aboutStats, setaboutStats] = useState(true);
   const NavigateProfile = () => nav("/profile");
 
   useEffect(() => {
@@ -62,7 +61,7 @@ function Habits() {
         />
       </div>
 
-      <div className="flex flex-col w-180 h-200 ml-100 mt-16">
+      <div className="flex flex-col w-180 h-250 ml-100 mt-16">
         <p className="text-white text-[45px] font-bold">My Habits</p>
         <div className="flex mt-8 p-0 items-center">
           <div
@@ -137,46 +136,9 @@ function Habits() {
             <p>Sat</p>
           </div>
         </div>
-
-        <div id="InfoColors" className="mt-7">
-          <div
-          onClick={() => setaboutStats(!aboutStats)} 
-          className="bg-[#1B1B1B] rounded-xl overflow-hidden 
-          transition-all duration-500 ease-in-out cursor-pointer">
-            <div className="flex items-center justify-between w-180 h-11">
-              <p className="ml-7 text-[#929292] font-semibold">
-                About the Stats
-              </p>
-              {aboutStats ? (
-                <IoIosArrowDown
-                  className="text-3xl mr-7 text-[#929292] cursor-pointer 
-                  transition-transform duration-300"
-                />
-              ) : (
-                <IoIosArrowUp
-                  className="text-3xl mr-7 text-[#929292] cursor-pointer 
-                  transition-transform duration-300"
-                />
-              )}
-            </div>
-            <div
-              className={`transition-all duration-500 ease-in-out ${
-                aboutStats ? "max-h-0 opacity-0" : "max-h-40 opacity-100"
-              }`}
-            >
-              <div className="p-5 text-[#c1c1c1] text-sm">
-                <p>
-                  This section shows your weekly progress average based on your
-                  habits. Each color represents performance: green (high),
-                  yellow (medium), and red (low). Keep improving your
-                  consistency!
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <InfoColor/>
+        <CreateNewHabit/>
       </div>
-
       <PcSearchBar />
       <MobileNavbar />
     </div>
