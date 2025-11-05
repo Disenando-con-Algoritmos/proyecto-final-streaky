@@ -50,10 +50,11 @@ export default function ProfileSearch() {
     if (!user) {
         return (
             <div className="min-h-screen bg-[#121212] text-white flex justify-center items-center">
-                <p>User not found :(</p>
+                <p>User not found.</p>
             </div>
         );
     }
+    
 
     return (
         <div className="min-h-screen bg-[#171717] text-[#F9FAFB] 
