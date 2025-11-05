@@ -103,10 +103,6 @@ w-11/12 max-w-sm border border-[#2A2A2A]">
             <h3 className="text-[25px] font-semibold mt-10 mb-4 w-11/12 max-w-sm">
                 Habits
             </h3>
-
-            {/* 🔹 línea divisora */}
-            <div className="w-11/12 max-w-sm border-b border-[#2A2A2A] mb-6"></div>
-
             <div className="w-11/12 max-w-sm flex flex-col gap-5 mb-6">
                 {user.habits.map((habit: HabitType) => (
                     <Habit key={habit.id} habit={habit} />
@@ -116,14 +112,22 @@ w-11/12 max-w-sm border border-[#2A2A2A]">
             {/* last post */}
             {lastPost && (
                 <>
-                    <h3 className="text-[25px] font-semibold mt-10 mb-2 w-11/12 max-w-sm">
-                        My last post
-                    </h3>
+                    <div className="flex justify-between items-center w-11/12 max-w-sm mt-10 mb-2">
+                        <h3 className="text-[25px] font-semibold">My last post</h3>
+                        <img
+                            src="/src/assets/cat-last-post.png"
+                            alt="cat last post"
+                            className="w-30 -mb-11 mr-7 z-100"
+                        />
+                    </div>
+
                     <div className="w-[430px] rounded-2xl">
                         <CardPost cardIndividuals={lastPost} />
                     </div>
                 </>
             )}
+
+
         </div>
     );
 }
