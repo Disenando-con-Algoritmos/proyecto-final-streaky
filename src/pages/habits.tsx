@@ -91,49 +91,49 @@ function Habits() {
               id="EachBar"
               className="bg-[#B1F042] w-11 h-60 rounded-sm"
             ></div>
-            <p>Sun</p>
+            <p className="mt-3">Sun</p>
           </div>
           <div className="text-white mr-5 ml-5 flex flex-col items-center">
             <div
               id="EachBar"
               className="bg-[#B1F042] w-11 h-60 rounded-sm"
             ></div>
-            <p>Mon</p>
+            <p className="mt-3">Mon</p>
           </div>
           <div className="text-white mr-5 ml-5 flex flex-col items-center">
             <div
               id="EachBar"
               className="bg-[#B1F042] w-11 h-60 rounded-sm"
             ></div>
-            <p>Tue</p>
+            <p className="mt-3">Tue</p>
           </div>
           <div className="text-white mr-5 ml-5 flex flex-col items-center">
             <div
               id="EachBar"
               className="bg-[#B1F042] w-11 h-60 rounded-sm"
             ></div>
-            <p>Wed</p>
+            <p className="mt-3">Wed</p>
           </div>
           <div className="text-white mr-5 ml-5 flex flex-col items-center">
             <div
               id="EachBar"
               className="bg-[#B1F042] w-11 h-60 rounded-sm"
             ></div>
-            <p>Thu</p>
+            <p className="mt-3">Thu</p>
           </div>
           <div className="text-white mr-5 ml-5 flex flex-col items-center">
             <div
               id="EachBar"
               className="bg-[#B1F042] w-11 h-60 rounded-sm"
             ></div>
-            <p>Fri</p>
+            <p className="mt-3">Fri</p>
           </div>
           <div className="text-white mr-5 ml-5 flex flex-col items-center">
             <div
               id="EachBar"
               className="bg-[#B1F042] w-11 h-60 rounded-sm"
             ></div>
-            <p>Sat</p>
+            <p className="mt-3">Sat</p>
           </div>
         </div>
         <InfoColor/>
