@@ -7,7 +7,7 @@ import SearchPage from "../pages/SearchPage";
 import SignUp from "../pages/SignUp";
 import ProfilePage from "../pages/myprofile";
 import Welcome from "../pages/welcome";
-import SelectCategory from "../pages/SelectCategory";
+import SelectCategory from "../components/mobile/create-post/SelectCategory";
 
 const router = createBrowserRouter(
     [
