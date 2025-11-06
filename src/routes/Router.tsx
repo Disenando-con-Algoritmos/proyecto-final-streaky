@@ -5,8 +5,9 @@ import LogIn from "../pages/login";
 import Landing from "../pages/Landing";
 import SearchPage from "../pages/SearchPage";
 import SignUp from "../pages/SignUp";
-import ProfilePage from "../pages/myprofile";
+import ProfilePage from "../pages/MyProfile";
 import Welcome from "../pages/welcome";
+import EditProfile from "../pages/editprofile";
 
 const router = createBrowserRouter(
     [
@@ -40,8 +41,12 @@ const router = createBrowserRouter(
         },
         {
             path: "/profile",
-            element: <ProfilePage />
+            Component: ProfilePage,
         },
+        {
+            path: "/edit-profile",
+            Component: EditProfile,
+        }
     ],
 );
 

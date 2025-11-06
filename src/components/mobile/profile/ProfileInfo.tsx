@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import type { UserProfile } from "../../../types/UserProfileType";
 import BtnEditProfile from "./BtnEditProfile";
 import ProfileStreak from "./ProfileStreak";
@@ -8,6 +9,8 @@ type UserProps = {
 };
 
 export default function ProfileInfo({ user }: UserProps) {
+    const navigate = useNavigate();
+
     return (
         <div className="flex justify-between items-center w-full max-w-7xl mx-auto p-6">
             <div className="flex items-center gap-6 ml-70">
@@ -18,7 +21,9 @@ export default function ProfileInfo({ user }: UserProps) {
                 <div>
                     <div className="flex items-center gap-6">
                         <h1 className="text-4xl font-bold">{user.username}</h1>
-                        <BtnEditProfile text="Edit Profile" type="button">
+                        <BtnEditProfile text="Edit Profile" type="button"
+                        onClick={() => navigate("/edit-profile")}
+                        >
                             <FaRegEdit />
                         </BtnEditProfile>
                     </div>
