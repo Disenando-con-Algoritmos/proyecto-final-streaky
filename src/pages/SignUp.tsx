@@ -34,26 +34,26 @@ export default function SignUp() {
                         navigate("/welcome");
                     }}
                 >
-                    <Inputs label="Username" type="text" placeholder="Enter username"
+                    <Inputs label="Username" type="text" placeholder="Enter Username"
                         required
                     >
                         <FaRegUser />
                     </Inputs>
 
                     <Inputs
-                        label="Email" type="email" placeholder="Enter email"
+                        label="Email" type="email" placeholder="Enter Email"
                         required
                     >
                         <MdOutlineEmail />
                     </Inputs>
 
-                    <Inputs label="Password" type="password" placeholder="Enter password"
+                    <Inputs label="Password" type="password" placeholder="Enter Password"
                         required
                     >
                         <MdLockOutline />
                     </Inputs>
 
-                    <Inputs label="Confirm Password" type="password" placeholder="Confirm password" 
+                    <Inputs label="Confirm Password" type="password" placeholder="Confirm Password" 
                     required
                     >
                         <MdLockOutline />
