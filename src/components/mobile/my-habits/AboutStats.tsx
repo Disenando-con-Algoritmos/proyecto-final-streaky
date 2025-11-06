@@ -5,7 +5,7 @@ function InfoColor() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="w-full max-w-md md:max-w-2xl mx-auto mt-6">
+    <div className="w-full max-w-92 md:max-w-2xl mx-auto mt-6">
       <div
         onClick={() => setIsOpen(!isOpen)}
         className="bg-[#1B1B1B] rounded-2xl overflow-hidden transition-all 

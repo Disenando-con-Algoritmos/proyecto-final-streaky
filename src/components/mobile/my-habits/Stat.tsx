@@ -16,7 +16,7 @@ function StatsHabits() {
   }, []);
 
   if (personalCategories.length === 0)
-    return <p className="text-center text-gray-400 mt-10">Loading...</p>;
+    return <p className="text-center text-gray-400 mt-10">You dont have any habit...</p>;
 
   const user = personalCategories[0];
   const categories = Array.from(
@@ -36,7 +36,7 @@ function StatsHabits() {
           className={`px-9 py-[5px] rounded-full border text-sm font-medium transition-colors${
             selectedCategory === "All"
               ? "border-[#B1F042] text-[#B1F042] cursor-pointer"
-              : "border-[#3F3F46] hover:border-[#B1F042] hover:text-[#B1F042] cursor-pointer"
+              : "border-[#F9FAFB] hover:border-[#B1F042] hover:text-[#B1F042] cursor-pointer"
           }`}
         >
           All
@@ -50,7 +50,7 @@ function StatsHabits() {
               transition-colors cursor-pointer ${
               selectedCategory === category
                 ? "border-[#B1F042] text-[#B1F042]"
-                : "border-[#3F3F46] text-gray-300 hover:border-[#B1F042] hover:text-[#B1F042]"
+                : "border-[#F9FAFB] text-white hover:border-[#B1F042] hover:text-[#B1F042]"
             }`}
           >
             {category}
