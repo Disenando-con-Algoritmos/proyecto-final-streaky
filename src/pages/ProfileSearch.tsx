@@ -66,7 +66,7 @@ export default function ProfileSearch() {
 
             <div
                 className="min-h-screen bg-[#171717] text-[#F9FAFB] font-sans 
-            flex flex-col items-center py-10 
+            flex flex-col items-center py-17
             lg:grid lg:grid-cols-[200px_1fr_390px] l
             lg:px-13 lg:py-18"
             >
@@ -125,9 +125,12 @@ export default function ProfileSearch() {
                     </div>
 
                     {/* habits */}
-                    <h3 className="text-[25px] font-semibold mt-10 mb-4 w-11/12 max-w-sm md:hidden">
+                    <h3 className="text-[25px] font-semibold mt-10 mb-2 w-11/12 max-w-sm md:hidden">
                         Habits
                     </h3>
+                    <div className="w-11/12 max-w-sm h-[1px] bg-[#2A2A2A] mb-6 mt-2
+                    md:hidden"></div>
+
                     <div className="w-11/12 max-w-sm flex flex-col gap-5 mb-6 lg:hidden">
                         {user.habits.map((habit: HabitType) => (
                             <Habit key={habit.id} habit={habit} />
@@ -145,7 +148,7 @@ export default function ProfileSearch() {
                                 <img
                                     src="/src/assets/cat-last-post.png"
                                     alt="cat last post"
-                                    className="w-30 -mb-11 mr-7 z-200 lg:absolute 
+                                    className="w-30 -mb-11 mr-7 z-20 lg:absolute 
                                 lg:w-35 lg:right-[-210px] lg:top-3.5"
                                 />
                             </div>
