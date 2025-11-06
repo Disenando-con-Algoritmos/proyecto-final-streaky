@@ -67,8 +67,8 @@ export default function ProfileSearch() {
             <div
                 className="min-h-screen bg-[#171717] text-[#F9FAFB] font-sans 
             flex flex-col items-center py-10 
-            lg:grid lg:grid-cols-[280px_1fr_370px] l
-            g:gap-10 lg:px-14 lg:py-20"
+            lg:grid lg:grid-cols-[200px_1fr_390px] l
+            lg:px-13 lg:py-18"
             >
                 {/* espacio blanco  */}
                 <div className="hidden lg:block"></div>
@@ -99,7 +99,7 @@ export default function ProfileSearch() {
                             </div>
                         </div>
 
-                        <div className="mt-3 lg:mt-10 mr-4">
+                        <div className="mt-3 lg:mt-10 mr-1">
                             <BtnFollow />
                         </div>
 
@@ -139,12 +139,14 @@ export default function ProfileSearch() {
                         <>
                             <div className="flex justify-between items-center 
                         w-11/12 max-w-sm mt-10 mb-2 lg:w-full relative">
-                                <h3 className="text-[25px] font-semibold">My last post</h3>
+                                <h3 className="text-[25px] lg:text-[30px] 
+                                font-semibold lg:ml-45 lg:mb-10">
+                                My last post</h3>
                                 <img
                                     src="/src/assets/cat-last-post.png"
                                     alt="cat last post"
-                                    className="w-30 -mb-11 mr-7 z-100 lg:absolute 
-                                lg:w-28 lg:right-[-10px] lg:-top-10"
+                                    className="w-30 -mb-11 mr-7 z-20 lg:absolute 
+                                lg:w-35 lg:right-[-210px] lg:top-3.5"
                                 />
                             </div>
 
@@ -157,7 +159,7 @@ export default function ProfileSearch() {
 
                 {/*columna derecha donde va streak y habitos y perifl d jenny */}
 
-                <div className="hidden lg:flex flex-col gap-8 mb-100 mr-30">
+                <div className="hidden lg:flex flex-col mb-100 ">
                     {/* perfil Jenny */}
                     <div
                         onClick={NavigateProfile}
@@ -189,8 +191,8 @@ export default function ProfileSearch() {
                         </div>
                     </div>
 
-                    {/* hábitos */}
-                    <div className="max-w-sm flex flex-col gap-5 mb-6 w-90">
+                    {/* habits */}
+                    <div className="fixed max-w-sm flex flex-col gap-7 ">
                         {user.habits.map((habit: HabitType) => (
                             <Habit key={habit.id} habit={habit} />
                         ))}
