@@ -3,7 +3,7 @@ export type User = {
   username: string;
   userImage: string;
   userDescription: string;
-  followers: string;
+  followers: number;
   following: number;
   streak: number;
   habits: Habit[];
