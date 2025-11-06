@@ -138,6 +138,9 @@ function Habits() {
         </div>
         <InfoColor/>
         <CreateNewHabit/>
+        <div>
+          <p className="text-white text-3xl font-medium mt-15">In Progress</p>
+        </div>
       </div>
       <PcSearchBar />
       <MobileNavbar />
