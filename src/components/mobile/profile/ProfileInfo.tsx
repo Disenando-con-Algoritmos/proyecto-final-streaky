@@ -1,5 +1,7 @@
 import type { UserProfile } from "../../../types/UserProfileType";
+import BtnEditProfile from "./BtnEditProfile";
 import ProfileStreak from "./ProfileStreak";
+import { FaRegEdit } from "react-icons/fa";
 
 type UserProps = {
     user: UserProfile;
@@ -14,7 +16,12 @@ export default function ProfileInfo({ user }: UserProps) {
                     className="w-28 h-28 rounded-full object-cover"
                 />
                 <div>
-                    <h1 className="text-4xl font-bold">{user.username}</h1>
+                    <div className="flex items-center gap-6">
+                        <h1 className="text-4xl font-bold">{user.username}</h1>
+                        <BtnEditProfile text="Edit Profile" type="button">
+                            <FaRegEdit />
+                        </BtnEditProfile>
+                    </div>
                     <p className="mt-3 text-[18px] text-gray-400">{user.userDescription}</p>
 
                     <div className="flex gap-8 mt-3">
