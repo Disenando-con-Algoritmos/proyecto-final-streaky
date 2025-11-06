@@ -30,13 +30,13 @@ function StatsHabits() {
   return (
     <div className="flex flex-col items-center mt-6 w-full px-4 md:px-0">
       {/* Botones de categoría */}
-      <div className="flex flex-wrap justify-center gap-3 mb-6">
+      <div className="flex gap-3 ml-10 mr-10 w-94 md:w-78 md:mr-102">
         <button
           onClick={() => setSelectedCategory("All")}
-          className={`px-4 py-[5px] rounded-full border text-sm font-medium transition-colors ${
+          className={`px-9 py-[5px] rounded-full border text-sm font-medium transition-colors${
             selectedCategory === "All"
-              ? "border-[#B1F042] text-[#B1F042]"
-              : "border-[#3F3F46] text-gray-300 hover:border-[#B1F042] hover:text-[#B1F042]"
+              ? "border-[#B1F042] text-[#B1F042] cursor-pointer"
+              : "border-[#3F3F46] hover:border-[#B1F042] hover:text-[#B1F042] cursor-pointer"
           }`}
         >
           All
@@ -46,7 +46,8 @@ function StatsHabits() {
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
-            className={`px-4 py-[5px] rounded-full border text-sm font-medium transition-colors ${
+            className={`px-4 py-[5px] rounded-full border text-sm font-medium 
+              transition-colors cursor-pointer ${
               selectedCategory === category
                 ? "border-[#B1F042] text-[#B1F042]"
                 : "border-[#3F3F46] text-gray-300 hover:border-[#B1F042] hover:text-[#B1F042]"
@@ -59,7 +60,7 @@ function StatsHabits() {
 
       {/* Título */}
       <div className="w-full max-w-md md:max-w-2xl">
-        <p className="text-white text-2xl md:text-3xl font-semibold mb-4">
+        <p className="text-white text-2xl md:text-3xl font-semibold mt-10">
           Stats
         </p>
       </div>
@@ -67,7 +68,7 @@ function StatsHabits() {
       {/* Gráfico de barras */}
       <div
         id="BarChart"
-        className="flex justify-center items-end w-full max-w-md md:max-w-2xl h-64 md:h-80"
+        className="flex justify-center items-end w-full max-w-md md:max-w-2xl h-64 md:h-70"
       >
         {[
           "sunday",
@@ -100,7 +101,7 @@ function StatsHabits() {
           return (
             <div key={day} className="flex flex-col items-center mx-2">
               <div
-                className="w-8 md:w-11 rounded-sm transition-all duration-700 ease-in-out"
+                className="w-8 md:w-10 rounded-sm transition-all duration-700 ease-in-out"
                 style={{
                   height: `${barHeight}px`,
                   backgroundColor: color,

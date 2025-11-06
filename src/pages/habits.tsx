@@ -10,7 +10,7 @@ function Habits() {
   const NavigateProfile = () => nav("/profile");
 
   return (
-    <div className="min-h-screen bg-[#0E0E0E] overflow-x-hidden text-white">
+    <div className="min-h-screen text-white">
       {/* Barra superior */}
       <PcSearchBar />
       <MobileNavbar />
@@ -63,7 +63,8 @@ function Habits() {
       {/* Contenido principal */}
       <div className="flex flex-col items-center w-full px-4 md:px-0 mt-6 md:mt-10">
         {/* Título */}
-        <p className="text-3xl md:text-[45px] font-bold text-center mb-6">
+        <p className="text-3xl font-bold ml-70 mr-115 w-50 
+        md:mb-2 md:ml-0 md:text-[45px] md:w-57">
           My Habits
         </p>
 
@@ -73,9 +74,10 @@ function Habits() {
           <InfoColor />
           <CreateNewHabit />
 
-          <div className="mt-10 md:mt-12">
+          <div className="mt-10 md:mt-12 md:ml-28 ml-4">
             <p className="text-2xl md:text-3xl font-medium">In Progress</p>
           </div>
+          <div className="h-100"></div>
         </div>
       </div>
     </div>

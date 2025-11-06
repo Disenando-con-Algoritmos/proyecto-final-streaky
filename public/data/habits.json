@@ -187,7 +187,7 @@
         "color": "#60A5FA",
         "icon": "📖",
         "progress": {
-          "monday": [1, 0, 1, 0],
+          "monday": [1, 1, 1, 1],
           "tuesday": [1, 1, 0, 1],
           "wednesday": [1, 0, 1, 1],
           "thursday": [0, 1, 0, 1],
