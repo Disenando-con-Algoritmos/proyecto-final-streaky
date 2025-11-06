@@ -7,9 +7,24 @@ import GrayShape from "../assets/GrayShape.png";
 import Logo3 from "../assets/Logo3.png";
 import { useNavigate } from "react-router";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
+import { useRef, type FormEvent } from "react";
 
 export default function LogIn() {
     const navigate = useNavigate();
+        const formRef = useRef<HTMLFormElement>(null);  
+        const handleSubmit = (e: FormEvent) => {
+            e.preventDefault();
+    
+            const formData = new FormData(formRef.current!);
+            const dataObj = {
+                email: formData.get("email"),
+                password: formData.get("password"),
+            };
+    
+            console.info("LogIn Data:", dataObj);
+    
+            navigate("/feed");
+        };
 
     return (
         <div
@@ -29,18 +44,18 @@ export default function LogIn() {
                 </p>
 
                 <form
-                    className="flex flex-col gap-3 sm:gap-4 mt-6 sm:mt-8"
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        navigate("/feed");
-                    }}
+                    ref={formRef}
+                    onSubmit={handleSubmit}
+                    className="flex flex-col justify-center gap-4 mt-8"
                 >
-                    <Inputs label="Email" type="email" placeholder="Enter Email" required
+                    <Inputs name="email" 
+                    label="Email" type="email" placeholder="Enter Email" required
                     >
                         <MdOutlineEmail />
                     </Inputs>
 
-                    <Inputs label="Password" type="password" placeholder="Enter Password"required
+                    <Inputs name="password" 
+                    label="Password" type="password" placeholder="Enter Password"required
                     >
                         <MdLockOutline />
                     </Inputs>

@@ -12,7 +12,7 @@ import { useRef,type FormEvent } from "react";
 export default function SignUp() {
 
     const navigate = useNavigate();
-     const formRef = useRef<HTMLFormElement>(null);  
+    const formRef = useRef<HTMLFormElement>(null);  
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
 
@@ -26,7 +26,6 @@ export default function SignUp() {
 
         console.info("SignUp Data:", dataObj);
 
-        // Aquí podrías validar que las contraseñas coincidan antes de seguir
         navigate("/welcome");
     };
 
