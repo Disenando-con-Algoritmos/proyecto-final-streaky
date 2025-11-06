@@ -9,6 +9,7 @@ import ProfilePage from "../pages/myprofile";
 import Welcome from "../pages/welcome";
 import Habits from "../pages/habits";
 import ProfileSearch from "../pages/ProfileSearch";
+import HabitAdded from "../pages/HabitSucces";
 
 const router = createBrowserRouter(
     [
@@ -51,6 +52,10 @@ const router = createBrowserRouter(
         {
             path: "/habits",
             element: <Habits />
+        },
+        {
+            path: "/habitAdded",
+            element: <HabitAdded/>
         },
     ],
 );
