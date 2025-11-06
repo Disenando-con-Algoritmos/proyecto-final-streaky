@@ -141,11 +141,11 @@ export default function ProfileSearch() {
                         w-11/12 max-w-sm mt-10 mb-2 lg:w-full relative">
                                 <h3 className="text-[25px] lg:text-[30px] 
                                 font-semibold lg:ml-45 lg:mb-10">
-                                My last post</h3>
+                                    My last post</h3>
                                 <img
                                     src="/src/assets/cat-last-post.png"
                                     alt="cat last post"
-                                    className="w-30 -mb-11 mr-7 z-20 lg:absolute 
+                                    className="w-30 -mb-11 mr-7 z-200 lg:absolute 
                                 lg:w-35 lg:right-[-210px] lg:top-3.5"
                                 />
                             </div>
@@ -157,18 +157,18 @@ export default function ProfileSearch() {
                     )}
                 </div>
 
-                {/*columna derecha donde va streak y habitos y perifl d jenny */}
-
-                <div className="hidden lg:flex flex-col mb-100 ">
+                {/*columna derecha de habitos streak y jenntty */}
+                <div className="hidden lg:flex flex-col fixed 
+                right-[60px] top-[40px] w-[380px] gap-6 z-40">
                     {/* perfil Jenny */}
                     <div
                         onClick={NavigateProfile}
-                        className="hidden md:flex 
-                    items-center gap-3 fixed top-10 cursor-pointer">
+                        className="flex items-center gap-3 cursor-pointer ml-12"
+                    >
                         <img
                     src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
                     alt="Profile"
-                            className="w-17 h-17 rounded-full "
+                            className="w-17 h-17 rounded-full"
                         />
                         <div className="flex flex-col">
                             <p className="font-semibold text-[#F9FAFB] text-[19px]">
@@ -179,25 +179,28 @@ export default function ProfileSearch() {
                     </div>
 
                     {/* streak */}
-                    <div className="fixed top-45 px-6 py-4 rounded-2xl w-90
-                flex items-center gap-2 border border-[#2A2A2A]">
+                    <div className="px-6 py-4 rounded-2xl w-full flex items-center mb-10 mt-10 
+                    gap-2 border
+                    border-[#2A2A2A]">
                         <span className="text-[55px]">🔥</span>
                         <div className="flex flex-col items-start">
-                            <p className="text-[#F9FAFB] font-semibold text-[20px]">
+                            <p className="text-[#F9FAFB] font-semibold text-[21px]">
                                 {user.streak} days of streak
                             </p>
-                            <p className="text-[14px] font-regular
-                        text-[#F9FAFB]">Keep the fire alive 💪</p>
+                            <p className="text-[14px] font-regular text-[#F9FAFB]">
+                                Keep the fire alive 💪
+                            </p>
                         </div>
                     </div>
 
                     {/* habits */}
-                    <div className="fixed max-w-sm flex flex-col gap-7 ">
+                    <div className="flex flex-col gap-7 max-h-[70vh] overflow-y-auto pr-1 mt-18">
                         {user.habits.map((habit: HabitType) => (
                             <Habit key={habit.id} habit={habit} />
                         ))}
                     </div>
                 </div>
+
             </div>
         </>
     );
