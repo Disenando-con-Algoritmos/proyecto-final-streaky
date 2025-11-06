@@ -15,7 +15,8 @@ function StatsHabits() {
     fetchUsers();
   }, []);
 
-  if (personalCategories.length === 0) return <p>Cargando...</p>;
+  if (personalCategories.length === 0)
+    return <p className="text-center text-gray-400 mt-10">Loading...</p>;
 
   const user = personalCategories[0];
   const categories = Array.from(
@@ -27,14 +28,15 @@ function StatsHabits() {
       : user.habits.filter((habit) => habit.category === selectedCategory);
 
   return (
-    <div className="flex flex-col mt-7 mb-2">
-      <div className="flex gap-4 mb-8">
+    <div className="flex flex-col items-center mt-6 w-full px-4 md:px-0">
+      {/* Botones de categoría */}
+      <div className="flex flex-wrap justify-center gap-3 mb-6">
         <button
           onClick={() => setSelectedCategory("All")}
-          className={`rounded-full border w-25 cursor-pointer ${
+          className={`px-4 py-[5px] rounded-full border text-sm font-medium transition-colors ${
             selectedCategory === "All"
               ? "border-[#B1F042] text-[#B1F042]"
-              : "border-[#F9FAFB] text-gray-300"
+              : "border-[#3F3F46] text-gray-300 hover:border-[#B1F042] hover:text-[#B1F042]"
           }`}
         >
           All
@@ -44,20 +46,29 @@ function StatsHabits() {
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
-            className={`px-4 py-[5px] border rounded-full cursor-pointer ${
+            className={`px-4 py-[5px] rounded-full border text-sm font-medium transition-colors ${
               selectedCategory === category
                 ? "border-[#B1F042] text-[#B1F042]"
-                : "border-[#F9FAFB] text-gray-300"
+                : "border-[#3F3F46] text-gray-300 hover:border-[#B1F042] hover:text-[#B1F042]"
             }`}
           >
             {category}
           </button>
         ))}
       </div>
-      <div>
-        <p className="text-3xl font-medium mt-2 mb-13">Stats</p>
+
+      {/* Título */}
+      <div className="w-full max-w-md md:max-w-2xl">
+        <p className="text-white text-2xl md:text-3xl font-semibold mb-4">
+          Stats
+        </p>
       </div>
-      <div id="BartChart" className="flex justify-center mt-4 h-80">
+
+      {/* Gráfico de barras */}
+      <div
+        id="BarChart"
+        className="flex justify-center items-end w-full max-w-md md:max-w-2xl h-64 md:h-80"
+      >
         {[
           "sunday",
           "monday",
@@ -77,30 +88,25 @@ function StatsHabits() {
               : 0;
 
           let color = "";
-          if (avg <= 0.25) color = "#EF3131"; 
-          else if (avg <= 0.5) color = "#FB5EF9"; 
-          else if (avg <= 0.75) color = "#8B5CF6"; 
+          if (avg <= 0.25) color = "#EF3131";
+          else if (avg <= 0.5) color = "#FF6BB7";
+          else if (avg <= 0.75) color = "#703EDD";
           else color = "#B1F042";
 
-          const maxHeight = 270;
+          const maxHeight = 220;
           const barHeight = maxHeight * avg;
           const dayName = day.charAt(0).toUpperCase() + day.slice(1, 3);
 
           return (
-            <div className="flex items-end">
-            <div
-              key={day}
-              className="text-white mx-5 flex flex-col items-center "
-            >
+            <div key={day} className="flex flex-col items-center mx-2">
               <div
-                className="w-11 rounded-sm transition-all duration-700 ease-in-out"
+                className="w-8 md:w-11 rounded-sm transition-all duration-700 ease-in-out"
                 style={{
                   height: `${barHeight}px`,
                   backgroundColor: color,
                 }}
               ></div>
-              <p className="mt-3">{dayName}</p>
-            </div>
+              <p className="mt-3 text-sm text-gray-300">{dayName}</p>
             </div>
           );
         })}

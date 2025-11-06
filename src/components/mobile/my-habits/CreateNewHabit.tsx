@@ -2,20 +2,49 @@ import { FaPlus } from "react-icons/fa6";
 
 function CreateNewHabit() {
   return (
-    <div className="mt-5">
-      <div className="w-100% h-32 bg-[#1B1B1B] rounded-xl flex flex-col justify-center">
-        <div className="flex justify-between">
+    <div className="w-full mt-6 px-4 md:px-0">
+      <div
+        className="
+          bg-[#1B1B1B]
+          rounded-2xl
+          flex
+          items-center
+          justify-between
+          w-full
+          max-w-md md:max-w-2xl
+          mx-auto
+          h-24 md:h-28
+          px-6
+          shadow-md
+        "
+      >
+        {/* Texto */}
+        <div className="flex flex-col justify-center">
+          <p className="text-lg md:text-2xl font-semibold text-white">
+            Create a New Habit
+          </p>
+          <p className="text-sm md:text-base text-gray-400 mt-1">
+            Start a new goal!
+          </p>
+        </div>
 
-          <div className="ml-7">
-            <p className="text-3xl font-medium">Create a New Habit</p>
-            <p className="text-[17px] mt-1">Start a new Goal!</p>
-          </div>
-
-          <div
-            className="w-17 h-17 bg-[#B1F042] rounded-[100px] 
-            flex flex-col items-center justify-center mr-7 cursor-pointer">
-            <FaPlus className="text-2xl text-[#1C1B1F]" />
-          </div>
+        {/* Botón */}
+        <div
+          className="
+            w-10 h-10
+            md:w-12 md:h-12
+            bg-[#B1F042]
+            rounded-full
+            flex
+            items-center
+            justify-center
+            cursor-pointer
+            hover:scale-105
+            transition-transform
+            duration-200
+          "
+        >
+          <FaPlus className="text-lg md:text-xl text-[#1C1B1F]" />
         </div>
       </div>
     </div>
