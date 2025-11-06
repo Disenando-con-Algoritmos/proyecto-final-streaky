@@ -28,29 +28,40 @@ export default function LogIn() {
                     Welcome back! you’ve been missed ✨
                 </p>
 
-                <form className="flex flex-col gap-3 sm:gap-4 mt-6 sm:mt-8">
-                    <Inputs label="Email" type="email" placeholder="Enter email">
+                <form
+                    className="flex flex-col gap-3 sm:gap-4 mt-6 sm:mt-8"
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        navigate("/feed");
+                    }}
+                >
+                    <Inputs label="Email" type="email" placeholder="Enter Email" required
+                    >
                         <MdOutlineEmail />
                     </Inputs>
 
-                    <Inputs label="Password" type="password" placeholder="Enter password">
+                    <Inputs label="Password" type="password" placeholder="Enter Password"required
+                    >
                         <MdLockOutline />
                     </Inputs>
+
+                    <div
+                        id="btn-container"
+                        className="flex justify-center mt-6 hover:scale-105 transition"
+                    >
+                        <GlobalBtn text="Log In" type="submit" />
+                    </div>
                 </form>
 
-                <div id="btn-container" className="flex justify-center mt-6 
-                hover:scale-105 transition">
-                    <GlobalBtn text="Log In" type="submit" onClick={() => navigate("/feed")}/>
-                </div>
 
-                    <p className="text-center mt-4 text-sm sm:text-base ">
-                        Not a member?
-                        <span className="font-semibold cursor-pointer hover:underline p-2" onClick={
-                            () => navigate("/signup")
-                        }>
-                            Sign Up
-                        </span>
-                    </p> 
+                <p className="text-center mt-4 text-sm sm:text-base ">
+                    Not a member?
+                    <span className="font-semibold cursor-pointer hover:underline p-2" onClick={
+                        () => navigate("/signup")
+                    }>
+                        Sign Up
+                    </span>
+                </p>
             </div>
 
             <div
@@ -61,9 +72,9 @@ export default function LogIn() {
         rounded-r-4xl flex items-center justify-end pr-3"
             >
                 <img
-                    className="w-6 mr-3 lg:w-8 cursor-pointer"  
-                    onClick={()=> navigate("/")}
-                    src={Logo3} 
+                    className="w-6 mr-3 lg:w-8 cursor-pointer"
+                    onClick={() => navigate("/")}
+                    src={Logo3}
                     alt="Streaky Logo"
                 />
             </div>
