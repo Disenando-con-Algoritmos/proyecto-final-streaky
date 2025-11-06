@@ -19,9 +19,7 @@ function StatsHabits() {
     return <p className="text-center text-gray-400 mt-10">You dont have any habit...</p>;
 
   const user = personalCategories[0];
-  const categories = Array.from(
-    new Set(user.habits.map((habit) => habit.category))
-  );
+  const categories = (user.habits.map((habit) => habit.category));
   const filteredHabits =
     selectedCategory === "All"
       ? user.habits

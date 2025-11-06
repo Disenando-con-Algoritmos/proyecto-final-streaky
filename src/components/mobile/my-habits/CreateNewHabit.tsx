@@ -39,8 +39,8 @@ function CreateNewHabit() {
             items-center
             justify-center
             cursor-pointer
-            hover:scale-105
-            transition-transform
+            hover:bg-[#82B42A]
+            transition-all
             duration-200
           "
         >
