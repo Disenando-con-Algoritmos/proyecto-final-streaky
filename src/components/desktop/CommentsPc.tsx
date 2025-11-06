@@ -22,7 +22,7 @@ export default function CommentsPc({
         className="flex items-center cursor-pointer justify-end relative"
         onClick={toggleComments}
       >
-        <div className="relative flex right-70 bottom-17">
+        <div className="relative flex right-73 bottom-17">
           <FaRegComment
             className="text-[#E7E7E7] 
           text-3xl hover:text-[#703EDD] transition-colors duration-300"

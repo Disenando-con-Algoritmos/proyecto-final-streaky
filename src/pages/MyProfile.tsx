@@ -4,6 +4,7 @@ import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 import ProfileInfo from "../components/mobile/profile/ProfileInfo";
 import DayProgressGrid from "../components/mobile/profile/HabitInteractive";
 import type { UserProfile } from "../types/UserProfileType";
+import UserLastPost from "../components/mobile/profile/UserLastPost";
 
 function ProfilePage() {
   const [user, setUser] = useState<UserProfile | null>(null);
@@ -23,18 +24,27 @@ function ProfilePage() {
       <PcSearchBar />
       <MobileNavbar />
 
+          <div className="flex justify-center mt-15">
+                    {user && <ProfileInfo user={user} />}
+                </div>
+                {/* Último post publicado */}
+                <div className="w-full flex justify-center ">
+                    <UserLastPost userId={userId} />
+
+                </div>
       <div className="flex flex-col items-center mt-15 px-4 gap-10">
-        {user && <ProfileInfo user={user} />}
         {user?.habits && (
+          <div>
           <div className="flex flex-col gap-10 w-full max-w-md">
             {user.habits.map((habit) => (
               <DayProgressGrid key={habit.id} habit={habit} />
             ))}
           </div>
+          </div>
+          
         )}
       </div>
     </>
-  );
-}
+  );}
 
 export default ProfilePage;
