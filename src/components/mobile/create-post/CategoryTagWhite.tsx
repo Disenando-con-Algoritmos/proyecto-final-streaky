@@ -6,7 +6,7 @@ type Props = {
   onSelect?: (label: string) => void;
 };
 
-export default function CategoryTag({ label, emoji, variant = "button", 
+export default function CategoryTagWhite({ label, emoji, variant = "button", 
   selected = false, onSelect }: Props) {
   if (variant === "text") {
     return <p className="text-[#B1F042]">{emoji} {label}</p>;
