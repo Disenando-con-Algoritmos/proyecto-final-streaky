@@ -7,9 +7,28 @@ import grayShape from "../assets/grayShape.png";
 import greenShape from "../assets/greenShape.png";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 import { useNavigate } from "react-router";
+import { useRef,type FormEvent } from "react";
 
 export default function SignUp() {
+
     const navigate = useNavigate();
+     const formRef = useRef<HTMLFormElement>(null);  
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+
+        const formData = new FormData(formRef.current!);
+        const dataObj = {
+            username: formData.get("username"),
+            email: formData.get("email"),
+            password: formData.get("password"),
+            confirmPassword: formData.get("confirmPassword"),
+        };
+
+        console.info("SignUp Data:", dataObj);
+
+        // Aquí podrías validar que las contraseñas coincidan antes de seguir
+        navigate("/welcome");
+    };
 
     return (
         <div
@@ -28,33 +47,31 @@ export default function SignUp() {
                 </p>
 
                 <form
+                    ref={formRef}
+                    onSubmit={handleSubmit}
                     className="flex flex-col justify-center gap-4 mt-8"
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        navigate("/welcome");
-                    }}
                 >
-                    <Inputs label="Username" type="text" placeholder="Enter Username"
-                        required
+                    <Inputs name="username" label="Username" type="text" 
+                    placeholder="Enter Username" required
                     >
                         <FaRegUser />
                     </Inputs>
 
                     <Inputs
-                        label="Email" type="email" placeholder="Enter Email"
+                        name="email" label="Email" type="email" placeholder="Enter Email"
                         required
                     >
                         <MdOutlineEmail />
                     </Inputs>
 
-                    <Inputs label="Password" type="password" placeholder="Enter Password"
-                        required
+                    <Inputs name="password" label="Password" type="password" 
+                    placeholder="Enter Password" required
                     >
                         <MdLockOutline />
                     </Inputs>
 
-                    <Inputs label="Confirm Password" type="password" placeholder="Confirm Password" 
-                    required
+                    <Inputs name="confirmPassword" 
+                    label="Confirm Password" type="password" placeholder="Confirm Password" required
                     >
                         <MdLockOutline />
                     </Inputs>

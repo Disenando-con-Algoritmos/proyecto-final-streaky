@@ -3,6 +3,7 @@ type InputProps = {
     type: string
     placeholder: string
     required?: boolean
+    name?: string;
     children?: React.ReactNode
 }
 
@@ -12,6 +13,7 @@ export default function Inputs({
     placeholder, 
     required = true,
     children,
+    name,
 } : InputProps){
 
     return(
@@ -27,7 +29,7 @@ export default function Inputs({
                 className="w-full bg-transparent border border-[#E1E1E1] rounded-full 
                 py-2 pl-12 pr-4 text-gray-200 placeholder-[#5D5D5D] focus:outline-none 
                 focus:border-[#B1F042] transition"
-                type={type} placeholder={placeholder} required={required} />
+                type={type} placeholder={placeholder} required={required} name={name} />
             </label>
         </div>
     );
