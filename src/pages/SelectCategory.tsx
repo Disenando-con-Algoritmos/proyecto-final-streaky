@@ -1,6 +1,7 @@
 import PcSearchBar from "../components/desktop/PcSearchBar";
 import CategoryTagWhite from "../components/mobile/create-post/CategoryTagWhite";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
+import { useState } from "react";
 
 export default function SelectCategory() {
     // Lista de categorías (emoji + nombre)
@@ -15,6 +16,8 @@ export default function SelectCategory() {
         { emoji: "🏠", label: "Home" },
         { emoji: "💵", label: "Money" },
     ];
+
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
     return (
         <>
@@ -35,7 +38,15 @@ export default function SelectCategory() {
                     {/* Contenedor de categorías */}
                     <div className="flex gap-2 flex-wrap justify-center mt-6">
                         {categories.map((cat, index) => (
-                            <CategoryTagWhite key={index} emoji={cat.emoji} label={cat.label} />
+                            <CategoryTagWhite
+                                key={index}
+                                emoji={cat.emoji}
+                                label={cat.label}
+                                selected={selectedCategory === cat.label}
+                                onSelect={(label) =>
+                                    setSelectedCategory(prev => (prev === label ? null : label))
+                                }
+                            />
                         ))}
                     </div>
                 </div>

@@ -147,7 +147,7 @@ export default function CreatePost() {
               className="bg-[#703EDD] hover:bg-[#5c32b6]
               duration-300 p-3 rounded-[50px] w-[70%]
               text-[#ffffff] font-medium text-lg shadow-md
-              hover:shadow-lg hover:scale-105 transition"
+              hover:shadow-lg hover:scale-105 transition cursor-pointer"
             >
               Choose Category
             </button>

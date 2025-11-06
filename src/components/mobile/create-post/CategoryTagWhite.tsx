@@ -1,14 +1,28 @@
 type Props = {
-  label: string; // nombre visible (ej: "Sport")
-  emoji: string; // emoji (ej: 🏃‍♂️)
+  label: string;
+  emoji?: string;
+  variant?: "button" | "text";
+  selected?: boolean;
+  onSelect?: (label: string) => void;
 };
 
-export default function CategoryTagWhite({ label, emoji }: Props) {
+export default function CategoryTag({ label, emoji, variant = "button", 
+  selected = false, onSelect }: Props) {
+  if (variant === "text") {
+    return <p className="text-[#B1F042]">{emoji} {label}</p>;
+  }
+
   return (
     <button
-      className="border border-[#B1F042] text-[#F9FAFB] w-28 py-2 rounded-3xl m-2.5
-                 transition-all duration-200 hover:border-[#D9FF7A]
-                 hover:shadow-[0_0_8px_#B1F042] flex items-center justify-center gap-1"
+      onClick={() => onSelect && onSelect(label)}
+      className={`border w-28 py-2 rounded-3xl m-3 mb-5 flex items-center 
+        justify-center gap-1 transition-all duration-200
+        ${
+          selected
+            ? "bg-[#B1F042]  text-black font-medium " 
+            : "border-[#ffffff] text-[#F9FAFB] hover:border-[#B1F042]"
+        }
+      `}
     >
       <span>{emoji}</span>
       <span>{label}</span>
