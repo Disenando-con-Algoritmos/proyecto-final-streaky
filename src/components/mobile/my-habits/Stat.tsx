@@ -83,7 +83,8 @@ function StatsHabits() {
 
           const avg =
             allDayValues.length > 0
-              ? allDayValues.reduce((a, b) => a + b, 0) / allDayValues.length
+              ? allDayValues.reduce((InitialValue, NextValue) => 
+                InitialValue + NextValue, 0) / allDayValues.length
               : 0;
 
           let color = "";
