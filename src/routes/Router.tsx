@@ -6,12 +6,12 @@ import SearchPage from "../pages/SearchPage";
 import SignUp from "../pages/SignUp";
 import ProfilePage from "../pages/MyProfile";
 import Welcome from "../pages/Welcome";
-import SelectCategory from "../components/mobile/create-post/SelectCategory";
+import SelectCategory from "../pages/SelectCategory";
 import Habits from "../pages/habits";
 import ProfileSearch from "../pages/ProfileSearch";
 import HabitAdded from "../pages/HabitSucces";
 import EditProfile from "../pages/EditProfile";
-import CreatePost from "../pages/createpost";
+import CreatePost from "../pages/Createpost";
 import LogIn from "../pages/Login";
 import Feed from "../pages/Feed";
 
@@ -56,7 +56,7 @@ const router = createBrowserRouter(
         },
         {
             path: "/profile/:username",
-            element: <ProfileSearch />,
+            element: <ProfileSearch/>,
         },
         {
             path: "/habits",

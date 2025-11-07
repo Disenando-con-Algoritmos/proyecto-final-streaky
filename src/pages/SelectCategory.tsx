@@ -26,12 +26,8 @@ export default function SelectCategory() {
   }, []);
 
   const handleCategorySelect = (category: string) => {
-    // Si la categoría ya está seleccionada, la deseleccionamos
-    if (selectedCategory === category) {
-      setSelectedCategory(null);
-    } else {
-      setSelectedCategory(category);
-    }
+    setSelectedCategory(category);
+    console.log('Categoría seleccionada:', category);
   };
 
   const handleAccept = () => {
@@ -76,16 +72,19 @@ export default function SelectCategory() {
           </h1>
 
           <div className="grid grid-cols-3 gap-3 justify-center mt-6">
-            {categories.map((cat, index) => (
-              <CategoryTagWhite
-                key={index}
-                emoji={cat.emoji}
-                label={cat.label}
-                selected={selectedCategory === cat.label}
-                onSelect={() => handleCategorySelect(cat.label)}
-                className="cursor-pointer"
-              />
-            ))}
+            {categories.map((cat, index) => {
+              const isSelected = selectedCategory === cat.label;
+              return (
+                <CategoryTagWhite
+                  key={index}
+                  emoji={cat.emoji}
+                  label={cat.label}
+                  selected={isSelected}
+                  onSelect={() => handleCategorySelect(cat.label)}
+                  className="cursor-pointer"
+                />
+              );
+            })}
           </div>
           
           {/* Botón aceptar */}
