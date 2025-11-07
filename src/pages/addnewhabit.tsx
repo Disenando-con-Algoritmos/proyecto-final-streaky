@@ -191,7 +191,7 @@ export default function AddNewHabit() {
         </div>
 
         <div className="max-w-md w-full mx-auto px-4 mt-8 mb-25 flex justify-center">
-          <GlobalBtn text="Add Habit" onClick={() => { /* pagina donde la redirije */ }} />
+          <GlobalBtn text="Add Habit" onClick={() => nav("/habitAdded")} />
         </div>
       </div>
     </>
