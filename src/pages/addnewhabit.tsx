@@ -1,0 +1,177 @@
+import PcSearchBar from "../components/desktop/PcSearchBar";
+import { useNavigate } from "react-router";
+import { useState } from "react";
+import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
+
+export default function AddNewHabit() {
+  const nav = useNavigate();
+  const NavigateProfile = () => nav("/profile");
+  
+
+  const [selectedDays, setSelectedDays] = useState<string[]>([]);
+  const days = [
+    { key: 'Su', label: 'Sunday' },
+    { key: 'Mo', label: 'Monday' },
+    { key: 'Tu', label: 'Tuesday' },
+    { key: 'We', label: 'Wednesday' },
+    { key: 'Th', label: 'Thursday' },
+    { key: 'Fr', label: 'Friday' },
+    { key: 'Sa', label: 'Saturday' }
+  ];
+
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const categories = [
+    { id: 'sport', label: '🏃‍♂️ Sport' },
+    { id: 'study', label: '📚 Study' },
+    { id: 'social', label: '💝 Social' },
+    { id: 'hobbies', label: '🎨 Hobbies' },
+    { id: 'food', label: '🍎 Food' },
+    { id: 'health', label: '❤️ Health' },
+    { id: 'work', label: '💼 Work' },
+    { id: 'home', label: '🏠 Home' },
+    { id: 'money', label: '💰 Money' }
+  ];
+
+
+  const toggleDay = (day: string) => {
+    setSelectedDays(prev => 
+      prev.includes(day) 
+        ? prev.filter(d => d !== day)
+        : [...prev, day]
+    );
+  };
+
+\
+  const toggleCategory = (categoryId: string) => {
+    setSelectedCategory(prev => prev === categoryId ? null : categoryId);
+  };
+
+  return (
+    <>
+      
+      <PcSearchBar />
+
+      <div
+        onClick={NavigateProfile}
+        className="hidden md:flex items-center gap-3 fixed right-40 mt-20 cursor-pointer"
+      >
+        <img
+          src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
+          alt="Profile"
+          className="w-17 h-17 rounded-full"
+        />
+        {/* Miffy desktop */}
+        <img
+          src="https://i.imgur.com/O90kfzg.png"
+          alt="miffyy"
+          className="hidden md:block fixed -bottom-8 right-[2px] w-[400px]"
+        />
+        <div className="flex flex-col">
+          <p className="font-semibold text-[#F9FAFB] text-[19px]">
+            Jenny Torres
+          </p>
+          <p className="text-[#A1A1AA] text-sm">Your Profile</p>
+        </div>
+      </div>
+
+      {/* Contenido  */}
+      <div className="flex flex-col items-center justify-center text-center">
+        <h1 className="font-black text-[33px] md:text-[42px] leading-tight mt-12">
+          Add your new habit
+        </h1>
+
+     
+        <div className="flex flex-col items-center mt-6 mb-6">
+          <div
+            className="w-30 h-30 bg-[#303030] 
+            rounded-full flex items-center justify-center mb-2 p-6"
+          >
+            <span className="text-5xl">😊</span>
+          </div>
+          <span
+            className="text-[#ffffff] text-[18px] hover:text-[#703EDD]
+            cursor-pointer font-medium"
+          >
+            Edit Icon
+          </span>
+        </div>
+
+        <div className="max-w-md w-full mx-auto px-4 mt-6 text-left">
+          <div className="mb-2" id="input-container-title">
+            <label className="block text-[24px] text-[#D1D1D1] font-medium mb-2">
+              Add a title
+            </label>
+            <input
+              className="w-full bg-transparent border border-[#833AFF] 
+              rounded-[12px] py-2 pl-4 pr-4 text-white placeholder-[#5D5D5D] "
+              type="text"
+              placeholder="Type here"
+              required
+            />
+          </div>
+        </div>
+
+         <div className="max-w-md w-full mx-auto px-4 mt-6 text-left">
+          <div className="mb-2" id="input-container-title">
+            <label className="block text-[24px] text-[#D1D1D1] font-medium mb-2">
+              Add a description
+            </label>
+            <input
+              className="w-full bg-transparent border border-[#833AFF] 
+              rounded-[12px] py-2 pl-4 pr-4 text-white placeholder-[#5D5D5D] mb-10px"
+              type="text"
+              placeholder="Type here"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="max-w-md w-full mx-auto px-4 mt-6 text-left">
+          <h2 className="text-[24px] text-white font-bold mb-4">Add your daily routine</h2>
+          <div className="flex justify-between mb-8">
+            {days.map((day) => (
+              <button
+                key={day.key}
+                onClick={() => toggleDay(day.key)}
+                className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors
+                  ${selectedDays.includes(day.key)
+                    ? 'bg-[#84CC16] text-black'
+                    : 'bg-[#303030] text-white hover:bg-[#404040]'
+                }`}
+                title={day.label}
+              >
+                {day.key}
+              </button>
+            ))}
+          </div>
+        </div>
+
+      
+        <div className="max-w-md w-full mx-auto px-4 mt-2 text-left">
+          <h2 className="text-[24px] text-white font-bold mb-4">Add a category</h2>
+          <div className="grid grid-cols-3 gap-3">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => toggleCategory(category.id)}
+                className={`py-2 px-4 rounded-[50px] border border-[#ffffff]
+                     transition-all duration-300 mb-[20px]
+                  ${selectedCategory === category.id
+                    ? 'bg-[#B1F042] text-[#171717] font-medium shadow-md'
+                    : 'bg-transparent text-white hover:bg-[#B1F042]/10'
+                }`}
+              >
+                {category.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+      
+        <div className="max-w-md w-full mx-auto px-4 mt-8 mb-8 flex justify-center">
+          <GlobalBtn text="Add Habit" onClick={() => {/* well done*/}} />
+        </div>
+      </div>
+    </>
+  );
+}

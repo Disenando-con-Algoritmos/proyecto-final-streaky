@@ -8,6 +8,7 @@ import SignUp from "../pages/SignUp";
 import ProfilePage from "../pages/myprofile";
 import Welcome from "../pages/welcome";
 import SelectCategory from "../components/mobile/create-post/SelectCategory";
+import AddNewHabit from "../pages/addnewhabit";
 
 const router = createBrowserRouter(
     [
@@ -44,6 +45,10 @@ const router = createBrowserRouter(
         {
             path: "/userSearch",
             Component: SearchPage,
+        },
+         {
+            path: "/newhabit",
+            Component: AddNewHabit,
         },
         {
             path: "/profile",
