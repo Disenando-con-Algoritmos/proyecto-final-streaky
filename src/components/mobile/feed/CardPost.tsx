@@ -7,6 +7,7 @@ import LikeButton from "./LikeButton";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import miffyPost from "../../../assets/miffyPost.png";
 import DeletePost from "../profile/DeletePost";
+import { useNavigate } from "react-router";
 
 export default function CardPost({
     cardIndividuals,
@@ -16,14 +17,12 @@ export default function CardPost({
     showMiffy?: boolean;
 }) {
     const [showPopup, setShowPopup] = useState(false);
-
-    // usuario actual simulado
+    const nav = useNavigate();
     const currentUserId = 5;
-
     const isOwnPost = cardIndividuals.id === currentUserId;
 
     return (
-        <div className="m-5 flex flex-col justify-center items-center relative">
+        <div className="m-5 flex flex-col justify-center items-center">
             <div className="bg-[#242424] text-[#F9FAFB] p-5 rounded-xl 
         max-w-md w-full shadow-md relative">
                 {showMiffy && (
@@ -37,7 +36,9 @@ export default function CardPost({
                 )}
                 {/* imagen + info perfil */}
                 <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-3">
+                    <div
+                    onClick={() => nav(`/profile/${cardIndividuals.username}`)} 
+                    className="flex items-center gap-3 hover:opacity-80 cursor-pointer">
                         <img
                             src={cardIndividuals.userImage}
                             className="w-12 h-12 rounded-full"
