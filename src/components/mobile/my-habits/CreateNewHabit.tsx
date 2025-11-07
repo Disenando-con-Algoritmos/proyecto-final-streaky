@@ -1,6 +1,9 @@
 import { FaPlus } from "react-icons/fa6";
+import { useNavigate } from "react-router";
 
 function CreateNewHabit() {
+
+  const nav = useNavigate();
   return (
     <div className="w-full mt-6 px-4 md:px-0">
       <div
@@ -43,6 +46,7 @@ function CreateNewHabit() {
             transition-all
             duration-200
           "
+          onClick={() => nav("/newhabit")}
         >
           <FaPlus className="text-lg md:text-xl text-[#1C1B1F]" />
         </div>
