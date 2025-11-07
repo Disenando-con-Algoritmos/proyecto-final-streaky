@@ -21,6 +21,7 @@ export default function AddNewHabit() {
     { key: 'Sa', label: 'Saturday' }
   ];
 
+  const [habitName, setHabitName] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const categories = [
     { id: 'sport', label: '🏃‍♂️ Sport' },
@@ -96,6 +97,7 @@ export default function AddNewHabit() {
 
 
         <div className="flex flex-col items-center mt-6 mb-6">
+          
           <div
             className="w-30 h-30 bg-[#303030] rounded-full 
             flex items-center justify-center mb-2 p-6"
@@ -191,7 +193,18 @@ export default function AddNewHabit() {
         </div>
 
         <div className="max-w-md w-full mx-auto px-4 mt-8 mb-25 flex justify-center">
-          <GlobalBtn text="Add Habit" onClick={() => nav("/habitAdded")} />
+          <GlobalBtn 
+            text="Add Habit" 
+            onClick={() => {
+              console.log("📋 New Habit Created:", {
+                name: habitName,
+                category: selectedCategory,
+                days: selectedDays,
+                emoji: emoji
+              });
+              nav("/habitAdded");
+            }} 
+          />
         </div>
       </div>
     </>
