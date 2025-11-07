@@ -1,51 +1,64 @@
 import { useNavigate } from "react-router";
 import PcSearchBar from "../components/desktop/PcSearchBar";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
-import type { User } from "../types/HabitsTypes";
-import { useEffect, useState } from "react";
-import { getHabits } from "../services/HabitsServices";
 import InfoColor from "../components/mobile/my-habits/AboutStats";
 import CreateNewHabit from "../components/mobile/my-habits/CreateNewHabit";
+import StatsHabits from "../components/mobile/my-habits/Stat";
+import { useEffect, useState } from "react";
+import type { UserProfile } from "../types/UserProfileType";
+import DayProgressGridStats from "../components/mobile/profile/HabitInteractiveStats";
+import miffyPost from "../assets/miffyPost.png";
 
 function Habits() {
   const nav = useNavigate();
-  const [personalCategories, setpersonalCategories] = useState<User[]>([]);
   const NavigateProfile = () => nav("/profile");
+  const [user, setUser] = useState<UserProfile | null>(null);
+  const userId = 5;
 
   useEffect(() => {
-    async function fetchUsers() {
-      const data = (await getHabits()) as User[];
-      const jennyData = data.find((user) => user.username === "Jenny");
-      setpersonalCategories(jennyData ? [jennyData] : []);
-    }
-    fetchUsers();
-  }, []);
+      fetch("/data/habits.json")
+        .then((res) => res.json())
+        .then((data: UserProfile[]) => {
+          const foundUser = data.find((u) => u.id === userId);
+          setUser(foundUser || null);
+        });
+    }, []);
 
   return (
-    <div>
-      <div className="flex justify-center items-center mt-10 md:mt-10 relative md:mb-10">
-        <div className="flex justify-between items-center px-5 w-full max-w-md ">
+    <div className="min-h-screen text-white">
+      {/* Barra superior */}
+      <PcSearchBar />
+      <MobileNavbar />
+
+      {/* Encabezado */}
+      <div className="flex justify-center items-center mt-8 md:mt-10 relative md:mb-10">
+        <div className="flex justify-between items-center px-5 w-full max-w-6xl">
+          {/* Logo móvil */}
           <img
             src="https://i.imgur.com/7IzEEQ5.png"
             alt="Streaky logo"
-            className="w-24 md:w-28 md:hidden"
+            className="w-20 md:hidden"
           />
+
+          {/* Perfil desktop */}
           <div
             onClick={NavigateProfile}
-            className="hidden md:flex items-center gap-3 fixed right-40 mt-20 cursor-pointer"
+            className="hidden md:flex items-center gap-3 fixed right-20 top-10 cursor-pointer"
           >
             <img
               src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
               alt="Profile"
-              className="w-17 h-17 rounded-full "
+              className="w-16 h-16 rounded-full object-cover"
             />
             <div className="flex flex-col">
-              <p className="font-semibold text-[#F9FAFB] text-[19px]">
+              <p className="font-semibold text-[#F9FAFB] text-lg">
                 Jenny Torres
               </p>
-              <p className="text-[#A1A1AA] text-sm text-[14px]">Your Profile</p>
+              <p className="text-[#A1A1AA] text-sm">Your Profile</p>
             </div>
           </div>
+
+          {/* Perfil móvil */}
           <img
             onClick={() => nav("/profile")}
             src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
@@ -53,94 +66,44 @@ function Habits() {
             className="w-12 h-12 rounded-full md:hidden"
           />
         </div>
+
+        {/* Gato decorativo desktop */}
         <img
           src="https://i.imgur.com/O90kfzg.png"
-          alt="miffyy"
-          className="hidden md:block fixed  
-                    -bottom-8 right-[2px] w-[400px]"
+          alt="cat deco"
+          className="hidden md:block fixed bottom-0 right-0 w-[350px]"
         />
       </div>
 
-      <div className="flex flex-col w-180 h-250 ml-100 mt-16">
-        <p className="text-white text-[45px] font-bold">My Habits</p>
-        <div className="flex mt-8 p-0 items-center">
-          <div
-            className="border-1 border-[#B1F042] p-1 w-26 rounded-4xl h-9 flex 
-          items-center justify-center mr-4 cursor-pointer"
-          >
-            <p className="flex justify-center">All</p>
+      {/* Contenido principal */}
+      <div className="flex flex-col items-center w-full px-4 md:px-0 mt-6 md:mt-10">
+        {/* Título */}
+        <p className="text-3xl font-bold ml-70 mr-115 w-50 
+        md:mb-2 md:ml-0 md:text-[45px] md:w-57">
+          My Habits
+        </p>
+
+        {/* Contenedor central */}
+        <div className="w-full max-w-md md:max-w-4xl mx-auto space-y-6 flex flex-col items-center">
+          <StatsHabits />
+          <InfoColor />
+          <CreateNewHabit />
+          <div className="mt-10 md:mt-12 md:mr-131 mr-60 ml-4">
+            <p className="text-2xl md:text-3xl font-medium">In Progress</p>
+          <div className="">
+            <img className="w-20 absolute ml-54 bottom-[38px] 
+            md:w-40 md:ml-100 md:bottom-[-233px]" src={miffyPost}></img>
           </div>
-          {personalCategories.length > 0 &&
-            personalCategories[0].habits.map((habit) => (
-              <div key={habit.id} className="">
-                <div
-                  className="border-1 border-white p-1 w-26 rounded-4xl h-9 flex 
-                items-center justify-center mr-4 cursor-pointer"
-                >
-                  <p className="flex justify-center">{habit.category}</p>
-                </div>
-              </div>
+          </div>
+          <div className="ml-0">
+          {user?.habits.map((habit) => (
+              <DayProgressGridStats key={habit.id} habit={habit} />
             ))}
+          </div>
+
+          <div className="h-10"></div>
         </div>
-        <div>
-          <p className="text-white text-3xl font-medium mt-13">Stats</p>
-        </div>
-        <div id="BartChart" className="flex justify-center mt-12">
-          <div className="text-white mr-5 ml-5 flex flex-col items-center">
-            <div
-              id="EachBar"
-              className="bg-[#B1F042] w-11 h-60 rounded-sm"
-            ></div>
-            <p className="mt-3">Sun</p>
-          </div>
-          <div className="text-white mr-5 ml-5 flex flex-col items-center">
-            <div
-              id="EachBar"
-              className="bg-[#B1F042] w-11 h-60 rounded-sm"
-            ></div>
-            <p className="mt-3">Mon</p>
-          </div>
-          <div className="text-white mr-5 ml-5 flex flex-col items-center">
-            <div
-              id="EachBar"
-              className="bg-[#B1F042] w-11 h-60 rounded-sm"
-            ></div>
-            <p className="mt-3">Tue</p>
-          </div>
-          <div className="text-white mr-5 ml-5 flex flex-col items-center">
-            <div
-              id="EachBar"
-              className="bg-[#B1F042] w-11 h-60 rounded-sm"
-            ></div>
-            <p className="mt-3">Wed</p>
-          </div>
-          <div className="text-white mr-5 ml-5 flex flex-col items-center">
-            <div
-              id="EachBar"
-              className="bg-[#B1F042] w-11 h-60 rounded-sm"
-            ></div>
-            <p className="mt-3">Thu</p>
-          </div>
-          <div className="text-white mr-5 ml-5 flex flex-col items-center">
-            <div
-              id="EachBar"
-              className="bg-[#B1F042] w-11 h-60 rounded-sm"
-            ></div>
-            <p className="mt-3">Fri</p>
-          </div>
-          <div className="text-white mr-5 ml-5 flex flex-col items-center">
-            <div
-              id="EachBar"
-              className="bg-[#B1F042] w-11 h-60 rounded-sm"
-            ></div>
-            <p className="mt-3">Sat</p>
-          </div>
-        </div>
-        <InfoColor/>
-        <CreateNewHabit/>
       </div>
-      <PcSearchBar />
-      <MobileNavbar />
     </div>
   );
 }

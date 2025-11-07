@@ -5,6 +5,11 @@ import LogIn from "../pages/login";
 import Landing from "../pages/Landing";
 import SearchPage from "../pages/SearchPage";
 import SignUp from "../pages/SignUp";
+import ProfilePage from "../pages/MyProfile";
+import Welcome from "../pages/welcome";
+import Habits from "../pages/habits";
+import EditProfile from "../pages/editprofile";
+
 import Welcome from "../pages/welcome";
 import Habits from "../pages/habits";
 import ProfileSearch from "../pages/ProfileSearch";
@@ -43,7 +48,7 @@ const router = createBrowserRouter(
         },
         {
             path: "/profile",
-            element: <ProfilePage />
+            Component: ProfilePage,
         },
         {
             path: "/profile/:username",
@@ -54,6 +59,9 @@ const router = createBrowserRouter(
             element: <Habits />
         },
         {
+            path: "/edit-profile",
+            Component: EditProfile,
+        }
             path: "/habitAdded",
             element: <HabitAdded/>
         },

@@ -21,7 +21,7 @@ export default function LikeButton({
   };
 
   return (
-    <div className="flex items-center z-1">
+    <div className="flex items-center">
       <div
         onClick={handleLike}
         className={`cursor-pointer transition-transform duration-300 ${
@@ -30,35 +30,29 @@ export default function LikeButton({
       >
         {liked ? (
           <FaHeart
-            size={30}
+            size={26}
             className="text-[#703EDD] hover:text-[#703EDD] transition-colors duration-300"
           />
         ) : (
           <FaRegHeart
-            size={30}
+            size={26}
             className="text-[#d1d1d1ff] hover:text-[#703EDD] transition-colors duration-300"
           />
         )}
       </div>
 
-      <p className="ml-2 text-[20px]">{likes}</p>
+      <p className="ml-2 text-[18px]">{likes}</p>
 
-      {/* Animacion like */}
+      {/* Animación de like */}
       <style>{`
         .pop {
           animation: pop 0.3s ease-in-out;
         }
 
         @keyframes pop {
-          0% {
-            transform: scale(1);
-          }
-          50% {
-            transform: scale(1.3);
-          }
-          100% {
-            transform: scale(1);
-          }
+          0% { transform: scale(1); }
+          50% { transform: scale(1.3); }
+          100% { transform: scale(1); }
         }
       `}</style>
     </div>
