@@ -20,29 +20,38 @@ function ProfilePage() {
   }, []);
 
   return (
-    <>
+      <>
       <PcSearchBar />
       <MobileNavbar />
 
-          <div className="flex justify-center mt-15">
-                    {user && <ProfileInfo user={user} />}
-                </div>
-                {/* Último post publicado */}
-                <div className="w-full flex justify-center ">
-                    <UserLastPost userId={userId} />
+      {/* info del perfil */}
+      <div className="flex justify-center mt-8 mb-0">
+        {user && <ProfileInfo user={user} />}
+      </div>
 
-                </div>
-      <div className="flex flex-col items-center mt-15 px-4 gap-10">
+      {/* contenedor principal responsive */}
+      <div className="flex flex-col lg:flex-row lg:justify-center lg:items-start gap-10 mt-2 px-6">
+
+        {/* columna: hábitos */}
         {user?.habits && (
-          <div>
-          <div className="flex flex-col gap-10 w-full max-w-md">
+          <div className="flex flex-col gap-6 lg:w-[35%] order-1 lg:order-2 mt-12">
+            <h2 className="text-[24px] font-semibold text-white">Friday ☀️</h2>
+            <p className="text-gray-400 mb-1">
+              Do 50% of your habits to secure today’s streak!
+            </p>
+            <hr className="border-[#2B2B2B] mb-2 w-100" />
+
             {user.habits.map((habit) => (
               <DayProgressGrid key={habit.id} habit={habit} />
             ))}
+
           </div>
-          </div>
-          
         )}
+
+        {/* columna */}
+        <div className="flex justify-center w-full lg:ml-120 lg:w-1/2 order-2 lg:order-1">
+          <UserLastPost userId={userId} />
+        </div>
       </div>
     </>
   );}

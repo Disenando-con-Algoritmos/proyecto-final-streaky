@@ -5,15 +5,18 @@ import CommentFeed from "../../desktop/CommentsPc";
 import CommentPopup from "./CommentsMobile";
 import LikeButton from "./LikeButton";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import miffyPost from "../../../assets/miffyPost.png";
 
 export default function CardPost({
     cardIndividuals,
+    showMiffy = false,
 }: {
     cardIndividuals: PostTypes;
+    showMiffy?: boolean;
 }) {
     const [showPopup, setShowPopup] = useState(false);
 
-    // Simulación de usuario logueado (esto luego vendrá de auth)
+    // usuario actual simulado
     const currentUserId = 5;
 
     const isOwnPost = cardIndividuals.id === currentUserId;
@@ -22,7 +25,14 @@ export default function CardPost({
         <div className="m-5 flex flex-col justify-center items-center relative">
             <div className="bg-[#242424] text-[#F9FAFB] p-5 rounded-xl 
         max-w-md w-full shadow-md relative">
-                {/* Header con imagen y tres puntos */}
+                {showMiffy && (
+                    <img
+                        src={miffyPost}
+                        className="absolute -top-22.5 right-10 w-32 
+                        pointer-events-none select-none"
+                    />
+                )}
+                {/* imagen + info perfil */}
                 <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
                         <img
@@ -37,7 +47,7 @@ export default function CardPost({
                         </div>
                     </div>
 
-                    {/* Tres puntos solo si el post es del usuario actual */}
+                    {/* icono de 3 puntos solo si el post es del usuario actual */}
                     {isOwnPost && (
                         <div className="relative">
                             <button
@@ -75,17 +85,17 @@ export default function CardPost({
                     id="btn-container"
                     className="flex items-center justify-between w-full mt-4"
                 >
-                    {/* Grupo de botones izquierda */}
-                    <div className="flex items-center gap-4">
+                    {/* botones like y comentarios */}
+                    <div className="flex items-center gap-20">
                         <LikeButton cardIndividuals={cardIndividuals} />
 
-                        {/* Comentarios (solo visible en mobile) */}
-                        <div className="block md:hidden">
+                        {/* comentarios (solo visible en mobile) */}
+                        <div className="block md:hidden" >
                             <CommentPopup cardIndividuals={cardIndividuals} />
                         </div>
                     </div>
 
-                    {/* Categoría a la derecha */}
+                    {/* categoría */}
                     <div className="flex items-center justify-end">
                         <CategoryTag cardIndividuals={cardIndividuals} />
                     </div>

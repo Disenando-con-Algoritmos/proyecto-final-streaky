@@ -13,7 +13,7 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
   );
   const [isOpen, setIsOpen] = useState(false);
 
-  // ✅ Acción: marca o desmarca el último día
+  // acción: marca o desmarca el último día
   const handleCheck = () => {
     setProgress((prev) => {
       const updated = [...prev];
@@ -24,7 +24,7 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
 
   return (
     <div
-      className="bg-[#1B1B1B] rounded-2xl p-5 mb-5 w-105 shadow-md 
+      className="bg-[#1B1B1B] rounded-2xl p-5 mb-5 w-105 
     transition-all duration-300"
     >
       {/* Header del hábito */}
@@ -82,8 +82,8 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
               }`}
             >
               <FaCheck
-                className={`text-lg ${
-                  progress[27] ? "text-[#4B4B4B]" : "text-[#000000]"
+                className={`text-[25px] ${
+                  progress[27] ? "text-[#4B4B4B]" : "text-[#1C1B1F]"
                 }`}
               />
             </button>
@@ -109,7 +109,7 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
             ))}
           </div>
 
-          {/* ✅ Botón que marca el último día */}
+          {/* botón que marca el último día */}
 
           <div
             className="w-28 h-8 bg-[#EF3131] mt-5 flex 
