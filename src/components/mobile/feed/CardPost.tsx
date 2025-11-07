@@ -21,7 +21,7 @@ export default function CardPost({
     const isOwnPost = cardIndividuals.id === currentUserId;
 
     return (
-        <div className="m-5 flex flex-col justify-center items-center relative">
+        <div className="m-5 flex flex-col justify-center items-center">
             <div className="bg-[#242424] text-[#F9FAFB] p-5 rounded-xl 
         max-w-md w-full shadow-md relative">
                 {showMiffy && (
