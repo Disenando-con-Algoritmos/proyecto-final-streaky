@@ -16,10 +16,8 @@ export default function CardPost({
     showMiffy?: boolean;
 }) {
     const [showPopup, setShowPopup] = useState(false);
-
-    // usuario actual simulado
+    const nav = useNavigate();
     const currentUserId = 5;
-
     const isOwnPost = cardIndividuals.id === currentUserId;
 
     return (
@@ -35,7 +33,9 @@ export default function CardPost({
                 )}
                 {/* imagen + info perfil */}
                 <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-3">
+                    <div
+                    onClick={() => nav(`/profile/${cardIndividuals.username}`)} 
+                    className="flex items-center gap-3 hover:opacity-80 cursor-pointer">
                         <img
                             src={cardIndividuals.userImage}
                             className="w-12 h-12 rounded-full"
