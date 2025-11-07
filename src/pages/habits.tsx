@@ -92,7 +92,7 @@ function Habits() {
             <p className="text-2xl md:text-3xl font-medium">In Progress</p>
           <div className="">
             <img className="w-20 absolute ml-54 bottom-[38px] 
-            md:w-40 md:ml-100 md:bottom-[-233px]" src={miffyPost}></img>
+            md:w-40 md:ml-100 md:bottom-[-84px]" src={miffyPost}></img>
           </div>
           </div>
           <div className="ml-0">
