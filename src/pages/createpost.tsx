@@ -99,7 +99,7 @@ export default function CreatePost() {
                   id="file-upload"
                   className="hidden"
                   accept="image/*"
-                  onChange={handleImageUpload} // ✅ aquí sí funciona
+                  onChange={handleImageUpload} 
                 />
                 <label
                   htmlFor="file-upload"
@@ -198,7 +198,7 @@ export default function CreatePost() {
                 id="file-upload"
                 className="hidden"
                 accept="image/*"
-                onChange={handleImageUpload} // ✅ ahora funciona igual que en PC
+                onChange={handleImageUpload} 
               />
               <label
                 htmlFor="file-upload"
