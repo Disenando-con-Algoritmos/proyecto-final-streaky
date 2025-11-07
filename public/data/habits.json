@@ -12,7 +12,7 @@
         "id": 1,
         "title": "Early morning run",
         "category": "🏃‍♀️ Sport",
-        "color": "#F87171",
+        "color": "#B1F042",
         "icon": "💪",
         "progress": {
           "monday": [1, 0, 1, 1],
@@ -28,7 +28,7 @@
         "id": 2,
         "title": "Coding challenges",
         "category": "📚 Study",
-        "color": "#60A5FA",
+        "color": "#703EDD",
         "icon": "👾",
         "progress": {
           "monday": [1, 1, 0, 0],
@@ -55,7 +55,7 @@
         "id": 1,
         "title": "Meal prep Sundays",
         "category": "🥗 Food",
-        "color": "#34D399",
+        "color": "#B1F042",
         "icon": "🥗",
         "progress": {
           "monday": [0, 1, 0, 1],
@@ -71,7 +71,7 @@
         "id": 2,
         "title": "Evening meditation",
         "category": "❤️ Health",
-        "color": "#FB7185",
+        "color": "#703EDD",
         "icon": "🧘‍♀️",
         "progress": {
           "monday": [1, 0, 0, 1],
@@ -98,7 +98,7 @@
         "id": 1,
         "title": "Stretch before runs",
         "category": "🏃‍♀️ Sport",
-        "color": "#F87171",
+        "color": "#B1F042",
         "icon": "🤸‍♂️",
         "progress": {
           "monday": [1, 0, 1, 0],
@@ -114,7 +114,7 @@
         "id": 2,
         "title": "Weekly meal plan",
         "category": "🥗 Food",
-        "color": "#34D399",
+        "color": "#703EDD",
         "icon": "🍱",
         "progress": {
           "monday": [1, 1, 1, 0],
@@ -141,7 +141,7 @@
         "id": 1,
         "title": "Yoga mornings",
         "category": "❤️ Health",
-        "color": "#FB7185",
+        "color": "#B1F042",
         "icon": "🧘‍♀️",
         "progress": {
           "monday": [1, 0, 1, 0],
@@ -157,7 +157,7 @@
         "id": 2,
         "title": "Social brunch",
         "category": "🤝 Social",
-        "color": "#FBBF24",
+        "color": "#703EDD",
         "icon": "🍳",
         "progress": {
           "monday": [1, 1, 1, 0],
@@ -184,7 +184,7 @@
         "id": 1,
         "title": "Daily reading",
         "category": "📚 Study",
-        "color": "#60A5FA",
+        "color": "#B1F042",
         "icon": "📖",
         "progress": {
           "monday": [1, 0, 1, 0],
@@ -200,7 +200,7 @@
         "id": 2,
         "title": "Saving tracker",
         "category": "💵 Money",
-        "color": "#FACC15",
+        "color": "#703EDD",
         "icon": "💰",
         "progress": {
           "monday": [1, 1, 1, 0],
@@ -227,7 +227,7 @@
         "id": 1,
         "title": "Evening gaming",
         "category": "🕹️ Hobbies",
-        "color": "#38BDF8",
+        "color": "#B1F042",
         "icon": "🎮",
         "progress": {
           "monday": [1, 1, 0, 1],
@@ -243,7 +243,7 @@
         "id": 2,
         "title": "Weekly reports",
         "category": "💼 Work",
-        "color": "#A78BFA",
+        "color": "#703EDD",
         "icon": "🗂️",
         "progress": {
           "monday": [1, 0, 1, 1],
@@ -270,7 +270,7 @@
         "id": 1,
         "title": "Café study session",
         "category": "📚 Study",
-        "color": "#60A5FA",
+        "color": "#B1F042",
         "icon": "☕",
         "progress": {
           "monday": [1, 0, 1, 1],
@@ -286,7 +286,7 @@
         "id": 2,
         "title": "Home cleaning routine",
         "category": "🏡 Home",
-        "color": "#4ADE80",
+        "color": "#703EDD",
         "icon": "🧹",
         "progress": {
           "monday": [1, 1, 1, 0],

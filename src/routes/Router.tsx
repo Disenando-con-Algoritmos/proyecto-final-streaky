@@ -1,13 +1,19 @@
 import { createBrowserRouter } from "react-router";
 import Feed from "../pages/feed";
-import CreatePost from "../pages/createpost";
+
 import LogIn from "../pages/login";
 import Landing from "../pages/Landing";
 import SearchPage from "../pages/SearchPage";
 import SignUp from "../pages/SignUp";
-import ProfilePage from "../pages/myprofile";
+import ProfilePage from "../pages/MyProfile";
 import Welcome from "../pages/welcome";
 import SelectCategory from "../components/mobile/create-post/SelectCategory";
+import Habits from "../pages/habits";
+import ProfileSearch from "../pages/ProfileSearch";
+import HabitAdded from "../pages/HabitSucces";
+import EditProfile from "../pages/editprofile";
+
+
 
 const router = createBrowserRouter(
     [
@@ -31,10 +37,7 @@ const router = createBrowserRouter(
             path: "/feed",
             Component: Feed,
         },
-        {
-            path: "/createPost",
-            element: <CreatePost/>
-        },
+
 
                 {
             path: "/select",
@@ -47,7 +50,23 @@ const router = createBrowserRouter(
         },
         {
             path: "/profile",
-            element: <ProfilePage />
+            Component: ProfilePage,
+        },
+        {
+            path: "/profile/:username",
+            element: <ProfileSearch />,
+        },
+        {
+            path: "/habits",
+            element: <Habits />
+        },
+        {
+            path: "/edit-profile",
+            Component: EditProfile,
+        },
+        {
+            path: "/habitAdded",
+            element: <HabitAdded/>
         },
     ],
 );
