@@ -5,10 +5,13 @@ import ProfileInfo from "../components/mobile/profile/ProfileInfo";
 import DayProgressGrid from "../components/mobile/profile/HabitInteractive";
 import type { UserProfile } from "../types/UserProfileType";
 import UserLastPost from "../components/mobile/profile/UserLastPost";
+import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
+import { useNavigate } from "react-router";
 
 function ProfilePage() {
   const [user, setUser] = useState<UserProfile | null>(null);
   const userId = 5;
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("/data/habits.json")
@@ -20,7 +23,7 @@ function ProfilePage() {
   }, []);
 
   return (
-      <>
+    <>
       <PcSearchBar />
       <MobileNavbar />
 
@@ -34,17 +37,28 @@ function ProfilePage() {
 
         {/* columna: hábitos */}
         {user?.habits && (
-          <div className="flex flex-col gap-6 lg:w-[35%] order-1 lg:order-2 mt-12">
-            <h2 className="text-[24px] font-semibold text-white">Friday ☀️</h2>
-            <p className="text-gray-400 mb-1">
+          <div className="
+  flex flex-col gap-6 lg:w-[35%] order-1 lg:order-2 mt-6 lg:mt-12
+  w-full px-5 max-w-md mx-auto       // <-- añade esto para mobile
+">
+            <h2 className="
+            text-[30px] lg:text-[28px] font-semibold text-white
+            text-left w-full">
+              Friday ☀️</h2>
+            <p className="text-[18px] text-gray-400 mb-1">
               Do 50% of your habits to secure today’s streak!
             </p>
-            <hr className="border-[#2B2B2B] mb-2 w-100" />
+            <hr className="border-[#2B2B2B] mb-2 w-80 lg:w-100" />
 
             {user.habits.map((habit) => (
               <DayProgressGrid key={habit.id} habit={habit} />
             ))}
 
+            <div className="flex justify-center">
+            <GlobalBtn text="My Habits" type="button" 
+              onClick={() => navigate("/welcome")}
+            />
+            </div>
           </div>
         )}
 
@@ -54,6 +68,7 @@ function ProfilePage() {
         </div>
       </div>
     </>
-  );}
+  );
+}
 
 export default ProfilePage;

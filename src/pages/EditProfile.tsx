@@ -66,7 +66,7 @@ export default function EditProfile() {
                         <button
                             type="button"
                             onClick={updateImgInput}
-                            className="absolute bottom-0 right-0 
+                            className="absolute bottom-0 right-0 cursor-pointer
                             bg-[#353535] rounded-full p-2 hover:bg-[#444]"
                             title="Editar imagen"
                         >

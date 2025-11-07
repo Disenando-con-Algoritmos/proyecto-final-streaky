@@ -64,7 +64,11 @@ export default function ProfileInfo({ user }: UserProps) {
                         <FaRegEdit />
                     </BtnEditProfile>
 
-                    <BtnLogOut text="Log Out">
+                    <BtnLogOut 
+                        text="Log Out"
+                        type="button"
+                        onClick={() => navigate("/login")}
+                    >
                         <LuLogOut />
                     </BtnLogOut>
                 </div>
