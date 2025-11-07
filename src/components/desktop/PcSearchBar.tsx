@@ -87,8 +87,6 @@ function PcSearchBar() {
                 placeholder="Search..."
               />
             </div>
-
-            {/* 🔍 Aquí agregamos el mensaje de “No users found” */}
             <div className="mt-4 max-h-130 overflow-y-auto pr-2 
             scrollbar-thin scrollbar-thumb-gray-600">
               {Search !== "" && (

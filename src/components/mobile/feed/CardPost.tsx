@@ -3,16 +3,23 @@ import CategoryTag from "../create-post/CategoryTag";
 import CommentFeed from "../../desktop/CommentsPc";
 import CommentPopup from "./CommentsMobile";
 import LikeButton from "./LikeButton";
+import { useNavigate } from "react-router";
 
 export default function CardPost({
     cardIndividuals,
 }: {
     cardIndividuals: PostTypes;
 }) {
+
+    const nav = useNavigate();
+
     return (
         <div className="m-5 flex flex-col justify-center items-center">
             <div className="bg-[#242424] text-[#F9FAFB] p-5 rounded-xl max-w-md w-full">
-                <div className="flex items-center gap-3 mb-3">
+                <div 
+                    onClick={() => nav(`/profile/${cardIndividuals.username}`)}
+                    className="flex items-center gap-3 mb-3 bg-transparent pb-3 cursor-pointer 
+                        hover:opacity-80 transition">
                     <img
                         src={cardIndividuals.userImage}
                         className="w-12 h-12 rounded-full"

@@ -65,7 +65,7 @@ export default function ProfileSearch() {
             <MobileNavbar />
 
             <div
-                className="min-h-screen bg-[#171717] text-[#F9FAFB] font-sans 
+                className="min-h-screen bg-[#171717] text-[#F9FAFB] 
             flex flex-col items-center py-17
             lg:grid lg:grid-cols-[200px_1fr_390px] l
             lg:px-13 lg:py-18"
