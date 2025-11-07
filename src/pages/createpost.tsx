@@ -164,6 +164,7 @@ export default function CreatePost() {
               className="w-24"
             />
             <img
+              onClick={() => navigate("/profile")}
               src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
               alt="Profile"
               className="w-12 h-12 rounded-full"
