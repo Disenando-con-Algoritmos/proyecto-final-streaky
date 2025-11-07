@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import Feed from "../pages/feed";
-import CreatePost from "../pages/createpost";
+
 import LogIn from "../pages/login";
 import Landing from "../pages/Landing";
 import SearchPage from "../pages/SearchPage";
@@ -34,10 +34,6 @@ const router = createBrowserRouter(
         {
             path: "/feed",
             Component: Feed,
-        },
-        {
-            path: "/createPost",
-            element: <CreatePost />
         },
         {
             path: "/userSearch",
