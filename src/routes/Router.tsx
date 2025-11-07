@@ -7,6 +7,8 @@ import SearchPage from "../pages/SearchPage";
 import SignUp from "../pages/SignUp";
 import ProfilePage from "../pages/myprofile";
 import Welcome from "../pages/welcome";
+import Habits from "../pages/habits";
+import ProfileSearch from "../pages/ProfileSearch";
 
 const router = createBrowserRouter(
     [
@@ -32,7 +34,7 @@ const router = createBrowserRouter(
         },
         {
             path: "/createPost",
-            element: <CreatePost/>
+            element: <CreatePost />
         },
         {
             path: "/userSearch",
@@ -41,6 +43,14 @@ const router = createBrowserRouter(
         {
             path: "/profile",
             element: <ProfilePage />
+        },
+        {
+            path: "/profile/:username",
+            element: <ProfileSearch />,
+        },
+        {
+            path: "/habits",
+            element: <Habits />
         },
     ],
 );

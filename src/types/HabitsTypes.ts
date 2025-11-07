@@ -1,6 +1,11 @@
 export type User = {
   id: number;
   username: string;
+  userImage: string;
+  userDescription: string;
+  followers: number;
+  following: number;
+  streak: number;
   habits: Habit[];
 }
 
