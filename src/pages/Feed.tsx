@@ -11,7 +11,8 @@ function Feed() {
       <PcSearchBar></PcSearchBar>
       <MobileNavbar />
       {/* header de logo mas profile */}
-      <div className="flex justify-center items-center mt-10 md:mt-10 relative md:mb-10">
+      <div id="feed-container"
+       className="flex justify-center items-center mt-10 md:mt-10 relative md:mb-10">
         <div
           className="flex justify-between items-center px-5
                 w-full max-w-md "
