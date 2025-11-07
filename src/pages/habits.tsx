@@ -4,10 +4,25 @@ import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 import InfoColor from "../components/mobile/my-habits/AboutStats";
 import CreateNewHabit from "../components/mobile/my-habits/CreateNewHabit";
 import StatsHabits from "../components/mobile/my-habits/Stat";
+import { useEffect, useState } from "react";
+import type { UserProfile } from "../types/UserProfileType";
+import DayProgressGridStats from "../components/mobile/profile/HabitInteractiveStats";
+import miffyPost from "../assets/miffyPost.png";
 
 function Habits() {
   const nav = useNavigate();
   const NavigateProfile = () => nav("/profile");
+  const [user, setUser] = useState<UserProfile | null>(null);
+  const userId = 5;
+
+  useEffect(() => {
+      fetch("/data/habits.json")
+        .then((res) => res.json())
+        .then((data: UserProfile[]) => {
+          const foundUser = data.find((u) => u.id === userId);
+          setUser(foundUser || null);
+        });
+    }, []);
 
   return (
     <div className="min-h-screen text-white">
@@ -69,15 +84,24 @@ function Habits() {
         </p>
 
         {/* Contenedor central */}
-        <div className="w-full max-w-md md:max-w-4xl mx-auto space-y-6">
+        <div className="w-full max-w-md md:max-w-4xl mx-auto space-y-6 flex flex-col items-center">
           <StatsHabits />
           <InfoColor />
           <CreateNewHabit />
-
-          <div className="mt-10 md:mt-12 md:ml-28 ml-4">
+          <div className="mt-10 md:mt-12 md:mr-131 mr-60 ml-4">
             <p className="text-2xl md:text-3xl font-medium">In Progress</p>
+          <div className="">
+            <img className="w-20 absolute ml-54 bottom-[38px] 
+            md:w-40 md:ml-100 md:bottom-[-233px]" src={miffyPost}></img>
           </div>
-          <div className="h-100"></div>
+          </div>
+          <div className="ml-0">
+          {user?.habits.map((habit) => (
+              <DayProgressGridStats key={habit.id} habit={habit} />
+            ))}
+          </div>
+
+          <div className="h-10"></div>
         </div>
       </div>
     </div>
