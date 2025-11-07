@@ -11,9 +11,10 @@ import Habits from "../pages/habits";
 import ProfileSearch from "../pages/ProfileSearch";
 import HabitAdded from "../pages/HabitSucces";
 import EditProfile from "../pages/EditProfile";
-import CreatePost from "../pages/Createpost";
+
 import LogIn from "../pages/Login";
 import Feed from "../pages/Feed";
+import CreatePost from "../pages/CreatePost";
 
 
 
