@@ -6,6 +6,7 @@ import CommentPopup from "./CommentsMobile";
 import LikeButton from "./LikeButton";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import miffyPost from "../../../assets/miffyPost.png";
+import DeletePost from "../profile/DeletePost";
 
 export default function CardPost({
     cardIndividuals,
@@ -28,7 +29,9 @@ export default function CardPost({
                 {showMiffy && (
                     <img
                         src={miffyPost}
-                        className="absolute -top-22.5 right-10 w-32 
+                        className="absolute -top-21 right-5 w-30
+                        sm:-top-16 sm:right-10 sm:w-24
+                        md:-top-24 md:w-35
                         pointer-events-none select-none"
                     />
                 )}
@@ -48,30 +51,16 @@ export default function CardPost({
                     </div>
 
                     {/* icono de 3 puntos solo si el post es del usuario actual */}
-                    {isOwnPost && (
-                        <div className="relative">
-                            <button
-                                onClick={() => setShowPopup(!showPopup)}
-                                className="text-[#A1A1A1] hover:text-white transition"
-                            >
-                                <BsThreeDotsVertical size={22} />
-                            </button>
-
-                            {/* Popup */}
-                            {showPopup && (
-                                <div className="absolute right-0 mt-2 w-36 bg-[#1C1C1C] border 
-                border-[#333] rounded-xl shadow-lg z-50">
-                                    <button
-                                        onClick={() => alert('Eliminar post (simulado)')}
-                                        className="w-full text-left px-4 py-2 text-red-500 
-                                        hover:bg-[#2C2C2C] rounded-xl transition"
-                                    >
-                                        Eliminar post
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    )}
+                        {isOwnPost && (
+                            <div className="relative">
+                                <button
+                                    onClick={() => setShowPopup(true)}
+                                    className="relative cursor-pointer"
+                                >
+                                    <BsThreeDotsVertical size={22} />
+                                </button>
+                            </div>
+                        )}
                 </div>
 
                 {/* imagen del post */}
@@ -124,6 +113,15 @@ export default function CardPost({
                     </span>
                 </p>
             </div>
+            {/* popup modal fuera del contenedor para que no se vea afectado */}
+            <DeletePost
+                open={showPopup}
+                onClose={() => setShowPopup(false)}
+                onDelete={() => {
+                    alert("Eliminar post (simulado)");
+                    setShowPopup(false);
+                }}
+            />
         </div>
     );
 }

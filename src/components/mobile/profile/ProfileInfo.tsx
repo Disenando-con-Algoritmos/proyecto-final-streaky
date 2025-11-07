@@ -50,7 +50,7 @@ export default function ProfileInfo({ user }: UserProps) {
                         </div>
 
                         {/* descripción */}
-                        <p className="mt-1 text-[15px] lg:text-[18px] text-gray-400">
+                        <p className="mt-1 text-[15px] lg:text-[18px] text- gray-400">
                             {user.userDescription}
                         </p>
 

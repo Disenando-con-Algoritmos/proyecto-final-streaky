@@ -8,6 +8,8 @@ type InputProps = {
     placeholder: string
     required?: boolean
     children?: React.ReactNode
+    value: string
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function InputProfile({
@@ -16,6 +18,8 @@ export default function InputProfile({
     placeholder,
     required = true,
     children,
+    value,
+    onChange,
 }: InputProps) {
 
     const [showPassword, setShowPassword] = useState(false);
@@ -37,6 +41,8 @@ export default function InputProfile({
                     type={inputType}
                     placeholder={placeholder}
                     required={required}
+                    value={value}
+                    onChange={onChange}
                     className={`w-full bg-transparent text-white text-md placeholder-[#5D5D5D] py-2
                     outline-none transition-colors ${children ? "pr-8" : "pr-0"} pr-6`}
                 />
