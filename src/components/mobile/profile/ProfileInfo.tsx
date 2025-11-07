@@ -5,6 +5,7 @@ import ProfileStreak from "./ProfileStreak";
 import { FaRegEdit } from "react-icons/fa";
 import { LuLogOut } from "react-icons/lu";
 import BtnLogOut from "./BtnLogOut";
+import ProfileStats from "./ProfileStats";
 
 type UserProps = {
     user: UserProfile;
@@ -15,91 +16,77 @@ export default function ProfileInfo({ user }: UserProps) {
 
     return (
         <div
-            className="flex flex-col items-center justify-center w-full px-6 py-8
-        lg:flex-row lg:justify-between lg:items-center
-        lg:ml-[530px] lg:pr-10 lg:max-w-[calc(100%-260px)]"
+            className=" bg-[#171717] text-[#F9FAFB] 
+                md:flex items-center py-13"
         >
-            {/* info perfil, foto + name */}
-            <div>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center 
-                lg:justify-start gap-4 sm:gap-6">
-                    {/* Imagen */}
-                    <img
-                        src={user.userImage}
-                        className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 
-                        lg:h-28 rounded-full object-cover"
-                    />
 
-                    {/* nombre, botón y descripción */}
-                    <div className="flex flex-col justify-center text-center sm:text-left
-                    sm:justify-center sm:items-start">
-                        {/* nombre + botón */}
-                        <div className="flex items-center gap-3">
-                            <h1 className="text-2xl lg:text-4xl font-bold">{user.username}</h1>
+            {/* perfil y post */}
+            <div className="flex flex-col lg:flex-row w-full lg:items-start lg:justify-center">
+                {/* perfil */}
+                <div
+                    className="flex flex-col items-center lg:flex-row 
+                    lg:flex-wrap  lg:ml-40"
+                >
+                    <div className="flex items-center md:ml-90 gap-5 ">
+                        <img
+                            src={user.userImage}
+                            alt={user.username}
+                            className="w-32 h-32 rounded-full object-cover"
+                        />
+                        <div className="flex flex-col mt-5 gap-3 mb-8">
+                            <h2 className="text-[35px] font-bold">{user.username}</h2>
+                            <p className="text-[#B3B3B3] text-[16px] lg:w-50">
+                                {user.userDescription}
+                            </p>
+                        </div>
+                    </div>
 
-                            {/* botón solo visible en desktop */}
-                            <div className="hidden lg:block">
-                                <BtnEditProfile
-                                    text="Edit Profile"
-                                    type="button"
-                                    onClick={() => navigate("/edit-profile")}
-                                >
-                                    <FaRegEdit />
-                                </BtnEditProfile>
-                            </div>
+                    {/* Botones */}
+                    <div className="mt-3 lg:mt-10 mr-1 flex flex-col sm:flex-row gap-3 mb-18">
+                        {/* Mobile: ambos botones */}
+                        <div className="flex items-center sm:items-center lg:hidden gap-5">
+                            <BtnEditProfile
+                                text="Edit Profile"
+                                type="button"
+                                onClick={() => navigate("/edit-profile")}
+                            >
+                                <FaRegEdit />
+                            </BtnEditProfile>
+
+                            <BtnLogOut
+                                text="Log Out"
+                                type="button"
+                                onClick={() => navigate("/login")}
+                            >
+                                <LuLogOut />
+                            </BtnLogOut>
                         </div>
 
-                        {/* descripción */}
-                        <p className="mt-1 text-[15px] lg:text-[18px] text-gray-400">
-                            {user.userDescription}
-                        </p>
+                        {/* Desktop: solo botón Edit Profile */}
+                        <div className="hidden lg:block">
+                            <BtnEditProfile
+                                text="Edit Profile"
+                                type="button"
+                                onClick={() => navigate("/edit-profile")}
+                            >
+                                <FaRegEdit />
+                            </BtnEditProfile>
+                        </div>
+                    </div>
 
-                {/* botones visibles en mobile */}
-                <div className="flex items-center gap-13 mt-3 lg:hidden">
-                    <BtnEditProfile
-                        text="Edit Profile"
-                        type="button"
-                        onClick={() => navigate("/edit-profile")}
+                    {/* Estadísticas */}
+                    <div
+                        className="w-full mb-8 mt-8 
+                            
+                            lg:justify-start lg:ml-70 lg:mb-20 lg:mt-0"
                     >
-                        <FaRegEdit />
-                    </BtnEditProfile>
-
-                    <BtnLogOut text="Log Out">
-                        <LuLogOut />
-                    </BtnLogOut>
-                </div>
-                
-                <div className="flex justify-center gap-16 mt-4">
-                    <div className="text-center">
-                        <p className="text-[18px] lg:text-[22px] font-semibold">
-                            {user.habits.length}
-                        </p>
-                        <p className="text-gray-400 text-sm lg:text-md">Habits</p>
-                    </div>
-
-                    <div className="text-center">
-                        <p className="text-[18px] lg:text-[22px] font-semibold">
-                            {user.followers}
-                        </p>
-                        <p className="text-gray-400 text-sm lg:text-md">Followers</p>
-                    </div>
-
-                    <div className="text-center">
-                        <p className="text-[18px] lg:text-[22px] font-semibold">
-                            {user.following}
-                        </p>
-                        <p className="text-gray-400 text-sm lg:text-md">Following</p>
+                        <ProfileStats user={user} />
                     </div>
                 </div>
-                    </div>
-                </div>
-                
-
-
             </div>
 
             {/* racha del usuario */}
-            <div className="mt-6 lg:mt-0">
+            <div className="flex justify-center mt-6 md:mr-8 ">
                 <ProfileStreak streak={user.streak} />
             </div>
         </div>

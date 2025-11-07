@@ -12,7 +12,6 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
     allDays.map((val) => val > 0)
   );
   const [isOpen, setIsOpen] = useState(false);
-
   // acción: marca o desmarca el último día
   const handleCheck = () => {
     setProgress((prev) => {
@@ -24,28 +23,32 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
 
   return (
     <div
-      className="bg-[#1B1B1B] rounded-2xl p-5 mb-5 w-105 
-    transition-all duration-300"
+      className="
+    bg-[#1B1B1B] rounded-2xl p-4 lg:p-5 mb-5
+    w-80 lg:w-[420px]
+    transition-all duration-300
+    overflow-hidden
+  "
     >
       {/* Header del hábito */}
-      <div className="flex justify-between">
-        <div className="flex items-center gap-12">
+      <div className="flex justify-between items-center h-full">
+        <div className="flex items-center gap-5 lg:gap-12">
           <div className="flex items-center">
-            <div className="mr-3">
+            <div className="mr-2 lg:mr-3">
               <div
-                className="text-3xl flex items-center justify-center w-15 
-                h-15 rounded-4xl bg-[#4E4E4E]"
+                className="text-2xl lg:text-3xl flex items-center justify-center
+              w-12 h-12 lg:w-15 lg:h-15 rounded-4xl bg-[#4E4E4E]"
               >
-                <div className="mb-2">{habit.icon}</div>
+                <span className="mb-1 lg:mb-2">{habit.icon}</span>
               </div>
             </div>
-
-            <div className="flex flex-col">
-              <h3 className="text-white font-semibold text-lg">
+            <div className="flex flex-col justify-center">
+              <h3 className="text-white font-semibold text-base lg:text-lg mb-1">
                 {habit.title}
               </h3>
               <div className="flex items-center gap-3 mt-1">
-                {/* Botón que abre/cierra el calendario */}
+
+                {/* botón que abre/cierra el calendario */}
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   className="text-xs font-medium px-4 py-[7px] rounded-full transition-all 
@@ -57,15 +60,26 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
                 >
                   Progress
                 </button>
-
-                <div className="bg-[#4E4E4E] w-[2px] h-5"></div>
-
+                <div className="bg-[#4E4E4E] w-[1px] h-5"></div>
                 <span
-                  className="text-xs border-1 border-white 
-                text-gray-300 px-3 py-[7px] rounded-full"
+                  className="
+    inline-flex items-center
+    bg-transparent
+    border-1 border-white
+    text-gray-300
+    rounded-full
+    px-2 lg:px-3 py-1 lg:py-3
+    lg:h-[30px]
+    text-[10px] lg:text-xs
+    font-normal
+    transition-all"
                 >
-                  {habit.category}
+                  {/* separar emoji */}
+                  <span className="mr-2 lg:text-xl">{habit.category.split(' ')[0]}</span>
+                  {/* separar texto */}
+                  <span>{habit.category.split(' ').slice(1).join(' ')}</span>
                 </span>
+
               </div>
             </div>
           </div>
@@ -73,7 +87,7 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
           <div>
             <button
               onClick={handleCheck}
-              className={`w-15 h-15 rounded-full flex items-center 
+              className={`w-11 h-11 lg:w-15 lg:h-15 rounded-full flex items-center 
                 justify-center transition-all duration-300 cursor-pointer
               ${
                 progress[27]
@@ -82,8 +96,8 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
               }`}
             >
               <FaCheck
-                className={`text-[25px] ${
-                  progress[27] ? "text-[#4B4B4B]" : "text-[#1C1B1F]"
+                className={`text-lg ${
+                  progress[27] ? "text-[#4B4B4B]" : "text-[#000000]"
                 }`}
               />
             </button>
@@ -109,7 +123,7 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
             ))}
           </div>
 
-          {/* botón que marca el último día */}
+          {/* ✅ Botón que marca el último día */}
 
           <div
             className="w-28 h-8 bg-[#EF3131] mt-5 flex 

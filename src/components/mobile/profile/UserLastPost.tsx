@@ -44,7 +44,8 @@ export default function UserLastPost({ userId }: LastUserPostProps) {
             {/* content título + last post */}
             <div className="w-full max-w-lg mt-10">
                 <div className="mb-16">
-                    <h2 className="text-white text-[28px] font-semibold mb-4 text-left ml-8">
+                    <h2 className="text-white text-[25px] sm:text-[28px] 
+                    font-semibold mb-4 text-left ml-8">
                         My Last Post
                     </h2>
                 </div>
