@@ -54,11 +54,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/profile/:username",
-    element: <ProfileSearch />,
+    Component: ProfileSearch,
   },
   {
     path: "/habits",
-    element: <Habits />,
+    Component: Habits,
   },
   {
     path: "/edit-profile",
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/habitAdded",
-    element: <HabitAdded />,
+    Component: HabitAdded,
   },
 ]);
 
