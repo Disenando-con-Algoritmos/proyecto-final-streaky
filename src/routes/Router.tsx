@@ -5,11 +5,11 @@ import LogIn from "../pages/login";
 import Landing from "../pages/Landing";
 import SearchPage from "../pages/SearchPage";
 import SignUp from "../pages/SignUp";
-import ProfilePage from "../pages/myprofile";
 import Welcome from "../pages/welcome";
 import Habits from "../pages/habits";
 import ProfileSearch from "../pages/ProfileSearch";
 import HabitAdded from "../pages/HabitSucces";
+import ProfilePage from "../pages/MyProfile";
 
 const router = createBrowserRouter(
     [
