@@ -99,7 +99,7 @@ export default function SelectCategory() {
         <img
           src={catSelect}
           alt="Cat Select"
-          className="absolute bottom-0 left-[70%] w-[300px] pointer-events-none"
+          className="absolute bottom-0 left-[57%] w-[300px] pointer-events-none z-20"
         />
 
         <img 
