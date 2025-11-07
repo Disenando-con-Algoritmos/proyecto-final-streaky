@@ -103,9 +103,8 @@ export default function CreatePost() {
                 />
                 <label
                   htmlFor="file-upload"
-                  className={`${
-                    imagePreview ? "bg-[#3C1A86]" : "bg-[#703EDD]"
-                  } hover:bg-[#5c32b6]
+                  className={`${imagePreview ? "bg-[#3C1A86]" : "bg-[#703EDD]"
+                    } hover:bg-[#5c32b6]
       duration-300 p-3 rounded-[50px] w-[200px] text-[#ffffff]
       font-medium text-lg shadow-md hover:shadow-lg hover:scale-105 transition
       text-center cursor-pointer inline-block`}
@@ -130,9 +129,9 @@ export default function CreatePost() {
               >
                 Choose Category
               </button>
-              <CategoryPopup 
-                isOpen={showCategoryPopup} 
-                onClose={() => setShowCategoryPopup(false)} 
+              <CategoryPopup
+                isOpen={showCategoryPopup}
+                onClose={() => setShowCategoryPopup(false)}
               />
             </div>
 
@@ -184,7 +183,9 @@ export default function CreatePost() {
 
           <textarea
             placeholder="What’s your habit today? 🌟"
-            className="bg-[#1B1B1B] p-4 w-full h-[230px] rounded-xl mt-2"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            className="bg-[#1B1B1B] p-4 w-full h-[230px] rounded-xl"
           />
 
           <div
@@ -201,9 +202,8 @@ export default function CreatePost() {
               />
               <label
                 htmlFor="file-upload"
-                className={`${
-                  imagePreview ? "bg-[#3C1A86]" : "bg-[#703EDD]"
-                } hover:bg-[#5c32b6]
+                className={`${imagePreview ? "bg-[#3C1A86]" : "bg-[#703EDD]"
+                  } hover:bg-[#5c32b6]
       duration-300 p-3 rounded-[50px] w-[180px] text-[#ffffff]
       font-medium text-lg shadow-md hover:shadow-lg hover:scale-105 transition
       text-center cursor-pointer inline-block`}
@@ -220,9 +220,9 @@ export default function CreatePost() {
             >
               Choose Category
             </button>
-            <CategoryPopup 
-              isOpen={showCategoryPopup} 
-              onClose={() => setShowCategoryPopup(false)} 
+            <CategoryPopup
+              isOpen={showCategoryPopup}
+              onClose={() => setShowCategoryPopup(false)}
             />
           </div>
 
@@ -230,7 +230,7 @@ export default function CreatePost() {
             <GlobalBtn
               text="Publish Post"
               type="submit"
-              onClick={() => navigate("/profile")}
+              onClick={handlePublish}
             />
           </div>
         </div>
