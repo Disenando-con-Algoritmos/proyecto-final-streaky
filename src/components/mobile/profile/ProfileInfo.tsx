@@ -17,17 +17,17 @@ export default function ProfileInfo({ user }: UserProps) {
     return (
         <div
             className=" bg-[#171717] text-[#F9FAFB] 
-                flex flex-col items-center py-17"
+                md:flex items-center py-13"
         >
 
             {/* perfil y post */}
-            <div className="flex flex-col items-center lg:items-start w-full">
+            <div className="flex flex-col lg:flex-row w-full lg:items-start lg:justify-center">
                 {/* perfil */}
                 <div
-                    className="flex flex-col items-center lg:items-start lg:flex-row 
-      lg:flex-wrap lg:w-full  gap-y-4 lg:gap-y-0 lg:ml-40"
+                    className="flex flex-col items-center lg:flex-row 
+                    lg:flex-wrap  lg:ml-40"
                 >
-                    <div className="flex items-center gap-5 lg:w-auto">
+                    <div className="flex items-center md:ml-90 gap-5 ">
                         <img
                             src={user.userImage}
                             alt={user.username}
@@ -42,9 +42,9 @@ export default function ProfileInfo({ user }: UserProps) {
                     </div>
 
                     {/* Botones */}
-                    <div className="mt-3 lg:mt-10 mr-1 flex flex-col sm:flex-row gap-3">
+                    <div className="mt-3 lg:mt-10 mr-1 flex flex-col sm:flex-row gap-3 mb-18">
                         {/* Mobile: ambos botones */}
-                        <div className="flex items-center sm:items-center gap-7> lg:hidden gap-5">
+                        <div className="flex items-center sm:items-center lg:hidden gap-5">
                             <BtnEditProfile
                                 text="Edit Profile"
                                 type="button"
@@ -76,8 +76,9 @@ export default function ProfileInfo({ user }: UserProps) {
 
                     {/* Estadísticas */}
                     <div
-                        className="w-full flex justify-center mb-8 mt-8 
-        lg:justify-start lg:ml-35 lg:mb-20 lg:mt-0"
+                        className="w-full mb-8 mt-8 
+                            
+                            lg:justify-start lg:ml-70 lg:mb-20 lg:mt-0"
                     >
                         <ProfileStats user={user} />
                     </div>
@@ -85,7 +86,7 @@ export default function ProfileInfo({ user }: UserProps) {
             </div>
 
             {/* racha del usuario */}
-            <div className="mt-6 lg:mt-0">
+            <div className="flex justify-center mt-6 md:mr-8 ">
                 <ProfileStreak streak={user.streak} />
             </div>
         </div>
