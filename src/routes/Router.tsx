@@ -10,6 +10,11 @@ import Welcome from "../pages/welcome";
 import Habits from "../pages/habits";
 import EditProfile from "../pages/editprofile";
 
+import Welcome from "../pages/welcome";
+import Habits from "../pages/habits";
+import ProfileSearch from "../pages/ProfileSearch";
+import HabitAdded from "../pages/HabitSucces";
+import ProfilePage from "../pages/MyProfile";
 
 const router = createBrowserRouter(
     [
@@ -35,7 +40,7 @@ const router = createBrowserRouter(
         },
         {
             path: "/createPost",
-            element: <CreatePost/>
+            element: <CreatePost />
         },
         {
             path: "/userSearch",
@@ -46,6 +51,10 @@ const router = createBrowserRouter(
             Component: ProfilePage,
         },
         {
+            path: "/profile/:username",
+            element: <ProfileSearch />,
+        },
+        {
             path: "/habits",
             element: <Habits />
         },
@@ -53,6 +62,9 @@ const router = createBrowserRouter(
             path: "/edit-profile",
             Component: EditProfile,
         }
+            path: "/habitAdded",
+            element: <HabitAdded/>
+        },
     ],
 );
 

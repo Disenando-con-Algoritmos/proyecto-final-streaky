@@ -6,6 +6,7 @@ import CommentPopup from "./CommentsMobile";
 import LikeButton from "./LikeButton";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import miffyPost from "../../../assets/miffyPost.png";
+import { useNavigate } from "react-router";
 
 export default function CardPost({
     cardIndividuals,

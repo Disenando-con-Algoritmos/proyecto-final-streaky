@@ -54,7 +54,7 @@ function PcSearchBar() {
   const NavigateNavBarPcFeed = () => { nav("/feed"); };
   const NavigateNavBarPcLogin = () => { nav("/login"); };
   const isFeed = location.pathname === "/feed";
-  const isCreatePost = location .pathname === "/createPost";
+  const isCreatePost = location.pathname === "/createPost";
 
   return (
     <>
@@ -87,28 +87,42 @@ function PcSearchBar() {
                 placeholder="Search..."
               />
             </div>
-            <div className="mt-4 max-h-130 overflow-y-auto pr-2 scrollbar-thin 
-            scrollbar-thumb-gray-600">
-              {Search !== "" &&
-                Users.filter((user) =>
-                  user.username.toLocaleLowerCase().includes(Search)
-                ).map((UserIndividual) => (
-                  <div
-                    className="flex items-center mb-3 mt-3 p-2 rounded-4xl cursor-pointer"
-                    key={UserIndividual.id}
-                  >
-                    <img
-                      className="w-13 h-13 rounded-4xl"
-                      src={UserIndividual.userImage}
-                    />
-                    <div>
-                      <p className="text-white ml-2">{UserIndividual.username}</p>
-                      <p className="text-[#B3B3B3] ml-2 text-[12px]">
-                        {UserIndividual.userDescription}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+            <div className="mt-4 max-h-130 overflow-y-auto pr-2 
+            scrollbar-thin scrollbar-thumb-gray-600">
+              {Search !== "" && (
+                <>
+                  {Users.filter((user) =>
+                    user.username.toLowerCase().includes(Search.toLowerCase())
+                  ).length > 0 ? (
+                    Users.filter((user) =>
+                      user.username.toLowerCase().includes(Search.toLowerCase())
+                    ).map((UserIndividual) => (
+                      <div
+                        key={UserIndividual.id}
+                        onClick={() => nav(`/profile/${UserIndividual.username}`)}
+                        className="flex items-center gap-4 bg-transparent pb-3 cursor-pointer 
+                        hover:opacity-80 transition"
+                      >
+                        <img
+                          className="w-13 h-13 rounded-4xl"
+                          src={UserIndividual.userImage}
+                          alt={UserIndividual.username}
+                        />
+                        <div>
+                          <p className="text-white ml-2">{UserIndividual.username}</p>
+                          <p className="text-[#B3B3B3] ml-2 text-[12px]">
+                            {UserIndividual.userDescription}
+                          </p>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-gray-500 text-sm mt-4 text-center">
+                      No users found.
+                    </p>
+                  )}
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -131,17 +145,17 @@ function PcSearchBar() {
             onClick={NavigateNavBarPcFeed}
             className="flex items-center mt-10 mb-12 cursor-pointer group w-30"
           >
-            <TiHome className={`${isFeed ? 
-            `text-[#703EDD] text-4xl transition-colors 
+            <TiHome className={`${isFeed ?
+              `text-[#703EDD] text-4xl transition-colors 
             duration-300 group-hover:text-[#703EDD] absolute left-[35px]` :
 
-             `text-white text-4xl transition-colors 
+              `text-white text-4xl transition-colors 
             duration-300 group-hover:text-[#703EDD] absolute left-[35px]`}`} />
             <h2
-            className={`${isFeed ? `text-[20px] ml-11 font-medium text-[#703EDD] 
+              className={`${isFeed ? `text-[20px] ml-11 font-medium text-[#703EDD] 
                  transition-colors duration-300 group-hover:text-[#703EDD] 
-                 ${!ClickSearch ? "opacity-0" : "opacity-100"}` 
-              : `text-[20px] ml-11 font-medium text-white 
+                 ${!ClickSearch ? "opacity-0" : "opacity-100"}`
+                : `text-[20px] ml-11 font-medium text-white 
                  transition-colors duration-300 group-hover:text-[#703EDD] 
                  ${!ClickSearch ? "opacity-0" : "opacity-100"}`}`}
             >
@@ -169,17 +183,17 @@ function PcSearchBar() {
             onClick={NavigateNavBarPccreatepost}
             className="flex items-center mt-3 ml-[-10px] cursor-pointer group w-30"
           >
-            <FiPlus className={`${isCreatePost ? 
-            `text-[#703EDD] text-5xl transition-colors 
+            <FiPlus className={`${isCreatePost ?
+              `text-[#703EDD] text-5xl transition-colors 
             duration-300 group-hover:text-[#703EDD]` :
 
-             `text-white text-5xl transition-colors 
+              `text-white text-5xl transition-colors 
             duration-300 group-hover:text-[#703EDD]`}`} />
             <h2
               className={`${isCreatePost ? `text-[20px] ml-3 font-medium text-[#703EDD] 
                  transition-colors duration-300 group-hover:text-[#703EDD] 
-                 ${!ClickSearch ? "opacity-0" : "opacity-100"}` 
-              : `text-[20px] ml-3 font-medium text-white 
+                 ${!ClickSearch ? "opacity-0" : "opacity-100"}`
+                : `text-[20px] ml-3 font-medium text-white 
                  transition-colors duration-300 group-hover:text-[#703EDD] 
                  ${!ClickSearch ? "opacity-0" : "opacity-100"}`}`}
             >

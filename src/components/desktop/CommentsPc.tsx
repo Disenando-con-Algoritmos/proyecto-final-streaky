@@ -34,7 +34,7 @@ export default function CommentsPc({
       {/* Contenedor de comentarios */}
       <div
         id="ShowComments"
-        className={`transition-all duration-300 ease-in-out overflow-hidden relative ${showComments
+        className={`transition-all duration-300 ease-in-out overflow-hidden ${showComments
           ? "max-h-[400px] opacity-100 mt-[-25px]"
           : "max-h-0 opacity-0 "
           }`}
