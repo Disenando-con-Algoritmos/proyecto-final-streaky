@@ -18,12 +18,14 @@ export default function ProfileSearch() {
     const [users, setUsers] = useState<User[]>([]);
     const [user, setUser] = useState<User | null>(null);
     const [lastPost, setLastPost] = useState<PostTypes | null>(null);
+    const [loading, setLoading] = useState(true);
 
     // cargar usuarios
     useEffect(() => {
         const loadUsers = async () => {
             const data = await getHabits();
             setUsers(data);
+            setLoading(false);
         };
         loadUsers();
     }, []);
@@ -50,10 +52,20 @@ export default function ProfileSearch() {
         loadPosts();
     }, [username]);
 
+    // 
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-[#171717] flex justify-center items-center">
+                <div className="w-12 h-12 border-4 border-[#B1F042] 
+                border-t-transparent rounded-full animate-spin"></div>
+            </div>
+        );
+    }
+
     // si no hay usuario
     if (!user) {
         return (
-            <div className="min-h-screen bg-[#121212] text-white flex justify-center items-center">
+            <div className="min-h-screen bg-[#171717] text-white flex justify-center items-center">
                 <p>No users found.</p>
             </div>
         );
