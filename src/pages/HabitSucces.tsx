@@ -41,8 +41,8 @@ export default function HabitAdded() {
             <img
                 src={catHabitAdded}
                 alt="miffyY"
-                className="absolute bottom-0 left-30 sm:left-280
-                 w-[300px] sm:w-[350px] object-contain"
+                className="absolute bottom-0 z-1 top-160 left-30 sm:left-280
+                 w-[250px] sm:w-[350px] object-contain"
             />
         </div>
         </>
