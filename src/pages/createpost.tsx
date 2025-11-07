@@ -9,10 +9,12 @@ import CatSleeping from "../assets/catsleeping.png";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 import shapeUpLogin from "../assets/shapeUpLogin.png";
 import grayShape from "../assets/grayShape.png";
+import CategoryPopup from "../components/mobile/create-post/CategoryPopup";
 
 export default function CreatePost() {
   const navigate = useNavigate();
   const [imagePreview, setimagePreview] = useState<string | null>();
+  const [showCategoryPopup, setShowCategoryPopup] = useState(false);
   const dispatch = useDispatch();
   const post = useSelector((state: RootState) => state.post);
   const [text, setText] = useState("");
@@ -113,7 +115,14 @@ export default function CreatePost() {
               </div>
 
               <button
-                onClick={() => navigate("/select")}
+                onClick={() => {
+                  const isMobile = window.innerWidth < 768;
+                  if (isMobile) {
+                    setShowCategoryPopup(true);
+                  } else {
+                    navigate("/select");
+                  }
+                }}
                 className="bg-[#703EDD] hover:bg-[#5c32b6]
                 duration-300 p-3 rounded-[50px] w-[200px]
                 text-[#ffffff] font-medium text-lg shadow-md
@@ -121,6 +130,10 @@ export default function CreatePost() {
               >
                 Choose Category
               </button>
+              <CategoryPopup 
+                isOpen={showCategoryPopup} 
+                onClose={() => setShowCategoryPopup(false)} 
+              />
             </div>
 
             <div className="flex justify-center mt-[20px]">
@@ -199,7 +212,7 @@ export default function CreatePost() {
               </label>
             </div>
             <button
-              onClick={() => navigate("/select")}
+              onClick={() => setShowCategoryPopup(true)}
               className="bg-[#703EDD] hover:bg-[#5c32b6]
               duration-300 p-3 rounded-[50px] w-[50%]
               text-[#ffffff] font-medium text-lg shadow-md
@@ -207,6 +220,10 @@ export default function CreatePost() {
             >
               Choose Category
             </button>
+            <CategoryPopup 
+              isOpen={showCategoryPopup} 
+              onClose={() => setShowCategoryPopup(false)} 
+            />
           </div>
 
           <div className="flex justify-center mt-[55px] lg:-mt[20px] w-full">
