@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router";
-import Feed from "../pages/feed";
-import CreatePost from "../pages/createpost";
-import LogIn from "../pages/login";
+import Feed from "../pages/Feed";
+import CreatePost from "../pages/Createpost";
+import LogIn from "../pages/Login";
 import Landing from "../pages/Landing";
 import SearchPage from "../pages/SearchPage";
 import SignUp from "../pages/SignUp";
-import Welcome from "../pages/welcome";
+import Welcome from "../pages/Welcome";
 import SelectCategory from "../pages/SelectCategory";
 import ProfilePage from "../pages/MyProfile";
 
