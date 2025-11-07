@@ -12,6 +12,7 @@ import Habits from "../pages/habits";
 import ProfileSearch from "../pages/ProfileSearch";
 import HabitAdded from "../pages/HabitSucces";
 import EditProfile from "../pages/editprofile";
+import CreatePost from "../pages/createpost";
 
 
 
@@ -63,6 +64,10 @@ const router = createBrowserRouter(
         {
             path: "/edit-profile",
             Component: EditProfile,
+        },
+       {
+            path: "/createpost",
+            Component: CreatePost,
         },
         {
             path: "/habitAdded",
