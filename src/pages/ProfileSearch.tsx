@@ -52,7 +52,7 @@ export default function ProfileSearch() {
         loadPosts();
     }, [username]);
 
-    // 
+    //spiner
     if (loading) {
         return (
             <div className="min-h-screen bg-[#171717] flex justify-center items-center">
