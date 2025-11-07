@@ -172,7 +172,6 @@ export default function CreatePost() {
           </div>
 
           {/* Título alineado a la izquierda */}
-          
           <h1 className="font-semibold text-[26px] text-left w-full ">
             Create your post
           </h1>
