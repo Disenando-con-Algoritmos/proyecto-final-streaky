@@ -30,7 +30,7 @@ export default function ProfileSearch() {
         loadUsers();
     }, []);
 
-    // buscar usuario
+    // busca el primer usuario que el username coincida con el valor de la url
     useEffect(() => {
         if (users.length > 0 && username) {
             const foundUser = users.find(
@@ -42,12 +42,16 @@ export default function ProfileSearch() {
 
     // cargar posts
     useEffect(() => {
+        //de todos los post que existen me quedo con los que 
+        //el nombre de usuario del post se a igual al 
+        //nombre del usuario que está en la URL
         const loadPosts = async () => {
-            const allPosts = await getPost();
+            const allPosts = await getPost(); //trae todos los posts
             const userPosts = allPosts.filter(
                 (p: PostTypes) => p.username.toLowerCase() === username?.toLowerCase()
             );
-            setLastPost(userPosts.length > 0 ? userPosts[0] : null);
+            setLastPost(userPosts.length > 0 ? userPosts[0] : null); 
+            //guardar el ultimos post o si no tiene ninguno es null
         };
         loadPosts();
     }, [username]);
