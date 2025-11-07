@@ -5,6 +5,8 @@ import { MdOutlineModeEdit } from "react-icons/md";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 import { useRef, useState } from "react";
 import type { UserProfile } from "../types/UserProfileType";
+import grayShape from "../assets/grayShape.png";
+import miffyEdit from "../assets/miffyEdit.png";
 
 export default function EditProfile() {
     const userData: Partial<UserProfile> = {
@@ -52,14 +54,14 @@ export default function EditProfile() {
         <>
             <PcSearchBar />
             <MobileNavbar />
-            <div className="min-h-screen flex flex-col items-center 
+            <div className="relative min-h-screen flex flex-col items-center 
             justify-center px-6 lg:ml-[260px] lg:flex lg:justify-center">
                 <form className="w-full max-w-md flex flex-col items-center" onSubmit={handleSave}>
                     {/* Imagen de perfil */}
                     <div className="relative w-24 h-24 mb-6 rounded-full">
                         <img
-                        src={profileImg}
-                        className="rounded-full object-cover w-24 h-24 border-2 border-[#333]"
+                            src={profileImg}
+                            className="rounded-full object-cover w-24 h-24 border-2 border-[#333]"
                         />
                         <button
                             type="button"
@@ -111,6 +113,21 @@ export default function EditProfile() {
                         type="submit"
                     />
                 </form>
+
+                {/* figura gris */}
+                <img
+                    src={grayShape}
+                    className="hidden lg:block absolute -top-20 -left-10 w-100" 
+                    style={{ zIndex: 0 }}
+                />
+
+                {/* miffy :3 */}
+                <img
+                    src={miffyEdit}
+                    className="hidden lg:block absolute bottom-0 right-5 w-80 max-w-xs"
+                    style={{ zIndex: 10 }}
+                />
+
             </div>
         </>
     );
