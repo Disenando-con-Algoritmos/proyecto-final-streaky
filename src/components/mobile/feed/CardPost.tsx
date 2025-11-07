@@ -118,7 +118,7 @@ export default function CardPost({
                 open={showPopup}
                 onClose={() => setShowPopup(false)}
                 onDelete={() => {
-                    alert("Eliminar post (simulado)");
+                    alert("Post Eliminado :0");
                     setShowPopup(false);
                 }}
             />
