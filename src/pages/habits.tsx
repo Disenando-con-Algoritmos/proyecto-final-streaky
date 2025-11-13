@@ -89,10 +89,10 @@ function Habits() {
           <InfoColor />
           <CreateNewHabit />
           <div className="mt-10 md:mt-12 md:mr-131 mr-60 ml-4">
-            <p className="text-2xl md:text-3xl font-medium">In Progress</p>
+            <p className="text-2xl md:text-3xl ml-13 font-semibold w-40 mb-[-75px]">In Progress</p>
           <div className="">
-            <img className="w-20 absolute ml-54 bottom-[38px] 
-            md:w-40 md:ml-100 md:bottom-[-84px]" src={miffyPost}></img>
+            <img className="w-27 relative left-60 bottom-[-37px] 
+            md:w-40 md:ml-20 md:left-90 md:bottom-[-45px]" src={miffyPost}></img>
           </div>
           </div>
           <div className="ml-0">

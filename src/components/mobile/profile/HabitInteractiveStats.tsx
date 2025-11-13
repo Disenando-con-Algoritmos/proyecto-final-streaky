@@ -77,8 +77,8 @@ const DayProgressGridStats: React.FC<DayProgressGridProps> = ({ habit }) => {
                 justify-center transition-all duration-300 cursor-pointer ml-0 md:ml-74
               ${
                 progress[27]
-                  ? "bg-[#2B2B2B]"
-                  : "bg-[#B1F042] hover:bg-[#C9F75A]"
+                  ? "bg-[#B1F042] hover:bg-[#C9F75A]"
+                  : "bg-[#2B2B2B]"
               }`}
             >
               <FaCheck

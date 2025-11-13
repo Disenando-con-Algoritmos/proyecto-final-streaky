@@ -91,8 +91,8 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
                 justify-center transition-all duration-300 cursor-pointer
               ${
                 progress[27]
-                  ? "bg-[#2B2B2B]"
-                  : "bg-[#B1F042] hover:bg-[#C9F75A]"
+                  ? "bg-[#B1F042] hover:bg-[#C9F75A]"
+                  : "bg-[#2B2B2B]"
               }`}
             >
               <FaCheck
