@@ -21,11 +21,11 @@ export default function ProfileInfo({ user }: UserProps) {
         >
 
             {/* perfil y post */}
-            <div className="flex flex-col lg:flex-row w-full lg:items-start lg:justify-center">
+            <div className="flex flex-col lg:flex-row lg:items-start lg:justify-center">
                 {/* perfil */}
                 <div
                     className="flex flex-col items-center lg:flex-row 
-                    lg:flex-wrap  lg:ml-40"
+                    lg:flex-wrap lg:ml-40"
                 >
                     <div className="flex items-center md:ml-90 gap-5 ">
                         <img
@@ -76,9 +76,7 @@ export default function ProfileInfo({ user }: UserProps) {
 
                     {/* Estadísticas */}
                     <div
-                        className="w-full mb-8 mt-8 
-                            
-                            lg:justify-start lg:ml-70 lg:mb-20 lg:mt-0"
+                        className="w-full mb-8 mt-2 lg:justify-start lg:ml-85 lg:mt-0"
                     >
                         <ProfileStats user={user} />
                     </div>
@@ -86,7 +84,7 @@ export default function ProfileInfo({ user }: UserProps) {
             </div>
 
             {/* racha del usuario */}
-            <div className="flex justify-center mt-6 md:mr-8 ">
+            <div className="flex justify-center md:mr-8 ">
                 <ProfileStreak streak={user.streak} />
             </div>
         </div>

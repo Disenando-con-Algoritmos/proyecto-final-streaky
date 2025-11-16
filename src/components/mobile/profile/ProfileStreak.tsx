@@ -4,7 +4,7 @@ type StreakProps = {
 
 export default function ProfileStreak({ streak }: StreakProps) {
     return (
-        <div className="flex items-center rounded-[15px] mt-5 lg:mt-0
+        <div className="flex items-center rounded-[15px] mt-5 lg:mb-30
             border border-neutral-700 text-center w-85 lg:w-105 h-25 lg:h-30">
             <p className="text-[50px] md:text-[65px] ml-7 mr-3">🔥</p>
             <div className="flex flex-col items-start">

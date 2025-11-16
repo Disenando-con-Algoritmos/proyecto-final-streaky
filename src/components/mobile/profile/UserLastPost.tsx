@@ -40,9 +40,9 @@ export default function UserLastPost({ userId }: LastUserPostProps) {
     }
 
     return (
-        <div className="flex flex-col items-center mt-5 w-full">
+        <div className="flex flex-col items-center w-full">
             {/* content título + last post */}
-            <div className="w-full max-w-lg mt-10">
+            <div className="w-full max-w-lg">
                 <div className="mb-16">
                     <h2 className="text-white text-[25px] sm:text-[28px] 
                     font-semibold mb-4 text-left ml-8">

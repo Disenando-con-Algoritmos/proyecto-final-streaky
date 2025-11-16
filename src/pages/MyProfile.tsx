@@ -33,14 +33,12 @@ function ProfilePage() {
       </div>
 
       {/* contenedor principal responsive */}
-      <div className="flex flex-col lg:flex-row lg:justify-center lg:items-start gap-10 mt-2 px-6">
+      <div className="flex flex-col lg:flex-row lg:justify-center lg:items-start gap-10 px-6">
 
         {/* columna: hábitos */}
         {user?.habits && (
           <div className="
-  flex flex-col gap-6 lg:w-[35%] order-1 lg:order-2 mt-6 lg:mt-12
-  w-full px-5 max-w-md mx-auto       // <-- añade esto para mobile
-">
+  flex flex-col gap-6 lg:w-[35%] order-1 lg:order-2 px-5">
             <h2 className="
             text-[30px] lg:text-[28px] font-semibold text-white
             text-left w-full">
@@ -63,7 +61,7 @@ function ProfilePage() {
         )}
 
         {/* columna */}
-        <div className="flex justify-center w-full lg:ml-120 lg:w-1/2 order-2 lg:order-1">
+        <div className="flex justify-center w-full lg:ml-120 order-2 lg:order-1">
           <UserLastPost userId={userId} />
         </div>
       </div>
