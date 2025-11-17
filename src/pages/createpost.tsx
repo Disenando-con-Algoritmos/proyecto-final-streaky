@@ -87,7 +87,15 @@ export default function CreatePost() {
               placeholder="What’s your habit today? 🌟"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              className="bg-[#1B1B1B] p-4 w-full h-[230px] rounded-xl"
+              className="bg-[#1B1B1B] 
+                p-4 
+                w-full 
+                h-[230px] 
+                rounded-xl 
+                border-3 
+                border-transparent 
+                focus:border-[#833AFF] 
+                focus:outline-none"
             />
             <div
               id="button-violette"

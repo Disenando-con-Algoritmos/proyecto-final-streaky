@@ -127,6 +127,7 @@ export default function AddNewHabit() {
             </label>
             <input
               className="w-full bg-transparent border border-[#833AFF] 
+              focus:outline-none focus:border-[#B1F042] transition
               rounded-[12px] py-2 pl-4 pr-4 text-white placeholder-[#5D5D5D]"
               type="text"
               placeholder="Type here"
@@ -143,6 +144,7 @@ export default function AddNewHabit() {
             </label>
             <input
               className="w-full bg-transparent border border-[#833AFF] 
+              focus:outline-none focus:border-[#B1F042] transition 
               rounded-[12px] py-2 pl-4 pr-4 text-white placeholder-[#5D5D5D]"
               type="text"
               placeholder="Type here"
@@ -159,7 +161,7 @@ export default function AddNewHabit() {
               <button
                 key={day.key}
                 onClick={() => toggleDay(day.key)}
-                className={`w-10 h-10 rounded-full flex items-center 
+                className={`w-10 h-10 rounded-full flex items-center cursor-pointer
                   justify-center transition-colors
                   ${selectedDays.includes(day.key)
                     ? 'bg-[#84CC16] text-black'
@@ -180,7 +182,8 @@ export default function AddNewHabit() {
               <button
                 key={category.id}
                 onClick={() => toggleCategory(category.id)}
-                className={`py-2 px-4 rounded-[50px] border transition-all duration-300 mb-[20px]
+                className={`py-2 px-4 rounded-[50px] border transition-all 
+                  duration-300 mb-[20px] cursor-pointer
                   ${selectedCategory === category.id
                     ? 'bg-[#B1F042] text-[#171717] font-medium shadow-md '
                     : 'border-white bg-transparent text-white hover:border-[#B1F042] font-medium'
