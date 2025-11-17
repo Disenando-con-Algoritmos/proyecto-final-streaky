@@ -90,7 +90,7 @@ export default function SelectCategory() {
                   label={cat.label}
                   selected={isSelected}
                   onSelect={() => handleCategorySelect(cat.label)}
-                  className="cursor-pointer"
+                  className="cursor-pointer hover:border-[#B1F042]"
                 />
               );
             })}

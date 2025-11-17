@@ -18,7 +18,6 @@ function CreateNewHabit() {
           mx-auto
           h-24 md:h-28
           px-6
-          shadow-md
         "
       >
         {/* Texto */}
@@ -42,7 +41,7 @@ function CreateNewHabit() {
             items-center
             justify-center
             cursor-pointer
-            hover:bg-[#82B42A]
+            hover:bg-[#96cf33]
             transition-all
             duration-200
           "

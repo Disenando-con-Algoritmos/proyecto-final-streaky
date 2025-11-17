@@ -16,7 +16,7 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
                 onClick={() => setShowComments(true)}
                 className="flex items-center cursor-pointer text-[#F9FAFB]"
             >   
-            <div className="relative flex right-16 top-0,5">
+            <div className="relative flex right-16 top-0.5">
                 <FaRegComment className="text-3xl" />
                 <p className="ml-2 text-[20px]">{comments.length}</p>
             </div>
@@ -78,8 +78,8 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
                                 className="flex-1 bg-transparent text-[#F9FAFB] 
                                 text-sm outline-none placeholder-[#888]"
                             />
-                            <button className="ml-3 bg-[#7C3AED] p-2 rounded-full
-                            hover:bg-[#8B5CF6] transition">
+                            <button className="ml-3 bg-[#7C3AED] p-2 rounded-full 
+                            hover:bg-[#8B5CF6] transition cursor-pointer">
                                 <FaPaperPlane className="text-white text-[14px]" />
                             </button>
                         </div>
