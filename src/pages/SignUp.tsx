@@ -7,12 +7,12 @@ import grayShape from "../assets/grayShape.png";
 import greenShape from "../assets/greenShape.png";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 import { useNavigate } from "react-router";
-import { useRef,type FormEvent } from "react";
+import { useRef, type FormEvent } from "react";
 
 export default function SignUp() {
 
     const navigate = useNavigate();
-    const formRef = useRef<HTMLFormElement>(null);  
+    const formRef = useRef<HTMLFormElement>(null);
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
 
@@ -50,8 +50,8 @@ export default function SignUp() {
                     onSubmit={handleSubmit}
                     className="flex flex-col justify-center gap-4 mt-8"
                 >
-                    <Inputs name="username" label="Username" type="text" 
-                    placeholder="Enter Username" required
+                    <Inputs name="username" label="Username" type="text"
+                        placeholder="Enter Username" required
                     >
                         <FaRegUser />
                     </Inputs>
@@ -63,24 +63,27 @@ export default function SignUp() {
                         <MdOutlineEmail />
                     </Inputs>
 
-                    <Inputs name="password" label="Password" type="password" 
-                    placeholder="Enter Password" required
+                    <Inputs name="password" label="Password" type="password"
+                        placeholder="Enter Password" required
                     >
                         <MdLockOutline />
                     </Inputs>
 
-                    <Inputs name="confirmPassword" 
-                    label="Confirm Password" type="password" placeholder="Confirm Password" required
+                    <Inputs name="confirmPassword"
+                        label="Confirm Password" type="password"
+                        placeholder="Confirm Password" required
                     >
                         <MdLockOutline />
                     </Inputs>
-
                     <div
                         id="btn-container"
-                        className="flex justify-center mt-6 hover:scale-105 transition"
+                        className="flex justify-center mt-4 w-full"
                     >
-                        <GlobalBtn text="Sign Up" type="submit" />
+                        <div className="hover:scale-105 w-[160px]">
+                            <GlobalBtn text="Sign Up" type="submit" />
+                        </div>
                     </div>
+
                 </form>
 
                 <p className="text-center mt-4 text-[15px] sm:text-base">

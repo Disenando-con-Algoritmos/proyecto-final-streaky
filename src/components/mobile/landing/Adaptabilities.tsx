@@ -16,7 +16,7 @@ export default function Adaptabilities() {
                     Track habits anytime on mobile or desktop.
                     Streaky 🔥 keeps your progress with you.
                 </p>
-                <div id="btn-container" className="flex m-0.5 mt-6 
+                <div id="btn-container" className="flex m-0.5 mt-6 w-[160px]
                     hover:scale-105 transition">
                     <GlobalBtn text="Join Us"
                         type="submit" onClick={() => navigate("/signup")} />

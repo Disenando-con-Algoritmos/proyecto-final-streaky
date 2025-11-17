@@ -11,20 +11,20 @@ import { useRef, type FormEvent } from "react";
 
 export default function LogIn() {
     const navigate = useNavigate();
-        const formRef = useRef<HTMLFormElement>(null);  
-        const handleSubmit = (e: FormEvent) => {
-            e.preventDefault();
-    
-            const formData = new FormData(formRef.current!);
-            const dataObj = {
-                email: formData.get("email"),
-                password: formData.get("password"),
-            };
-    
-            console.info("LogIn Data:", dataObj);
-    
-            navigate("/feed");
+    const formRef = useRef<HTMLFormElement>(null);
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+
+        const formData = new FormData(formRef.current!);
+        const dataObj = {
+            email: formData.get("email"),
+            password: formData.get("password"),
         };
+
+        console.info("LogIn Data:", dataObj);
+
+        navigate("/feed");
+    };
 
     return (
         <div
@@ -48,23 +48,25 @@ export default function LogIn() {
                     onSubmit={handleSubmit}
                     className="flex flex-col justify-center gap-4 mt-8"
                 >
-                    <Inputs name="email" 
-                    label="Email" type="email" placeholder="Enter Email" required
+                    <Inputs name="email"
+                        label="Email" type="email" placeholder="Enter Email" required
                     >
                         <MdOutlineEmail />
                     </Inputs>
 
-                    <Inputs name="password" 
-                    label="Password" type="password" placeholder="Enter Password"required
+                    <Inputs name="password"
+                        label="Password" type="password" placeholder="Enter Password" required
                     >
                         <MdLockOutline />
                     </Inputs>
 
                     <div
                         id="btn-container"
-                        className="flex justify-center mt-6 hover:scale-105 transition"
+                        className="flex justify-center mt-6 w-full"
                     >
-                        <GlobalBtn text="Log In" type="submit" />
+                        <div className="hover:scale-105 w-[160px]">
+                            <GlobalBtn text="Log In" type="submit" />
+                        </div>
                     </div>
                 </form>
 
