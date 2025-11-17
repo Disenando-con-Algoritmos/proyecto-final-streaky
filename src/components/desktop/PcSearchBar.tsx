@@ -168,8 +168,9 @@ function PcSearchBar() {
             className="flex mt-3 cursor-pointer group w-30 mb-10"
             onClick={PcSearchBarOpen}
           >
-            <FaMagnifyingGlass className="text-white text-3xl transition-colors 
-            duration-300 group-hover:text-[#703EDD]" />
+            <FaMagnifyingGlass className={`text-3xl transition-colors duration-300 
+    ${ClickSearch ? "text-white" : "text-[#703EDD]"} 
+    group-hover:text-[#703EDD]`} />
             <h2
               className={`text-[20px] text-gray-50 ml-4 mb-0 font-medium 
                 transition-colors duration-300 group-hover:text-[#703EDD] 

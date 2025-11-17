@@ -52,7 +52,7 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   className="text-xs font-medium px-4 py-[7px] rounded-full transition-all 
-                duration-300 hover:opacity-80"
+                duration-300 hover:opacity-80 cursor-pointer"
                   style={{
                     backgroundColor: habit.color + "20",
                     color: habit.color,
