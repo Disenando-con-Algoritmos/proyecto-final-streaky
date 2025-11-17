@@ -72,7 +72,7 @@ export default function CreatePost() {
         <div className="hidden md:flex justify-center items-center min-h-screen relative">
           <div
             className="bg-[#303030] text-[#F9FAFB]
-           p-9 rounded-4xl max-w-[600px] w-full shadow-md relative z-10"
+          p-9 rounded-4xl max-w-[600px] w-full shadow-md relative z-10"
           >
             <h1 className="flex justify-center font-semibold text-[30px]">
               Create your post

@@ -77,7 +77,7 @@ export default function CommentsPc({
           {/* Botón posicionado dentro del input */}
           <button
             className="absolute right-3 top-1/2 -translate-y-1/2 bg-[#7C3AED] p-2 rounded-full
-            hover:bg-[#8B5CF6] transition">
+            hover:bg-[#8B5CF6] transition cursor-pointer">
             <FaPaperPlane className="text-white text-[14px]" />
           </button>
 

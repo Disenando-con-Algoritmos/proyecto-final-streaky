@@ -9,7 +9,7 @@ function InfoColor() {
       <div
         onClick={() => setIsOpen(!isOpen)}
         className="bg-[#1B1B1B] rounded-2xl overflow-hidden transition-all 
-        duration-500 ease-in-out cursor-pointer shadow-md"
+        duration-500 ease-in-out cursor-pointer"
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 h-12">

@@ -132,7 +132,7 @@ function PcSearchBar() {
         className={`hidden lg:block bg-[#212121] h-screen rounded-r-[2rem] w-65
           fixed top-0 left-0 z-0`}
       >
-        <div id="generalPcBar" className="ml-10">
+        <div id="generalPcBar" className="flex flex-col h-full ml-10">
           <div className="flex flex-row mt-15 ml-1">
             <img className="w-6 h-9" src={logo1}></img>
             <img
@@ -203,13 +203,13 @@ function PcSearchBar() {
 
           <div
             onClick={NavigateNavBarPcLogin}
-            className="flex items-center mt-60 cursor-pointer group w-35"
+            className="flex items-center mt-auto cursor-pointer group w-35"
           >
-            <HiOutlineLogout className="text-red-700 text-4xl transition-colors 
-            duration-300 group-hover:text-[#831313]" />
+            <HiOutlineLogout className="text-[#EF3131] text-4xl transition-colors 
+            duration-300 group-hover:text-[#e40202]" />
             <h2
-              className={`text-[20px] text-red-700 ml-2 font-bold transition-colors 
-                duration-300 group-hover:text-[#831313] 
+              className={`text-[20px] text-[#EF3131] ml-2 font-bold transition-colors 
+                duration-300 group-hover:text-[#e40202] 
 ${!ClickSearch ? "opacity-0" : "opacity-100"}`}
             >
               Log Out

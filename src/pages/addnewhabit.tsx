@@ -164,7 +164,7 @@ export default function AddNewHabit() {
                 className={`w-10 h-10 rounded-full flex items-center cursor-pointer
                   justify-center transition-colors
                   ${selectedDays.includes(day.key)
-                    ? 'bg-[#84CC16] text-black'
+                    ? 'bg-[#B1F042] text-black'
                     : 'bg-[#303030] text-white hover:bg-[#404040]'
                 }`}
               >
