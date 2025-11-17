@@ -2,40 +2,46 @@ import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setCategory } from "../redux/slices/SlicePost";
+
 import catSelect from "../assets/catSelectCategory.png";
 import shapeUpLogin from "../assets/shapeUpLogin.png";
+
 import CategoryTagWhite from "../components/mobile/create-post/CategoryTagWhite";
 import PcSearchBar from "../components/desktop/PcSearchBar";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 import CategoryPopup from "../components/mobile/create-post/CategoryPopup";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
+import Alert from "../components/desktop/Alert";
 
 export default function SelectCategory() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const handleCategorySelect = (category: string) => {
     setSelectedCategory(category);
-    console.log('Categoría seleccionada:', category);
+    console.log("Categoría seleccionada:", category);
   };
 
   const handleAccept = () => {
     if (selectedCategory) {
       dispatch(setCategory(selectedCategory));
-      navigate('/createpost');
+      navigate("/createpost");
     } else {
-      alert("Please select a category first!");
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 2500);
     }
   };
 
@@ -51,14 +57,17 @@ export default function SelectCategory() {
     { emoji: "💵", label: "Money" },
   ];
 
-  // Mostrar popup en móvil
+  
   if (isMobile) {
     return <CategoryPopup isOpen={true} onClose={() => navigate("/createpost")} />;
   }
 
-  // Versión desktop
+
   return (
     <>
+
+      <Alert show={showAlert} />
+
       <div className="fixed top-0 left-0 w-full z-50">
         <PcSearchBar />
         <MobileNavbar />
@@ -86,13 +95,10 @@ export default function SelectCategory() {
               );
             })}
           </div>
-          
+
           {/* Botón aceptar */}
           <div className="flex justify-center mt-8">
-            <GlobalBtn
-              text="Accept"
-              onClick={handleAccept}
-            />
+            <GlobalBtn text="Accept" onClick={handleAccept} />
           </div>
         </div>
 
@@ -102,10 +108,10 @@ export default function SelectCategory() {
           className="absolute bottom-0 left-[57%] w-[300px] pointer-events-none z-20"
         />
 
-        <img 
-          src={shapeUpLogin} 
-          alt="shapeUpLogin" 
-          className="absolute top-[70px] left-[25%] w-[300px] z-10" 
+        <img
+          src={shapeUpLogin}
+          alt="shapeUpLogin"
+          className="absolute top-[70px] left-[25%] w-[300px] z-10"
         />
       </div>
     </>
