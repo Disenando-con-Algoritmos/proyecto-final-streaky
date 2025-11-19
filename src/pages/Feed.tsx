@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 
 function Feed() {
   const nav = useNavigate();
-  const NavigateProfile = () => nav("/profile");
+  const NavigateProfile = () => nav("/welcome/profile");
   return (
     <>
       <PcSearchBar></PcSearchBar>
@@ -46,7 +46,7 @@ function Feed() {
           {/* esta imagen no se puede poner en un espacio abajo pq se deja de ver en 
                     el navegador */}
           <img
-            onClick={() => nav("/profile")}
+            onClick={() => nav("/welcome/profile")}
             src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
             alt="Profile"
             className="w-12 h-12 rounded-full md:hidden"

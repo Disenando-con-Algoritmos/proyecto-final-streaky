@@ -45,7 +45,7 @@ function CreateNewHabit() {
             transition-all
             duration-200
           "
-          onClick={() => nav("/newhabit")}
+          onClick={() => nav("/welcome/newhabit")}
         >
           <FaPlus className="text-lg md:text-xl text-[#1C1B1F]" />
         </div>

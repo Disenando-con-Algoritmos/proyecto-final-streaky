@@ -9,6 +9,7 @@ import logo2 from "../../assets/logo2.png";
 import type { PostTypes } from "../../types/PostTypes";
 import { getPost } from "../../services/PostService";
 import { useLocation, useNavigate } from "react-router";
+import authService from "../../services/AuthServices";
 
 function PcSearchBar() {
   const [ClickSearch, setClickSearch] = useState(true);
@@ -50,11 +51,21 @@ function PcSearchBar() {
     };
   }, [ClickSearch]);
 
-  const NavigateNavBarPccreatepost = () => { nav("/createPost"); };
-  const NavigateNavBarPcFeed = () => { nav("/feed"); };
-  const NavigateNavBarPcLogin = () => { nav("/login"); };
-  const isFeed = location.pathname === "/feed";
-  const isCreatePost = location.pathname === "/createPost";
+  const NavigateNavBarPccreatepost = () => { nav("/welcome/createPost"); };
+  const NavigateNavBarPcFeed = () => { nav("/welcome/feed"); };
+  
+  const isFeed = location.pathname === "/welcome/feed";
+  const isCreatePost = location.pathname === "/welcome/createPost";
+
+  const handleLogout = async () => {
+  const result = await authService.signOut();
+
+  if (result.success) {
+    nav("/login");
+  } else {
+    console.error("Error logging out:", result.error);
+  }
+};
 
   return (
     <>
@@ -99,7 +110,7 @@ function PcSearchBar() {
                     ).map((UserIndividual) => (
                       <div
                         key={UserIndividual.id}
-                        onClick={() => nav(`/profile/${UserIndividual.username}`)}
+                        onClick={() => nav(`/welcome/profile/${UserIndividual.username}`)}
                         className="flex items-center gap-4 bg-transparent pb-3 cursor-pointer 
                         hover:opacity-80 transition"
                       >
@@ -203,7 +214,7 @@ function PcSearchBar() {
           </div>
 
           <div
-            onClick={NavigateNavBarPcLogin}
+            onClick={handleLogout}
             className="flex items-center mt-auto mb-6 cursor-pointer group w-35"
           >
             <HiOutlineLogout className="text-[#EF3131] text-4xl transition-colors 

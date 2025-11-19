@@ -60,7 +60,7 @@ export default function AddNewHabit() {
       emoji: emoji
     });
 
-    nav("/habitAdded");
+    nav("/welcome/habitAdded");
   };
 
   return (

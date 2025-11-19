@@ -6,6 +6,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { LuLogOut } from "react-icons/lu";
 import BtnLogOut from "./BtnLogOut";
 import ProfileStats from "./ProfileStats";
+import authService from "../../../services/AuthServices";
 
 type UserProps = {
     user: UserProfile;
@@ -13,6 +14,16 @@ type UserProps = {
 
 export default function ProfileInfo({ user }: UserProps) {
     const navigate = useNavigate();
+
+     const handleLogout = async () => {
+  const result = await authService.signOut();
+
+  if (result.success) {
+    navigate("/login");
+  } else {
+    console.error("Error logging out:", result.error);
+  }
+};
 
     return (
         <div
@@ -48,7 +59,7 @@ export default function ProfileInfo({ user }: UserProps) {
                             <BtnEditProfile
                                 text="Edit Profile"
                                 type="button"
-                                onClick={() => navigate("/edit-profile")}
+                                onClick={() => navigate("/welcome/editprofile")}
                             >
                                 <FaRegEdit />
                             </BtnEditProfile>
@@ -56,7 +67,7 @@ export default function ProfileInfo({ user }: UserProps) {
                             <BtnLogOut
                                 text="Log Out"
                                 type="button"
-                                onClick={() => navigate("/login")}
+                                onClick={handleLogout}
                             >
                                 <LuLogOut />
                             </BtnLogOut>
@@ -67,7 +78,7 @@ export default function ProfileInfo({ user }: UserProps) {
                             <BtnEditProfile
                                 text="Edit Profile"
                                 type="button"
-                                onClick={() => navigate("/edit-profile")}
+                                onClick={() => navigate("/welcome/editprofile")}
                             >
                                 <FaRegEdit />
                             </BtnEditProfile>

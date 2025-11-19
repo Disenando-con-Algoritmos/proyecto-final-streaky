@@ -8,11 +8,13 @@ import Logo3 from "../assets/Logo3.png";
 import { useNavigate } from "react-router";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 import { useRef, type FormEvent } from "react";
+import authService from "../services/AuthServices";
 
 export default function LogIn() {
     const navigate = useNavigate();
     const formRef = useRef<HTMLFormElement>(null);
-    const handleSubmit = (e: FormEvent) => {
+
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
         const formData = new FormData(formRef.current!);
@@ -23,7 +25,23 @@ export default function LogIn() {
 
         console.info("LogIn Data:", dataObj);
 
-        navigate("/feed");
+        navigate("/welcome");
+
+        try {
+            const result = await authService.signIn(
+                dataObj.email as string, dataObj.password as string);
+
+            if (result.success) {
+                console.info("User signed in successfully:", result);
+                localStorage.setItem("user", JSON.stringify(result.data));
+                navigate("/welcome");
+            } else {
+                console.error("Sign-in failed:", result.error);
+                // Aquí puedes mostrar un mensaje de error al usuario
+            }
+        } catch (error) {
+            console.error("Sign-in failed:", error);
+        }
     };
 
     return (

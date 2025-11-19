@@ -9,9 +9,9 @@ import { useNavigate } from "react-router";
 
 export default function SearchPage() {
   const [postsData, setPostsData] = useState<PostTypes[]>([]);
-  const [uniqueUsers, setUniqueUsers] = useState<UserProfile[]>([]);
+  const [uniqueUsers, setUniqueUsers] = useState<Partial<UserProfile>[]>([]);
   const [inputText, setInputText] = useState("");
-  const [usersFilter, setUsersFilter] = useState<UserProfile[]>([]);
+  const [usersFilter, setUsersFilter] = useState<Partial<UserProfile>[]>([]);
   const nav = useNavigate();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function SearchPage() {
 
   useEffect(() => {
     if (postsData.length > 0) {
-      const unique = Array.from(
+      const unique: Partial<UserProfile>[] = Array.from(
         new Map(postsData.map((p) => [p.username, p])).values()
       ).map((user) => ({
         id: user.id,
@@ -32,6 +32,7 @@ export default function SearchPage() {
         userDescription: user.userDescription,
         userImage: user.userImage,
       }));
+
       setUniqueUsers(unique);
     }
   }, [postsData]);
@@ -41,7 +42,7 @@ export default function SearchPage() {
       setUsersFilter([]); // no muestra nada al inicio
     } else {
       const filtered = uniqueUsers.filter((user) =>
-        user.username.toLowerCase().includes(inputText.toLowerCase())
+        user.username?.toLowerCase().includes(inputText.toLowerCase())
       );
       setUsersFilter(filtered);
     }
@@ -85,7 +86,7 @@ export default function SearchPage() {
             usersFilter.map((user) => (
               <div
                 key={user.id}
-                onClick={() => nav(`/profile/${user.username}`)}
+                onClick={() => nav(`/welcome/profile/${user.username}`)}
                 className="flex items-center gap-4 bg-transparent pb-3 cursor-pointer 
                 hover:opacity-80 transition"
               >

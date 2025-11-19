@@ -54,7 +54,7 @@ function ProfilePage() {
 
             <div className="flex justify-center">
             <GlobalBtn text="My Habits" type="button" 
-              onClick={() => navigate("/habits")}
+              onClick={() => navigate("/welcome/habits")}
             />
             </div>
           </div>

@@ -41,7 +41,7 @@ export default function Welcome() {
 
             {/* Botón */}
             <div className="lg:mb-[200px] sm:mt-[50px] mt-[30px]">
-                <GlobalBtn text="Start" type="button" onClick={() => navigate("/feed")} />
+                <GlobalBtn text="Start" type="button" onClick={() => navigate("feed")} />
             </div>
 
             {/* Imagen del Miffy */}

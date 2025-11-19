@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import type { UserProfile } from "../types/UserProfileType";
 import grayShape from "../assets/grayShape.png";
 import miffyEdit from "../assets/miffyEdit.png";
+import { useNavigate } from "react-router";
 
 export default function EditProfile() {
     const userData: Partial<UserProfile> = {
@@ -18,6 +19,7 @@ export default function EditProfile() {
     const [username, setUsername] = useState("");
     const [biography, setBiography] = useState("");
     const [password, setPassword] = useState("");
+    const nav = useNavigate();
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -48,6 +50,7 @@ export default function EditProfile() {
             profileImg,
         });
         alert("Datos guardados (revisa la consola :3)");
+        nav("/welcome/profile");
     };
 
     return (

@@ -8,12 +8,13 @@ import greenShape from "../assets/greenShape.png";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 import { useNavigate } from "react-router";
 import { useRef, type FormEvent } from "react";
+import authService from "../services/AuthServices";
 
 export default function SignUp() {
-
     const navigate = useNavigate();
     const formRef = useRef<HTMLFormElement>(null);
-    const handleSubmit = (e: FormEvent) => {
+
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
         const formData = new FormData(formRef.current!);
@@ -24,10 +25,34 @@ export default function SignUp() {
             confirmPassword: formData.get("confirmPassword"),
         };
 
+        if (dataObj.password !== dataObj.confirmPassword) {
+        alert("Passwords do not match");
+        return;
+    }
+
+        const additionalInfo = {
+    username: dataObj.username as string,
+    email: dataObj.email as string,
+};
+
         console.info("SignUp Data:", dataObj);
 
-        navigate("/welcome");
+        navigate("/login");
+
+        try {
+            const result = await authService.signUp(
+                dataObj.email as string, dataObj.password as string, additionalInfo);
+                if (result.success) {
+                    console.info("User registered successfully:", result);
+                    navigate("/login");
+                } else {
+                    console.error("Registration failed:", result.error);
+                }
+            } catch (error) {
+                console.error("Registration failed:", error);
+            }
     };
+
 
     return (
         <div

@@ -32,7 +32,7 @@ export default function HabitAdded() {
 
                     <GlobalBtn
                         text="Continue Training"
-                        onClick={() => navigate("/habits")}
+                        onClick={() => navigate("/welcome/habits")}
                         className="min-w-[190px]"
                     />
 

@@ -24,42 +24,42 @@ export default function MobileNavbar() {
     >
 
       <button
-        onClick={() => navigate("/feed")}
+        onClick={() => navigate("/welcome/feed")}
         className="flex items-center justify-center w-14 h-14"
       >
         <GoHome
           className={`text-3xl transition-all duration-300 ${
-            isActive("/feed") ? "text-[#833AFF]" : "text-[#8F8F8F]"
+            isActive("/welcome/feed") ? "text-[#833AFF]" : "text-[#8F8F8F]"
           }`}
         />
       </button>
 
       <motion.button
         animate={{
-          scale: isActive("/createPost") ? 1.2 : 1,
-          backgroundColor: isActive("/createPost")
+          scale: isActive("/welcome/createPost") ? 1.2 : 1,
+          backgroundColor: isActive("/welcome/createPost")
           ? activeColor
           : "rgba(32,32,32,0.9)",
         }}
         transition={{ type: "spring", stiffness: 200, damping: 15 }}
-        onClick={() => navigate("/createPost")}
+        onClick={() => navigate("/welcome/createPost")}
         className="
           -mt-6 w-14 h-14 rounded-full flex items-center justify-center
           shadow-md" 
       >
         <FiPlus className={`text-3xl transition-all duration-300 ${
-            isActive("/createPost") ? "text-white" : "text-[#8F8F8F]"
+            isActive("/welcome/createPost") ? "text-white" : "text-[#8F8F8F]"
           }`} 
         />
       </motion.button>
 
       <button
-        onClick={() => navigate("/userSearch")}
+        onClick={() => navigate("/welcome/userSearch")}
         className="flex items-center justify-center w-14 h-14"
       >
         <FaMagnifyingGlass
         className={`text-2xl transition-all duration-300 ${
-            isActive("/userSearch") ? "text-[#833AFF]" : "text-[#8F8F8F]"
+            isActive("/welcome/userSearch") ? "text-[#833AFF]" : "text-[#8F8F8F]"
           }`}
         />
       </button>

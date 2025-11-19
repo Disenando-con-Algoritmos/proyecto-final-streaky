@@ -11,7 +11,7 @@ import miffyPost from "../assets/miffyPost.png";
 
 function Habits() {
   const nav = useNavigate();
-  const NavigateProfile = () => nav("/profile");
+  const NavigateProfile = () => nav("/welcome/profile");
   const [user, setUser] = useState<UserProfile | null>(null);
   const userId = 5;
 
@@ -60,7 +60,7 @@ function Habits() {
 
           {/* Perfil móvil */}
           <img
-            onClick={() => nav("/profile")}
+            onClick={() => nav("/welcome/profile")}
             src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
             alt="Profile"
             className="w-12 h-12 rounded-full md:hidden"

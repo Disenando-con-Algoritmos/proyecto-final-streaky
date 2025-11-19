@@ -37,7 +37,7 @@ export default function CardPost({
                 {/* imagen + info perfil */}
                 <div className="flex items-center justify-between mb-3">
                     <div
-                    onClick={() => nav(`/profile/${cardIndividuals.username}`)} 
+                    onClick={() => nav(`/welcome/profile/${cardIndividuals.username}`)} 
                     className="flex items-center gap-3 hover:opacity-80 cursor-pointer">
                         <img
                             src={cardIndividuals.userImage}

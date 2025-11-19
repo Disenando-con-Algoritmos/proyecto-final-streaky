@@ -13,7 +13,7 @@ import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 
 export default function ProfileSearch() {
     const nav = useNavigate();
-    const NavigateProfile = () => nav("/profile");
+    const NavigateProfile = () => nav("/welcome/profile");
     const { username } = useParams<{ username: string }>();
     const [users, setUsers] = useState<User[]>([]);
     const [user, setUser] = useState<User | null>(null);

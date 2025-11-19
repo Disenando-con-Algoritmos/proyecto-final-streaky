@@ -42,7 +42,7 @@ export default function CreatePost() {
       image: post.image,
       category: post.category,
     });
-    navigate("/profile");
+    navigate("/welcome/profile");
     dispatch(resetPost());
   };
 
@@ -141,7 +141,7 @@ export default function CreatePost() {
            w-full absolute top-6 left-0 px-6 mt-10 z-50">
             <img src="https://i.imgur.com/7IzEEQ5.png" alt="Streaky logo" className="w-24" />
             <img
-              onClick={() => navigate("/profile")}
+              onClick={() => navigate("/welcome/profile")}
               src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
               alt="Profile"
               className="w-12 h-12 rounded-full"
