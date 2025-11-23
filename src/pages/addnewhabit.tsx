@@ -1,12 +1,9 @@
 import PcSearchBar from "../components/desktop/PcSearchBar";
 import Alert from "../components/desktop/Alert";
 import { useNavigate } from "react-router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
-import { getCurrentUser } from "../services/supabase/userService";
-import type { UserProfile } from "../types/UserProfileType";
-import UserAvatar from "../components/UserAvatar/UserAvatar";
 
 
 export default function AddNewHabit() {
@@ -18,21 +15,7 @@ export default function AddNewHabit() {
   const [habitName, setHabitName] = useState("");
   const [habitDesc, setHabitDesc] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-<<<<<<< HEAD
-  const [user, setUser] = useState<UserProfile | null>(null);
-
-  useEffect(() => {
-    async function fetchUser() {
-      const userData = await getCurrentUser();
-      if (userData) {
-        setUser(userData);
-      }
-    }
-    fetchUser();
-  }, []);
-=======
   const [showAlert, setShowAlert] = useState(false);
->>>>>>> d88e6f1cec16c18b6b6254f60b29eaf1650158eb
 
   const days = [
     { key: 'Su', label: 'Sunday' },
@@ -109,17 +92,14 @@ export default function AddNewHabit() {
               onClick={NavigateProfile}
               className="hidden md:flex items-center gap-3 fixed right-40 mt-20 cursor-pointer"
             >
-              {user && (
-                <UserAvatar
-                  userImage={user.userImage}
-                  username={user.username}
-                  size="w-17 h-17"
-                  textSize="text-2xl"
-                />
-              )}
+              <img
+                src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
+                alt="Profile"
+                className="w-17 h-17 rounded-full"
+              />
               <div className="flex flex-col">
                 <p className="font-semibold text-[#F9FAFB] text-[19px]">
-                  {user ? user.username : "Loading..."}
+                  Jenny Torres
                 </p>
                 <p className="text-[#A1A1AA] text-sm text-[14px]">Your Profile</p>
               </div>

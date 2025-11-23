@@ -122,7 +122,7 @@ function Feed() {
               >
                 <p className="text-[35px] md:text-[40px] mr-2">🔥</p>
                 <p className="text-[16px] md:text-[18px] text-center md:text-left">
-                  Amazing! You’ve kept your streak for 
+                  Amazing! You’ve kept your streak for{" "}
                   <strong>
                     {user ? user.streak : 0} days
                   </strong>
