@@ -1,10 +1,39 @@
 import { supabase } from "./supabase/config";
 import type { PostTypes } from "../types/PostTypes";
 
+type PostData = {
+  id: number;
+  content: string;
+  image: string | null;
+  date_created: string;
+  user_id: number;
+  users:
+    | {
+        username: string;
+        image: string | null;
+        streak: number | null;
+      }
+    | {
+        username: string;
+        image: string | null;
+        streak: number | null;
+      }[]
+    | null;
+  categories:
+    | {
+        category: string;
+      }
+    | {
+        category: string;
+      }[]
+    | null;
+};
+
 const getPost = async (): Promise<PostTypes[]> => {
   const { data, error } = await supabase
     .from("post")
-    .select(`
+    .select(
+      `
       id,
       content,
       image,
@@ -18,7 +47,8 @@ const getPost = async (): Promise<PostTypes[]> => {
       categories (
         category
       )
-    `)
+    `
+    )
     .order("date_created", { ascending: false });
 
   if (error) {
@@ -26,19 +56,26 @@ const getPost = async (): Promise<PostTypes[]> => {
     return [];
   }
 
-  return data.map((post: any) => ({
-    id: post.id,
-    datePublished: post.date_created,
-    postImage: post.image,
-    content: post.content,
-    username: post.users?.username || "Unknown",
-    userImage: post.users?.image || "",
-    likeCount: 0,
-    tag: post.categories?.category || "General",
-    userDescription: `Streak: ${post.users?.streak || 0}`,
-    comments: [],
-    userId: post.user_id,
-  }));
+  return (data as unknown as PostData[]).map((post) => {
+    const user = Array.isArray(post.users) ? post.users[0] : post.users;
+    const category = Array.isArray(post.categories)
+      ? post.categories[0]
+      : post.categories;
+
+    return {
+      id: post.id,
+      datePublished: post.date_created,
+      postImage: post.image || "",
+      content: post.content,
+      username: user?.username || "Unknown",
+      userImage: user?.image || "",
+      likeCount: 0,
+      tag: category?.category || "General",
+      userDescription: `Streak: ${user?.streak || 0}`,
+      comments: [],
+      userId: post.user_id,
+    };
+  });
 };
 
 export { getPost };

@@ -1,6 +1,19 @@
 import { supabase } from "./config";
 import type { CommentsPost } from "../../types/Comments";
 
+type CommentType = {
+    id: number;
+    content: string;
+    date: string;
+    users: {
+        username: string;
+        image: string | null;
+    } | {
+        username: string;
+        image: string | null;
+    }[] | null;
+}
+
 export async function addComment(postId: number, userId: number, content: string) {
     const { data, error } = await supabase
         .from("comments")
@@ -9,7 +22,7 @@ export async function addComment(postId: number, userId: number, content: string
                 post_id: postId,
                 user_id: userId,
                 content: content,
-                date: new Date().toISOString(), // Assuming the DB takes a timestamp string or we let it default if configured
+                date: new Date().toISOString(),
             },
         ])
         .select();
@@ -41,12 +54,14 @@ export async function getCommentsByPostId(postId: number): Promise<CommentsPost[
         return [];
     }
 
-    // Map the result to match CommentsPost type
-    return data.map((comment: any) => ({
-        id: comment.id,
-        content: comment.content,
-        datePublished: new Date(comment.date).toLocaleDateString(), // Format as needed
-        username: comment.users?.username || "Unknown",
-        userImage: comment.users?.image || "",
-    }));
+    return (data as unknown as CommentType[]).map((comment) => {
+        const user = Array.isArray(comment.users) ? comment.users[0] : comment.users;
+        return {
+            id: comment.id,
+            content: comment.content,
+            datePublished: new Date(comment.date).toLocaleDateString(), // Format as needed
+            username: user?.username || "Unknown",
+            userImage: user?.image || "",
+        };
+    });
 }
