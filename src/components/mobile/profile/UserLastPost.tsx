@@ -15,7 +15,7 @@ export default function UserLastPost({ userId }: LastUserPostProps) {
             const data: PostTypes[] = await getPost();
 
             // filtrar solo los posts de este usuario
-            const userPosts = data.filter((post: PostTypes) => post.id === userId);
+            const userPosts = data.filter((post: PostTypes) => post.userId === userId);
 
             // ordenar los posts por fecha de publicación (más reciente primero)
             const sortedPosts = userPosts.sort(

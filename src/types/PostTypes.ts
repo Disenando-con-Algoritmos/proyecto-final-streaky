@@ -11,4 +11,5 @@ export type PostTypes = {
     tag: string
     userDescription: string
     comments: CommentsPost[]
+    userId: number
 }

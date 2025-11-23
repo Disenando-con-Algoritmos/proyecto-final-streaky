@@ -13,6 +13,7 @@ import CategoryPopup from "../components/mobile/create-post/CategoryPopup";
 import { getCurrentUser } from "../services/supabase/userService";
 import type { UserProfile } from "../types/UserProfileType";
 import UserAvatar from "../components/UserAvatar/UserAvatar";
+import { supabase } from "../services/supabase/config";
 import AlertPassword from "../components/desktop/AlertPassword";
 
 export default function CreatePost() {
@@ -29,8 +30,11 @@ export default function CreatePost() {
   useEffect(() => {
     async function fetchUser() {
       const userData = await getCurrentUser();
+      console.log("👤 Current User Data:", userData);
       if (userData) {
         setUser(userData);
+      } else {
+        console.warn("⚠️ No user data found. User might not be logged in.");
       }
     }
     fetchUser();
@@ -52,7 +56,50 @@ export default function CreatePost() {
     }
   };
 
-  const handlePublish = () => {
+  // Load state from Redux on mount
+  useEffect(() => {
+    if (post.description) setText(post.description);
+    if (post.image) setimagePreview(post.image);
+  }, [post.description, post.image]);
+
+  // Save state to Redux when navigating to category selection
+  const handleChooseCategory = () => {
+    dispatch(setDescription(text));
+    if (imagePreview) dispatch(setImage(imagePreview));
+    
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) setShowCategoryPopup(true);
+    else navigate("/welcome/select");
+  };
+
+  const base64ToBlob = async (base64: string) => {
+    const res = await fetch(base64);
+    return await res.blob();
+  };
+
+  const uploadImage = async (base64Image: string) => {
+    try {
+      const blob = await base64ToBlob(base64Image);
+      const fileName = `post_images/${Date.now()}_${Math.random().toString(36).substring(7)}.png`;
+      
+      const { error } = await supabase.storage
+        .from("streaky_bucket")
+        .upload(fileName, blob);
+
+      if (error) throw error;
+
+      const { data: publicUrlData } = supabase.storage
+        .from("streaky_bucket")
+        .getPublicUrl(fileName);
+
+      return publicUrlData.publicUrl;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      return null;
+    }
+  };
+
+  const handlePublish = async () => {
     if (!text.trim()) {
       setAlertMessage("You must write something!");
       setShowAlert(true);
@@ -67,21 +114,79 @@ export default function CreatePost() {
       return;
     }
 
-    if (!post.image && !imagePreview) {
+    const currentImage = imagePreview || post.image;
+    if (!currentImage) {
       setAlertMessage("You must upload an image!");
       setShowAlert(true);
       setTimeout(() => setShowAlert(false), 3000);
       return;
     }
 
-    dispatch(setDescription(text));
-    console.log("📝 New Post Created:", {
-      description: text,
-      image: post.image,
-      category: post.category,
-    });
-    navigate("/welcome/profile");
-    dispatch(resetPost());
+    if (!user) {
+      setAlertMessage("User not found. Please log in again.");
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);
+      return;
+    }
+
+    try {
+      // 1. Get category ID
+      const normalizedCategory = post.category.trim().toLowerCase();
+      console.log("🔍 Searching for category:", normalizedCategory);
+
+      const { data: categoryData, error: categoryError } = await supabase
+        .from("categories")
+        .select("id")
+        .ilike("category", `%${normalizedCategory}`)
+        .single();
+
+      if (categoryError || !categoryData) {
+        console.error("Error fetching category:", categoryError);
+        setAlertMessage("Invalid category selected.");
+        setShowAlert(true);
+        setTimeout(() => setShowAlert(false), 3000);
+        return;
+      }
+
+      // 2. Upload Image
+      const imageUrl = await uploadImage(currentImage);
+      if (!imageUrl) {
+        setAlertMessage("Failed to upload image.");
+        setShowAlert(true);
+        setTimeout(() => setShowAlert(false), 3000);
+        return;
+      }
+
+      // 3. Insert post
+      const { error: insertError } = await supabase
+        .from("post")
+        .insert([
+          {
+            user_id: user.id,
+            content: text,
+            image: imageUrl,
+            category_id: categoryData.id,
+            date_created: new Date().toISOString(),
+          },
+        ]);
+
+      if (insertError) {
+        console.error("Error creating post:", insertError);
+        setAlertMessage("Failed to publish post. Please try again.");
+        setShowAlert(true);
+        setTimeout(() => setShowAlert(false), 3000);
+        return;
+      }
+
+      console.log("📝 New Post Created Successfully");
+      dispatch(resetPost());
+      navigate("/welcome/profile");
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      setAlertMessage("An unexpected error occurred.");
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);
+    }
   };
 
   return (
@@ -149,11 +254,7 @@ export default function CreatePost() {
               </div>
 
               <button
-                onClick={() => {
-                  const isMobile = window.innerWidth < 768;
-                  if (isMobile) setShowCategoryPopup(true);
-                  else navigate("/welcome/select");
-                }}
+                onClick={handleChooseCategory}
                 className="bg-[#703EDD] hover:bg-[#5c32b6] duration-300 p-3 
                   rounded-[50px] w-[200px] text-white font-medium text-lg
                   shadow-md hover:shadow-lg hover:scale-105 transition cursor-pointer"
@@ -229,7 +330,7 @@ export default function CreatePost() {
             </div>
 
             <button
-              onClick={() => setShowCategoryPopup(true)}
+              onClick={handleChooseCategory}
               className="bg-[#703EDD] hover:bg-[#5c32b6] duration-300 p-3 
                 rounded-[50px] w-[50%] text-white font-medium text-lg 
                 shadow-md hover:shadow-lg hover:scale-105 transition cursor-pointer"
