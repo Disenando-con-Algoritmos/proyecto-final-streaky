@@ -11,7 +11,7 @@ import PcSearchBar from "../components/desktop/PcSearchBar";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 import CategoryPopup from "../components/mobile/create-post/CategoryPopup";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
-import Alert from "../components/desktop/Alert";
+import AlertPassword from "../components/desktop/AlertPassword";
 
 export default function SelectCategory() {
   const navigate = useNavigate();
@@ -66,7 +66,7 @@ export default function SelectCategory() {
   return (
     <>
 
-      <Alert show={showAlert} />
+      <AlertPassword show={showAlert} message="You must choose a category!" />
 
       <div className="fixed top-0 left-0 w-full z-50">
         <PcSearchBar />
