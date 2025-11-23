@@ -37,7 +37,13 @@ const getPost = async (): Promise<PostTypes[]> => {
       id,
       content,
       image,
-@@ -18,27 +47,35 @@ const getPost = async (): Promise<PostTypes[]> => {
+      date_created,
+      user_id,
+      users!post_user_id_fkey (
+        username,
+        image,
+        streak
+      ),
       categories (
         category
       )
