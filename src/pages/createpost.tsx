@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../redux/storeRedux/AppReducer";
 import { setDescription, setImage, resetPost } from "../redux/slices/SlicePost";
-import { useState, type ChangeEvent } from "react";
+import { useState, type ChangeEvent, useEffect } from "react";
 import PcSearchBar from "../components/desktop/PcSearchBar";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 import CatSleeping from "../assets/catsleeping.png";
@@ -10,6 +10,9 @@ import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 import shapeUpLogin from "../assets/shapeUpLogin.png";
 import grayShape from "../assets/grayShape.png";
 import CategoryPopup from "../components/mobile/create-post/CategoryPopup";
+import { getCurrentUser } from "../services/supabase/userService";
+import type { UserProfile } from "../types/UserProfileType";
+import UserAvatar from "../components/UserAvatar/UserAvatar";
 
 export default function CreatePost() {
   const navigate = useNavigate();
@@ -18,6 +21,17 @@ export default function CreatePost() {
   const dispatch = useDispatch();
   const post = useSelector((state: RootState) => state.post);
   const [text, setText] = useState("");
+  const [user, setUser] = useState<UserProfile | null>(null);
+
+  useEffect(() => {
+    async function fetchUser() {
+      const userData = await getCurrentUser();
+      if (userData) {
+        setUser(userData);
+      }
+    }
+    fetchUser();
+  }, []);
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -61,7 +75,7 @@ export default function CreatePost() {
         alt="Gray Shape"
       />
 
-      
+
       <div className="relative z-10">
 
         <div className="relative z-50">
@@ -88,10 +102,8 @@ export default function CreatePost() {
                 border-transparent focus:border-[#833AFF] focus:outline-none"
             />
 
-            {/* BUTTONS - No popup inside here */}
             <div className="flex justify-center mt-[30px] flex-wrap gap-4">
 
-              {/* Upload Image */}
               <div className="relative">
                 <input
                   type="file"
@@ -111,7 +123,6 @@ export default function CreatePost() {
                 </label>
               </div>
 
-              {/* Choose Category */}
               <button
                 onClick={() => {
                   const isMobile = window.innerWidth < 768;
@@ -126,7 +137,6 @@ export default function CreatePost() {
               </button>
             </div>
 
-            {/* Publish */}
             <div className="flex justify-center mt-[20px]">
               <GlobalBtn text="Publish Post" type="submit" onClick={handlePublish} />
             </div>
@@ -140,12 +150,22 @@ export default function CreatePost() {
           <div className="flex justify-between items-center
            w-full absolute top-6 left-0 px-6 mt-10 z-50">
             <img src="https://i.imgur.com/7IzEEQ5.png" alt="Streaky logo" className="w-24" />
-            <img
-              onClick={() => navigate("/welcome/profile")}
-              src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
-              alt="Profile"
-              className="w-12 h-12 rounded-full"
-            />
+            <div onClick={() => navigate("/welcome/profile")}>
+              {user ? (
+                <UserAvatar
+                  userImage={user.userImage}
+                  username={user.username}
+                  size="w-12 h-12"
+                  textSize="text-lg"
+                />
+              ) : (
+                <div className="w-12 h-12 rounded-full 
+                bg-[#2A2A2A] flex items-center justify-center">
+                  <div className="w-6 h-6 border-2 border-[#B1F042] 
+                  border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
+            </div>
           </div>
 
           <h1 className="font-semibold text-[26px] text-left w-full">Create your post</h1>
@@ -159,10 +179,10 @@ export default function CreatePost() {
             className="bg-[#1B1B1B] p-4 w-full h-[230px] rounded-xl"
           />
 
-          
+
           <div className="flex items-center mt-[30px] gap-4 w-full">
 
-     
+
             <div className="relative">
               <input
                 type="file"
@@ -182,7 +202,6 @@ export default function CreatePost() {
               </label>
             </div>
 
-            {/* Category */}
             <button
               onClick={() => setShowCategoryPopup(true)}
               className="bg-[#703EDD] hover:bg-[#5c32b6] duration-300 p-3 
@@ -199,7 +218,7 @@ export default function CreatePost() {
         </div>
       </div>
 
- 
+
       <CategoryPopup
         isOpen={showCategoryPopup}
         onClose={() => setShowCategoryPopup(false)}

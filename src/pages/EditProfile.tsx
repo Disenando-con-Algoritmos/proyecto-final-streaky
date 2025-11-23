@@ -1,27 +1,38 @@
+import { useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import PcSearchBar from "../components/desktop/PcSearchBar";
 import InputProfile from "../components/mobile/edit-profile/InputProfile";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 import { MdOutlineModeEdit } from "react-icons/md";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
-import { useRef, useState } from "react";
 import type { UserProfile } from "../types/UserProfileType";
 import grayShape from "../assets/grayShape.png";
 import miffyEdit from "../assets/miffyEdit.png";
-import { useNavigate } from "react-router";
+import { getCurrentUser, updateUserProfile } from "../services/supabase/userService";
+import UserAvatar from "../components/UserAvatar/UserAvatar";
 
 export default function EditProfile() {
-    const userData: Partial<UserProfile> = {
-        id: 5,
-        username: "Jenny",
-        userImage: "https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg",
-    };
-    const [profileImg, setProfileImg] = useState<string>(userData.userImage ?? "");
+    const [user, setUser] = useState<UserProfile | null>(null);
+    const [profileImg, setProfileImg] = useState<string>("");
     const [username, setUsername] = useState("");
     const [biography, setBiography] = useState("");
     const [password, setPassword] = useState("");
     const nav = useNavigate();
 
     const fileInputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        async function fetchUser() {
+            const userData = await getCurrentUser();
+            if (userData) {
+                setUser(userData);
+                setProfileImg(userData.userImage || "");
+                setUsername(userData.username);
+                setBiography(userData.userDescription);
+            }
+        }
+        fetchUser();
+    }, []);
 
     // manejar subida de imagen
     const handleImgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,16 +52,20 @@ export default function EditProfile() {
     const updateImgInput = () => fileInputRef.current?.click();
 
     // guardar cambios
-    const handleSave = (e: React.FormEvent) => {
+    const handleSave = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({
-            username,
-            biography,
-            password,
-            profileImg,
-        });
-        alert("Datos guardados (revisa la consola :3)");
-        nav("/welcome/profile");
+        try {
+            await updateUserProfile({
+                username,
+                userDescription: biography,
+                userImage: profileImg
+            });
+            alert("Datos guardados correctamente!");
+            nav("/welcome/profile");
+        } catch (error) {
+            console.error("Error updating profile:", error);
+            alert("Error al guardar los cambios.");
+        }
     };
 
     return (
@@ -62,9 +77,11 @@ export default function EditProfile() {
                 <form className="w-full max-w-md flex flex-col items-center" onSubmit={handleSave}>
                     {/* Imagen de perfil */}
                     <div className="relative w-24 h-24 mb-6 rounded-full">
-                        <img
-                            src={profileImg}
-                            className="rounded-full object-cover w-24 h-24 border-2 border-[#333]"
+                        <UserAvatar
+                            userImage={profileImg}
+                            username={username || (user?.username ?? "")}
+                            size="w-24 h-24"
+                            textSize="text-3xl"
                         />
                         <button
                             type="button"
@@ -120,7 +137,7 @@ export default function EditProfile() {
                 {/* figura gris */}
                 <img
                     src={grayShape}
-                    className="hidden lg:block absolute -top-20 -left-10 w-100" 
+                    className="hidden lg:block absolute -top-20 -left-10 w-100"
                     style={{ zIndex: 0 }}
                 />
 

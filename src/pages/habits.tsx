@@ -8,21 +8,23 @@ import { useEffect, useState } from "react";
 import type { UserProfile } from "../types/UserProfileType";
 import DayProgressGridStats from "../components/mobile/profile/HabitInteractiveStats";
 import miffyPost from "../assets/miffyPost.png";
+import { getCurrentUser } from "../services/supabase/userService";
+import UserAvatar from "../components/UserAvatar/UserAvatar";
 
 function Habits() {
   const nav = useNavigate();
   const NavigateProfile = () => nav("/welcome/profile");
   const [user, setUser] = useState<UserProfile | null>(null);
-  const userId = 5;
 
   useEffect(() => {
-      fetch("/data/habits.json")
-        .then((res) => res.json())
-        .then((data: UserProfile[]) => {
-          const foundUser = data.find((u) => u.id === userId);
-          setUser(foundUser || null);
-        });
-    }, []);
+    async function fetchUser() {
+      const userData = await getCurrentUser();
+      if (userData) {
+        setUser(userData);
+      }
+    }
+    fetchUser();
+  }, []);
 
   return (
     <div className="min-h-screen text-white">
@@ -45,26 +47,33 @@ function Habits() {
             onClick={NavigateProfile}
             className="hidden md:flex items-center gap-3 fixed right-20 top-10 cursor-pointer"
           >
-            <img
-              src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
-              alt="Profile"
-              className="w-16 h-16 rounded-full object-cover"
-            />
+            {user && (
+              <UserAvatar
+                userImage={user.userImage}
+                username={user.username}
+                size="w-16 h-16"
+                textSize="text-2xl"
+              />
+            )}
             <div className="flex flex-col">
               <p className="font-semibold text-[#F9FAFB] text-lg">
-                Jenny Torres
+                {user ? user.username : "Loading..."}
               </p>
               <p className="text-[#A1A1AA] text-sm">Your Profile</p>
             </div>
           </div>
 
           {/* Perfil móvil */}
-          <img
-            onClick={() => nav("/welcome/profile")}
-            src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
-            alt="Profile"
-            className="w-12 h-12 rounded-full md:hidden"
-          />
+          <div onClick={() => nav("/welcome/profile")} className="md:hidden">
+            {user && (
+              <UserAvatar
+                userImage={user.userImage}
+                username={user.username}
+                size="w-12 h-12"
+                textSize="text-lg"
+              />
+            )}
+          </div>
         </div>
 
         {/* Gato decorativo desktop */}
@@ -90,13 +99,13 @@ function Habits() {
           <CreateNewHabit />
           <div className="mt-10 md:mt-12 md:mr-131 mr-60 ml-4">
             <p className="text-2xl md:text-3xl ml-13 font-semibold w-40 mb-[-75px]">In Progress</p>
-          <div className="">
-            <img className="w-27 relative left-60 bottom-[-37px] 
+            <div className="">
+              <img className="w-27 relative left-60 bottom-[-37px] 
             md:w-40 md:ml-20 md:left-90 md:bottom-[-45px]" src={miffyPost}></img>
-          </div>
+            </div>
           </div>
           <div className="ml-0">
-          {user?.habits.map((habit) => (
+            {user?.habits.map((habit) => (
               <DayProgressGridStats key={habit.id} habit={habit} />
             ))}
           </div>

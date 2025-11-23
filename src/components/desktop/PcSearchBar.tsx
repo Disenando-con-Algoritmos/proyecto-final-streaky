@@ -10,6 +10,7 @@ import type { PostTypes } from "../../types/PostTypes";
 import { getPost } from "../../services/PostService";
 import { useLocation, useNavigate } from "react-router";
 import authService from "../../services/AuthServices";
+import UserAvatar from "../UserAvatar/UserAvatar";
 
 function PcSearchBar() {
   const [ClickSearch, setClickSearch] = useState(true);
@@ -53,19 +54,19 @@ function PcSearchBar() {
 
   const NavigateNavBarPccreatepost = () => { nav("/welcome/createPost"); };
   const NavigateNavBarPcFeed = () => { nav("/welcome/feed"); };
-  
+
   const isFeed = location.pathname === "/welcome/feed";
   const isCreatePost = location.pathname === "/welcome/createPost";
 
   const handleLogout = async () => {
-  const result = await authService.signOut();
+    const result = await authService.signOut();
 
-  if (result.success) {
-    nav("/login");
-  } else {
-    console.error("Error logging out:", result.error);
-  }
-};
+    if (result.success) {
+      nav("/login");
+    } else {
+      console.error("Error logging out:", result.error);
+    }
+  };
 
   return (
     <>
@@ -114,10 +115,11 @@ function PcSearchBar() {
                         className="flex items-center gap-4 bg-transparent pb-3 cursor-pointer 
                         hover:opacity-80 transition"
                       >
-                        <img
-                          className="w-13 h-13 rounded-4xl"
-                          src={UserIndividual.userImage}
-                          alt={UserIndividual.username}
+                        <UserAvatar
+                          userImage={UserIndividual.userImage}
+                          username={UserIndividual.username}
+                          size="w-13 h-13"
+                          textSize="text-lg"
                         />
                         <div>
                           <p className="text-white ml-2">{UserIndividual.username}</p>

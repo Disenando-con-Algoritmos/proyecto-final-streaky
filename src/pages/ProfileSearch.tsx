@@ -10,6 +10,9 @@ import type { PostTypes } from "../types/PostTypes";
 import CardPost from "../components/mobile/feed/CardPost";
 import PcSearchBar from "../components/desktop/PcSearchBar";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
+import { getCurrentUser } from "../services/supabase/userService";
+import type { UserProfile } from "../types/UserProfileType";
+import UserAvatar from "../components/UserAvatar/UserAvatar";
 
 export default function ProfileSearch() {
     const nav = useNavigate();
@@ -19,6 +22,7 @@ export default function ProfileSearch() {
     const [user, setUser] = useState<User | null>(null);
     const [lastPost, setLastPost] = useState<PostTypes | null>(null);
     const [loading, setLoading] = useState(true);
+    const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
 
     // cargar usuarios
     useEffect(() => {
@@ -28,6 +32,17 @@ export default function ProfileSearch() {
             setLoading(false);
         };
         loadUsers();
+    }, []);
+
+    // cargar usuario logueado
+    useEffect(() => {
+        async function fetchCurrentUser() {
+            const userData = await getCurrentUser();
+            if (userData) {
+                setCurrentUser(userData);
+            }
+        }
+        fetchCurrentUser();
     }, []);
 
     // busca el primer usuario que el username coincida con el valor de la url
@@ -50,7 +65,7 @@ export default function ProfileSearch() {
             const userPosts = allPosts.filter(
                 (p: PostTypes) => p.username.toLowerCase() === username?.toLowerCase()
             );
-            setLastPost(userPosts.length > 0 ? userPosts[0] : null); 
+            setLastPost(userPosts.length > 0 ? userPosts[0] : null);
             //guardar el ultimos post o si no tiene ninguno es null
         };
         loadPosts();
@@ -102,10 +117,11 @@ export default function ProfileSearch() {
                     <div className="flex flex-col items-center lg:items-start lg:flex-row 
                 lg:flex-wrap lg:w-full mt-8 gap-y-4 lg:gap-y-0 lg:ml-40">
                         <div className="flex items-center gap-5 lg:w-auto">
-                            <img
-                                src={user.userImage}
-                                alt={user.username}
-                                className="w-32 h-32 rounded-full object-cover"
+                            <UserAvatar
+                                userImage={user.userImage}
+                                username={user.username}
+                                size="w-32 h-32"
+                                textSize="text-4xl"
                             />
                             <div className="flex flex-col mt-5 gap-3 mb-8">
                                 <h2 className="text-[35px] font-bold">{user.username}</h2>
@@ -184,14 +200,17 @@ export default function ProfileSearch() {
                         onClick={NavigateProfile}
                         className="flex items-center gap-3 cursor-pointer ml-12"
                     >
-                        <img
-                    src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
-                    alt="Profile"
-                            className="w-17 h-17 rounded-full"
-                        />
+                        {currentUser && (
+                            <UserAvatar
+                                userImage={currentUser.userImage}
+                                username={currentUser.username}
+                                size="w-17 h-17"
+                                textSize="text-2xl"
+                            />
+                        )}
                         <div className="flex flex-col">
                             <p className="font-semibold text-[#F9FAFB] text-[19px]">
-                                Jenny Torres
+                                {currentUser ? currentUser.username : "Loading..."}
                             </p>
                             <p className="text-[#A1A1AA] text-sm text-[14px]">Your Profile</p>
                         </div>

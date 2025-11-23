@@ -8,6 +8,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import miffyPost from "../../../assets/miffyPost.png";
 import DeletePost from "../profile/DeletePost";
 import { useNavigate } from "react-router";
+import UserAvatar from "../../UserAvatar/UserAvatar";
 
 export default function CardPost({
     cardIndividuals,
@@ -37,11 +38,13 @@ export default function CardPost({
                 {/* imagen + info perfil */}
                 <div className="flex items-center justify-between mb-3">
                     <div
-                    onClick={() => nav(`/welcome/profile/${cardIndividuals.username}`)} 
-                    className="flex items-center gap-3 hover:opacity-80 cursor-pointer">
-                        <img
-                            src={cardIndividuals.userImage}
-                            className="w-12 h-12 rounded-full"
+                        onClick={() => nav(`/welcome/profile/${cardIndividuals.username}`)}
+                        className="flex items-center gap-3 hover:opacity-80 cursor-pointer">
+                        <UserAvatar
+                            userImage={cardIndividuals.userImage}
+                            username={cardIndividuals.username}
+                            size="w-12 h-12"
+                            textSize="text-lg"
                         />
                         <div>
                             <h3 className="font-semibold text-lg">{cardIndividuals.username}</h3>
@@ -52,16 +55,16 @@ export default function CardPost({
                     </div>
 
                     {/* icono de 3 puntos solo si el post es del usuario actual */}
-                        {isOwnPost && (
-                            <div className="relative">
-                                <button
-                                    onClick={() => setShowPopup(true)}
-                                    className="relative cursor-pointer"
-                                >
-                                    <BsThreeDotsVertical size={22} />
-                                </button>
-                            </div>
-                        )}
+                    {isOwnPost && (
+                        <div className="relative">
+                            <button
+                                onClick={() => setShowPopup(true)}
+                                className="relative cursor-pointer"
+                            >
+                                <BsThreeDotsVertical size={22} />
+                            </button>
+                        </div>
+                    )}
                 </div>
 
                 {/* imagen del post */}
@@ -114,7 +117,7 @@ export default function CardPost({
                     </span>
                 </p>
             </div>
-            {/* popup modal fuera del contenedor para que no se vea afectado */}
+
             <DeletePost
                 open={showPopup}
                 onClose={() => setShowPopup(false)}

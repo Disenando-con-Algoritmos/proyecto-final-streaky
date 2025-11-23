@@ -1,13 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaRegComment } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { FaPaperPlane } from "react-icons/fa6";
 import type { PostTypes } from "../../../types/PostTypes";
+import UserAvatar from "../../UserAvatar/UserAvatar";
+import { getCurrentUser } from "../../../services/supabase/userService";
+import type { UserProfile } from "../../../types/UserProfileType";
 
 export default function CommentPopup({ cardIndividuals }: { cardIndividuals: PostTypes }) {
     const [showComments, setShowComments] = useState(false);
+    const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
 
     const comments = cardIndividuals.comments || [];
+
+    useEffect(() => {
+        async function fetchUser() {
+            const userData = await getCurrentUser();
+            if (userData) {
+                setCurrentUser(userData);
+            }
+        }
+        fetchUser();
+    }, []);
 
     return (
         <>
@@ -15,12 +29,12 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
             <div
                 onClick={() => setShowComments(true)}
                 className="flex items-center cursor-pointer text-[#F9FAFB]"
-            >   
-            <div className="relative flex right-16 top-0.5">
-                <FaRegComment className="text-3xl" />
-                <p className="ml-2 text-[20px]">{comments.length}</p>
-            </div>
-            
+            >
+                <div className="relative flex right-16 top-0.5">
+                    <FaRegComment className="text-3xl" />
+                    <p className="ml-2 text-[20px]">{comments.length}</p>
+                </div>
+
             </div>
 
             {/* visible en mobile */}
@@ -46,10 +60,11 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
                         <div className="flex-1 px-10 pt-2 space-y-8">
                             {comments.map((comment, index) => (
                                 <div key={index} className="flex items-start gap-3">
-                                    <img
-                                        src={comment.userImage}
-                                        alt="User"
-                                        className="w-10 h-10 rounded-full"
+                                    <UserAvatar
+                                        userImage={comment.userImage}
+                                        username={comment.username}
+                                        size="w-10 h-10"
+                                        textSize="text-sm"
                                     />
                                     <div>
                                         <p className="text-[#F9FAFB] font-semibold text-sm">
@@ -67,11 +82,16 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
                         {/* input inferior */}
                         <div className="px-5 py-4 border-t border-[#808080] 
                         flex items-center bg-[#303030] rounded-b-3xl">
-                            <img
-                                src={cardIndividuals.userImage}
-                                alt="Profile"
-                                className="w-10 h-10 rounded-full mr-4"
-                            />
+                            {currentUser && (
+                                <div className="mr-4">
+                                    <UserAvatar
+                                        userImage={currentUser.userImage}
+                                        username={currentUser.username}
+                                        size="w-10 h-10"
+                                        textSize="text-sm"
+                                    />
+                                </div>
+                            )}
                             <input
                                 type="text"
                                 placeholder="Add a comment..."

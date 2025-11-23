@@ -7,6 +7,7 @@ import { LuLogOut } from "react-icons/lu";
 import BtnLogOut from "./BtnLogOut";
 import ProfileStats from "./ProfileStats";
 import authService from "../../../services/AuthServices";
+import UserAvatar from "../../UserAvatar/UserAvatar";
 
 type UserProps = {
     user: UserProfile;
@@ -15,15 +16,15 @@ type UserProps = {
 export default function ProfileInfo({ user }: UserProps) {
     const navigate = useNavigate();
 
-     const handleLogout = async () => {
-  const result = await authService.signOut();
+    const handleLogout = async () => {
+        const result = await authService.signOut();
 
-  if (result.success) {
-    navigate("/login");
-  } else {
-    console.error("Error logging out:", result.error);
-  }
-};
+        if (result.success) {
+            navigate("/login");
+        } else {
+            console.error("Error logging out:", result.error);
+        }
+    };
 
     return (
         <div
@@ -39,10 +40,11 @@ export default function ProfileInfo({ user }: UserProps) {
                     lg:flex-wrap lg:ml-40"
                 >
                     <div className="flex items-center md:ml-90 gap-5 ">
-                        <img
-                            src={user.userImage}
-                            alt={user.username}
-                            className="w-32 h-32 rounded-full object-cover"
+                        <UserAvatar
+                            userImage={user.userImage}
+                            username={user.username}
+                            size="w-32 h-32"
+                            textSize="text-4xl"
                         />
                         <div className="flex flex-col mt-5 gap-3 mb-8">
                             <h2 className="text-[35px] font-bold">{user.username}</h2>

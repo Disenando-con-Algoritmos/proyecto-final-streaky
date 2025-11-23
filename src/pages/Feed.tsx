@@ -1,18 +1,34 @@
+import { useEffect, useState } from "react";
 import Post from "../components/mobile/feed/Post";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 import PcSearchBar from "../components/desktop/PcSearchBar";
 import { useNavigate } from "react-router";
+import { getCurrentUser } from "../services/supabase/userService";
+import type { UserProfile } from "../types/UserProfileType";
+import UserAvatar from "../components/UserAvatar/UserAvatar";
 
 function Feed() {
   const nav = useNavigate();
   const NavigateProfile = () => nav("/welcome/profile");
+  const [user, setUser] = useState<UserProfile | null>(null);
+
+  useEffect(() => {
+    async function fetchUser() {
+      const userData = await getCurrentUser();
+      if (userData) {
+        setUser(userData);
+      }
+    }
+    fetchUser();
+  }, []);
+
   return (
     <>
       <PcSearchBar></PcSearchBar>
       <MobileNavbar />
       {/* header de logo mas profile */}
       <div id="feed-container"
-       className="flex justify-center items-center mt-10 md:mt-10 relative md:mb-10">
+        className="flex justify-center items-center mt-10 md:mt-10 relative md:mb-10">
         <div
           className="flex justify-between items-center px-5
                 w-full max-w-md "
@@ -26,17 +42,25 @@ function Feed() {
           {/* este es el perfil de solo desktop*/}
           {/* esta imagen no se puede poner en un espacio abajo pq se deja de ver en 
                     el navegador */}
-          <div 
-          onClick={NavigateProfile}
-          className="hidden md:flex items-center gap-3 fixed right-40 mt-20 cursor-pointer">
-            <img
-              src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
-              alt="Profile"
-              className="w-17 h-17 rounded-full "
-            />
+          <div
+            onClick={NavigateProfile}
+            className="hidden md:flex items-center gap-3 fixed right-40 mt-20 cursor-pointer">
+            {user ? (
+              <UserAvatar
+                userImage={user.userImage}
+                username={user.username}
+                size="w-17 h-17"
+                textSize="text-2xl"
+              />
+            ) : (
+              <div className="w-17 h-17 rounded-full bg-[#2A2A2A] flex items-center justify-center">
+                <div className="w-8 h-8 border-2 border-[#B1F042] 
+                border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            )}
             <div className="flex flex-col">
               <p className="font-semibold text-[#F9FAFB] text-[19px]">
-                Jenny Torres
+                {user ? user.username : "Loading..."}
               </p>
               <p className="text-[#A1A1AA] text-sm text-[14px]">Your Profile</p>
             </div>
@@ -45,12 +69,21 @@ function Feed() {
           {/* perfil pequeña de mobileeee */}
           {/* esta imagen no se puede poner en un espacio abajo pq se deja de ver en 
                     el navegador */}
-          <img
-            onClick={() => nav("/welcome/profile")}
-            src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
-            alt="Profile"
-            className="w-12 h-12 rounded-full md:hidden"
-          />
+          <div onClick={() => nav("/welcome/profile")} className="md:hidden">
+            {user ? (
+              <UserAvatar
+                userImage={user.userImage}
+                username={user.username}
+                size="w-12 h-12"
+                textSize="text-lg"
+              />
+            ) : (
+              <div className="w-12 h-12 rounded-full bg-[#2A2A2A] flex items-center justify-center">
+                <div className="w-6 h-6 border-2 border-[#B1F042] 
+                border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* miffyyy desktop */}
@@ -73,7 +106,7 @@ function Feed() {
               className="font-black text-[33px] md:text-[42px] 
                     leading-tight md:mr-10 mr-33 mt-12"
             >
-              Hello, Jenny! 👋🏻
+              Hello, {user ? user.username : "Loading..."}! 👋🏻
             </h1>
 
             <p className="text-[#F9FAFB] mt-3 text-[15px] md:text-[17px] md:mr-10 mr-55">
@@ -89,7 +122,10 @@ function Feed() {
               >
                 <p className="text-[35px] md:text-[40px] mr-2">🔥</p>
                 <p className="text-[16px] md:text-[18px] text-center md:text-left">
-                  Amazing! You’ve kept your streak for <strong>10 days</strong>
+                  Amazing! You’ve kept your streak for 
+                  <strong>
+                    {user ? user.streak : 0} days
+                  </strong>
                 </p>
               </div>
             </div>

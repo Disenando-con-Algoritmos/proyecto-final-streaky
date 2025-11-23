@@ -7,20 +7,32 @@ import type { UserProfile } from "../types/UserProfileType";
 import UserLastPost from "../components/mobile/profile/UserLastPost";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 import { useNavigate } from "react-router";
+import { getCurrentUser } from "../services/supabase/userService";
 
 function ProfilePage() {
   const [user, setUser] = useState<UserProfile | null>(null);
-  const userId = 5;
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("/data/habits.json")
-      .then((res) => res.json())
-      .then((data: UserProfile[]) => {
-        const foundUser = data.find((u) => u.id === userId);
-        setUser(foundUser || null);
-      });
+    async function fetchUser() {
+      const userData = await getCurrentUser();
+      if (userData) {
+        setUser(userData);
+      }
+      setLoading(false);
+    }
+    fetchUser();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#171717] flex justify-center items-center">
+        <div className="w-12 h-12 border-4 border-[#B1F042] 
+        border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -53,16 +65,16 @@ function ProfilePage() {
             ))}
 
             <div className="flex justify-center">
-            <GlobalBtn text="My Habits" type="button" 
-              onClick={() => navigate("/welcome/habits")}
-            />
+              <GlobalBtn text="My Habits" type="button"
+                onClick={() => navigate("/welcome/habits")}
+              />
             </div>
           </div>
         )}
 
         {/* columna */}
         <div className="flex justify-center w-full lg:ml-120 order-2 lg:order-1">
-          <UserLastPost userId={userId} />
+          {user && <UserLastPost userId={user.id} />}
         </div>
       </div>
     </>

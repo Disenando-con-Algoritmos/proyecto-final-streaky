@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaRegComment } from "react-icons/fa";
 import type { PostTypes } from "../../types/PostTypes";
 import { FaPaperPlane } from "react-icons/fa6";
+import UserAvatar from "../UserAvatar/UserAvatar";
 
 export default function CommentsPc({
   cardIndividuals,
@@ -44,10 +45,11 @@ export default function CommentsPc({
           {comments.length > 0 ? (
             comments.map((Comment, index) => (
               <div key={index} className="flex items-start gap-3">
-                <img
-                  className="w-10 h-10 rounded-full"
-                  src={Comment.userImage}
-                  alt="User"
+                <UserAvatar
+                  userImage={Comment.userImage}
+                  username={Comment.username}
+                  size="w-10 h-10"
+                  textSize="text-sm"
                 />
                 <div>
                   <p className="text-[#F9FAFB] font-semibold text-sm">
