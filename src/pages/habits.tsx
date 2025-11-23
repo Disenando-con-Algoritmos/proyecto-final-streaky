@@ -47,14 +47,20 @@ function Habits() {
             onClick={NavigateProfile}
             className="hidden md:flex items-center gap-3 fixed right-20 top-10 cursor-pointer"
           >
-            {user && (
+            {user ? (
               <UserAvatar
                 userImage={user.userImage}
                 username={user.username}
                 size="w-16 h-16"
                 textSize="text-2xl"
               />
+            ) : (
+              <div className="w-16 h-16 rounded-full bg-[#2A2A2A] flex items-center justify-center">
+                <div className="w-8 h-8 border-2 border-[#B1F042] 
+      border-t-transparent rounded-full animate-spin"></div>
+              </div>
             )}
+
             <div className="flex flex-col">
               <p className="font-semibold text-[#F9FAFB] text-lg">
                 {user ? user.username : "Loading..."}
@@ -65,13 +71,18 @@ function Habits() {
 
           {/* Perfil móvil */}
           <div onClick={() => nav("/welcome/profile")} className="md:hidden">
-            {user && (
+            {user ? (
               <UserAvatar
                 userImage={user.userImage}
                 username={user.username}
                 size="w-12 h-12"
                 textSize="text-lg"
               />
+            ) : (
+              <div className="w-12 h-12 rounded-full bg-[#2A2A2A] flex items-center justify-center">
+                <div className="w-6 h-6 border-2 border-[#B1F042] 
+      border-t-transparent rounded-full animate-spin"></div>
+              </div>
             )}
           </div>
         </div>

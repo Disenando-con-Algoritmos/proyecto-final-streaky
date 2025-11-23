@@ -1,21 +1,39 @@
 import PcSearchBar from "../components/desktop/PcSearchBar";
 import Alert from "../components/desktop/Alert";
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
+import { supabase } from "../services/supabase/config";
+import userService from "../services/UserServices";
+import UserAvatar from "../components/UserAvatar/UserAvatar";
+import type { UserProfile } from "../types/UserProfileType";
 
 
 export default function AddNewHabit() {
   const nav = useNavigate();
-  const NavigateProfile = () => nav("/profile");
+  const NavigateProfile = () => nav("/welcome/profile");
 
+  const [user, setUser] = useState<UserProfile | null>(null);
   const [emoji, setEmoji] = useState("🤯");
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [habitName, setHabitName] = useState("");
   const [habitDesc, setHabitDesc] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState(false);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user?.email) {
+        const userData = await userService.getUserByEmail(session.user.email);
+        if (userData) {
+          setUser(userData);
+        }
+      }
+    };
+    fetchUser();
+  }, []);
 
   const days = [
     { key: 'Su', label: 'Sunday' },
@@ -89,21 +107,32 @@ export default function AddNewHabit() {
             </button>
 
             <div
-              onClick={NavigateProfile}
-              className="hidden md:flex items-center gap-3 fixed right-40 mt-20 cursor-pointer"
-            >
-              <img
-                src="https://i.pinimg.com/736x/34/df/3c/34df3c26865e26dbda372ed6ec45e9b7.jpg"
-                alt="Profile"
-                className="w-17 h-17 rounded-full"
-              />
-              <div className="flex flex-col">
-                <p className="font-semibold text-[#F9FAFB] text-[19px]">
-                  Jenny Torres
-                </p>
-                <p className="text-[#A1A1AA] text-sm text-[14px]">Your Profile</p>
-              </div>
-            </div>
+                        onClick={NavigateProfile}
+                        className="hidden md:flex items-center gap-3 fixed 
+                        right-40 mt-20 cursor-pointer"
+                      >
+                        {user ? (
+                          <UserAvatar
+                            userImage={user.userImage}
+                            username={user.username}
+                            size="w-16 h-16"
+                            textSize="text-2xl"
+                          />
+                        ) : (
+                          <div className="w-16 h-16 rounded-full bg-[#2A2A2A] 
+                          flex items-center justify-center">
+                            <div className="w-8 h-8 border-2 border-[#B1F042] 
+                  border-t-transparent rounded-full animate-spin"></div>
+                          </div>
+                        )}
+            
+                        <div className="flex flex-col">
+                          <p className="font-semibold text-[#F9FAFB] text-lg">
+                            {user ? user.username : "Loading..."}
+                          </p>
+                          <p className="text-[#A1A1AA] text-sm">Your Profile</p>
+                        </div>
+                      </div>
 
           </div>
 
