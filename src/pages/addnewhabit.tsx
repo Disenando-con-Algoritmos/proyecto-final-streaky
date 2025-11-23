@@ -8,7 +8,7 @@ import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 
 export default function AddNewHabit() {
   const nav = useNavigate();
-  const NavigateProfile = () => nav("/profile");
+  const NavigateProfile = () => nav("/welcome/profile");
 
   const [emoji, setEmoji] = useState("🤯");
   const [selectedDays, setSelectedDays] = useState<string[]>([]);

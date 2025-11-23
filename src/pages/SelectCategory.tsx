@@ -38,7 +38,7 @@ export default function SelectCategory() {
   const handleAccept = () => {
     if (selectedCategory) {
       dispatch(setCategory(selectedCategory));
-      navigate("/createpost");
+      navigate("/welcome/createpost");
     } else {
       setShowAlert(true);
       setTimeout(() => setShowAlert(false), 2500);
@@ -57,7 +57,7 @@ export default function SelectCategory() {
     { emoji: "💵", label: "Money" },
   ];
 
-  
+
   if (isMobile) {
     return <CategoryPopup isOpen={true} onClose={() => navigate("/createpost")} />;
   }

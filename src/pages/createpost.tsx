@@ -127,7 +127,7 @@ export default function CreatePost() {
                 onClick={() => {
                   const isMobile = window.innerWidth < 768;
                   if (isMobile) setShowCategoryPopup(true);
-                  else navigate("/select");
+                  else navigate("/welcome/select");
                 }}
                 className="bg-[#703EDD] hover:bg-[#5c32b6] duration-300 p-3 
                   rounded-[50px] w-[200px] text-white font-medium text-lg

@@ -7,12 +7,14 @@ import { useNavigate } from "react-router";
 
 export default function Welcome() {
     const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const username = user.user?.user_metadata?.username || "User";
 
     return (
         <div
             className="relative flex flex-col justify-center items-center 
       h-screen text-center bg-[#171717] 
-      text-[#F9FAFB] s" 
+      text-[#F9FAFB] s"
         >
             {/* Vector Violeta izquierdo */}
             <img
@@ -32,7 +34,7 @@ export default function Welcome() {
             {/* Texto principal */}
             <div className="z-10 px-4" >
                 <p className="font-bold text-[36px] sm:text-[60px]">
-                    Welcome Jenny!
+                    Welcome {username}!
                 </p>
                 <p className="text-[16px] sm:text-[20px] pt-[20px]">
                     Start adding your first habit ✏️
