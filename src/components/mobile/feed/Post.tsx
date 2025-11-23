@@ -7,7 +7,7 @@ export default function Post() {
   const [multiplePost, sedMultiplePost] = useState<PostTypes[]>([]); // la tag va el tipado
   useEffect(() => {
     const fecthData = async () => {
-      const data = await getPost(); 
+      const data = await getPost();
       sedMultiplePost(data);
     };
     fecthData();
