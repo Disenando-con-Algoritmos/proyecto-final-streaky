@@ -13,6 +13,7 @@ import CategoryPopup from "../components/mobile/create-post/CategoryPopup";
 import { getCurrentUser } from "../services/supabase/userService";
 import type { UserProfile } from "../types/UserProfileType";
 import UserAvatar from "../components/UserAvatar/UserAvatar";
+import AlertPassword from "../components/desktop/AlertPassword";
 
 export default function CreatePost() {
   const navigate = useNavigate();
@@ -22,6 +23,8 @@ export default function CreatePost() {
   const post = useSelector((state: RootState) => state.post);
   const [text, setText] = useState("");
   const [user, setUser] = useState<UserProfile | null>(null);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
     async function fetchUser() {
@@ -50,6 +53,27 @@ export default function CreatePost() {
   };
 
   const handlePublish = () => {
+    if (!text.trim()) {
+      setAlertMessage("You must write something!");
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);
+      return;
+    }
+
+    if (!post.category) {
+      setAlertMessage("You must choose a category!");
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);
+      return;
+    }
+
+    if (!post.image && !imagePreview) {
+      setAlertMessage("You must upload an image!");
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);
+      return;
+    }
+
     dispatch(setDescription(text));
     console.log("📝 New Post Created:", {
       description: text,
@@ -62,6 +86,7 @@ export default function CreatePost() {
 
   return (
     <div className="relative z-0">
+      <AlertPassword show={showAlert} message={alertMessage} />
 
       {/* Background shapes */}
       <img
@@ -175,6 +200,7 @@ export default function CreatePost() {
           <textarea
             placeholder="What’s your habit today? 🌟"
             value={text}
+            required
             onChange={(e) => setText(e.target.value)}
             className="bg-[#1B1B1B] p-4 w-full h-[230px] rounded-xl"
           />

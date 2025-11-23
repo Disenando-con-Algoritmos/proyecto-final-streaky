@@ -11,7 +11,6 @@ const authService = {
             email, //tenemos que solo enviamos el email y la password
             password,
             options: {
-                emailRedirectTo: `${window.location.origin}/login`,
                 data: {
                     username: additionalInfo.username,
                     display_name: additionalInfo.username,  // esto es el nombre que ves en Supabase
