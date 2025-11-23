@@ -5,23 +5,43 @@ import { FaPaperPlane } from "react-icons/fa6";
 import type { PostTypes } from "../../../types/PostTypes";
 import UserAvatar from "../../UserAvatar/UserAvatar";
 import { getCurrentUser } from "../../../services/supabase/userService";
+import { addComment, getCommentsByPostId } from "../../../services/supabase/commentsService";
 import type { UserProfile } from "../../../types/UserProfileType";
+import type { CommentsPost } from "../../../types/Comments";
 
 export default function CommentPopup({ cardIndividuals }: { cardIndividuals: PostTypes }) {
     const [showComments, setShowComments] = useState(false);
     const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
-
-    const comments = cardIndividuals.comments || [];
+    const [comments, setComments] = useState<CommentsPost[]>([]);
+    const [newComment, setNewComment] = useState("");
 
     useEffect(() => {
-        async function fetchUser() {
+        async function fetchData() {
             const userData = await getCurrentUser();
             if (userData) {
                 setCurrentUser(userData);
             }
+            fetchComments();
         }
-        fetchUser();
-    }, []);
+        fetchData();
+    }, [cardIndividuals.id]);
+
+    async function fetchComments() {
+        const fetchedComments = await getCommentsByPostId(cardIndividuals.id);
+        setComments(fetchedComments);
+    }
+
+    async function handleSendComment() {
+        if (!newComment.trim() || !currentUser) return;
+
+        try {
+            await addComment(cardIndividuals.id, currentUser.id, newComment);
+            setNewComment("");
+            fetchComments();
+        } catch (error) {
+            console.error("Failed to send comment", error);
+        }
+    }
 
     return (
         <>
@@ -57,7 +77,7 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
                         </div>
 
                         {/* lista de comentarios */}
-                        <div className="flex-1 px-10 pt-2 space-y-8">
+                        <div className="flex-1 px-10 pt-2 space-y-8 overflow-y-auto">
                             {comments.map((comment, index) => (
                                 <div key={index} className="flex items-start gap-3">
                                     <UserAvatar
@@ -97,9 +117,18 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
                                 placeholder="Add a comment..."
                                 className="flex-1 bg-transparent text-[#F9FAFB] 
                                 text-sm outline-none placeholder-[#888]"
+                                value={newComment}
+                                onChange={(e) => setNewComment(e.target.value)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') handleSendComment();
+                                }}
                             />
-                            <button className="ml-3 bg-[#7C3AED] p-2 rounded-full 
-                            hover:bg-[#8B5CF6] transition cursor-pointer">
+                            <button
+                                className="ml-3 bg-[#7C3AED] p-2 rounded-full 
+                                hover:bg-[#8B5CF6] transition cursor-pointer"
+                                onClick={handleSendComment}
+                                disabled={!currentUser}
+                            >
                                 <FaPaperPlane className="text-white text-[14px]" />
                             </button>
                         </div>

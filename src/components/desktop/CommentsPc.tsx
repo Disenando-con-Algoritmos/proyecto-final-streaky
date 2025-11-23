@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaRegComment } from "react-icons/fa";
 import type { PostTypes } from "../../types/PostTypes";
 import { FaPaperPlane } from "react-icons/fa6";
 import UserAvatar from "../UserAvatar/UserAvatar";
+import { addComment, getCommentsByPostId } from "../../services/supabase/commentsService";
+import { getCurrentUser } from "../../services/supabase/userService";
+import type { CommentsPost } from "../../types/Comments";
 
 export default function CommentsPc({
   cardIndividuals,
@@ -10,10 +13,40 @@ export default function CommentsPc({
   cardIndividuals: PostTypes;
 }) {
   const [showComments, setShowComments] = useState(false);
-  const comments = cardIndividuals.comments || [];
+  const [comments, setComments] = useState<CommentsPost[]>([]);
+  const [newComment, setNewComment] = useState("");
+  const [userId, setUserId] = useState<number | null>(null);
+
+  useEffect(() => {
+    // Fetch current user
+    getCurrentUser().then((user) => {
+      if (user) setUserId(user.id);
+    });
+
+    // Fetch comments for this post
+    fetchComments();
+  }, [cardIndividuals.id]);
+
+  async function fetchComments() {
+    const fetchedComments = await getCommentsByPostId(cardIndividuals.id);
+    setComments(fetchedComments);
+  }
 
   function toggleComments() {
     setShowComments(!showComments);
+  }
+
+  async function handleSendComment() {
+    if (!newComment.trim() || !userId) return;
+
+    try {
+      await addComment(cardIndividuals.id, userId, newComment);
+      setNewComment("");
+      // Refresh comments to show the new one
+      fetchComments();
+    } catch (error) {
+      console.error("Failed to send comment", error);
+    }
   }
 
   return (
@@ -41,7 +74,7 @@ export default function CommentsPc({
           }`}
       >
         {/* Caja con comentarios */}
-        <div className="bg-[#2A2A2A] p-4 rounded-xl space-y-5 mt-2">
+        <div className="bg-[#2A2A2A] p-4 rounded-xl space-y-5 mt-2 overflow-y-auto max-h-[300px]">
           {comments.length > 0 ? (
             comments.map((Comment, index) => (
               <div key={index} className="flex items-start gap-3">
@@ -75,11 +108,19 @@ export default function CommentsPc({
             placeholder="Add a comment..."
             className="bg-[#2A2A2A] rounded-full w-full h-11 p-4 pr-12 
             text-[#F9FAFB] focus:outline-none"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSendComment();
+            }}
           />
           {/* Botón posicionado dentro del input */}
           <button
             className="absolute right-3 top-1/2 -translate-y-1/2 bg-[#7C3AED] p-2 rounded-full
-            hover:bg-[#8B5CF6] transition cursor-pointer">
+            hover:bg-[#8B5CF6] transition cursor-pointer"
+            onClick={handleSendComment}
+            disabled={!userId}
+          >
             <FaPaperPlane className="text-white text-[14px]" />
           </button>
 
