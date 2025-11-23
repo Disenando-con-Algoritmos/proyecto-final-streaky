@@ -1,8 +1,9 @@
 interface AlertProps {
   show: boolean;
+  message?: string;
 }
 
-export default function Alert({ show }: AlertProps) {
+export default function Alert({ show, message }: AlertProps) {
   if (!show) return null;
 
   return (
@@ -24,7 +25,7 @@ export default function Alert({ show }: AlertProps) {
         />
       </svg>
 
-      <span>Error! You must select at least one.</span>
+      <span>{message}</span>
     </div>
   );
 }

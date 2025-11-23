@@ -3,19 +3,20 @@ import { supabase } from "./supabase/config";
 import userService from "./UserServices";
 
 const authService = {
-    signUp: async (email: string, password: string, additionalInfo: Omit<UserProfile, 
-        "id" | "userDescription" | "userImage" | "streak" | "followers" | 
+    signUp: async (email: string, password: string, additionalInfo: Omit<UserProfile,
+        "id" | "userDescription" | "userImage" | "streak" | "followers" |
         "following" | "habits">) => {
         const { data, error } = await supabase.auth.signUp({
             //todo viene desde la api de supabase, aqui es donde por ejemplo
             email, //tenemos que solo enviamos el email y la password
             password,
             options: {
-        data: {
-            username: additionalInfo.username,
-            display_name: additionalInfo.username,  // esto es el nombre que ves en Supabase
-        }
-    }
+                emailRedirectTo: `${window.location.origin}/login`,
+                data: {
+                    username: additionalInfo.username,
+                    display_name: additionalInfo.username,  // esto es el nombre que ves en Supabase
+                }
+            }
         });
 
         if (error) {
