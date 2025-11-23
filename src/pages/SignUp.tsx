@@ -1,4 +1,5 @@
 import Inputs from "../components/mobile/signup-login/Inputs";
+import AlertPassword from "../components/desktop/AlertPassword";
 import { FaRegUser } from "react-icons/fa6";
 import { MdOutlineEmail, MdLockOutline } from "react-icons/md";
 import miffySignUp from "../assets/miffy-signup.png";
@@ -7,12 +8,14 @@ import grayShape from "../assets/grayShape.png";
 import greenShape from "../assets/greenShape.png";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 import { useNavigate } from "react-router";
-import { useRef, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import authService from "../services/AuthServices";
 
 export default function SignUp() {
     const navigate = useNavigate();
     const formRef = useRef<HTMLFormElement>(null);
+    const [showPasswordAlert, setShowPasswordAlert] = useState(false);
+    const [passwordAlertMessage, setPasswordAlertMessage] = useState("");
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -26,14 +29,23 @@ export default function SignUp() {
         };
 
         if (dataObj.password !== dataObj.confirmPassword) {
-        alert("Passwords do not match");
-        return;
-    }
+            setPasswordAlertMessage("The password is not the same.");
+            setShowPasswordAlert(true);
+            setTimeout(() => setShowPasswordAlert(false), 3000);
+            return;
+        }
+
+        if ((dataObj.password as string).length < 6) {
+            setPasswordAlertMessage("Password must be at least 6 characters long!");
+            setShowPasswordAlert(true);
+            setTimeout(() => setShowPasswordAlert(false), 3000);
+            return;
+        }
 
         const additionalInfo = {
-    username: dataObj.username as string,
-    email: dataObj.email as string,
-};
+            username: dataObj.username as string,
+            email: dataObj.email as string,
+        };
 
         console.info("SignUp Data:", dataObj);
 
@@ -42,15 +54,15 @@ export default function SignUp() {
         try {
             const result = await authService.signUp(
                 dataObj.email as string, dataObj.password as string, additionalInfo);
-                if (result.success) {
-                    console.info("User registered successfully:", result);
-                    navigate("/login");
-                } else {
-                    console.error("Registration failed:", result.error);
-                }
-            } catch (error) {
-                console.error("Registration failed:", error);
+            if (result.success) {
+                console.info("User registered successfully:", result);
+                navigate("/login");
+            } else {
+                console.error("Registration failed:", result.error);
             }
+        } catch (error) {
+            console.error("Registration failed:", error);
+        }
     };
 
 
@@ -60,6 +72,7 @@ export default function SignUp() {
             className="relative min-h-screen flex flex-col items-center 
             justify-between overflow-x-hidden"
         >
+            <AlertPassword show={showPasswordAlert} message={passwordAlertMessage} />
             <div
                 id="elements-container"
                 className="w-full max-w-[420px] flex flex-col mt-[140px] sm:mt-[40px] 

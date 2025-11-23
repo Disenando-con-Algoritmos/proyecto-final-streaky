@@ -1,4 +1,5 @@
 import PcSearchBar from "../components/desktop/PcSearchBar";
+import Alert from "../components/desktop/Alert";
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
@@ -17,6 +18,7 @@ export default function AddNewHabit() {
   const [habitName, setHabitName] = useState("");
   const [habitDesc, setHabitDesc] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+<<<<<<< HEAD
   const [user, setUser] = useState<UserProfile | null>(null);
 
   useEffect(() => {
@@ -28,6 +30,9 @@ export default function AddNewHabit() {
     }
     fetchUser();
   }, []);
+=======
+  const [showAlert, setShowAlert] = useState(false);
+>>>>>>> d88e6f1cec16c18b6b6254f60b29eaf1650158eb
 
   const days = [
     { key: 'Su', label: 'Sunday' },
@@ -66,6 +71,12 @@ export default function AddNewHabit() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!selectedCategory || selectedDays.length === 0) {
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);
+      return;
+    }
+
     console.log("📋 New Habit Created:", {
       name: habitName,
       description: habitDesc,
@@ -81,6 +92,7 @@ export default function AddNewHabit() {
     <>
       <PcSearchBar />
       <MobileNavbar />
+      <Alert show={showAlert} />
 
       <form onSubmit={handleSubmit}>
         <div className="flex justify-center items-center mt-10 md:mt-10 relative md:mb-10">
