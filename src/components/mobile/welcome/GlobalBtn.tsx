@@ -19,7 +19,7 @@ export default function GlobalBtn({
                   p-3 rounded-[50px] w-[160px] text-[#171717] font-[600] text-lg
                   shadow-md hover:shadow-lg hover:scale-105 transition cursor-pointer 
                   whitespace-nowrap
-                  ${className}`} 
+                  ${className}`}
     >
       {text}
     </button>
