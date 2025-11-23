@@ -1,4 +1,5 @@
 import Inputs from "../components/mobile/signup-login/Inputs";
+import AlertPassword from "../components/desktop/AlertPassword";
 import { MdOutlineEmail } from "react-icons/md";
 import { MdLockOutline } from "react-icons/md";
 import catLogin from "../assets/miffy-signup.png";
@@ -7,12 +8,14 @@ import GrayShape from "../assets/GrayShape.png";
 import Logo3 from "../assets/Logo3.png";
 import { useNavigate } from "react-router";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
-import { useRef, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import authService from "../services/AuthServices";
 
 export default function LogIn() {
     const navigate = useNavigate();
     const formRef = useRef<HTMLFormElement>(null);
+    const [showPasswordAlert, setShowPasswordAlert] = useState(false);
+    const [passwordAlertMessage, setPasswordAlertMessage] = useState("");
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -25,7 +28,9 @@ export default function LogIn() {
 
         console.info("LogIn Data:", dataObj);
 
-        navigate("/welcome");
+        console.info("LogIn Data:", dataObj);
+
+        // navigate("/welcome"); // Removed early navigation
 
         try {
             const result = await authService.signIn(
@@ -37,7 +42,9 @@ export default function LogIn() {
                 navigate("/welcome");
             } else {
                 console.error("Sign-in failed:", result.error);
-                // Aquí puedes mostrar un mensaje de error al usuario
+                setPasswordAlertMessage("Incorrect password");
+                setShowPasswordAlert(true);
+                setTimeout(() => setShowPasswordAlert(false), 3000);
             }
         } catch (error) {
             console.error("Sign-in failed:", error);
@@ -50,6 +57,7 @@ export default function LogIn() {
             className="relative min-h-screen flex flex-col items-center 
         justify-between overflow-hidden"
         >
+            <AlertPassword show={showPasswordAlert} message={passwordAlertMessage} />
             <div
                 id="elements-container"
                 className="p-4 sm:p-6 rounded-lg mt-22 sm:mt-12"
@@ -97,7 +105,7 @@ export default function LogIn() {
                         Sign Up
                     </span>
                 </p>
-            </div>
+            </div >
 
             <div
                 className="bg-[#222222] 
@@ -135,6 +143,6 @@ export default function LogIn() {
                 src={catLogin}
                 alt="Miffy"
             />
-        </div>
+        </div >
     );
 }
