@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { PostTypes } from "../../../types/PostTypes";
 import CategoryTag from "../create-post/CategoryTag";
 import CommentFeed from "../../desktop/CommentsPc";
@@ -21,6 +21,47 @@ export default function CardPost({
     const nav = useNavigate();
     const currentUserId = 5;
     const isOwnPost = cardIndividuals.id === currentUserId;
+    const [timeAgo, setTimeAgo] = useState("");
+
+    useEffect(() => {
+        const calculateTimeAgo = () => {
+            // Ensure date is treated as UTC if missing timezone info
+            let dateStr = cardIndividuals.datePublished;
+            if (!dateStr.endsWith("Z") && !dateStr.includes("+")) {
+                dateStr += "Z";
+            }
+            
+            const date = new Date(dateStr);
+            const now = new Date();
+            // Use Math.max to prevent negative values due to slight clock skew
+            const diffInSeconds = Math.max(0, Math.floor((now.getTime() - date.getTime()) / 1000));
+
+            if (diffInSeconds < 60) {
+                setTimeAgo(`Hace ${diffInSeconds} segundo${diffInSeconds !== 1 ? 's' : ''}`);
+            } else {
+                const diffInMinutes = Math.floor(diffInSeconds / 60);
+                if (diffInMinutes < 60) {
+                    setTimeAgo(`Hace ${diffInMinutes} minuto${diffInMinutes !== 1 ? 's' : ''}`);
+                } else {
+                    const diffInHours = Math.floor(diffInMinutes / 60);
+                    if (diffInHours < 23) {
+                        setTimeAgo(`Hace ${diffInHours} hora${diffInHours !== 1 ? 's' : ''}`);
+                    } else {
+                        setTimeAgo(date.toLocaleDateString("es-ES", {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                        }));
+                    }
+                }
+            }
+        };
+
+        calculateTimeAgo(); // Initial calculation
+        const interval = setInterval(calculateTimeAgo, 1000); // Update every second
+
+        return () => clearInterval(interval);
+    }, [cardIndividuals.datePublished]);
 
     return (
         <div className="m-5 flex flex-col justify-center items-center">
@@ -49,7 +90,7 @@ export default function CardPost({
                         <div>
                             <h3 className="font-semibold text-lg">{cardIndividuals.username}</h3>
                             <p className="text-[#5A5A5A] text-sm">
-                                {cardIndividuals.datePublished}
+                                {timeAgo}
                             </p>
                         </div>
                     </div>
