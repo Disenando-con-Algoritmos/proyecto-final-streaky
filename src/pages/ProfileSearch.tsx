@@ -10,7 +10,7 @@ import type { PostTypes } from "../types/PostTypes";
 import CardPost from "../components/mobile/feed/CardPost";
 import PcSearchBar from "../components/desktop/PcSearchBar";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
-import { getCurrentUser } from "../services/supabase/userService";
+import { getCurrentUser, getAllUsers } from "../services/supabase/userService";
 import type { UserProfile } from "../types/UserProfileType";
 import UserAvatar from "../components/UserAvatar/UserAvatar";
 
@@ -27,8 +27,18 @@ export default function ProfileSearch() {
     // cargar usuarios
     useEffect(() => {
         const loadUsers = async () => {
-            const data = await getHabits();
-            setUsers(data);
+            const staticUsers = await getHabits();
+            const dynamicUsers = await getAllUsers();
+            const mergedUsers = [...staticUsers];
+
+            dynamicUsers.forEach((dUser) => {
+                if (!mergedUsers.find(sUser => 
+                    sUser.username.toLowerCase() === dUser.username.toLowerCase())) {
+                    mergedUsers.push(dUser as unknown as User);
+                }
+            });
+
+            setUsers(mergedUsers);
             setLoading(false);
         };
         loadUsers();
@@ -98,7 +108,7 @@ export default function ProfileSearch() {
             <div
                 className="min-h-screen bg-[#171717] text-[#F9FAFB] 
             flex flex-col items-center py-17
-            lg:grid lg:grid-cols-[200px_1fr_390px] l
+            lg:grid lg:grid-cols-[300px_1fr_390px] l
             lg:px-13 lg:py-18"
             >
                 {/* espacio blanco  */}
@@ -164,13 +174,17 @@ export default function ProfileSearch() {
                     md:hidden"></div>
 
                     <div className="w-11/12 max-w-sm flex flex-col gap-5 mb-6 lg:hidden">
-                        {user.habits.map((habit: HabitType) => (
-                            <Habit key={habit.id} habit={habit} />
-                        ))}
+                        {user.habits.length > 0 ? (
+                            user.habits.map((habit: HabitType) => (
+                                <Habit key={habit.id} habit={habit} />
+                            ))
+                        ) : (
+                            <p className="text-gray-400 text-center">No habits yet.</p>
+                        )}
                     </div>
 
                     {/* last post */}
-                    {lastPost && (
+                    {lastPost ? (
                         <>
                             <div className="flex justify-between items-center 
                         w-11/12 max-w-sm mt-10 mb-2 lg:w-full relative">
@@ -185,10 +199,15 @@ export default function ProfileSearch() {
                                 />
                             </div>
 
-                            <div className="w-[430px] lg:w-[810px] rounded-2xl lg:m-0">
+                            <div className="w-[430px] lg:w-[818px] rounded-2xl lg:m-0">
                                 <CardPost cardIndividuals={lastPost} />
                             </div>
                         </>
+                    ) : (
+                        <div className="w-11/12 max-w-sm mt-10 mb-10
+                        text-center lg:w-full lg:ml-45">
+                            <p className="text-gray-400 text-xl">No posts yet.</p>
+                        </div>
                     )}
                 </div>
 
@@ -233,9 +252,13 @@ export default function ProfileSearch() {
 
                     {/* habits */}
                     <div className="flex flex-col gap-7 max-h-[70vh] overflow-y-auto pr-1 mt-18">
-                        {user.habits.map((habit: HabitType) => (
-                            <Habit key={habit.id} habit={habit} />
-                        ))}
+                        {user.habits.length > 0 ? (
+                            user.habits.map((habit: HabitType) => (
+                                <Habit key={habit.id} habit={habit} />
+                            ))
+                        ) : (
+                            <p className="text-gray-400 text-center mt-10">No habits yet.</p>
+                        )}
                     </div>
                 </div>
 

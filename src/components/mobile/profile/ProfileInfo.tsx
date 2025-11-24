@@ -37,7 +37,7 @@ export default function ProfileInfo({ user }: UserProps) {
                 {/* perfil */}
                 <div
                     className="flex flex-col items-center lg:flex-row 
-                    lg:flex-wrap lg:ml-40"
+                    lg:flex-wrap lg:ml-30"
                 >
                     <div className="flex items-center md:ml-90 gap-5 ">
                         <UserAvatar

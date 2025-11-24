@@ -61,3 +61,28 @@ export async function updateUserProfile(updates: Partial<UserProfile>) {
   if (error) throw error;
   return data;
 }
+
+export async function getAllUsers(): Promise<UserProfile[]> {
+  const { data, error } = await supabase
+    .from("users")
+    .select("id, username, email, image, streak, description");
+
+  if (error) {
+    console.error("Error fetching users:", error);
+    return [];
+  }
+
+  console.log("Fetched users data:", data); // Debugging log
+
+  return data.map((user: any) => ({
+    id: user.id,
+    username: user.username,
+    userDescription: user.description || "No description yet.",
+    email: user.email,
+    userImage: user.image,
+    streak: user.streak || 0,
+    followers: user.followers || 0,
+    following: user.following || 0,
+    habits: []
+  }));
+}

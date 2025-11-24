@@ -6,15 +6,15 @@ import { HiOutlineLogout } from "react-icons/hi";
 import { CgClose } from "react-icons/cg";
 import logo1 from "../../assets/logo1.png";
 import logo2 from "../../assets/logo2.png";
-import type { PostTypes } from "../../types/PostTypes";
-import { getPost } from "../../services/PostService";
+import type { UserProfile } from "../../types/UserProfileType";
+import { getAllUsers } from "../../services/supabase/userService";
 import { useLocation, useNavigate } from "react-router";
 import authService from "../../services/AuthServices";
 import UserAvatar from "../UserAvatar/UserAvatar";
 
 function PcSearchBar() {
   const [ClickSearch, setClickSearch] = useState(true);
-  const [Users, setUsers] = useState<PostTypes[]>([]);
+  const [Users, setUsers] = useState<UserProfile[]>([]);
   const [Search, setSearch] = useState("");
   const nav = useNavigate();
   const location = useLocation();
@@ -26,7 +26,7 @@ function PcSearchBar() {
 
   useEffect(() => {
     async function fetchUsers() {
-      const data = await getPost();
+      const data = await getAllUsers();
       setUsers(data);
     }
     fetchUsers();
@@ -111,7 +111,15 @@ function PcSearchBar() {
                     ).map((UserIndividual) => (
                       <div
                         key={UserIndividual.id}
-                        onClick={() => nav(`/welcome/profile/${UserIndividual.username}`)}
+                        onClick={async () => {
+                          const currentUser = await authService.getCurrentUser();
+                          if (currentUser && currentUser.user_metadata.username
+                            === UserIndividual.username) {
+                            nav("/welcome/profile");
+                          } else {
+                            nav(`/welcome/profile/${UserIndividual.username}`);
+                          }
+                        }}
                         className="flex items-center gap-4 bg-transparent pb-3 cursor-pointer 
                         hover:opacity-80 transition"
                       >

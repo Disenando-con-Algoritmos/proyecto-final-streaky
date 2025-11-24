@@ -9,6 +9,7 @@ import miffyPost from "../../../assets/miffyPost.png";
 import DeletePost from "../profile/DeletePost";
 import { useNavigate } from "react-router";
 import UserAvatar from "../../UserAvatar/UserAvatar";
+import authService from "../../../services/AuthServices";
 
 export default function CardPost({
     cardIndividuals,
@@ -19,9 +20,18 @@ export default function CardPost({
 }) {
     const [showPopup, setShowPopup] = useState(false);
     const nav = useNavigate();
-    const currentUserId = 5;
-    const isOwnPost = cardIndividuals.id === currentUserId;
+    const [currentUser, setCurrentUser] = useState<any>(null);
+    const isOwnPost = currentUser && 
+    currentUser.user_metadata.username === cardIndividuals.username;
     const [timeAgo, setTimeAgo] = useState("");
+
+    useEffect(() => {
+        async function fetchUser() {
+            const user = await authService.getCurrentUser();
+            setCurrentUser(user);
+        }
+        fetchUser();
+    }, []);
 
     useEffect(() => {
         const calculateTimeAgo = () => {
@@ -30,7 +40,7 @@ export default function CardPost({
             if (!dateStr.endsWith("Z") && !dateStr.includes("+")) {
                 dateStr += "Z";
             }
-            
+
             const date = new Date(dateStr);
             const now = new Date();
             // Use Math.max to prevent negative values due to slight clock skew
@@ -79,7 +89,13 @@ export default function CardPost({
                 {/* imagen + info perfil */}
                 <div className="flex items-center justify-between mb-3">
                     <div
-                        onClick={() => nav(`/welcome/profile/${cardIndividuals.username}`)}
+                        onClick={() => {
+                            if (isOwnPost) {
+                                nav("/welcome/profile");
+                            } else {
+                                nav(`/welcome/profile/${cardIndividuals.username}`);
+                            }
+                        }}
                         className="flex items-center gap-3 hover:opacity-80 cursor-pointer">
                         <UserAvatar
                             userImage={cardIndividuals.userImage}

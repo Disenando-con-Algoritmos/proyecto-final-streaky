@@ -70,6 +70,10 @@ const authService = {
             data,
         };
     },
+    getCurrentUser: async () => {
+        const { data: { user } } = await supabase.auth.getUser();
+        return user;
+    },
 };
 
 export default authService;

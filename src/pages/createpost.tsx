@@ -56,13 +56,11 @@ export default function CreatePost() {
     }
   };
 
-  // Load state from Redux on mount
   useEffect(() => {
     if (post.description) setText(post.description);
     if (post.image) setimagePreview(post.image);
   }, [post.description, post.image]);
 
-  // Save state to Redux when navigating to category selection
   const handleChooseCategory = () => {
     dispatch(setDescription(text));
     if (imagePreview) dispatch(setImage(imagePreview));
@@ -130,7 +128,7 @@ export default function CreatePost() {
     }
 
     try {
-      // 1. Get category ID
+      // obtwnr categoria id 
       const normalizedCategory = post.category.trim().toLowerCase();
       console.log("🔍 Searching for category:", normalizedCategory);
 
@@ -148,7 +146,7 @@ export default function CreatePost() {
         return;
       }
 
-      // 2. Upload Image
+      //subir i mage
       const imageUrl = await uploadImage(currentImage);
       if (!imageUrl) {
         setAlertMessage("Failed to upload image.");
@@ -157,7 +155,7 @@ export default function CreatePost() {
         return;
       }
 
-      // 3. Insert post
+      //insertar el post
       const { error: insertError } = await supabase
         .from("post")
         .insert([
