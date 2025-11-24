@@ -11,6 +11,13 @@ import { useNavigate } from "react-router";
 import UserAvatar from "../../UserAvatar/UserAvatar";
 import authService from "../../../services/AuthServices";
 
+type AuthUser = {
+    id: string; 
+    user_metadata?: {
+        username?: string;
+    };
+};
+
 export default function CardPost({
     cardIndividuals,
     showMiffy = false,
@@ -20,10 +27,10 @@ export default function CardPost({
 }) {
     const [showPopup, setShowPopup] = useState(false);
     const nav = useNavigate();
-    const [currentUser, setCurrentUser] = useState<any>(null);
+    const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
 
     const isOwnPost = currentUser &&
-        currentUser.user_metadata?.username?.toLowerCase() 
+        currentUser.user_metadata?.username?.toLowerCase()
         === cardIndividuals.username?.toLowerCase();
     const [timeAgo, setTimeAgo] = useState("");
 
@@ -75,7 +82,7 @@ export default function CardPost({
         };
 
         calculateTimeAgo();
-        const interval = setInterval(calculateTimeAgo, 1000); 
+        const interval = setInterval(calculateTimeAgo, 1000);
 
         return () => clearInterval(interval);
     }, [cardIndividuals.datePublished]);
