@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { FaRegComment } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { FaPaperPlane } from "react-icons/fa6";
@@ -15,21 +15,23 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
     const [comments, setComments] = useState<CommentsPost[]>([]);
     const [newComment, setNewComment] = useState("");
 
+    //memorizar la función que trae comentarios
+    const fetchComments = useCallback(async () => {
+        const fetchedComments = await getCommentsByPostId(cardIndividuals.id);
+        setComments(fetchedComments);
+    }, [cardIndividuals.id]);
+
+    // useEffect depende de fetchComments (que ya depende de cardIndividuals.id)
     useEffect(() => {
         async function fetchData() {
             const userData = await getCurrentUser();
             if (userData) {
                 setCurrentUser(userData);
             }
-            fetchComments();
+            await fetchComments();
         }
         fetchData();
-    }, [cardIndividuals.id]);
-
-    async function fetchComments() {
-        const fetchedComments = await getCommentsByPostId(cardIndividuals.id);
-        setComments(fetchedComments);
-    }
+    }, [fetchComments]);
 
     async function handleSendComment() {
         if (!newComment.trim() || !currentUser) return;
@@ -37,7 +39,7 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
         try {
             await addComment(cardIndividuals.id, currentUser.id, newComment);
             setNewComment("");
-            fetchComments();
+            await fetchComments(); 
         } catch (error) {
             console.error("Failed to send comment", error);
         }

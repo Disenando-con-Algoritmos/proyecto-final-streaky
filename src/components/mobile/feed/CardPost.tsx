@@ -21,21 +21,28 @@ export default function CardPost({
     const [showPopup, setShowPopup] = useState(false);
     const nav = useNavigate();
     const [currentUser, setCurrentUser] = useState<any>(null);
-    const isOwnPost = currentUser && 
-    currentUser.user_metadata.username === cardIndividuals.username;
+
+    const isOwnPost = currentUser &&
+        currentUser.user_metadata?.username?.toLowerCase() 
+        === cardIndividuals.username?.toLowerCase();
     const [timeAgo, setTimeAgo] = useState("");
 
     useEffect(() => {
         async function fetchUser() {
-            const user = await authService.getCurrentUser();
-            setCurrentUser(user);
+            try {
+                const user = await authService.getCurrentUser();
+                // console.log("CardPost - Fetched user:", user)
+                setCurrentUser(user);
+            } catch (error) {
+                console.error("CardPost - Error fetching user:", error);
+            }
         }
         fetchUser();
     }, []);
 
     useEffect(() => {
         const calculateTimeAgo = () => {
-            // Ensure date is treated as UTC if missing timezone info
+
             let dateStr = cardIndividuals.datePublished;
             if (!dateStr.endsWith("Z") && !dateStr.includes("+")) {
                 dateStr += "Z";
@@ -43,7 +50,7 @@ export default function CardPost({
 
             const date = new Date(dateStr);
             const now = new Date();
-            // Use Math.max to prevent negative values due to slight clock skew
+
             const diffInSeconds = Math.max(0, Math.floor((now.getTime() - date.getTime()) / 1000));
 
             if (diffInSeconds < 60) {
@@ -67,8 +74,8 @@ export default function CardPost({
             }
         };
 
-        calculateTimeAgo(); // Initial calculation
-        const interval = setInterval(calculateTimeAgo, 1000); // Update every second
+        calculateTimeAgo();
+        const interval = setInterval(calculateTimeAgo, 1000); 
 
         return () => clearInterval(interval);
     }, [cardIndividuals.datePublished]);

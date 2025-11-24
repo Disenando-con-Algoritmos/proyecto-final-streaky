@@ -17,10 +17,10 @@ export default function MobileNavbar() {
   return (
     <nav
       className="
-        fixed bottom-0 left-0 right-0
+        fixed bottom-0 left-0 right-0 
         bg-[#111111] h-[70px]
         rounded-t-[2rem] flex items-center justify-around
-        shadow-md z-50 sm:hidden"
+        shadow-md z-60 sm:hidden"
     >
 
       <button

@@ -1,52 +1,37 @@
 import { useEffect, useState } from "react";
 import type { UserProfile } from "../types/UserProfileType";
-import type { PostTypes } from "../types/PostTypes";
 import catSearch from "../assets/cat-search.png";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { getPost } from "../services/PostService";
+import { getAllUsers } from "../services/supabase/userService";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 import { useNavigate } from "react-router";
+import UserAvatar from "../components/UserAvatar/UserAvatar";
+import authService from "../services/AuthServices";
 
 export default function SearchPage() {
-  const [postsData, setPostsData] = useState<PostTypes[]>([]);
-  const [uniqueUsers, setUniqueUsers] = useState<Partial<UserProfile>[]>([]);
+  const [users, setUsers] = useState<UserProfile[]>([]);
   const [inputText, setInputText] = useState("");
-  const [usersFilter, setUsersFilter] = useState<Partial<UserProfile>[]>([]);
+  const [usersFilter, setUsersFilter] = useState<UserProfile[]>([]);
   const nav = useNavigate();
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const data = await getPost();
-      setPostsData(data);
+    const fetchUsers = async () => {
+      const data = await getAllUsers();
+      setUsers(data);
     };
-    fetchPosts();
+    fetchUsers();
   }, []);
-
-  useEffect(() => {
-    if (postsData.length > 0) {
-      const unique: Partial<UserProfile>[] = Array.from(
-        new Map(postsData.map((p) => [p.username, p])).values()
-      ).map((user) => ({
-        id: user.id,
-        username: user.username,
-        userDescription: user.userDescription,
-        userImage: user.userImage,
-      }));
-
-      setUniqueUsers(unique);
-    }
-  }, [postsData]);
 
   useEffect(() => {
     if (inputText === "") {
       setUsersFilter([]); // no muestra nada al inicio
     } else {
-      const filtered = uniqueUsers.filter((user) =>
-        user.username?.toLowerCase().includes(inputText.toLowerCase())
+      const filtered = users.filter((user) =>
+        user.username.toLowerCase().includes(inputText.toLowerCase())
       );
       setUsersFilter(filtered);
     }
-  }, [inputText, uniqueUsers]);
+  }, [inputText, users]);
 
   return (
     <>
@@ -86,14 +71,22 @@ export default function SearchPage() {
             usersFilter.map((user) => (
               <div
                 key={user.id}
-                onClick={() => nav(`/welcome/profile/${user.username}`)}
+                onClick={async () => {
+                  const currentUser = await authService.getCurrentUser();
+                  if (currentUser && currentUser.user_metadata.username === user.username) {
+                    nav("/welcome/profile");
+                  } else {
+                    nav(`/welcome/profile/${user.username}`);
+                  }
+                }}
                 className="flex items-center gap-4 bg-transparent pb-3 cursor-pointer 
                 hover:opacity-80 transition"
               >
-                <img
-                  src={user.userImage}
-                  alt={user.username}
-                  className="w-14 h-14 rounded-full object-cover"
+                <UserAvatar
+                  userImage={user.userImage}
+                  username={user.username}
+                  size="w-14 h-14"
+                  textSize="text-lg"
                 />
                 <div>
                   <h2 className="text-lg font-semibold">{user.username}</h2>
