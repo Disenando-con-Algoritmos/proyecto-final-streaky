@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
 import { FaCheck } from "react-icons/fa6";
 import type { Habit } from "../../../types/HabitsTypes";
-import { toggleHabitCheck } from "../../../services/HabitsServices";
+import { toggleHabitCheck, deleteHabit } from "../../../services/HabitsServices";
+import DeleteHabit from "./DeleteHabit";
 
 interface DayProgressGridProps {
   habit: Habit;
   userId: number;
+  onHabitDeleted?: () => void;
 }
 
-const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
+const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit, userId, onHabitDeleted }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [completedDates, setCompletedDates] = useState<string[]>(habit.completedDates || []);
   const [currentMonthDays, setCurrentMonthDays] = useState<Date[]>([]);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   useEffect(() => {
     const now = new Date();
@@ -53,7 +56,7 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
     setCompletedDates(newCompletedDates);
 
     try {
-      await toggleHabitCheck(habit.id, dateStr);
+      await toggleHabitCheck(habit.id, dateStr, userId);
     } catch (error) {
       console.error("Error toggling habit check:", error);
       setCompletedDates(completedDates);
@@ -193,13 +196,31 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
               className="w-28 h-8 bg-[#EF3131] mt-5 flex 
           flex-col items-center justify-center rounded-4xl cursor-pointer"
             >
-              <button className="text-[15px] font-medium text-white cursor-pointer">
+              <button
+                onClick={() => setIsDeleteModalOpen(true)}
+                className="text-[15px] font-medium text-white cursor-pointer"
+              >
                 Delete Habit
               </button>
             </div>
           </div>
         </div>
       )}
+
+      <DeleteHabit
+        open={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onDelete={async () => {
+          try {
+            await deleteHabit(habit.id, userId);
+            setIsDeleteModalOpen(false);
+            if (onHabitDeleted) onHabitDeleted();
+          } catch (error) {
+            console.error("Error deleting habit:", error);
+            alert("Failed to delete habit");
+          }
+        }}
+      />
     </div>
   );
 };

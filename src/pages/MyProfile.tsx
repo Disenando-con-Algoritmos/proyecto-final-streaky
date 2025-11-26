@@ -73,7 +73,25 @@ function ProfilePage() {
             <hr className="border-[#2B2B2B] mb-2 w-80 lg:w-100" />
 
             {user.habits.map((habit) => (
-              <DayProgressGrid key={habit.id} habit={habit} userId={user.id} />
+              <DayProgressGrid
+                key={habit.id}
+                habit={habit}
+                userId={user.id}
+                onHabitDeleted={() => {
+                  // Refresh user data
+                  setLoading(true);
+                  getCurrentUser().then(userData => {
+                    if (userData) {
+                      setUser(userData);
+                      followService.getFollowCounts(userData.id).then((counts) => {
+                        setFollowersCount(counts.followers);
+                        setFollowingCount(counts.following);
+                      });
+                    }
+                    setLoading(false);
+                  });
+                }}
+              />
             ))}
 
             <div className="flex justify-center">

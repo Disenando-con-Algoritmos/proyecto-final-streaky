@@ -18,11 +18,10 @@ export default function LikeButton({
     let isMounted = true;
 
     const fetchLikeStatus = async () => {
-      // Always fetch the latest count
+    
       const count = await likesService.getLikesCount(cardIndividuals.id);
       if (isMounted) setLikes(count);
 
-      // If user is logged in, check if they liked it
       if (currentUserId) {
         const hasLiked = await likesService.hasUserLiked(cardIndividuals.id, currentUserId);
         if (isMounted) setLiked(hasLiked);
@@ -42,7 +41,6 @@ export default function LikeButton({
       return;
     }
 
-    // Optimistic update
     const previousLiked = liked;
     const previousLikes = likes;
 
@@ -58,7 +56,7 @@ export default function LikeButton({
       setLikes(newCount);
     } catch (error) {
       console.error("Error toggling like:", error);
-      // Revert on error
+  
       setLiked(previousLiked);
       setLikes(previousLikes);
     }

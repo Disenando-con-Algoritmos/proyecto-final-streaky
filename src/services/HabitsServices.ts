@@ -40,15 +40,15 @@ const REVERSE_CATEGORY_MAP: Record<number, string> = {
 
 const getCategoryColor = (category: string): string => {
     const colors: Record<string, string> = {
-        'sport': '#B1F042', 
-        'study': '#833AFF', 
-        'social': '#FF69B4', 
-        'hobbies': '#FFA500', 
-        'food': '#FF6347', 
-        'health': '#FF0000', 
-        'work': '#4682B4', 
-        'home': '#8B4513', 
-        'money': '#FFD700'  
+        'sport': '#B1F042',
+        'study': '#833AFF',
+        'social': '#FF69B4',
+        'hobbies': '#FFA500',
+        'food': '#FF6347',
+        'health': '#FF0000',
+        'work': '#4682B4',
+        'home': '#8B4513',
+        'money': '#FFD700'
     };
     return colors[category] || '#FFFFFF';
 };
@@ -141,22 +141,71 @@ export const getUserHabits = async (userId: number): Promise<Habit[]> => {
     });
 };
 
-export const toggleHabitCheck = async (habitId: number, date: string) => {
-    const { data } = await supabase
+export const toggleHabitCheck = async (habitId: number, date: string, userId: number) => {
+    const { data: existingCheck } = await supabase
         .from('habit_progress')
         .select('id')
         .eq('habit_id', habitId)
         .eq('date', date)
         .maybeSingle();
 
-    if (data) {
+    const { data: userHabits } = await supabase
+        .from('habits')
+        .select('id')
+        .eq('user_id', userId);
+
+    const userHabitIds = userHabits?.map(h => h.id) || [];
+
+    const { count: completedTodayCount } = await supabase
+        .from('habit_progress')
+        .select('*', { count: 'exact', head: true })
+        .in('habit_id', userHabitIds)
+        .eq('date', date);
+
+    if (existingCheck) {
         const { error: deleteError } = await supabase
             .from('habit_progress')
             .delete()
-            .eq('id', data.id);
+            .eq('id', existingCheck.id);
 
         if (deleteError) throw deleteError;
-        return false;
+
+        if (completedTodayCount === 1) {
+        
+            const yesterday = new Date(date);
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+            const { count: completedYesterdayCount } = await supabase
+                .from('habit_progress')
+                .select('*', { count: 'exact', head: true })
+                .in('habit_id', userHabitIds)
+                .eq('date', yesterdayStr);
+
+            const { data: userData } = await supabase
+                .from('users')
+                .select('streak')
+                .eq('id', userId)
+                .single();
+
+            const currentStreak = userData?.streak || 0;
+
+            if (completedYesterdayCount && completedYesterdayCount > 0) {
+                if (currentStreak > 0) {
+                    await supabase
+                        .from('users')
+                        .update({ streak: currentStreak - 1 })
+                        .eq('id', userId);
+                }
+            } else {
+                await supabase
+                    .from('users')
+                    .update({ streak: 0 })
+                    .eq('id', userId);
+            }
+        }
+
+        return false; 
     } else {
         const { error: insertError } = await supabase
             .from('habit_progress')
@@ -166,6 +215,40 @@ export const toggleHabitCheck = async (habitId: number, date: string) => {
             });
 
         if (insertError) throw insertError;
+
+        if (completedTodayCount === 0) {
+            const yesterday = new Date(date);
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+
+            const { count: completedYesterdayCount } = await supabase
+                .from('habit_progress')
+                .select('*', { count: 'exact', head: true })
+                .in('habit_id', userHabitIds)
+                .eq('date', yesterdayStr);
+
+            const { data: userData } = await supabase
+                .from('users')
+                .select('streak')
+                .eq('id', userId)
+                .single();
+
+            const currentStreak = userData?.streak || 0;
+
+            if (completedYesterdayCount && completedYesterdayCount > 0) {
+                await supabase
+                    .from('users')
+                    .update({ streak: currentStreak + 1 })
+                    .eq('id', userId);
+            } else {
+                await supabase
+                    .from('users')
+                    .update({ streak: 1 })
+                    .eq('id', userId);
+            }
+        }
+
         return true;
     }
 };
@@ -175,4 +258,32 @@ export const getHabits = async () => {
     const dataHabits = await res.json();
 
     return dataHabits;
+};
+
+export const deleteHabit = async (habitId: number, userId: number) => {
+    const { error: progressError } = await supabase
+        .from('habit_progress')
+        .delete()
+        .eq('habit_id', habitId);
+
+    if (progressError) throw progressError;
+
+    const { error: habitError } = await supabase
+        .from('habits')
+        .delete()
+        .eq('id', habitId);
+
+    if (habitError) throw habitError;
+
+    const { count } = await supabase
+        .from('habits')
+        .select('*', { count: 'exact', head: true })
+        .eq('user_id', userId);
+
+    if (count === 0) {
+        await supabase
+            .from('users')
+            .update({ streak: 0 })
+            .eq('id', userId);
+    }
 };

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { getCurrentUser } from "../services/supabase/userService";
 import type { UserProfile } from "../types/UserProfileType";
 import UserAvatar from "../components/UserAvatar/UserAvatar";
+import Streak from "../components/mobile/feed/Streak";
 
 function Feed() {
   const nav = useNavigate();
@@ -88,7 +89,7 @@ function Feed() {
 
         {/* miffyyy desktop */}
         <img
-          src="https://i.imgur.com/O90kfzg.png" // reemplázalo con tu imagen real
+          src="https://i.imgur.com/O90kfzg.png" 
           alt="miffyy"
           className="hidden md:block fixed  
                     -bottom-8 right-[2px] w-[400px]"
@@ -114,21 +115,7 @@ function Feed() {
             </p>
 
             {/* streak */}
-            <div className="md:m-1 m-4">
-              <div
-                className="bg-[#956EFF] mt-10 mb-11 p-3 rounded-[17px] 
-                        flex justify-center md:justify-start 
-                        items-center text-white shadow-md w-full"
-              >
-                <p className="text-[35px] md:text-[40px] mr-2">🔥</p>
-                <p className="text-[16px] md:text-[18px] text-center md:text-left">
-                  Amazing! You’ve kept your streak for{" "}
-                  <strong>
-                    {user ? user.streak : 0} days
-                  </strong>
-                </p>
-              </div>
-            </div>
+            <Streak streak={user ? user.streak : 0} />
           </div>
         </div>
 
