@@ -120,7 +120,6 @@ export const getUserHabits = async (userId: number): Promise<Habit[]> => {
                 ?.filter((p: HabitProgressRow) => p.habit_id === habit.id)
                 .map((p: HabitProgressRow) => p.date) || [];
 
-        // Initialize progress object
         const progress: Record<string, number[]> = {
             monday: [],
             tuesday: [],
@@ -141,7 +140,6 @@ export const getUserHabits = async (userId: number): Promise<Habit[]> => {
             6: 'saturday'
         };
         
-        // Map short day names to day indices (0-6)
         const dayAbbrMap: Record<string, number> = {
             'Su': 0, 'Mo': 1, 'Tu': 2, 'We': 3, 'Th': 4, 'Fr': 5, 'Sa': 6
         };
@@ -151,22 +149,20 @@ export const getUserHabits = async (userId: number): Promise<Habit[]> => {
             habitDays = habit.days;
         } else if (typeof habit.days === 'string') {
             try {
-                // Handle potential double escaping or simple string format
+
                 const parsed = JSON.parse(habit.days);
                 habitDays = Array.isArray(parsed) ? parsed : [];
-            } catch (e) {
+            } catch {
                 console.warn("Could not parse habit days:", habit.days);
                 habitDays = [];
             }
         }
 
-        // Iterate through each day of the month
         for (let d = new Date(startOfMonth); d <= endOfMonth; d.setDate(d.getDate() + 1)) {
             const dayIndex = d.getDay();
             const dayName = dayMap[dayIndex];
             const dateStr = d.toISOString().split('T')[0];
 
-            // Check if the habit is scheduled for this day of the week
             const isScheduled = habitDays.some(dayAbbr => dayAbbrMap[dayAbbr] === dayIndex);
 
             if (isScheduled) {
