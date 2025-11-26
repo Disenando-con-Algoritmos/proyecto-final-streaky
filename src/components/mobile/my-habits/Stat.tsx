@@ -28,7 +28,8 @@ function StatsHabits({ habits, isLoading = false }: StatsHabitsProps) {
       <div className="flex gap-3 ml-10 mr-10 w-94 md:mr-86">
         <button
           onClick={() => setSelectedCategory("All")}
-          className={`px-9 py-[5px] rounded-full border text-sm font-medium transition-colors${selectedCategory === "All"
+          className={`px-9 py-[5px] rounded-full border text-sm font-medium 
+            transition-colors${selectedCategory === "All"
             ? "border-[#B1F042] text-[#B1F042] cursor-pointer"
             : "border-[#F9FAFB] hover:border-[#B1F042] hover:text-[#B1F042] cursor-pointer"
             }`}

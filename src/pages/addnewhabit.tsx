@@ -118,7 +118,7 @@ export default function AddNewHabit() {
   };
 
   return (
-    <>
+    <div className="ml-5 mr-5">
       <PcSearchBar />
       <MobileNavbar />
       <AlertPassword show={showAlert} message={alertMessage} />
@@ -129,7 +129,7 @@ export default function AddNewHabit() {
 
             <button
               onClick={() => nav(-1)}
-              className="absolute top-4 right-4 md:hidden text-white text-2xl p-2"
+              className="absolute top-4 right-0 md:hidden text-white text-2xl p-2"
             >
               ✕
             </button>
@@ -172,7 +172,7 @@ export default function AddNewHabit() {
         </div>
 
         <div className="flex flex-col items-center justify-center text-center">
-          <h1 className="font-black text-[33px] md:text-[42px] leading-tight mt-12">
+          <h1 className="font-black text-[33px] md:text-[42px] leading-tight mt-20">
             Add your new habit
           </h1>
 
@@ -242,7 +242,7 @@ export default function AddNewHabit() {
                   type="button"
                   onClick={() => toggleCategory(category.id)}
                   className={`py-2 px-4 rounded-[50px] border transition-all 
-                    duration-300 mb-[20px] cursor-pointer
+                    duration-300 mb-[20px] cursor-pointer text-[14px]
                     ${selectedCategory === category.id
                       ? 'bg-[#B1F042] text-[#171717] font-medium shadow-md '
                       : 'border-white bg-transparent text-white hover:border-[#B1F042] font-medium'
@@ -260,6 +260,6 @@ export default function AddNewHabit() {
         </div>
 
       </form>
-    </>
+    </div>
   );
 }
