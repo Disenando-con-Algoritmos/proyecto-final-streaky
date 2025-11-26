@@ -3,7 +3,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 interface DeleteHabitProps {
     open: boolean;
     onClose: () => void;
-    onDelete: () => void;
+    onDelete: () => Promise<void> | void;
 }
 
 const DeleteHabit: React.FC<DeleteHabitProps> = ({ open, onClose, onDelete }) => {
@@ -31,9 +31,13 @@ const DeleteHabit: React.FC<DeleteHabitProps> = ({ open, onClose, onDelete }) =>
                             Cancel
                         </button>
                         <button
+
                             className="w-35 h-10 bg-[#F8575A] text-white rounded-full transition 
                             hover:bg-[#ed4144] focus:outline-none cursor-pointer"
-                            onClick={onDelete}
+                            onClick={async () => {
+                                await onDelete();
+                                window.location.reload();
+                            }}
                         >
                             Delete
                         </button>

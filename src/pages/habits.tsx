@@ -27,7 +27,7 @@ function Habits() {
   useEffect(() => {
     fetchUser();
 
-    // Realtime habito s
+    // Realtime habitos
     const habitsChannel = supabase
       .channel('habits_realtime')
       .on(
@@ -131,16 +131,30 @@ function Habits() {
 
         {/* Contenedor central */}
         <div className="w-full max-w-md md:max-w-4xl mx-auto space-y-6 flex flex-col items-center">
-          <StatsHabits />
+          <StatsHabits habits={user?.habits || []} isLoading={!user} />
           <InfoColor />
           <CreateNewHabit />
-          <div className="mt-10 md:mt-12 md:mr-131 mr-60 ml-4">
-            <p className="text-2xl md:text-3xl ml-13 font-semibold w-40 mb-[-75px]">In Progress</p>
-            <div className="">
-              <img className="w-27 relative left-60 bottom-[-37px] 
-            md:w-40 md:ml-20 md:left-90 md:bottom-[-45px]" src={miffyPost}></img>
+          {user?.habits && user.habits.length > 0 ? (
+            <div className="mt-10 md:mt-12 md:mr-131 mr-60 ml-4">
+              <p className="text-2xl md:text-3xl ml-13 font-semibold w-40 mb-[-75px]">
+                In Progress
+              </p>
+              <div className="">
+                <img
+                  className="w-27 relative left-60 bottom-[-37px] 
+                  md:w-40 md:ml-20 md:left-90 md:bottom-[-45px]"
+                  src={miffyPost}
+                  alt="Miffy Post"
+                />
+              </div>
             </div>
-          </div>
+          ) : user ? (
+            <div className="mt-10 flex justify-center w-full">
+              <p className="text-gray-400 text-lg">
+                You don´t have any habits yet :c
+              </p>
+            </div>
+          ) : null}
           <div className="ml-0">
             {user?.habits.map((habit) => (
               <DayProgressGrid

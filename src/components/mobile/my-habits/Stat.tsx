@@ -1,38 +1,22 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { Habit } from "../../../types/HabitsTypes";
-import { getUserHabits } from "../../../services/HabitsServices";
-import { getCurrentUser } from "../../../services/supabase/userService";
 
-function StatsHabits() {
-  const [habits, setHabits] = useState<Habit[]>([]);
+interface StatsHabitsProps {
+  habits: Habit[];
+  isLoading?: boolean;
+}
+
+function StatsHabits({ habits, isLoading = false }: StatsHabitsProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const user = await getCurrentUser();
-        if (user && user.id) {
-          const userHabits = await getUserHabits(user.id);
-          setHabits(userHabits);
-        }
-      } catch (error) {
-        console.error("Error fetching habits:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
+  if (isLoading) return <p className="text-center text-gray-400 mt-10">Loading stats...</p>;
 
-  if (loading) return <p className="text-center text-gray-400 mt-10">Loading stats...</p>;
-  
   if (habits.length === 0)
     return <p className="text-center text-gray-400 mt-10">You dont have any habit...</p>;
 
   // Extract unique categories from habits
   const categories = Array.from(new Set(habits.map((habit) => habit.category)));
-  
+
   const filteredHabits =
     selectedCategory === "All"
       ? habits
@@ -44,11 +28,10 @@ function StatsHabits() {
       <div className="flex gap-3 ml-10 mr-10 w-94 md:mr-86">
         <button
           onClick={() => setSelectedCategory("All")}
-          className={`px-9 py-[5px] rounded-full border text-sm font-medium transition-colors${
-            selectedCategory === "All"
-              ? "border-[#B1F042] text-[#B1F042] cursor-pointer"
-              : "border-[#F9FAFB] hover:border-[#B1F042] hover:text-[#B1F042] cursor-pointer"
-          }`}
+          className={`px-9 py-[5px] rounded-full border text-sm font-medium transition-colors${selectedCategory === "All"
+            ? "border-[#B1F042] text-[#B1F042] cursor-pointer"
+            : "border-[#F9FAFB] hover:border-[#B1F042] hover:text-[#B1F042] cursor-pointer"
+            }`}
         >
           All
         </button>
@@ -58,11 +41,10 @@ function StatsHabits() {
             key={category}
             onClick={() => setSelectedCategory(category)}
             className={`px-4 py-[5px] rounded-full border text-sm font-medium 
-              transition-colors cursor-pointer ${
-              selectedCategory === category
+              transition-colors cursor-pointer ${selectedCategory === category
                 ? "border-[#B1F042] text-[#B1F042]"
                 : "border-[#F9FAFB] text-white hover:border-[#B1F042] hover:text-[#B1F042]"
-            }`}
+              }`}
           >
             {category}
           </button>
@@ -96,7 +78,7 @@ function StatsHabits() {
 
           const avg =
             allDayValues.length > 0
-              ? allDayValues.reduce((InitialValue, NextValue) => 
+              ? allDayValues.reduce((InitialValue, NextValue) =>
                 InitialValue + NextValue, 0) / allDayValues.length
               : 0;
 
