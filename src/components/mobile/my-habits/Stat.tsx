@@ -1,29 +1,42 @@
 import { useEffect, useState } from "react";
-import type { User } from "../../../types/HabitsTypes";
-import { getHabits } from "../../../services/HabitsServices";
+import type { Habit } from "../../../types/HabitsTypes";
+import { getUserHabits } from "../../../services/HabitsServices";
+import { getCurrentUser } from "../../../services/supabase/userService";
 
 function StatsHabits() {
-  const [personalCategories, setpersonalCategories] = useState<User[]>([]);
+  const [habits, setHabits] = useState<Habit[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchUsers() {
-      const data = (await getHabits()) as User[];
-      const jennyData = data.find((user) => user.username === "Jenny");
-      setpersonalCategories(jennyData ? [jennyData] : []);
+    async function fetchData() {
+      try {
+        const user = await getCurrentUser();
+        if (user && user.id) {
+          const userHabits = await getUserHabits(user.id);
+          setHabits(userHabits);
+        }
+      } catch (error) {
+        console.error("Error fetching habits:", error);
+      } finally {
+        setLoading(false);
+      }
     }
-    fetchUsers();
+    fetchData();
   }, []);
 
-  if (personalCategories.length === 0)
+  if (loading) return <p className="text-center text-gray-400 mt-10">Loading stats...</p>;
+  
+  if (habits.length === 0)
     return <p className="text-center text-gray-400 mt-10">You dont have any habit...</p>;
 
-  const user = personalCategories[0];
-  const categories = (user.habits.map((habit) => habit.category));
+  // Extract unique categories from habits
+  const categories = Array.from(new Set(habits.map((habit) => habit.category)));
+  
   const filteredHabits =
     selectedCategory === "All"
-      ? user.habits
-      : user.habits.filter((habit) => habit.category === selectedCategory);
+      ? habits
+      : habits.filter((habit) => habit.category === selectedCategory);
 
   return (
     <div className="flex flex-col items-center mt-6 w-full px-4 md:px-0">

@@ -98,14 +98,14 @@ export const getUserHabits = async (userId: number): Promise<Habit[]> => {
     }
 
     const today = new Date();
-    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1).toISOString();
-    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).toISOString();
+    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
 
     const { data: progressData, error: progressError } = await supabase
         .from('habit_progress')
         .select('habit_id, date')
-        .gte('date', startOfMonth)
-        .lte('date', endOfMonth)
+        .gte('date', startOfMonth.toISOString())
+        .lte('date', endOfMonth.toISOString())
         .in('habit_id', data.map((h: HabitRow) => h.id));
 
     if (progressError) {
@@ -120,6 +120,61 @@ export const getUserHabits = async (userId: number): Promise<Habit[]> => {
                 ?.filter((p: HabitProgressRow) => p.habit_id === habit.id)
                 .map((p: HabitProgressRow) => p.date) || [];
 
+        // Initialize progress object
+        const progress: Record<string, number[]> = {
+            monday: [],
+            tuesday: [],
+            wednesday: [],
+            thursday: [],
+            friday: [],
+            saturday: [],
+            sunday: []
+        };
+
+        const dayMap: Record<number, string> = {
+            0: 'sunday',
+            1: 'monday',
+            2: 'tuesday',
+            3: 'wednesday',
+            4: 'thursday',
+            5: 'friday',
+            6: 'saturday'
+        };
+        
+        // Map short day names to day indices (0-6)
+        const dayAbbrMap: Record<string, number> = {
+            'Su': 0, 'Mo': 1, 'Tu': 2, 'We': 3, 'Th': 4, 'Fr': 5, 'Sa': 6
+        };
+
+        let habitDays: string[] = [];
+        if (Array.isArray(habit.days)) {
+            habitDays = habit.days;
+        } else if (typeof habit.days === 'string') {
+            try {
+                // Handle potential double escaping or simple string format
+                const parsed = JSON.parse(habit.days);
+                habitDays = Array.isArray(parsed) ? parsed : [];
+            } catch (e) {
+                console.warn("Could not parse habit days:", habit.days);
+                habitDays = [];
+            }
+        }
+
+        // Iterate through each day of the month
+        for (let d = new Date(startOfMonth); d <= endOfMonth; d.setDate(d.getDate() + 1)) {
+            const dayIndex = d.getDay();
+            const dayName = dayMap[dayIndex];
+            const dateStr = d.toISOString().split('T')[0];
+
+            // Check if the habit is scheduled for this day of the week
+            const isScheduled = habitDays.some(dayAbbr => dayAbbrMap[dayAbbr] === dayIndex);
+
+            if (isScheduled) {
+                const isCompleted = habitProgress.includes(dateStr);
+                progress[dayName].push(isCompleted ? 1 : 0);
+            }
+        }
+
         return {
             id: habit.id,
             title: habit.title,
@@ -127,15 +182,7 @@ export const getUserHabits = async (userId: number): Promise<Habit[]> => {
             color: getCategoryColor(category),
             icon: habit.icon,
             days: habit.days || ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-            progress: {
-                monday: [0, 0, 0, 0],
-                tuesday: [0, 0, 0, 0],
-                wednesday: [0, 0, 0, 0],
-                thursday: [0, 0, 0, 0],
-                friday: [0, 0, 0, 0],
-                saturday: [0, 0, 0, 0],
-                sunday: [0, 0, 0, 0]
-            },
+            progress: progress,
             completedDates: habitProgress
         } as unknown as Habit;
     });
