@@ -41,7 +41,7 @@ function StatsHabits() {
   return (
     <div className="flex flex-col items-center mt-6 w-full px-4 md:px-0">
       {/* Botones de categoría */}
-      <div className="flex gap-3 ml-10 mr-10 w-94 md:w-78 md:mr-102">
+      <div className="flex gap-3 ml-10 mr-10 w-94 md:mr-86">
         <button
           onClick={() => setSelectedCategory("All")}
           className={`px-9 py-[5px] rounded-full border text-sm font-medium transition-colors${
