@@ -60,6 +60,7 @@ export default function SelectCategory() {
 
   if (isMobile) {
     return <CategoryPopup isOpen={true} onClose={() => navigate("/welcome/createpost")} />;
+    
   }
 
 

@@ -7,6 +7,7 @@ import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 import { getCurrentUser } from "../services/supabase/userService";
 import UserAvatar from "../components/UserAvatar/UserAvatar";
 import type { UserProfile } from "../types/UserProfileType";
+import { createHabit } from "../services/HabitsServices";
 
 
 export default function AddNewHabit() {
@@ -17,7 +18,7 @@ export default function AddNewHabit() {
   const [emoji, setEmoji] = useState("🤯");
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [habitName, setHabitName] = useState("");
-  const [habitDesc, setHabitDesc] = useState("");
+  const [habitDesc] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -43,15 +44,15 @@ export default function AddNewHabit() {
   ];
 
   const categories = [
-    { id: 'sport', label: '🏃‍♂️ Sport' },
-    { id: 'study', label: '📚 Study' },
-    { id: 'social', label: '💝 Social' },
-    { id: 'hobbies', label: '🎨 Hobbies' },
-    { id: 'food', label: '🍎 Food' },
-    { id: 'health', label: '❤️ Health' },
-    { id: 'work', label: '💼 Work' },
-    { id: 'home', label: '🏠 Home' },
-    { id: 'money', label: '💰 Money' }
+    { id: 'sport', label: '🏃‍♂️ sport' },
+    { id: 'study', label: '📚 study' },
+    { id: 'social', label: '🤝 social' },
+    { id: 'hobbies', label: '🕹️ hobbies' },
+    { id: 'food', label: '🥗 food' },
+    { id: 'health', label: '💗 health' },
+    { id: 'work', label: '💼 work' },
+    { id: 'home', label: '🏠 home' },
+    { id: 'money', label: '💵 money' }
   ];
 
   const toggleDay = (day: string) => {
@@ -66,7 +67,7 @@ export default function AddNewHabit() {
     setSelectedCategory(prev => prev === categoryId ? null : categoryId);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!selectedCategory) {
@@ -83,15 +84,37 @@ export default function AddNewHabit() {
       return;
     }
 
-    console.log("📋 New Habit Created:", {
-      name: habitName,
-      description: habitDesc,
-      category: selectedCategory,
-      days: selectedDays,
-      emoji: emoji
-    });
+    if (!user) {
+      setAlertMessage("User not loaded");
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);
+      return;
+    }
 
-    nav("/welcome/habitAdded");
+    try {
+      await createHabit(
+        user.id,
+        habitName,
+        selectedCategory,
+        emoji,
+        selectedDays
+      );
+
+      console.log("📋 New Habit Created:", {
+        name: habitName,
+        description: habitDesc,
+        category: selectedCategory,
+        days: selectedDays,
+        emoji: emoji
+      });
+
+      nav("/welcome/habitAdded");
+    } catch (error) {
+      console.error("Error creating habit:", error);
+      setAlertMessage("Error creating habit. Please try again.");
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);
+    }
   };
 
   return (
@@ -190,22 +213,6 @@ export default function AddNewHabit() {
           </div>
 
           <div className="max-w-md w-full mx-auto px-4 mt-6 text-left">
-            <label className="block text-[24px] text-[#D1D1D1] font-medium mb-2">
-              Add a description
-            </label>
-            <input
-              className="w-full bg-transparent border border-[#833AFF] 
-              focus:outline-none focus:border-[#B1F042] transition 
-              rounded-[12px] py-2 pl-4 pr-4 text-white placeholder-[#5D5D5D]"
-              type="text"
-              placeholder="Type here"
-              required
-              value={habitDesc}
-              onChange={(e) => setHabitDesc(e.target.value)}
-            />
-          </div>
-
-          <div className="max-w-md w-full mx-auto px-4 mt-6 text-left">
             <h2 className="text-[24px] text-white font-bold mb-4">Add your daily routine</h2>
             <div className="flex justify-between mb-8">
               {days.map((day) => (
@@ -253,8 +260,6 @@ export default function AddNewHabit() {
         </div>
 
       </form>
-
-
     </>
   );
 }

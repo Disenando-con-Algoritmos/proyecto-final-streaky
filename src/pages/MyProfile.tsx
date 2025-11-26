@@ -63,19 +63,17 @@ function ProfilePage() {
 
         {/* columna: hábitos */}
         {user?.habits && (
-          <div className="
-  flex flex-col gap-6 lg:w-[35%] order-1 lg:order-2 px-5">
-            <h2 className="
-            text-[30px] lg:text-[28px] font-semibold text-white
-            text-left w-full">
-              Friday ☀️</h2>
+          <div className="flex flex-col gap-6 lg:w-[35%] order-1 lg:order-2 px-5">
+            <h2 className="text-[30px] lg:text-[28px] font-semibold text-white text-left w-full">
+              Friday ☀️
+            </h2>
             <p className="text-[18px] text-gray-400 mb-1">
               Do 50% of your habits to secure today’s streak!
             </p>
             <hr className="border-[#2B2B2B] mb-2 w-80 lg:w-100" />
 
             {user.habits.map((habit) => (
-              <DayProgressGrid key={habit.id} habit={habit} />
+              <DayProgressGrid key={habit.id} habit={habit} userId={user.id} />
             ))}
 
             <div className="flex justify-center">
@@ -86,7 +84,7 @@ function ProfilePage() {
           </div>
         )}
 
-        {/* columna */}
+        {/* columna: last post */}
         <div className="flex justify-center w-full lg:ml-120 order-2 lg:order-1">
           {user && <UserLastPost userId={user.id} />}
         </div>

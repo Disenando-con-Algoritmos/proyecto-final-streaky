@@ -1,24 +1,78 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaCheck } from "react-icons/fa6";
 import type { Habit } from "../../../types/HabitsTypes";
+import { toggleHabitCheck } from "../../../services/HabitsServices";
 
 interface DayProgressGridProps {
   habit: Habit;
+  userId: number;
 }
 
-const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
-  const allDays = Object.values(habit.progress).flat();
-  const [progress, setProgress] = useState<boolean[]>(
-    allDays.map((val) => val > 0)
-  );
+const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit, userId }) => {
   const [isOpen, setIsOpen] = useState(false);
-  // acción: marca o desmarca el último día
-  const handleCheck = () => {
-    setProgress((prev) => {
-      const updated = [...prev];
-      updated[27] = !updated[27];
-      return updated;
-    });
+  const [completedDates, setCompletedDates] = useState<string[]>(habit.completedDates || []);
+  const [currentMonthDays, setCurrentMonthDays] = useState<Date[]>([]);
+
+  useEffect(() => {
+    // Generate days for the current month
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const days: Date[] = [];
+    for (let i = 1; i <= daysInMonth; i++) {
+      days.push(new Date(year, month, i));
+    }
+    setCurrentMonthDays(days);
+  }, []);
+
+  // Map day index (0-6) to habit days keys
+  const dayMap = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+
+  const isDayAllowed = (date: Date) => {
+    const dayKey = dayMap[date.getDay()];
+    return habit.days.includes(dayKey);
+  };
+
+  const isDateCompleted = (date: Date) => {
+    // Format date as YYYY-MM-DD to match DB
+    const dateStr = date.toISOString().split('T')[0];
+    return completedDates.includes(dateStr);
+  };
+
+  const handleDayClick = async (date: Date) => {
+    if (!isDayAllowed(date)) return;
+
+    const dateStr = date.toISOString().split('T')[0];
+
+    // Optimistic update
+    const isCompleted = completedDates.includes(dateStr);
+    const newCompletedDates = isCompleted
+      ? completedDates.filter(d => d !== dateStr)
+      : [...completedDates, dateStr];
+
+    setCompletedDates(newCompletedDates);
+
+    try {
+      await toggleHabitCheck(habit.id, dateStr);
+    } catch (error) {
+      console.error("Error toggling habit check:", error);
+      // Revert on error
+      setCompletedDates(completedDates);
+    }
+  };
+
+  // Check if today is completed for the main button
+  const today = new Date();
+  const todayStr = today.toISOString().split('T')[0];
+  const isTodayCompleted = completedDates.includes(todayStr);
+  const isTodayAllowed = isDayAllowed(today);
+
+  const handleMainCheck = () => {
+    if (isTodayAllowed) {
+      handleDayClick(today);
+    }
   };
 
   return (
@@ -86,19 +140,18 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
 
           <div>
             <button
-              onClick={handleCheck}
+              onClick={handleMainCheck}
+              disabled={!isTodayAllowed}
               className={`w-11 h-11 lg:w-15 lg:h-15 rounded-full flex items-center 
                 justify-center transition-all duration-300 cursor-pointer
-              ${
-                progress[27]
+              ${isTodayCompleted
                   ? "bg-[#B1F042] hover:bg-[#C9F75A]"
-                  : "bg-[#2B2B2B]"
-              }`}
+                  : isTodayAllowed ? "bg-[#2B2B2B]" : "bg-[#1A1A1A] opacity-50 cursor-not-allowed"
+                }`}
             >
               <FaCheck
-                className={`text-lg ${
-                  progress[27] ? "text-[#4B4B4B]" : "text-[#000000]"
-                }`}
+                className={`text-lg ${isTodayCompleted ? "text-[#4B4B4B]" : "text-[#000000]"
+                  }`}
               />
             </button>
           </div>
@@ -108,32 +161,44 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
       {/* Calendario desplegable */}
       {isOpen && (
         <div>
-          <p className="text-white text-[20px] font-medium ml-13 mt-4">Past 4 Weeks</p>
-        <div className="mt-2 flex flex-col items-center animate-fadeIn">
-          <div className="grid grid-cols-7 gap-2">
-            {progress.map((done, i) => (
-              <div
-                key={i}
-                className="w-6 h-6 md:w-8 md:h-8 rounded-md transition-all duration-300"
-                style={{
-                  backgroundColor: done ? habit.color : "#2B2B2B",
-                  boxShadow: done ? "0 0 6px rgba(0,0,0,0.3)" : "none",
-                }}
-              ></div>
-            ))}
-          </div>
+          <p className="text-white text-[20px] font-medium ml-13 mt-4">
+            {new Date().toLocaleString('default', { month: 'long' })}
+          </p>
+          <div className="mt-2 flex flex-col items-center animate-fadeIn">
+            <div className="grid grid-cols-7 gap-2">
+              {currentMonthDays.map((date, i) => {
+                const allowed = isDayAllowed(date);
+                const completed = isDateCompleted(date);
 
-          {/* ✅ Botón que marca el último día */}
+                return (
+                  <div
+                    key={i}
+                    onClick={() => handleDayClick(date)}
+                    className={`w-6 h-6 md:w-8 md:h-8 rounded-md transition-all duration-300 flex items-center justify-center text-[10px] text-gray-500
+                    ${allowed ? 'cursor-pointer hover:opacity-80' : 'opacity-30 cursor-not-allowed'}`}
+                    style={{
+                      backgroundColor: completed ? habit.color : "#2B2B2B",
+                      boxShadow: completed ? "0 0 6px rgba(0,0,0,0.3)" : "none",
+                    }}
+                  >
+                    {/* Optional: Show day number for better UX */}
+                    {!completed && date.getDate()}
+                  </div>
+                );
+              })}
+            </div>
 
-          <div
-            className="w-28 h-8 bg-[#EF3131] mt-5 flex 
+            {/* ✅ Botón que marca el último día */}
+
+            <div
+              className="w-28 h-8 bg-[#EF3131] mt-5 flex 
           flex-col items-center justify-center rounded-4xl cursor-pointer"
-          >
-            <button className="text-[15px] font-medium text-white cursor-pointer">
-              Delete Habit
-            </button>
+            >
+              <button className="text-[15px] font-medium text-white cursor-pointer">
+                Delete Habit
+              </button>
+            </div>
           </div>
-        </div>
         </div>
       )}
     </div>
