@@ -10,21 +10,47 @@ import DayProgressGrid from "../components/mobile/profile/HabitInteractive";
 import miffyPost from "../assets/miffyPost.png";
 import { getCurrentUser } from "../services/supabase/userService";
 import UserAvatar from "../components/UserAvatar/UserAvatar";
+import { supabase } from "../services/supabase/config";
 
 function Habits() {
   const nav = useNavigate();
   const NavigateProfile = () => nav("/welcome/profile");
   const [user, setUser] = useState<UserProfile | null>(null);
 
-  useEffect(() => {
-    async function fetchUser() {
-      const userData = await getCurrentUser();
-      if (userData) {
-        setUser(userData);
-      }
+  const fetchUser = async () => {
+    const userData = await getCurrentUser();
+    if (userData) {
+      setUser(userData);
     }
+  };
+
+  useEffect(() => {
     fetchUser();
-  }, []);
+
+    // Realtime habito s
+    const habitsChannel = supabase
+      .channel('habits_realtime')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'habits' },
+        () => fetchUser()
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'habit_progress' },
+        () => fetchUser()
+      )
+      .on(
+        'postgres_changes',
+        { event: 'UPDATE', schema: 'public', table: 'users', filter: `id=eq.${user?.id}` },
+        () => fetchUser()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(habitsChannel);
+    };
+  }, [user?.id]);
 
   return (
     <div className="min-h-screen text-white">
@@ -117,7 +143,12 @@ function Habits() {
           </div>
           <div className="ml-0">
             {user?.habits.map((habit) => (
-              <DayProgressGrid key={habit.id} habit={habit} userId={user.id} />
+              <DayProgressGrid
+                key={habit.id}
+                habit={habit}
+                userId={user.id}
+                onHabitDeleted={fetchUser}
+              />
             ))}
           </div>
 

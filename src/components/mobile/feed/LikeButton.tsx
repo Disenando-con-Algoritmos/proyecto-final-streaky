@@ -3,6 +3,7 @@ import { FaHeart } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import { likesService } from "../../../services/supabase/likesService";
+import { supabase } from "../../../services/supabase/config";
 
 export default function LikeButton({
   cardIndividuals,
@@ -18,7 +19,6 @@ export default function LikeButton({
     let isMounted = true;
 
     const fetchLikeStatus = async () => {
-    
       const count = await likesService.getLikesCount(cardIndividuals.id);
       if (isMounted) setLikes(count);
 
@@ -30,8 +30,27 @@ export default function LikeButton({
 
     fetchLikeStatus();
 
+    //realtime lik es 
+    const channel = supabase
+      .channel(`likes:${cardIndividuals.id}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'likes',
+          filter: `post_id=eq.${cardIndividuals.id}`,
+        },
+        () => {
+          
+          fetchLikeStatus();
+        }
+      )
+      .subscribe();
+
     return () => {
       isMounted = false;
+      supabase.removeChannel(channel);
     };
   }, [cardIndividuals.id, currentUserId]);
 
@@ -56,7 +75,7 @@ export default function LikeButton({
       setLikes(newCount);
     } catch (error) {
       console.error("Error toggling like:", error);
-  
+
       setLiked(previousLiked);
       setLikes(previousLikes);
     }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import PcSearchBar from "../components/desktop/PcSearchBar";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 import ProfileInfo from "../components/mobile/profile/ProfileInfo";
@@ -9,6 +9,7 @@ import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 import { useNavigate } from "react-router";
 import { getCurrentUser } from "../services/supabase/userService";
 import { followService } from "../services/supabase/followService";
+import { supabase } from "../services/supabase/config";
 
 function ProfilePage() {
   const [user, setUser] = useState<UserProfile | null>(null);
@@ -17,21 +18,67 @@ function ProfilePage() {
   const [followingCount, setFollowingCount] = useState(0);
   const navigate = useNavigate();
 
+  const userHabitsRef = useRef<UserProfile["habits"]>([]);
   useEffect(() => {
-    async function fetchUser() {
-      const userData = await getCurrentUser();
-      if (userData) {
-        setUser(userData);
-        // Fetch follow counts
-        followService.getFollowCounts(userData.id).then((counts) => {
-          setFollowersCount(counts.followers);
-          setFollowingCount(counts.following);
-        });
-      }
-      setLoading(false);
+    if (user?.habits) {
+      userHabitsRef.current = user.habits;
     }
+  }, [user?.habits]);
+
+  const fetchUser = async () => {
+    const userData = await getCurrentUser();
+    if (userData) {
+      setUser(userData);
+
+      followService.getFollowCounts(userData.id).then((counts) => {
+        setFollowersCount(counts.followers);
+        setFollowingCount(counts.following);
+      });
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
     fetchUser();
-  }, []);
+    //realtime habitos
+    const channel = supabase
+      .channel('my_profile_realtime')
+      .on(
+        'postgres_changes',
+        { event: 'UPDATE', schema: 'public', table: 'users', filter: `id=eq.${user?.id}` },
+        () => fetchUser()
+      )
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'habits', filter: `user_id=eq.${user?.id}` },
+        () => fetchUser()
+      )
+      .on(
+        'postgres_changes',
+        { event: 'UPDATE', schema: 'public', table: 'habits', filter: `user_id=eq.${user?.id}` },
+        () => fetchUser()
+      )
+      .on(
+        'postgres_changes',
+        { event: 'DELETE', schema: 'public', table: 'habits' },
+        (payload) => {
+          const deletedId = payload.old.id;
+          if (userHabitsRef.current.some(h => h.id === deletedId)) {
+            fetchUser();
+          }
+        }
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'habit_progress' },
+        () => fetchUser()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [user?.id]);
 
   if (loading) {
     return (
@@ -77,20 +124,7 @@ function ProfilePage() {
                 key={habit.id}
                 habit={habit}
                 userId={user.id}
-                onHabitDeleted={() => {
-                  // Refresh user data
-                  setLoading(true);
-                  getCurrentUser().then(userData => {
-                    if (userData) {
-                      setUser(userData);
-                      followService.getFollowCounts(userData.id).then((counts) => {
-                        setFollowersCount(counts.followers);
-                        setFollowingCount(counts.following);
-                      });
-                    }
-                    setLoading(false);
-                  });
-                }}
+                onHabitDeleted={fetchUser}
               />
             ))}
 

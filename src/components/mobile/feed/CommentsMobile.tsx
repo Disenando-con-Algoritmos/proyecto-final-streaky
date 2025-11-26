@@ -8,6 +8,7 @@ import { getCurrentUser } from "../../../services/supabase/userService";
 import { addComment, getCommentsByPostId } from "../../../services/supabase/commentsService";
 import type { UserProfile } from "../../../types/UserProfileType";
 import type { CommentsPost } from "../../../types/Comments";
+import { supabase } from "../../../services/supabase/config";
 
 export default function CommentPopup({ cardIndividuals }: { cardIndividuals: PostTypes }) {
     const [showComments, setShowComments] = useState(false);
@@ -15,13 +16,11 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
     const [comments, setComments] = useState<CommentsPost[]>([]);
     const [newComment, setNewComment] = useState("");
 
-    //memorizar la función que trae comentarios
     const fetchComments = useCallback(async () => {
         const fetchedComments = await getCommentsByPostId(cardIndividuals.id);
         setComments(fetchedComments);
     }, [cardIndividuals.id]);
 
-    // useEffect depende de fetchComments (que ya depende de cardIndividuals.id)
     useEffect(() => {
         async function fetchData() {
             const userData = await getCurrentUser();
@@ -31,7 +30,28 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
             await fetchComments();
         }
         fetchData();
-    }, [fetchComments]);
+
+        //realtime comentarios
+        const channel = supabase
+            .channel(`comments:${cardIndividuals.id}`)
+            .on(
+                'postgres_changes',
+                {
+                    event: 'INSERT',
+                    schema: 'public',
+                    table: 'comments',
+                    filter: `post_id=eq.${cardIndividuals.id}`,
+                },
+                () => {
+                    fetchComments();
+                }
+            )
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(channel);
+        };
+    }, [fetchComments, cardIndividuals.id]);
 
     async function handleSendComment() {
         if (!newComment.trim() || !currentUser) return;
@@ -39,7 +59,7 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
         try {
             await addComment(cardIndividuals.id, currentUser.id, newComment);
             setNewComment("");
-            await fetchComments(); 
+            await fetchComments();
         } catch (error) {
             console.error("Failed to send comment", error);
         }

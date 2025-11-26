@@ -6,6 +6,7 @@ import UserAvatar from "../UserAvatar/UserAvatar";
 import { addComment, getCommentsByPostId } from "../../services/supabase/commentsService";
 import { getCurrentUser } from "../../services/supabase/userService";
 import type { CommentsPost } from "../../types/Comments";
+import { supabase } from "../../services/supabase/config";
 
 export default function CommentsPc({
   cardIndividuals,
@@ -25,6 +26,27 @@ export default function CommentsPc({
 
     // Fetch comments for this post
     fetchComments();
+
+    // Realtime subscription for comments
+    const channel = supabase
+      .channel(`comments_pc:${cardIndividuals.id}`)
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'comments',
+          filter: `post_id=eq.${cardIndividuals.id}`,
+        },
+        () => {
+          fetchComments();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [cardIndividuals.id]);
 
   async function fetchComments() {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router";
 import { getHabits, getUserHabits } from "../services/HabitsServices";
 import { getPost } from "../services/PostService";
@@ -14,6 +14,7 @@ import { getCurrentUser, getAllUsers } from "../services/supabase/userService";
 import type { UserProfile } from "../types/UserProfileType";
 import UserAvatar from "../components/UserAvatar/UserAvatar";
 import { followService } from "../services/supabase/followService";
+import { supabase } from "../services/supabase/config";
 
 export default function ProfileSearch() {
     const nav = useNavigate();
@@ -60,20 +61,90 @@ export default function ProfileSearch() {
 
     // busca el primer usuario que el username coincida con el valor de la url
     useEffect(() => {
-        if (users.length > 0 && username) {
-            const foundUser = users.find(
-                (u: User) => u.username.toLowerCase() === username.toLowerCase()
-            );
+        let isMounted = true;
 
-            if (foundUser) {
-                getUserHabits(Number(foundUser.id)).then((habits: HabitType[]) => {
-                    setUser({ ...foundUser, habits });
-                });
-            } else {
-                setUser(null);
+        const fetchUserData = () => {
+            if (users.length > 0 && username) {
+                const foundUser = users.find(
+                    (u: User) => u.username.toLowerCase() === username.toLowerCase()
+                );
+
+                if (foundUser) {
+                    getUserHabits(Number(foundUser.id)).then((habits: HabitType[]) => {
+                        if (isMounted) setUser({ ...foundUser, habits });
+                    });
+                } else {
+                    if (isMounted) setUser(null);
+                }
             }
-        }
+        };
+
+        fetchUserData();
+
+        return () => {
+            isMounted = false;
+        };
     }, [users, username]);
+
+    const userHabitsRef = useRef<HabitType[]>([]);
+    useEffect(() => {
+        if (user?.habits) {
+            userHabitsRef.current = user.habits;
+        }
+    }, [user?.habits]);
+
+    //realtime perfil
+    useEffect(() => {
+        if (!user) return;
+
+        let isMounted = true;
+
+        const refreshHabits = () => {
+            getUserHabits(Number(user.id)).then((habits: HabitType[]) => {
+                if (isMounted) setUser(prev => prev ? { ...prev, habits } : null);
+            });
+        };
+
+        const channel = supabase
+            .channel(`profile_search_realtime:${user.id}`)
+            .on(
+                'postgres_changes',
+                { event: 'UPDATE', schema: 'public', table: 'users', filter: `id=eq.${user.id}` },
+                (payload) => {
+                    if (isMounted) {
+                        const newUser = payload.new as User;
+                        setUser(prev => prev ? { ...prev, streak: newUser.streak } : null);
+                    }
+                }
+            )
+            .on(
+                'postgres_changes',
+            { event: 'INSERT', schema: 'public', table: 'habits', filter: `user_id=eq.${user.id}` },
+                () => refreshHabits()
+            )
+            .on(
+                'postgres_changes',
+            { event: 'UPDATE', schema: 'public', table: 'habits', filter: `user_id=eq.${user.id}` },
+                () => refreshHabits()
+            )
+            .on(
+                'postgres_changes',
+                { event: 'DELETE', schema: 'public', table: 'habits' },
+                (payload) => {
+    
+                    const deletedId = payload.old.id;
+                    if (userHabitsRef.current.some(h => h.id === deletedId)) {
+                        refreshHabits();
+                    }
+                }
+            )
+            .subscribe();
+
+        return () => {
+            isMounted = false;
+            supabase.removeChannel(channel);
+        };
+    }, [user?.id, user]);
 
     useEffect(() => {
         if (user) {
@@ -82,7 +153,7 @@ export default function ProfileSearch() {
                 setFollowingCount(counts.following);
             });
         }
-    }, [user]);
+    }, [user?.id, user]);
 
     const handleFollowChange = (isFollowing: boolean) => {
         setFollowersCount(prev => isFollowing ? prev + 1 : prev - 1);
@@ -129,7 +200,7 @@ export default function ProfileSearch() {
             <MobileNavbar />
 
             <div
-            className="
+                className="
                 min-h-screen bg-[#171717] text-[#F9FAFB]
                 flex flex-col items-center py-17
                 lg:grid lg:grid-cols-[300px_1fr_390px] 
@@ -286,18 +357,20 @@ export default function ProfileSearch() {
                         </div>
                     </div>
 
-                    {/* habits */}
-                    <div className="flex flex-col gap-7 max-h-[70vh] overflow-y-auto pr-1 mt-18">
+                    {/* Desktop Habits List */}
+                    <div className="w-full flex flex-col gap-5 mb-6">
+                        <h3 className="text-[25px] font-semibold mb-2">Habits</h3>
+                        <div className="w-full h-[1px] bg-[#2A2A2A] mb-4"></div>
+
                         {user.habits.length > 0 ? (
                             user.habits.map((habit: HabitType) => (
                                 <Habit key={habit.id} habit={habit} />
                             ))
                         ) : (
-                            <p className="text-gray-400 text-center mt-10">No habits yet.</p>
+                            <p className="text-gray-400 text-center">No habits yet.</p>
                         )}
                     </div>
                 </div>
-
             </div>
         </>
     );

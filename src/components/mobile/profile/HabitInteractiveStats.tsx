@@ -1,17 +1,22 @@
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import type { Habit } from "../../../types/HabitsTypes";
+import DeleteHabit from "./DeleteHabit";
+import { deleteHabit } from "../../../services/HabitsServices";
 
 interface DayProgressGridProps {
   habit: Habit;
+  userId: number;
+  onHabitDeleted?: () => void;
 }
 
-const DayProgressGridStats: React.FC<DayProgressGridProps> = ({ habit }) => {
+const DayProgressGridStats: React.FC<DayProgressGridProps> = ({ habit, userId, onHabitDeleted }) => {
   const allDays = Object.values(habit.progress).flat();
   const [progress, setProgress] = useState<boolean[]>(
     allDays.map((val) => val > 0)
   );
   const [isOpen, setIsOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // acción: marca o desmarca el último día
   const handleCheck = () => {
@@ -75,16 +80,14 @@ const DayProgressGridStats: React.FC<DayProgressGridProps> = ({ habit }) => {
               onClick={handleCheck}
               className={`w-10 h-10 md:w-13 md:h-13 rounded-full flex items-center 
                 justify-center transition-all duration-300 cursor-pointer ml-0 md:ml-74
-              ${
-                progress[27]
+              ${progress[27]
                   ? "bg-[#B1F042] hover:bg-[#C9F75A]"
                   : "bg-[#2B2B2B]"
-              }`}
+                }`}
             >
               <FaCheck
-                className={`text-[15px] md:text-[25px] ${
-                  progress[27] ? "text-[#4B4B4B]" : "text-[#1C1B1F]"
-                }`}
+                className={`text-[15px] md:text-[25px] ${progress[27] ? "text-[#4B4B4B]" : "text-[#1C1B1F]"
+                  }`}
               />
             </button>
           </div>
@@ -95,33 +98,51 @@ const DayProgressGridStats: React.FC<DayProgressGridProps> = ({ habit }) => {
       {isOpen && (
         <div>
           <p className="text-white text-[20px] font-medium ml-13 mt-4">Past 4 Weeks</p>
-        <div className="mt-2 flex flex-col items-center animate-fadeIn">
-          <div className="grid grid-cols-7 gap-2">
-            {progress.map((done, i) => (
-              <div
-                key={i}
-                className="w-6 h-6 md:w-8 md:h-8 rounded-md transition-all duration-300"
-                style={{
-                  backgroundColor: done ? habit.color : "#2B2B2B",
-                  boxShadow: done ? "0 0 6px rgba(0,0,0,0.3)" : "none",
-                }}
-              ></div>
-            ))}
-          </div>
+          <div className="mt-2 flex flex-col items-center animate-fadeIn">
+            <div className="grid grid-cols-7 gap-2">
+              {progress.map((done, i) => (
+                <div
+                  key={i}
+                  className="w-6 h-6 md:w-8 md:h-8 rounded-md transition-all duration-300"
+                  style={{
+                    backgroundColor: done ? habit.color : "#2B2B2B",
+                    boxShadow: done ? "0 0 6px rgba(0,0,0,0.3)" : "none",
+                  }}
+                ></div>
+              ))}
+            </div>
 
-          {/* botón que marca el último día */}
+            {/* botón que marca el último día */}
 
-          <div
-            className="w-28 h-8 bg-[#EF3131] mt-5 flex 
+            <div
+              className="w-28 h-8 bg-[#EF3131] mt-5 flex 
           flex-col items-center justify-center rounded-4xl cursor-pointer"
-          >
-            <button className="text-[15px] font-medium text-white cursor-pointer">
-              Delete Habit
-            </button>
+            >
+              <button
+                onClick={() => setIsDeleteModalOpen(true)}
+                className="text-[15px] font-medium text-white cursor-pointer"
+              >
+                Delete Habit
+              </button>
+            </div>
           </div>
-        </div>
         </div>
       )}
+
+      <DeleteHabit
+        open={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onDelete={async () => {
+          try {
+            await deleteHabit(habit.id, userId);
+            setIsDeleteModalOpen(false);
+            if (onHabitDeleted) onHabitDeleted();
+          } catch (error) {
+            console.error("Error deleting habit:", error);
+            alert("Failed to delete habit");
+          }
+        }}
+      />
     </div>
   );
 };
