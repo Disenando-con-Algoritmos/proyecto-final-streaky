@@ -7,7 +7,7 @@ import { CgClose } from "react-icons/cg";
 import logo1 from "../../assets/logo1.png";
 import logo2 from "../../assets/logo2.png";
 import type { UserProfile } from "../../types/UserProfileType";
-import { getAllUsers } from "../../services/supabase/userService";
+import { getAllUsers, getCurrentUser } from "../../services/supabase/userService";
 import { useLocation, useNavigate } from "react-router";
 import authService from "../../services/AuthServices";
 import UserAvatar from "../UserAvatar/UserAvatar";
@@ -112,16 +112,15 @@ function PcSearchBar() {
                       <div
                         key={UserIndividual.id}
                         onClick={async () => {
-                          const currentUser = await authService.getCurrentUser();
-                          if (currentUser && currentUser.user_metadata.username
-                            === UserIndividual.username) {
+                          const currentUser = await getCurrentUser();
+                          if (currentUser && currentUser.username === UserIndividual.username) {
                             nav("/welcome/profile");
                           } else {
                             nav(`/welcome/profile/${UserIndividual.username}`);
                           }
                         }}
-                        className="flex items-center gap-4 bg-transparent pb-3 cursor-pointer 
-                        hover:opacity-80 transition"
+                        className="flex items-center gap-4 bg-transparent pb-3 cursor-pointer
+                  hover:opacity-80 transition"
                       >
                         <UserAvatar
                           userImage={UserIndividual.userImage}
@@ -146,8 +145,9 @@ function PcSearchBar() {
               )}
             </div>
           </div>
-        </div>
-      )}
+        </div >
+      )
+      }
 
       <div
         className={`hidden lg:block bg-[#212121] h-screen rounded-r-[2rem] w-65

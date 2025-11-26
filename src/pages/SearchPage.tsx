@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import type { UserProfile } from "../types/UserProfileType";
 import catSearch from "../assets/cat-search.png";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { getAllUsers } from "../services/supabase/userService";
+import { getAllUsers, getCurrentUser } from "../services/supabase/userService";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 import { useNavigate } from "react-router";
 import UserAvatar from "../components/UserAvatar/UserAvatar";
-import authService from "../services/AuthServices";
 
 export default function SearchPage() {
   const [users, setUsers] = useState<UserProfile[]>([]);
@@ -72,8 +71,8 @@ export default function SearchPage() {
               <div
                 key={user.id}
                 onClick={async () => {
-                  const currentUser = await authService.getCurrentUser();
-                  if (currentUser && currentUser.user_metadata.username === user.username) {
+                  const currentUser = await getCurrentUser();
+                  if (currentUser && currentUser.username === user.username) {
                     nav("/welcome/profile");
                   } else {
                     nav(`/welcome/profile/${user.username}`);

@@ -4,8 +4,7 @@ import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
-import { supabase } from "../services/supabase/config";
-import userService from "../services/UserServices";
+import { getCurrentUser } from "../services/supabase/userService";
 import UserAvatar from "../components/UserAvatar/UserAvatar";
 import type { UserProfile } from "../types/UserProfileType";
 
@@ -25,12 +24,9 @@ export default function AddNewHabit() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user?.email) {
-        const userData = await userService.getUserByEmail(session.user.email);
-        if (userData) {
-          setUser(userData);
-        }
+      const userData = await getCurrentUser();
+      if (userData) {
+        setUser(userData);
       }
     };
     fetchUser();
@@ -116,32 +112,32 @@ export default function AddNewHabit() {
             </button>
 
             <div
-                        onClick={NavigateProfile}
-                        className="hidden md:flex items-center gap-3 fixed 
+              onClick={NavigateProfile}
+              className="hidden md:flex items-center gap-3 fixed 
                         right-40 mt-20 cursor-pointer"
-                      >
-                        {user ? (
-                          <UserAvatar
-                            userImage={user.userImage}
-                            username={user.username}
-                            size="w-16 h-16"
-                            textSize="text-2xl"
-                          />
-                        ) : (
-                          <div className="w-16 h-16 rounded-full bg-[#2A2A2A] 
+            >
+              {user ? (
+                <UserAvatar
+                  userImage={user.userImage}
+                  username={user.username}
+                  size="w-16 h-16"
+                  textSize="text-2xl"
+                />
+              ) : (
+                <div className="w-16 h-16 rounded-full bg-[#2A2A2A] 
                           flex items-center justify-center">
-                            <div className="w-8 h-8 border-2 border-[#B1F042] 
+                  <div className="w-8 h-8 border-2 border-[#B1F042] 
                   border-t-transparent rounded-full animate-spin"></div>
-                          </div>
-                        )}
-            
-                        <div className="flex flex-col">
-                          <p className="font-semibold text-[#F9FAFB] text-lg">
-                            {user ? user.username : "Loading..."}
-                          </p>
-                          <p className="text-[#A1A1AA] text-sm">Your Profile</p>
-                        </div>
-                      </div>
+                </div>
+              )}
+
+              <div className="flex flex-col">
+                <p className="font-semibold text-[#F9FAFB] text-lg">
+                  {user ? user.username : "Loading..."}
+                </p>
+                <p className="text-[#A1A1AA] text-sm">Your Profile</p>
+              </div>
+            </div>
 
           </div>
 

@@ -1,7 +1,7 @@
 import { supabase } from "./config";
 import type { UserProfile } from "../../types/UserProfileType";
-export async function getCurrentUser(): Promise<UserProfile | null> {
 
+export async function getCurrentUser(): Promise<UserProfile | null> {
   const {
     data: { user },
     error: authError,
@@ -26,7 +26,7 @@ export async function getCurrentUser(): Promise<UserProfile | null> {
     userDescription: data.description || "No description yet.",
     email: data.email,
     userImage: data.image,
-    streak: 0,
+    streak: data.streak ?? 0,
     followers: 0,
     following: 0,
     habits: []
@@ -38,20 +38,72 @@ export async function getCurrentUser(): Promise<UserProfile | null> {
 type UserService = {
   username?: string;
   description?: string;
-  image?: string | null;
+  image?: string;
 };
 
-export async function updateUserProfile(updates: Partial<UserProfile>) {
+
+type UserSupabase = {
+  id: number;
+  username: string | null;
+  email: string;
+  image: string;
+  streak: number | null;
+  description: string | null;
+};
+
+export async function updateUserProfile(
+  updates: Partial<UserProfile> & { password?: string; imageFile?: File }
+) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
   if (!user) throw new Error("No user logged in");
 
+  if (updates.username) {
+    const { data: existingUser } = await supabase
+      .from("users")
+      .select("id")
+      .eq("username", updates.username)
+      .neq("email", user.email)
+      .single();
+
+    if (existingUser) {
+      throw new Error("USERNAME_EXISTS");
+    }
+  }
+
+  if (updates.password && updates.password.trim() !== "") {
+    const { error: passwordError } = await supabase.auth.updateUser({
+      password: updates.password,
+    });
+    if (passwordError) throw passwordError;
+  }
+
+  let publicUrl = updates.userImage;
+
+  if (updates.imageFile) {
+    const fileExt = updates.imageFile.name.split(".").pop();
+    const fileName = `${Date.now()}_profile.${fileExt}`;
+    const filePath = `profile_images/${user.id}/${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("streaky_bucket")
+      .upload(filePath, updates.imageFile);
+
+    if (uploadError) throw uploadError;
+
+    const { data: urlData } = supabase.storage
+      .from("streaky_bucket")
+      .getPublicUrl(filePath);
+
+    publicUrl = urlData.publicUrl;
+  }
+
   const dbUpdates: UserService = {};
   if (updates.username) dbUpdates.username = updates.username;
   if (updates.userDescription) dbUpdates.description = updates.userDescription;
-  if (updates.userImage) dbUpdates.image = updates.userImage;
+  if (publicUrl) dbUpdates.image = publicUrl;
 
   const { data, error } = await supabase
     .from("users")
@@ -72,17 +124,15 @@ export async function getAllUsers(): Promise<UserProfile[]> {
     return [];
   }
 
-  console.log("Fetched users data:", data); // Debugging log
-
-  return data.map((user: any) => ({
+  return data.map((user: UserSupabase): UserProfile => ({
     id: user.id,
-    username: user.username,
-    userDescription: user.description || "No description yet.",
+    username: user.username ?? "",
+    userDescription: user.description ?? "No description yet.",
     email: user.email,
     userImage: user.image,
-    streak: user.streak || 0,
-    followers: user.followers || 0,
-    following: user.following || 0,
+    streak: user.streak ?? 0,
+    followers: 0,
+    following: 0,
     habits: []
   }));
 }

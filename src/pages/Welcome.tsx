@@ -5,10 +5,22 @@ import VectorVioleta from "../assets/Vector-violeta.png";
 import AsteriscoOuline from "../assets/asterisco-ounline.png";
 import { useNavigate } from "react-router";
 
+import { useEffect, useState } from "react";
+import { getCurrentUser } from "../services/supabase/userService";
+
 export default function Welcome() {
     const navigate = useNavigate();
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    const username = user.user?.user_metadata?.username || "User";
+    const [username, setUsername] = useState("User");
+
+    useEffect(() => {
+        async function fetchUser() {
+            const user = await getCurrentUser();
+            if (user) {
+                setUsername(user.username);
+            }
+        }
+        fetchUser();
+    }, []);
 
     return (
         <div

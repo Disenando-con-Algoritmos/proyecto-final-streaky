@@ -10,13 +10,17 @@ import grayShape from "../assets/grayShape.png";
 import miffyEdit from "../assets/miffyEdit.png";
 import { getCurrentUser, updateUserProfile } from "../services/supabase/userService";
 import UserAvatar from "../components/UserAvatar/UserAvatar";
+import Alert from "../components/desktop/Alert";
 
 export default function EditProfile() {
     const [user, setUser] = useState<UserProfile | null>(null);
     const [profileImg, setProfileImg] = useState<string>("");
+    const [imgFile, setImgFile] = useState<File | null>(null);
     const [username, setUsername] = useState("");
     const [biography, setBiography] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
     const nav = useNavigate();
 
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -43,6 +47,7 @@ export default function EditProfile() {
             alert("Formato inválido. Solo PNG o JPG!");
             return;
         }
+        setImgFile(file);
         const reader = new FileReader();
         reader.onload = (ev) => setProfileImg(ev.target?.result as string);
         reader.readAsDataURL(file);
@@ -51,20 +56,40 @@ export default function EditProfile() {
     // ejecutar upload al clickear el icono
     const updateImgInput = () => fileInputRef.current?.click();
 
+    const [alertMessage, setAlertMessage] = useState("Well done! changes saved");
+    const [alertColor, setAlertColor] = useState("bg-[#b1ef42]");
+
     // guardar cambios
     const handleSave = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true);
         try {
             await updateUserProfile({
                 username,
                 userDescription: biography,
-                userImage: profileImg
+                userImage: profileImg,
+                password,
+                imageFile: imgFile || undefined
             });
-            alert("Datos guardados correctamente!");
-            nav("/welcome/profile");
+            setAlertMessage("Well done! changes saved");
+            setAlertColor("bg-[#b1ef42]");
+            setShowAlert(true);
+            setTimeout(() => {
+                setShowAlert(false);
+                nav("/welcome/profile");
+            }, 2000);
         } catch (error) {
             console.error("Error updating profile:", error);
-            alert("Error al guardar los cambios.");
+            if (error instanceof Error && error.message === "USERNAME_EXISTS") {
+                setAlertMessage("Sorry, this username already exists :(");
+                setAlertColor("bg-[#EF3131]");
+                setShowAlert(true);
+                setTimeout(() => setShowAlert(false), 3000);
+            } else {
+                alert("Error al guardar los cambios.");
+            }
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -72,6 +97,11 @@ export default function EditProfile() {
         <>
             <PcSearchBar />
             <MobileNavbar />
+            <Alert
+                show={showAlert}
+                message={alertMessage}
+                color={alertColor}
+            />
             <div className="relative min-h-screen flex flex-col items-center 
             justify-center px-6 lg:ml-[260px] lg:flex lg:justify-center">
                 <form className="w-full max-w-md flex flex-col items-center" onSubmit={handleSave}>
@@ -106,7 +136,7 @@ export default function EditProfile() {
                         placeholder="New Username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        required
+                        required={false}
                     >
                         <MdOutlineModeEdit />
                     </InputProfile>
@@ -116,7 +146,7 @@ export default function EditProfile() {
                         placeholder="New Biography"
                         value={biography}
                         onChange={(e) => setBiography(e.target.value)}
-                        required
+                        required={false}
                     >
                         <MdOutlineModeEdit />
                     </InputProfile>
@@ -126,11 +156,12 @@ export default function EditProfile() {
                         placeholder="New Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        required
+                        required={false}
                     />
                     <GlobalBtn
-                        text="Save Changes"
+                        text={loading ? "Saving..." : "Save Changes"}
                         type="submit"
+                        disabled={loading}
                     />
                 </form>
 
