@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { getHabits } from "../services/HabitsServices";
+import { getHabits, getUserHabits } from "../services/HabitsServices";
 import { getPost } from "../services/PostService";
 import BtnFollow from "../components/mobile/profilesearch/BtnFollow";
 import HabFoweFowi from "../components/mobile/profilesearch/HabFoweFowi";
@@ -64,11 +64,17 @@ export default function ProfileSearch() {
             const foundUser = users.find(
                 (u: User) => u.username.toLowerCase() === username.toLowerCase()
             );
-            setUser(foundUser || null);
+
+            if (foundUser) {
+                getUserHabits(Number(foundUser.id)).then((habits: HabitType[]) => {
+                    setUser({ ...foundUser, habits });
+                });
+            } else {
+                setUser(null);
+            }
         }
     }, [users, username]);
 
-    // Fetch follow counts when user is loaded
     useEffect(() => {
         if (user) {
             followService.getFollowCounts(Number(user.id)).then((counts) => {
@@ -123,10 +129,13 @@ export default function ProfileSearch() {
             <MobileNavbar />
 
             <div
-                className="min-h-screen bg-[#171717] text-[#F9FAFB] 
-            flex flex-col items-center py-17
-            lg:grid lg:grid-cols-[300px_1fr_390px] l
-            lg:px-13 lg:py-18"
+            className="
+                min-h-screen bg-[#171717] text-[#F9FAFB]
+                flex flex-col items-center py-17
+                lg:grid lg:grid-cols-[300px_1fr_390px] 
+                lg:px-13 lg:py-18
+                lg:items-start
+                lg:min-h-[calc(100vh-80px)]"
             >
                 {/* espacio blanco  */}
                 <div className="hidden lg:block"></div>
@@ -239,7 +248,7 @@ export default function ProfileSearch() {
                 </div>
 
                 {/*columna derecha de habitos streak y jenntty */}
-                <div className="hidden lg:flex flex-col fixed 
+                <div className="hidden lg:flex flex-col 
                 right-[60px] top-[40px] w-[380px] gap-6 z-40">
                     {/* perfil Jenny */}
                     <div

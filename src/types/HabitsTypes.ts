@@ -12,10 +12,12 @@ export type User = {
 export type Habit = {
   id: number;
   title: string;
-  category: string; 
-  color: string;    
-  icon: string;     
+  category: string;
+  color: string;
+  icon: string;
+  days: string[];
   progress: Progress;
+  completedDates?: string[];
 }
 
 export type Progress = {

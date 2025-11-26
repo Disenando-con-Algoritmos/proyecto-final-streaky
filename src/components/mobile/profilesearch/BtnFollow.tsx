@@ -24,7 +24,6 @@ export default function BtnFollow({ targetUserId, currentUserId, onFollowChange 
         }
         if (loading) return;
 
-        // Optimistic update
         const previousState = isFollowing;
         setIsFollowing(!isFollowing);
         if (onFollowChange) onFollowChange(!isFollowing);
@@ -38,7 +37,7 @@ export default function BtnFollow({ targetUserId, currentUserId, onFollowChange 
             }
         } catch (error) {
             console.error("Error toggling follow:", error);
-            // Revert
+
             setIsFollowing(previousState);
             if (onFollowChange) onFollowChange(previousState);
         } finally {

@@ -1,5 +1,6 @@
 import { supabase } from "./config";
 import type { UserProfile } from "../../types/UserProfileType";
+import { getUserHabits } from "../HabitsServices";
 
 export async function getCurrentUser(): Promise<UserProfile | null> {
   const {
@@ -20,6 +21,8 @@ export async function getCurrentUser(): Promise<UserProfile | null> {
     return null;
   }
 
+  const habits = await getUserHabits(data.id);
+
   const userProfile: UserProfile = {
     id: data.id,
     username: data.username,
@@ -29,7 +32,7 @@ export async function getCurrentUser(): Promise<UserProfile | null> {
     streak: data.streak ?? 0,
     followers: 0,
     following: 0,
-    habits: []
+    habits: habits
   };
 
   return userProfile;

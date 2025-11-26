@@ -67,7 +67,7 @@ export default function CreatePost() {
     
     const isMobile = window.innerWidth < 768;
     if (isMobile) setShowCategoryPopup(true);
-    else navigate("welcome/select");
+    else navigate("/welcome/select");
   };
 
   const base64ToBlob = async (base64: string) => {

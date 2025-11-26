@@ -6,7 +6,7 @@ import CreateNewHabit from "../components/mobile/my-habits/CreateNewHabit";
 import StatsHabits from "../components/mobile/my-habits/Stat";
 import { useEffect, useState } from "react";
 import type { UserProfile } from "../types/UserProfileType";
-import DayProgressGridStats from "../components/mobile/profile/HabitInteractiveStats";
+import DayProgressGrid from "../components/mobile/profile/HabitInteractive";
 import miffyPost from "../assets/miffyPost.png";
 import { getCurrentUser } from "../services/supabase/userService";
 import UserAvatar from "../components/UserAvatar/UserAvatar";
@@ -117,7 +117,7 @@ function Habits() {
           </div>
           <div className="ml-0">
             {user?.habits.map((habit) => (
-              <DayProgressGridStats key={habit.id} habit={habit} />
+              <DayProgressGrid key={habit.id} habit={habit} userId={user.id} />
             ))}
           </div>
 
