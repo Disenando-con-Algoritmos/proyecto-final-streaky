@@ -8,13 +8,12 @@ interface DayProgressGridProps {
   userId: number;
 }
 
-const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit, userId }) => {
+const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [completedDates, setCompletedDates] = useState<string[]>(habit.completedDates || []);
   const [currentMonthDays, setCurrentMonthDays] = useState<Date[]>([]);
 
   useEffect(() => {
-    // Generate days for the current month
     const now = new Date();
     const year = now.getFullYear();
     const month = now.getMonth();
@@ -27,7 +26,6 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit, userId }) => {
     setCurrentMonthDays(days);
   }, []);
 
-  // Map day index (0-6) to habit days keys
   const dayMap = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
   const isDayAllowed = (date: Date) => {
@@ -36,17 +34,17 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit, userId }) => {
   };
 
   const isDateCompleted = (date: Date) => {
-    // Format date as YYYY-MM-DD to match DB
     const dateStr = date.toISOString().split('T')[0];
     return completedDates.includes(dateStr);
   };
 
   const handleDayClick = async (date: Date) => {
+    const dateStr = date.toISOString().split('T')[0];
+    const todayStr = new Date().toISOString().split('T')[0];
+
+    if (dateStr !== todayStr) return;
     if (!isDayAllowed(date)) return;
 
-    const dateStr = date.toISOString().split('T')[0];
-
-    // Optimistic update
     const isCompleted = completedDates.includes(dateStr);
     const newCompletedDates = isCompleted
       ? completedDates.filter(d => d !== dateStr)
@@ -58,12 +56,10 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit, userId }) => {
       await toggleHabitCheck(habit.id, dateStr);
     } catch (error) {
       console.error("Error toggling habit check:", error);
-      // Revert on error
       setCompletedDates(completedDates);
     }
   };
 
-  // Check if today is completed for the main button
   const today = new Date();
   const todayStr = today.toISOString().split('T')[0];
   const isTodayCompleted = completedDates.includes(todayStr);
@@ -169,26 +165,29 @@ const DayProgressGrid: React.FC<DayProgressGridProps> = ({ habit, userId }) => {
               {currentMonthDays.map((date, i) => {
                 const allowed = isDayAllowed(date);
                 const completed = isDateCompleted(date);
+                const dateStr = date.toISOString().split('T')[0];
+                const isToday = dateStr === todayStr;
+
+                const isClickable = isToday && allowed;
 
                 return (
                   <div
                     key={i}
                     onClick={() => handleDayClick(date)}
-                    className={`w-6 h-6 md:w-8 md:h-8 rounded-md transition-all duration-300 flex items-center justify-center text-[10px] text-gray-500
-                    ${allowed ? 'cursor-pointer hover:opacity-80' : 'opacity-30 cursor-not-allowed'}`}
+                    className={`w-6 h-6 md:w-8 md:h-8 rounded-md transition-all duration-300 
+                      flex items-center justify-center text-[10px] text-gray-500
+                    ${isClickable ? 'cursor-pointer hover:opacity-80' : 'cursor-not-allowed'}
+                    ${!isClickable && !completed ? 'opacity-30' : ''}`}
                     style={{
                       backgroundColor: completed ? habit.color : "#2B2B2B",
                       boxShadow: completed ? "0 0 6px rgba(0,0,0,0.3)" : "none",
                     }}
                   >
-                    {/* Optional: Show day number for better UX */}
                     {!completed && date.getDate()}
                   </div>
                 );
               })}
             </div>
-
-            {/* ✅ Botón que marca el último día */}
 
             <div
               className="w-28 h-8 bg-[#EF3131] mt-5 flex 

@@ -1,6 +1,19 @@
 import { supabase } from "./supabase/config";
 import type { Habit } from "../types/HabitsTypes";
 
+type HabitRow = {
+    id: number;
+    title: string;
+    category_id: number;
+    icon: string;
+    days: string[] | null;
+};
+
+type HabitProgressRow = {
+    habit_id: number;
+    date: string;
+};
+
 const CATEGORY_MAP: Record<string, number> = {
     'study': 1,
     'food': 2,
@@ -25,18 +38,17 @@ const REVERSE_CATEGORY_MAP: Record<number, string> = {
     9: '🤝 social'
 };
 
-// Helper to get color based on category (mock implementation)
 const getCategoryColor = (category: string): string => {
     const colors: Record<string, string> = {
-        'sport': '#B1F042', // Green
-        'study': '#833AFF', // Purple
-        'social': '#FF69B4', // Pink
-        'hobbies': '#FFA500', // Orange
-        'food': '#FF6347', // Tomato
-        'health': '#FF0000', // Red
-        'work': '#4682B4', // SteelBlue
-        'home': '#8B4513', // SaddleBrown
-        'money': '#FFD700'  // Gold
+        'sport': '#B1F042', 
+        'study': '#833AFF', 
+        'social': '#FF69B4', 
+        'hobbies': '#FFA500', 
+        'food': '#FF6347', 
+        'health': '#FF0000', 
+        'work': '#4682B4', 
+        'home': '#8B4513', 
+        'money': '#FFD700'  
     };
     return colors[category] || '#FFFFFF';
 };
@@ -54,15 +66,14 @@ export const createHabit = async (
         throw new Error("Invalid category");
     }
 
-    // Insert into habits table
     const { data, error } = await supabase
         .from('habits')
         .insert({
             user_id: userId,
             title: title,
             category_id: categoryId,
-            icon: icon
-            // days: days // REMOVED: Column does not exist in DB yet
+            icon: icon,
+            days: days
         })
         .select()
         .single();
@@ -78,12 +89,7 @@ export const createHabit = async (
 export const getUserHabits = async (userId: number): Promise<Habit[]> => {
     const { data, error } = await supabase
         .from('habits')
-        .select(`
-            id,
-            title,
-            icon,
-            category_id
-        `)
+        .select('*')
         .eq('user_id', userId);
 
     if (error) {
@@ -91,7 +97,6 @@ export const getUserHabits = async (userId: number): Promise<Habit[]> => {
         return [];
     }
 
-    // Fetch progress for the current month for all habits
     const today = new Date();
     const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1).toISOString();
     const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).toISOString();
@@ -101,23 +106,19 @@ export const getUserHabits = async (userId: number): Promise<Habit[]> => {
         .select('habit_id, date')
         .gte('date', startOfMonth)
         .lte('date', endOfMonth)
-        .in('habit_id', data.map((h: any) => h.id));
+        .in('habit_id', data.map((h: HabitRow) => h.id));
 
     if (progressError) {
         console.error("Error fetching progress:", progressError);
     }
 
-    return data.map((habit: any) => {
+    return data.map((habit: HabitRow) => {
         const category = REVERSE_CATEGORY_MAP[habit.category_id] || 'unknown';
 
-        // Map progress data to the structure expected by UI if needed, 
-        // but for the new grid we might just need the raw dates.
-        // For now, keeping the mock structure to avoid breaking other components
-        // but adding a 'completedDates' field could be useful, or we just rely on the component fetching it.
-        // However, the prompt asks for the logic here.
-
-        // Let's attach the raw progress dates to the habit object so the UI can use them
-        const habitProgress = progressData?.filter((p: any) => p.habit_id === habit.id).map((p: any) => p.date) || [];
+        const habitProgress =
+            progressData
+                ?.filter((p: HabitProgressRow) => p.habit_id === habit.id)
+                .map((p: HabitProgressRow) => p.date) || [];
 
         return {
             id: habit.id,
@@ -125,8 +126,8 @@ export const getUserHabits = async (userId: number): Promise<Habit[]> => {
             category: category,
             color: getCategoryColor(category),
             icon: habit.icon,
-            days: habit.days || ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'], // Default to all days since DB column is missing
-            progress: { // Keep mock for compatibility with other components for now
+            days: habit.days || ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+            progress: {
                 monday: [0, 0, 0, 0],
                 tuesday: [0, 0, 0, 0],
                 wednesday: [0, 0, 0, 0],
@@ -135,31 +136,28 @@ export const getUserHabits = async (userId: number): Promise<Habit[]> => {
                 saturday: [0, 0, 0, 0],
                 sunday: [0, 0, 0, 0]
             },
-            completedDates: habitProgress // New field for the interactive grid
-        } as unknown as Habit; // Casting to Habit to avoid type errors with the new field if not added to type yet
+            completedDates: habitProgress
+        } as unknown as Habit;
     });
 };
 
 export const toggleHabitCheck = async (habitId: number, date: string) => {
-    // Check if it exists
     const { data } = await supabase
         .from('habit_progress')
         .select('id')
         .eq('habit_id', habitId)
         .eq('date', date)
-        .single();
+        .maybeSingle();
 
     if (data) {
-        // Delete if exists (toggle off)
         const { error: deleteError } = await supabase
             .from('habit_progress')
             .delete()
             .eq('id', data.id);
 
         if (deleteError) throw deleteError;
-        return false; // Not completed anymore
+        return false;
     } else {
-        // Insert if not exists (toggle on)
         const { error: insertError } = await supabase
             .from('habit_progress')
             .insert({
@@ -168,7 +166,7 @@ export const toggleHabitCheck = async (habitId: number, date: string) => {
             });
 
         if (insertError) throw insertError;
-        return true; // Completed
+        return true;
     }
 };
 
