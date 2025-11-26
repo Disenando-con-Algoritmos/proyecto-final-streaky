@@ -13,6 +13,7 @@ import MobileNavbar from "../components/mobile/nav-bar/MobileNavBar";
 import { getCurrentUser, getAllUsers } from "../services/supabase/userService";
 import type { UserProfile } from "../types/UserProfileType";
 import UserAvatar from "../components/UserAvatar/UserAvatar";
+import { followService } from "../services/supabase/followService";
 
 export default function ProfileSearch() {
     const nav = useNavigate();
@@ -23,6 +24,8 @@ export default function ProfileSearch() {
     const [lastPost, setLastPost] = useState<PostTypes | null>(null);
     const [loading, setLoading] = useState(true);
     const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
+    const [followersCount, setFollowersCount] = useState(0);
+    const [followingCount, setFollowingCount] = useState(0);
 
     // cargar usuarios
     useEffect(() => {
@@ -32,7 +35,7 @@ export default function ProfileSearch() {
             const mergedUsers = [...staticUsers];
 
             dynamicUsers.forEach((dUser) => {
-                if (!mergedUsers.find(sUser => 
+                if (!mergedUsers.find(sUser =>
                     sUser.username.toLowerCase() === dUser.username.toLowerCase())) {
                     mergedUsers.push(dUser as unknown as User);
                 }
@@ -64,6 +67,20 @@ export default function ProfileSearch() {
             setUser(foundUser || null);
         }
     }, [users, username]);
+
+    // Fetch follow counts when user is loaded
+    useEffect(() => {
+        if (user) {
+            followService.getFollowCounts(Number(user.id)).then((counts) => {
+                setFollowersCount(counts.followers);
+                setFollowingCount(counts.following);
+            });
+        }
+    }, [user]);
+
+    const handleFollowChange = (isFollowing: boolean) => {
+        setFollowersCount(prev => isFollowing ? prev + 1 : prev - 1);
+    };
 
     // cargar posts
     useEffect(() => {
@@ -142,12 +159,22 @@ export default function ProfileSearch() {
                         </div>
 
                         <div className="mt-3 lg:mt-10 mr-1">
-                            <BtnFollow />
+                            {user && (
+                                <BtnFollow
+                                    targetUserId={Number(user.id)}
+                                    currentUserId={currentUser?.id || null}
+                                    onFollowChange={handleFollowChange}
+                                />
+                            )}
                         </div>
 
                         <div className="w-full flex justify-center mb-8 mt-8 
                     lg:justify-start lg:ml-35 lg:mb-20 lg:mt-0 ">
-                            <HabFoweFowi user={user} />
+                            <HabFoweFowi
+                                user={user}
+                                followersCount={followersCount}
+                                followingCount={followingCount}
+                            />
                         </div>
                     </div>
 

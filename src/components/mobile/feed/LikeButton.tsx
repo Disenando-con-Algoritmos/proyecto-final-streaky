@@ -1,32 +1,75 @@
 import type { PostTypes } from "../../../types/PostTypes";
 import { FaHeart } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa6";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { likesService } from "../../../services/supabase/likesService";
 
 export default function LikeButton({
   cardIndividuals,
+  currentUserId,
 }: {
   cardIndividuals: PostTypes;
+  currentUserId: number | null;
 }) {
   const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(cardIndividuals.likeCount || 0); {/* Numeros de likes */}
+  const [likes, setLikes] = useState(cardIndividuals.likeCount || 0);
 
-  const handleLike = () => {
-    if (liked) {
-      setLikes(likes - 1);
-    } else {
-      setLikes(likes + 1);
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchLikeStatus = async () => {
+      // Always fetch the latest count
+      const count = await likesService.getLikesCount(cardIndividuals.id);
+      if (isMounted) setLikes(count);
+
+      // If user is logged in, check if they liked it
+      if (currentUserId) {
+        const hasLiked = await likesService.hasUserLiked(cardIndividuals.id, currentUserId);
+        if (isMounted) setLiked(hasLiked);
+      }
+    };
+
+    fetchLikeStatus();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [cardIndividuals.id, currentUserId]);
+
+  const handleLike = async () => {
+    if (!currentUserId) {
+      console.warn("User not logged in, cannot like.");
+      return;
     }
+
+    // Optimistic update
+    const previousLiked = liked;
+    const previousLikes = likes;
+
     setLiked(!liked);
+    setLikes(liked ? likes - 1 : likes + 1);
+
+    try {
+      const { liked: newLiked, count: newCount } = await likesService.toggleLike(
+        cardIndividuals.id,
+        currentUserId
+      );
+      setLiked(newLiked);
+      setLikes(newCount);
+    } catch (error) {
+      console.error("Error toggling like:", error);
+      // Revert on error
+      setLiked(previousLiked);
+      setLikes(previousLikes);
+    }
   };
 
   return (
     <div className="flex items-center">
       <div
         onClick={handleLike}
-        className={`cursor-pointer transition-transform duration-300 ${
-          liked ? "pop" : ""
-        }`}
+        className={`cursor-pointer transition-transform duration-300 ${liked ? "pop" : ""
+          }`}
       >
         {liked ? (
           <FaHeart

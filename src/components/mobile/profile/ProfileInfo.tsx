@@ -11,9 +11,11 @@ import UserAvatar from "../../UserAvatar/UserAvatar";
 
 type UserProps = {
     user: UserProfile;
+    followersCount?: number;
+    followingCount?: number;
 };
 
-export default function ProfileInfo({ user }: UserProps) {
+export default function ProfileInfo({ user, followersCount, followingCount }: UserProps) {
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -91,7 +93,11 @@ export default function ProfileInfo({ user }: UserProps) {
                     <div
                         className="w-full mb-8 mt-2 lg:justify-start lg:ml-85 lg:mt-0"
                     >
-                        <ProfileStats user={user} />
+                        <ProfileStats
+                            user={user}
+                            followersCount={followersCount}
+                            followingCount={followingCount}
+                        />
                     </div>
                 </div>
             </div>

@@ -8,10 +8,13 @@ import UserLastPost from "../components/mobile/profile/UserLastPost";
 import GlobalBtn from "../components/mobile/welcome/GlobalBtn";
 import { useNavigate } from "react-router";
 import { getCurrentUser } from "../services/supabase/userService";
+import { followService } from "../services/supabase/followService";
 
 function ProfilePage() {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [followersCount, setFollowersCount] = useState(0);
+  const [followingCount, setFollowingCount] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,6 +22,11 @@ function ProfilePage() {
       const userData = await getCurrentUser();
       if (userData) {
         setUser(userData);
+        // Fetch follow counts
+        followService.getFollowCounts(userData.id).then((counts) => {
+          setFollowersCount(counts.followers);
+          setFollowingCount(counts.following);
+        });
       }
       setLoading(false);
     }
@@ -41,7 +49,13 @@ function ProfilePage() {
 
       {/* info del perfil */}
       <div className="flex justify-center mt-8 mb-0">
-        {user && <ProfileInfo user={user} />}
+        {user && (
+          <ProfileInfo
+            user={user}
+            followersCount={followersCount}
+            followingCount={followingCount}
+          />
+        )}
       </div>
 
       {/* contenedor principal responsive */}

@@ -9,14 +9,8 @@ import miffyPost from "../../../assets/miffyPost.png";
 import DeletePost from "../profile/DeletePost";
 import { useNavigate } from "react-router";
 import UserAvatar from "../../UserAvatar/UserAvatar";
-import authService from "../../../services/AuthServices";
-
-type AuthUser = {
-    id: string; 
-    user_metadata?: {
-        username?: string;
-    };
-};
+import { getCurrentUser } from "../../../services/supabase/userService";
+import type { UserProfile } from "../../../types/UserProfileType";
 
 export default function CardPost({
     cardIndividuals,
@@ -27,17 +21,17 @@ export default function CardPost({
 }) {
     const [showPopup, setShowPopup] = useState(false);
     const nav = useNavigate();
-    const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
+    const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
 
     const isOwnPost = currentUser &&
-        currentUser.user_metadata?.username?.toLowerCase()
+        currentUser.username?.toLowerCase()
         === cardIndividuals.username?.toLowerCase();
     const [timeAgo, setTimeAgo] = useState("");
 
     useEffect(() => {
         async function fetchUser() {
             try {
-                const user = await authService.getCurrentUser();
+                const user = await getCurrentUser();
                 // console.log("CardPost - Fetched user:", user)
                 setCurrentUser(user);
             } catch (error) {
@@ -151,7 +145,7 @@ export default function CardPost({
                 >
                     {/* botones like y comentarios */}
                     <div className="flex items-center gap-20">
-                        <LikeButton cardIndividuals={cardIndividuals} />
+                        <LikeButton cardIndividuals={cardIndividuals} currentUserId={currentUser?.id || null} />
 
                         {/* comentarios (solo visible en mobile) */}
                         <div className="block md:hidden" >
