@@ -54,9 +54,9 @@ export default function InputProfile({
                     onClick={() => setShowPassword(!showPassword)}
                 >
                     {showPassword ? (
-                        <RiEyeOffLine className="text-xl" />
-                    ) : (
                         <CgEye className="text-xl" />
+                    ) : (
+                        <RiEyeOffLine className="text-xl" />
                     )}
                 </span>
             ) : (

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import CategoryTagWhite from "./CategoryTagWhite";
 import MobileNavbar from "../nav-bar/MobileNavBar";
 import GlobalBtn from "../welcome/GlobalBtn";
+import Alert from "../../desktop/AlertPassword";
 
 interface CategoryPopupProps {
   isOpen: boolean;
@@ -28,6 +29,7 @@ export default function CategoryPopup({ isOpen, onClose }: CategoryPopupProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleCategorySelect = (category: string) => {
     // Si la categoría ya está seleccionada, la deseleccionamos
@@ -42,9 +44,10 @@ export default function CategoryPopup({ isOpen, onClose }: CategoryPopupProps) {
     if (selectedCategory) {
       dispatch(setCategory(selectedCategory));
       onClose();
-      navigate('/createpost');
+      navigate('/welcome/createpost');
     } else {
-      alert("Please select a category first!");
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);
     }
   };
 
@@ -52,6 +55,7 @@ export default function CategoryPopup({ isOpen, onClose }: CategoryPopupProps) {
 
   return (
     <div className="fixed inset-0 flex flex-col justify-end bg-black/60 z-50 md:hidden ">
+      <Alert show={showAlert} message="Please select a category first!" />
       {/* Mobile NavBar arriba */}
       <div className="w-full">
         <MobileNavbar />

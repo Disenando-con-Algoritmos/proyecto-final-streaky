@@ -14,7 +14,7 @@ export default function Post() {
   }, []);
 
   return (
-    <div>
+    <div className="mb-25">
       {multiplePost.map((cardIndividual: PostTypes) => {
         return (
           <CardPost key={cardIndividual.id} cardIndividuals={cardIndividual} />

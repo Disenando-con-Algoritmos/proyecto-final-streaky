@@ -78,4 +78,13 @@ const getPost = async (): Promise<PostTypes[]> => {
   });
 };
 
-export { getPost };
+const deletePost = async (postId: number): Promise<void> => {
+  const { error } = await supabase.from("post").delete().eq("id", postId);
+
+  if (error) {
+    console.error("Error deleting post:", error);
+    throw error;
+  }
+};
+
+export { getPost, deletePost };

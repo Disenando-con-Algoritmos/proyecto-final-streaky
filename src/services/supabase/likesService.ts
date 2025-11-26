@@ -31,11 +31,11 @@ export const likesService = {
     },
 
     async toggleLike(postId: number, userId: number): Promise<{ liked: boolean; count: number }> {
-        // First check if liked
+       
         const liked = await this.hasUserLiked(postId, userId);
 
         if (liked) {
-            // Unlike
+            
             const { error } = await supabase
                 .from("likes")
                 .delete()
@@ -44,7 +44,7 @@ export const likesService = {
 
             if (error) throw error;
         } else {
-            // Like
+            
             const { error } = await supabase
                 .from("likes")
                 .insert({ post_id: postId, user_id: userId });
@@ -52,8 +52,20 @@ export const likesService = {
             if (error) throw error;
         }
 
-        // Get new count
+        
         const count = await this.getLikesCount(postId);
         return { liked: !liked, count };
+    },
+
+    async deleteLikesByPostId(postId: number): Promise<void> {
+        const { error } = await supabase
+            .from("likes")
+            .delete()
+            .eq("post_id", postId);
+
+        if (error) {
+            console.error("Error deleting likes:", error);
+            throw error;
+        }
     }
 };

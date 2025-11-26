@@ -11,6 +11,9 @@ import { useNavigate } from "react-router";
 import UserAvatar from "../../UserAvatar/UserAvatar";
 import { getCurrentUser } from "../../../services/supabase/userService";
 import type { UserProfile } from "../../../types/UserProfileType";
+import { deletePost } from "../../../services/PostService";
+import { likesService } from "../../../services/supabase/likesService";
+import { deleteCommentsByPostId } from "../../../services/supabase/commentsService";
 
 export default function CardPost({
     cardIndividuals,
@@ -32,7 +35,7 @@ export default function CardPost({
         async function fetchUser() {
             try {
                 const user = await getCurrentUser();
-                // console.log("CardPost - Fetched user:", user)
+               
                 setCurrentUser(user);
             } catch (error) {
                 console.error("CardPost - Error fetching user:", error);
@@ -145,7 +148,8 @@ export default function CardPost({
                 >
                     {/* botones like y comentarios */}
                     <div className="flex items-center gap-20">
-                        <LikeButton cardIndividuals={cardIndividuals} currentUserId={currentUser?.id || null} />
+                        <LikeButton cardIndividuals={cardIndividuals} 
+                        currentUserId={currentUser?.id || null} />
 
                         {/* comentarios (solo visible en mobile) */}
                         <div className="block md:hidden" >
@@ -186,9 +190,23 @@ export default function CardPost({
             <DeletePost
                 open={showPopup}
                 onClose={() => setShowPopup(false)}
-                onDelete={() => {
-                    alert("Post Eliminado :0");
-                    setShowPopup(false);
+                onDelete={async () => {
+                    try {
+                       
+                        await deleteCommentsByPostId(cardIndividuals.id);
+                       
+                        await likesService.deleteLikesByPostId(cardIndividuals.id);
+                       
+                        await deletePost(cardIndividuals.id);
+                        
+                        
+                        setShowPopup(false);
+                        
+                        window.location.reload(); 
+                    } catch (error) {
+                        console.error("Error deleting post:", error);
+                        alert("Error al eliminar el post");
+                    }
                 }}
             />
         </div>

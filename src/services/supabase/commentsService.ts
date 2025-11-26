@@ -59,9 +59,21 @@ export async function getCommentsByPostId(postId: number): Promise<CommentsPost[
         return {
             id: comment.id,
             content: comment.content,
-            datePublished: new Date(comment.date).toLocaleDateString(), // Format as needed
+            datePublished: new Date(comment.date).toLocaleDateString(), 
             username: user?.username || "Unknown",
             userImage: user?.image || "",
         };
     });
+}
+
+export async function deleteCommentsByPostId(postId: number): Promise<void> {
+    const { error } = await supabase
+        .from("comments")
+        .delete()
+        .eq("post_id", postId);
+
+    if (error) {
+        console.error("Error deleting comments:", error);
+        throw error;
+    }
 }
