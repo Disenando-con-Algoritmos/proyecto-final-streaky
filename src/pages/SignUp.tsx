@@ -1,5 +1,6 @@
 import Inputs from "../components/mobile/signup-login/Inputs";
 import AlertPassword from "../components/desktop/AlertPassword";
+import Alert from "../components/desktop/Alert";
 import { FaRegUser } from "react-icons/fa6";
 import { MdOutlineEmail, MdLockOutline } from "react-icons/md";
 import miffySignUp from "../assets/miffy-signup.png";
@@ -15,7 +16,9 @@ export default function SignUp() {
     const navigate = useNavigate();
     const formRef = useRef<HTMLFormElement>(null);
     const [showPasswordAlert, setShowPasswordAlert] = useState(false);
+
     const [passwordAlertMessage, setPasswordAlertMessage] = useState("");
+    const [showEmailAlert, setShowEmailAlert] = useState(false);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -49,14 +52,16 @@ export default function SignUp() {
 
         console.info("SignUp Data:", dataObj);
 
-        navigate("/login");
+        console.info("SignUp Data:", dataObj);
+
+        // navigate("/login");
 
         try {
             const result = await authService.signUp(
                 dataObj.email as string, dataObj.password as string, additionalInfo);
             if (result.success) {
                 console.info("User registered successfully:", result);
-                navigate("/login");
+                setShowEmailAlert(true);
             } else {
                 console.error("Registration failed:", result.error);
             }
@@ -73,6 +78,7 @@ export default function SignUp() {
             justify-between overflow-x-hidden"
         >
             <AlertPassword show={showPasswordAlert} message={passwordAlertMessage} />
+            <Alert show={showEmailAlert} message="Check your email!" color="bg-[#703edd]" />
             <div
                 id="elements-container"
                 className="w-full max-w-[420px] flex flex-col mt-[140px] sm:mt-[40px] 
