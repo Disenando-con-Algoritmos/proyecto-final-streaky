@@ -137,7 +137,7 @@ function ProfilePage() {
         )}
 
         {/* columna: last post */}
-        <div className="flex justify-center w-full lg:ml-120 order-2 lg:order-1">
+        <div className="flex justify-center w-full lg:ml-120 order-2 lg:order-1 mb-50">
           {user && <UserLastPost userId={user.id} />}
         </div>
       </div>

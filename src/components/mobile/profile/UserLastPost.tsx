@@ -33,12 +33,6 @@ export default function UserLastPost({ userId }: LastUserPostProps) {
         fetchData();
     }, [userId]);
 
-    if (!lastPost) {
-        return (
-            <p className="text-gray-400 text-center mt-10">No posts published yet.</p>
-        );
-    }
-
     return (
         <div className="flex flex-col items-center w-full">
             {/* content título + last post */}
@@ -49,7 +43,11 @@ export default function UserLastPost({ userId }: LastUserPostProps) {
                         My Last Post
                     </h2>
                 </div>
-                <CardPost cardIndividuals={lastPost} showMiffy={true} />
+                {lastPost ? (
+                    <CardPost cardIndividuals={lastPost} showMiffy={true} />
+                ) : (
+                    <p className="text-gray-400 text-center mt-10">No posts published yet.</p>
+                )}
             </div>
         </div>
     );

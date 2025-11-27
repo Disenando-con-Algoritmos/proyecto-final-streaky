@@ -139,7 +139,7 @@ export const getUserHabits = async (userId: number): Promise<Habit[]> => {
             5: 'friday',
             6: 'saturday'
         };
-        
+
         const dayAbbrMap: Record<string, number> = {
             'Su': 0, 'Mo': 1, 'Tu': 2, 'We': 3, 'Th': 4, 'Fr': 5, 'Sa': 6
         };
@@ -214,7 +214,7 @@ export const toggleHabitCheck = async (habitId: number, date: string, userId: nu
         if (deleteError) throw deleteError;
 
         if (completedTodayCount === 1) {
-        
+
             const yesterday = new Date(date);
             yesterday.setDate(yesterday.getDate() - 1);
             const yesterdayStr = yesterday.toISOString().split('T')[0];
@@ -248,7 +248,7 @@ export const toggleHabitCheck = async (habitId: number, date: string, userId: nu
             }
         }
 
-        return false; 
+        return false;
     } else {
         const { error: insertError } = await supabase
             .from('habit_progress')
