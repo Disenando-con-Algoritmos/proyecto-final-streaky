@@ -186,7 +186,7 @@ const DayProgressGrid: React.FC<Props> = ({ habit, userId, onHabitDeleted }) => 
                       ${isClickable ? 'cursor-pointer hover:opacity-80' : 'cursor-not-allowed'}
                       ${!isClickable && !completed ? 'opacity-30' : ''}`}
                     style={{
-                      backgroundColor: completed ? habit.color : "#2B2B2B",
+                      backgroundColor: completed ? "#B2F042" : "#2B2B2B",
                       boxShadow: completed ? "0 0 6px rgba(0,0,0,0.3)" : "none",
                     }}
                   >
