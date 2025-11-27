@@ -10,6 +10,7 @@ type InputProps = {
     children?: React.ReactNode
     value: string
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    maxLength?: number
 }
 
 export default function InputProfile({
@@ -20,6 +21,7 @@ export default function InputProfile({
     children,
     value,
     onChange,
+    maxLength,
 }: InputProps) {
 
     const [showPassword, setShowPassword] = useState(false);
@@ -43,6 +45,7 @@ export default function InputProfile({
                     required={required}
                     value={value}
                     onChange={onChange}
+                    maxLength={maxLength}
                     className={`w-full bg-transparent text-white text-md placeholder-[#5D5D5D] py-2
                     outline-none transition-colors ${children ? "pr-8" : "pr-0"} pr-6`}
                 />

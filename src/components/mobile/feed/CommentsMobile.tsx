@@ -140,6 +140,7 @@ export default function CommentPopup({ cardIndividuals }: { cardIndividuals: Pos
                                 className="flex-1 bg-transparent text-[#F9FAFB] 
                                 text-sm outline-none placeholder-[#888]"
                                 value={newComment}
+                                maxLength={30}
                                 onChange={(e) => setNewComment(e.target.value)}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') handleSendComment();

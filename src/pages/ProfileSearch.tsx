@@ -15,7 +15,6 @@ import type { UserProfile } from "../types/UserProfileType";
 import UserAvatar from "../components/UserAvatar/UserAvatar";
 import { followService } from "../services/supabase/followService";
 import { supabase } from "../services/supabase/config";
-import CatLastPost from "../assets/cat-last-post.png";
 
 export default function ProfileSearch() {
     const nav = useNavigate();
@@ -300,7 +299,7 @@ export default function ProfileSearch() {
                                 font-semibold lg:ml-45 lg:mb-10">
                                     My last post</h3>
                                 <img
-                                    src={CatLastPost}
+                                    src="https://i.imgur.com/dNmMnm9.png"
                                     alt="cat last post"
                                     className="w-30 -mb-11 mr-7 z-20 lg:absolute 
                                 lg:w-35 lg:right-[-210px] lg:top-3.5"

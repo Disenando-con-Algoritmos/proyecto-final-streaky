@@ -89,7 +89,7 @@ export default function SignUp() {
                     className="flex flex-col justify-center gap-4 mt-8"
                 >
                     <Inputs name="username" label="Username" type="text"
-                        placeholder="Enter Username" required
+                        placeholder="Enter Username" maxLength={10} required
                     >
                         <FaRegUser />
                     </Inputs>

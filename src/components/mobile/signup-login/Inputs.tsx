@@ -5,6 +5,7 @@ type InputProps = {
     required?: boolean
     name?: string;
     children?: React.ReactNode
+    maxLength?: number
 }
 
 export default function Inputs({
@@ -14,6 +15,7 @@ export default function Inputs({
     required = true,
     children,
     name,
+    maxLength,
 } : InputProps){
 
     return(
@@ -29,7 +31,8 @@ export default function Inputs({
                 className="w-full bg-transparent border border-[#E1E1E1] rounded-full 
                 py-2 pl-12 pr-4 text-gray-200 placeholder-[#5D5D5D] focus:outline-none 
                 focus:border-[#B1F042] transition"
-                type={type} placeholder={placeholder} required={required} name={name} />
+                type={type} placeholder={placeholder} required={required} 
+                name={name}  maxLength={maxLength}/>
             </label>
         </div>
     );

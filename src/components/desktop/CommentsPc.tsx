@@ -130,6 +130,7 @@ export default function CommentsPc({
             placeholder="Add a comment..."
             className="bg-[#2A2A2A] rounded-full w-full h-11 p-4 pr-12 
             text-[#F9FAFB] focus:outline-none"
+            maxLength={30}
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             onKeyDown={(e) => {

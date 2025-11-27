@@ -143,6 +143,7 @@ export default function EditProfile() {
                     <InputProfile
                         label="Biography"
                         type="text"
+                        maxLength={16}
                         placeholder="New Biography"
                         value={biography}
                         onChange={(e) => setBiography(e.target.value)}

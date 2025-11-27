@@ -206,6 +206,7 @@ export default function AddNewHabit() {
               focus:outline-none focus:border-[#B1F042] transition
               rounded-[12px] py-2 pl-4 pr-4 text-white placeholder-[#5D5D5D]"
               type="text"
+              maxLength={15}
               placeholder="Type here"
               required
               value={habitName}

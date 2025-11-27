@@ -223,6 +223,7 @@ export default function CreatepostPage() {
             <img src={CatSleeping} alt="CatSleeping" className="w-[35%] mt-[35px]" />
 
             <textarea
+              maxLength={25}
               placeholder="What’s your habit today? 🌟"
               value={text}
               onChange={(e) => setText(e.target.value)}
