@@ -217,7 +217,7 @@ export default function CreatePost() {
           p-9 rounded-4xl max-w-[600px] w-full shadow-md relative z-10">
 
             <h1 className="flex justify-center font-semibold text-[30px]">
-              Create your post
+              Create your Post
             </h1>
 
             <img src={CatSleeping} alt="CatSleeping" className="w-[35%] mt-[35px]" />
