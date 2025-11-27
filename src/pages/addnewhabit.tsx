@@ -154,6 +154,7 @@ export default function AddNewHabit() {
                 </div>
               )}
 
+
               <div className="flex flex-col">
                 <p className="font-semibold text-[#F9FAFB] text-lg">
                   {user ? user.username : "Loading..."}
