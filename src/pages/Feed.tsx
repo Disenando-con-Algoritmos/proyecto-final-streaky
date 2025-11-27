@@ -105,12 +105,12 @@ function Feed() {
           <div className="text-center md:text-left">
             <h1
               className="font-black text-[33px] md:text-[42px] 
-                    leading-tight  ml-[-80px] md:ml-0 mt-12 "
+                    leading-tight  ml-[-180px] md:ml-0 mt-12 "
             >
               Hello, {user ? user.username : "Loading..."}! 👋🏻
             </h1>
 
-            <p className="text-[#F9FAFB] mt-3 text-[15px] md:text-[17px] md:mr-10 mr-55 ">
+            <p className="text-[#F9FAFB] mt-3 text-[15px] md:text-[17px] md:mr-0 mr-55">
               What’s your habit today?
             </p>
 
