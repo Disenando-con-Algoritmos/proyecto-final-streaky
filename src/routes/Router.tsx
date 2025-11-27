@@ -13,9 +13,9 @@ import HabitAdded from "../pages/HabitSucces";
 import EditProfile from "../pages/EditProfile";
 import LogIn from "../pages/Login";
 import Feed from "../pages/Feed";
-import CreatePost from "../pages/createpost";
 import PublicLayout from "../layouts/PublicLayout";
 import PrivateLayout from "../layouts/PrivateLayout";
+import CreatepostPage from "../pages/CreatepostPage";
 
 const router = createBrowserRouter([
   {
@@ -78,7 +78,7 @@ const router = createBrowserRouter([
       },
       {
         path: "createpost",
-        Component: CreatePost,
+        Component: CreatepostPage,
       },
       {
         path: "habitAdded",

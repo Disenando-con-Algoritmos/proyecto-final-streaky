@@ -16,7 +16,7 @@ import UserAvatar from "../components/UserAvatar/UserAvatar";
 import { supabase } from "../services/supabase/config";
 import AlertPassword from "../components/desktop/AlertPassword";
 
-export default function CreatePost() {
+export default function CreatepostPage() {
   const navigate = useNavigate();
   const [imagePreview, setimagePreview] = useState<string | null>(null);
   const [showCategoryPopup, setShowCategoryPopup] = useState(false);
